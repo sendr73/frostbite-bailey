@@ -14,10 +14,13 @@ class Frostbite
         void drawPlayer(sf::RenderWindow &window);
 
         //move player around
-        void movePlayer(char direction, float moveSpeed);
+        void movePlayer(char direction, float moveSpeed, const float gameHeight, const float gameWidth);
         //get and set players positon (should be center of player for now)
         const sf::Vector2f getPlayerPosition() const ;
         void setPlayerPostion(float x, float y);
+        //get players width
+        const float getPlayerWidth() const ;
+        const float getPlayerHeight() const ;
         virtual ~Frostbite();
 
     protected:
