@@ -14,10 +14,10 @@ class Iceberg
         //draws the iceberg on the window
         void drawIceberg(sf::RenderWindow &window);
         //moves the iceberg
-        void moveIceberg(char direction, float moveSpeed, const float gameHeight, const float gameWidth, sf::Sprite &overlapIceberg);
+        void moveIceberg(char direction, float moveSpeed, const float gameHeight, const float gameWidth, Iceberg &overlapIceberg);
         //getter and setter for the position of the iceberg
         const sf::Vector2f getIcebergPosition() const;
-        void setIcebergPostion(float x, float y);
+        void setIcebergPosition(float x, float y);
         //get iceberg dimensions
         const float getIcebergWidth() const;
         const float getIcebergHeight() const;
