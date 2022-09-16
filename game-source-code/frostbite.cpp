@@ -5,66 +5,67 @@ Frostbite::~Frostbite()
 }
 Frostbite::Frostbite(std::string imDirectory, const sf::Vector2f &Size)
 {
-    if(!pTexture.loadFromFile(imDirectory))
+    if(!fTexture.loadFromFile(imDirectory))
     {
         std::cerr<<"Error\n"; //display error if it does not load
     }
-    pSprite.setTexture(pTexture);
-    pSprite.setScale(Size);
+    fSprite.setTexture(fTexture);
+    fSprite.setScale(Size);
+    fSprite.setOrigin(getWidth()/2,getHeight());
 }
-void Frostbite::drawPlayer(sf::RenderWindow &window)
+void Frostbite::draw(sf::RenderWindow &window)
 {
-    window.draw(pSprite);
+    window.draw(fSprite);
 }
 //move player around
-void Frostbite::movePlayer(char direction, float moveSpeed, const float gameHeight, const float gameWidth)
+void Frostbite::move(char direction, float moveSpeed, const float gameHeight, const float gameWidth)
 {
     if(direction == 'u')
     {
-        pSprite.move(0, -moveSpeed);
+        fSprite.move(0, -moveSpeed);
         //screen colision on the top
-        if(getPlayerPosition().y<0)
-            setPlayerPostion(getPlayerPosition().x,0);
+        if(getPosition().y<0)
+            setPostion(getPosition().x,0);
     }
     else if(direction == 'd')
     {
-        pSprite.move(0, moveSpeed);
+        fSprite.move(0, moveSpeed);
         //screen colision on the bottom
-        if(getPlayerPosition().y+getPlayerHeight()>gameHeight)
-            setPlayerPostion(getPlayerPosition().x,gameHeight-getPlayerHeight() );
+        if(getPosition().y+getHeight()>gameHeight)
+            setPostion(getPosition().x,gameHeight-getHeight() );
     }
     else if(direction == 'l')
     {
-        pSprite.move(-moveSpeed, 0);
+        fSprite.move(-moveSpeed, 0);
         //screen colision on the left
-        if(getPlayerPosition().x<0)
-            setPlayerPostion(0,getPlayerPosition().y);
+        if(getPosition().x<0)
+            setPostion(0,getPosition().y);
     }
     else if(direction == 'r')
     {
-        pSprite.move(moveSpeed, 0);
+        fSprite.move(moveSpeed, 0);
         //screen colision on the right
-        if(getPlayerPosition().x+getPlayerWidth()>gameWidth)
-            setPlayerPostion(gameWidth-getPlayerWidth(), getPlayerPosition().y);
+        if(getPosition().x+getWidth()>gameWidth)
+            setPostion(gameWidth-getWidth(), getPosition().y);
     }
 }
 //get and set players positon (should be center of player for now)
-const sf::Vector2f Frostbite::getPlayerPosition() const
+const sf::Vector2f Frostbite::getPosition() const
 {
-    return pSprite.getPosition();
+    return fSprite.getPosition();
 }
-void Frostbite::setPlayerPostion(float x, float y)
+void Frostbite::setPostion(float x, float y)
 {
-    pSprite.setPosition(x,y);
+    fSprite.setPosition(x,y);
 }
 
 //get players width
-const float Frostbite::getPlayerWidth() const
+const float Frostbite::getWidth() const
 {
-    return pSprite.getTexture()->getSize().x * pSprite.getScale().x;
+    return fSprite.getTexture()->getSize().x * fSprite.getScale().x;
 }
-const float Frostbite::getPlayerHeight() const
+const float Frostbite::getHeight() const
 {
-    return pSprite.getTexture()->getSize().x * pSprite.getScale().x;
+    return fSprite.getTexture()->getSize().y * fSprite.getScale().y;
 }
 

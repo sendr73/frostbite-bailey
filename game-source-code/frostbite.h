@@ -11,23 +11,23 @@ class Frostbite
         //default
         }
         Frostbite(std::string imDirectory, const sf::Vector2f &Size);
-        void drawPlayer(sf::RenderWindow &window);
+        void draw(sf::RenderWindow &window);
 
         //move player around
-        void movePlayer(char direction, float moveSpeed, const float gameHeight, const float gameWidth);
+        void move(char direction, float moveSpeed, const float gameHeight, const float gameWidth);
         //get and set players positon (should be center of player for now)
-        const sf::Vector2f getPlayerPosition() const ;
-        void setPlayerPostion(float x, float y);
+        const sf::Vector2f getPosition() const ;
+        void setPostion(float x, float y);
         //get players width
-        const float getPlayerWidth() const ;
-        const float getPlayerHeight() const ;
+        const float getWidth() const ;
+        const float getHeight() const ;
         virtual ~Frostbite();
 
     protected:
 
     private:
-        sf::Texture pTexture;
-        sf::Sprite pSprite;
+        sf::Texture fTexture;
+        sf::Sprite fSprite;
 };
 
 #endif // FROSTBITE_H
