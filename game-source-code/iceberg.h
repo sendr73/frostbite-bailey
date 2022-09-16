@@ -12,15 +12,15 @@ class Iceberg
         }
         Iceberg(std::string imDirectory, const sf::Vector2f &Size);
         //draws the iceberg on the window
-        void drawIceberg(sf::RenderWindow &window);
+        void draw(sf::RenderWindow &window);
         //moves the iceberg
-        void moveIceberg(char direction, float moveSpeed, const float gameHeight, const float gameWidth, Iceberg &overlapIceberg);
+        void move(char direction, float moveSpeed, const float gameHeight, const float gameWidth, Iceberg &overlapIceberg);
         //getter and setter for the position of the iceberg
-        const sf::Vector2f getIcebergPosition() const;
-        void setIcebergPosition(float x, float y);
+        const sf::Vector2f getPosition() const;
+        void setPosition(float x, float y);
         //get iceberg dimensions
-        const float getIcebergWidth() const;
-        const float getIcebergHeight() const;
+        const float getWidth() const;
+        const float getHeight() const;
         virtual ~Iceberg();
 
     private:

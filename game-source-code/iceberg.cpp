@@ -13,58 +13,60 @@ Iceberg::Iceberg(std::string imDirectory, const sf::Vector2f &Size)
     }
     iSprite.setTexture(iTexture);
     iSprite.setScale(Size);
-    iSprite.setOrigin(getIcebergWidth()/2,getIcebergHeight()/2);
+    iSprite.setOrigin(getWidth()/2,getHeight()/2);
 }
 
-void Iceberg::drawIceberg(sf::RenderWindow &window)
+void Iceberg::draw(sf::RenderWindow &window)
 {
     window.draw(iSprite);
 }
 
-void Iceberg::moveIceberg(char direction, float moveSpeed, const float gameHeight, const float gameWidth, Iceberg &overlapIceberg)
+void Iceberg::move(char direction, float moveSpeed, const float gameHeight, const float gameWidth, Iceberg &overlapIceberg)
 {
     if(direction == 'l')
     {
         iSprite.move(-moveSpeed, 0);
-        if(getIcebergPosition().x+getIcebergWidth()/2<=0)
+        if(getPosition().x+getWidth()/2<=0)
         {
-            setIcebergPosition(getIcebergWidth()/2,getIcebergPosition().y);
+            setPosition(getWidth()/2,getPosition().y);
+            overlapIceberg.setPosition(-overlapIceberg.getWidth()/2,getPosition().y);
         }
-        else if(getIcebergPosition().x-getIcebergWidth()/2<0)
+        else if(getPosition().x-getWidth()/2<0)
         {
-            overlapIceberg.setIcebergPosition((gameWidth-getIcebergPosition().x),getIcebergPosition().y);
+            overlapIceberg.setPosition((gameWidth-getPosition().x),getPosition().y);
         }
     }
     else if(direction == 'r')
     {
         iSprite.move(moveSpeed, 0);
-        if(getIcebergPosition().x-getIcebergWidth()/2>=gameWidth)
+        if(getPosition().x-getWidth()/2>=gameWidth)
         {
-            setIcebergPosition(getIcebergWidth()/2,getIcebergPosition().y);
+            setPosition(getWidth()/2,getPosition().y);
+            overlapIceberg.setPosition(-overlapIceberg.getWidth()/2,getPosition().y);
         }
-        else if(getIcebergPosition().x+getIcebergWidth()/2>gameWidth)
+        else if(getPosition().x+getWidth()/2>gameWidth)
         {
-            overlapIceberg.setIcebergPosition((getIcebergPosition().x-gameWidth),getIcebergPosition().y);
+            overlapIceberg.setPosition((getPosition().x-gameWidth),getPosition().y);
         }
     }
 }
 
-const sf::Vector2f Iceberg::getIcebergPosition() const
+const sf::Vector2f Iceberg::getPosition() const
 {
     return iSprite.getPosition();
 }
 
-void Iceberg::setIcebergPosition(float x, float y)
+void Iceberg::setPosition(float x, float y)
 {
     iSprite.setPosition(x,y);
 }
 
-const float Iceberg::getIcebergWidth() const
+const float Iceberg::getWidth() const
 {
     return iSprite.getTexture()->getSize().x*iSprite.getScale().x;
 }
 
-const float Iceberg::getIcebergHeight() const
+const float Iceberg::getHeight() const
 {
     return iSprite.getTexture()->getSize().y*iSprite.getScale().y;
 }
