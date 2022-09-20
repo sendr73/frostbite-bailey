@@ -11,7 +11,9 @@ Frostbite::Frostbite(std::string imDirectory, const sf::Vector2f &Size)
     }
     fSprite.setTexture(fTexture);
     fSprite.setScale(Size);
-    fSprite.setOrigin(getWidth()/2,getHeight());
+    fSprite.setOrigin(getWidth()/2,getHeight()); //set orign to bottom centre
+    setPostion(getWidth()/2,getHeight()); //set Sprite to top left corner
+
 }
 void Frostbite::draw(sf::RenderWindow &window)
 {
@@ -24,29 +26,30 @@ void Frostbite::move(char direction, float moveSpeed, const float gameHeight, co
     {
         fSprite.move(0, -moveSpeed);
         //screen colision on the top
-        if(getPosition().y<0)
-            setPostion(getPosition().x,0);
+        //position player on the centre of width and at the bottom
+        if(getPosition().y<0 + (getHeight()))
+            setPostion(getPosition().x, 0 + (getHeight())); //set bottom to height of FrostBite
     }
     else if(direction == 'd')
     {
         fSprite.move(0, moveSpeed);
         //screen colision on the bottom
-        if(getPosition().y+getHeight()>gameHeight)
-            setPostion(getPosition().x,gameHeight-getHeight() );
+        if(getPosition().y>gameHeight) //check to base line
+            setPostion(getPosition().x,gameHeight);
     }
     else if(direction == 'l')
     {
         fSprite.move(-moveSpeed, 0);
         //screen colision on the left
-        if(getPosition().x<0)
-            setPostion(0,getPosition().y);
+        if(getPosition().x<0 + getWidth()/2) //adjust the sides by width/2 when checking left and right
+            setPostion(getWidth()/2,getPosition().y);
     }
     else if(direction == 'r')
     {
         fSprite.move(moveSpeed, 0);
         //screen colision on the right
-        if(getPosition().x+getWidth()>gameWidth)
-            setPostion(gameWidth-getWidth(), getPosition().y);
+        if(getPosition().x>gameWidth-getWidth()/2) //adjust the sides by width/2 when checking left and right
+            setPostion(gameWidth-getWidth()/2, getPosition().y);
     }
 }
 //get and set players positon (should be center of player for now)
