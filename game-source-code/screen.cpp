@@ -39,7 +39,7 @@ void Screen::setFrostbite(const sf::RenderWindow &window)
 //sets the positions and directions of icebergs in specific rows
 void Screen::setIcebergRows(const sf::RenderWindow &window)
 {
-    icerow=vector<vector<icebergSandbox>>(row,vector<icebergSandbox>(column,iceberg)); //initializes 2D
+    icerow=vector<vector<Iceberg>>(row,vector<Iceberg>(column,iceberg)); //initializes 2D
     for(int i = 0; i < icerow.size(); i++) //loops through rows
     {
         for(int j = 0; j<icerow[i].size(); j++) //loops through columns
@@ -92,6 +92,69 @@ void Screen::moveFrostbite(const sf::RenderWindow &window, const float &frostbit
     {
         frostbite.move('r',frostbiteSpeed*deltaTime,window.getSize().y,window.getSize().x);
     }
+}
+
+void Screen::moveIcerow(sf::RenderWindow &window, const float &icebergSpeed, const float &deltaTime)
+{
+    for(int i = 0; i<icerow.size(); i++)
+    {
+        for(int j = 0; j<icerow[i].size()-1; j++)
+        {
+            icerow[i][j].move(icebergSpeed*deltaTime,window.getSize().y,window.getSize().x,icerow[i][icerow[i].size()-1]);
+        }
+    }
+}
+
+bool Screen::isOnIceberg(const Iceberg &iceberg)
+{
+    if((frostbite.getPosition().x+frostbite.getWidth()/2>iceberg.getPosition().x-iceberg.getWidth()/2)
+            &&(frostbite.getPosition().x+frostbite.getWidth()/2<iceberg.getPosition().x+iceberg.getWidth()/2)
+            &&((frostbite.getPosition().y>iceberg.getPosition().y-iceberg.getHeight()/2)
+               &&(frostbite.getPosition().y<iceberg.getPosition().y+iceberg.getHeight()/2)))
+    {
+        return true;
+    }
+    return false;
+}
+
+void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed, const float &deltaTime)
+{
+    bool landed = false;
+    for(int i = 0; i<icerow.size(); i++)
+    {
+        for(int j = 0; j<icerow[i].size(); j++)
+        {
+            if(isOnIceberg(icerow[i][j]))
+            {
+                frostbite.move(icerow[i][j].getDirection(),icebergSpeed*deltaTime,window.getSize().y,window.getSize().x);
+                landed = true;
+                break;
+            }
+            else if(frostbite.getPosition().y>0.45*window.getSize().y&&j==icerow[i].size()-1&&i==icerow.size()-1)
+            {
+                frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y);
+            }
+        }
+        if(landed)
+        {
+            landed = false;
+            break;
+        }
+    }
+}
+
+void Screen::refresh(sf::RenderWindow &window)
+{
+    window.clear(sf::Color(38,79,155));
+    window.draw(background);
+    for(int i = 0; i<icerow.size(); i++)
+    {
+        for(int j = 0; j < icerow[i].size(); j++)
+        {
+            icerow[i][j].draw(window);
+        }
+    }
+    frostbite.draw(window);
 }
 
 Screen::~Screen()

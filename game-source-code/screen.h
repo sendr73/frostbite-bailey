@@ -33,8 +33,8 @@ public:
 protected:
     sf::RenderTexture texture; //texture object
     sf::Sprite background; //sprite object for background
-    Frostbite frostbite=Frostbite("frostbite.png",sf::Vector2f(1.f,1.f)); //frostbite object
-    Iceberg iceberg=Iceberg("iceberg.png",sf::Vector2f(1.f,1.f)); //iceberg object
+    Frostbite frostbite=Frostbite("resources/frostbite.png",sf::Vector2f(1.f,1.f)); //frostbite object
+    Iceberg iceberg=Iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //iceberg object
     float row=4; //amount of rows (default of 4)
     float column=4; //amount of columns (default of 3 + overlap)
     vector<vector<Iceberg>> icerow; //2D vector of icebergs (could segregate into classes)
