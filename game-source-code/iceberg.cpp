@@ -13,7 +13,8 @@ Iceberg::Iceberg(std::string imDirectory, const sf::Vector2f &Size)
     }
     iSprite.setTexture(iTexture);
     iSprite.setScale(Size);
-    iSprite.setOrigin(getWidth()/2,getHeight()/2);
+    iSprite.setOrigin(getWidth()/2,getHeight()/2); //origin reset to middle of iceberg
+    direction = 'r';
 }
 
 void Iceberg::draw(sf::RenderWindow &window)
@@ -21,19 +22,19 @@ void Iceberg::draw(sf::RenderWindow &window)
     window.draw(iSprite);
 }
 
-void Iceberg::move(char direction, float moveSpeed, const float gameHeight, const float gameWidth, Iceberg &overlapIceberg)
+void Iceberg::move(float moveSpeed, const float gameHeight, const float gameWidth, Iceberg &overlapIceberg)
 {
     if(direction == 'l')
     {
         iSprite.move(-moveSpeed, 0);
         if(getPosition().x+getWidth()/2<=0)
         {
-            setPosition(getWidth()/2,getPosition().y);
+            setPosition(gameWidth-getWidth()/2,getPosition().y);
             overlapIceberg.setPosition(-overlapIceberg.getWidth()/2,getPosition().y);
         }
         else if(getPosition().x-getWidth()/2<0)
         {
-            overlapIceberg.setPosition((gameWidth-getPosition().x),getPosition().y);
+            overlapIceberg.setPosition((gameWidth+getPosition().x),getPosition().y);
         }
     }
     else if(direction == 'r')
@@ -59,6 +60,16 @@ const sf::Vector2f Iceberg::getPosition() const
 void Iceberg::setPosition(float x, float y)
 {
     iSprite.setPosition(x,y);
+}
+
+const char Iceberg::getDirection() const
+{
+    return direction;
+}
+
+void Iceberg::setDirection(const char dir)
+{
+    direction = dir;
 }
 
 const float Iceberg::getWidth() const
