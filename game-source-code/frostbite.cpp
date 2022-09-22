@@ -24,11 +24,10 @@ void Frostbite::move(char direction, float moveSpeed, const float gameHeight, co
 {
     if(direction == 'u')
     {
-        fSprite.move(0, -moveSpeed);
-        //screen colision on the top
-        //position player on the centre of width and at the bottom
-        if(getPosition().y<0 + (getHeight()))
-            setPostion(getPosition().x, 0 + (getHeight())); //set bottom to height of FrostBite
+        if(!(getPosition().y-moveSpeed< 0.f + getHeight())) //if tries to exceed boundaries, don't move (avoids misalignment with icebergs)
+        {
+            fSprite.move(0, -moveSpeed);
+        }
     }
     else if(direction == 'd')
     {

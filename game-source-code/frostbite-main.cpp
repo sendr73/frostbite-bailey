@@ -42,9 +42,11 @@ int main()
     header.setPosition(sf::Vector2f(gameWidth/2.0f,gameHeight/4.0f));
 
     sf::Text paragraph;
-    paragraph.setString("Use the arrow keys to move Frostbite left and right \n"
-                        "up and down. If he falls into the water he will respawn. \n \n"
-                        "To start press enter.");
+    paragraph.setString("Use the LEFT and RIGHT arrow keys to move Frostbite left and right \n"
+                        "and the UP and DOWN arrow keys to jump platforms, up and down. Try \n"
+                        "land on the moving icebergs. If Frostbite falls into the water, he \n"
+                        "will respawn in the middle of the safezone. \n \n"
+                        "Press the ENTER key to start.");
     paragraph.setFont(font); //set font, color etc
     paragraph.setCharacterSize(30);
     paragraph.setFillColor(sf::Color::White);

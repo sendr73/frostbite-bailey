@@ -88,12 +88,13 @@ TEST_CASE("Frostbite Move Down, keeps horizontal position and changes vertical p
     CHECK((500 + FROSTBITE_SPEED) == frostbite.getPosition().y); //check y axis that it increase by the speed/jump
 }
 
-TEST_CASE("Frostbite Screen Collision at top prevents Sprite's vertical position from being less than its height")
+TEST_CASE("Frostbite Screen Collision at top prevents Sprite's vertical position changing")
 {
     auto frostbite_height = frostbite.getHeight();
     frostbite.setPostion(500,frostbite_height + 1); //set initial positon to be close to top
+    const auto initial_y = frostbite.getPosition().y;
     frostbite.move('u', FROSTBITE_SPEED, GAME_HEIGHT, GAME_WIDTH);
-    CHECK(frostbite_height == frostbite.getPosition().y); //check y position is set to frosbite_height with top collision
+    CHECK(initial_y == frostbite.getPosition().y); //check y position is set to frosbite_height with top collision
 }
 TEST_CASE("Frostbite Screen Collision at bottom prevents Sprite's vertical position from being greater than board height")
 {
