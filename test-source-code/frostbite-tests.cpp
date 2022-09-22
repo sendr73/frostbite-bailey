@@ -4,8 +4,8 @@
 #include "../game-source-code/iceberg.h"
 #include "../game-source-code/frostbite.h"
 
-Iceberg iceberg("iceberg.png",sf::Vector2f(1.f,1.f)); //known to exist, will create another test case later on
-Iceberg overlap("iceberg.png",sf::Vector2f(1.f,1.f));
+Iceberg iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //known to exist, will create another test case later on
+Iceberg overlap("resources/iceberg.png",sf::Vector2f(1.f,1.f));
 const auto ICEBERG_SPEED = 150.f;
 const auto GAME_HEIGHT = 900.f;
 const auto GAME_WIDTH = 1600.f;
