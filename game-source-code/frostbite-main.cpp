@@ -77,6 +77,7 @@ int main()
             window.draw(header);
             window.draw(paragraph);
             window.display();
+            float deltaTime = clock.restart().asSeconds(); //Whithout this there might only be 1 iceberg per row
         }
         else //play the game
         {
