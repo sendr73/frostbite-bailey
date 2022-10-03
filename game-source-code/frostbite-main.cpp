@@ -9,6 +9,7 @@
 #include <iostream>
 #include "screen.h"
 #include "splashscreen.h"
+#include "temperature.h"
 using namespace std;
 
 int main()
@@ -27,6 +28,8 @@ int main()
     splashScreen splash_screen(gameWidth, gameHeight);
     auto drawSplashScreen = true;
 
+    //create temperature timer
+    temperature temperature_timer;
 
     sf::Clock clock;
 
@@ -51,14 +54,17 @@ int main()
             splash_screen.draw(window);
             window.display();
             float deltaTime = clock.restart().asSeconds(); //Whithout this there might only be 1 iceberg per row
+            temperature_timer.reset_temperature_clock();
         }
         else //play the game
         {
             float deltaTime = clock.restart().asSeconds();
+            temperature_timer.draw(window);
             screen.moveFrostbite(window, frostbiteSpeed, deltaTime);
             screen.moveIcerow(window, icebergSpeed, deltaTime); // (window,icebergSpeed,deltaTime);
             screen.icebergCollision(window,icebergSpeed,deltaTime);
             screen.refresh(window);
+            temperature_timer.draw(window);
             window.display();
         }
 
