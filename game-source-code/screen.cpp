@@ -8,11 +8,11 @@ Screen::Screen(sf::RenderWindow &window)
     setBackground(window);
     setFrostbite(window);
     setIcebergRows(window);
+    setEnemyRows(window);
 }
 //sets texture of background based on dimensions of the window
 void Screen::setBackground(const sf::RenderWindow &window) //All take in the window as parameters, maybe change to height and width?
 {
-
     sf::RectangleShape sky(sf::Vector2f(window.getSize().x,0.2*window.getSize().y));
     sky.setFillColor(sf::Color(78,119,195,255)); //Values taken from screenshot, maybe give them aliases?
     sky.setPosition(0.f,0.2*window.getSize().y);
@@ -59,6 +59,18 @@ void Screen::setIcebergRows(const sf::RenderWindow &window)
         icerow[i][icerow.size()-1].setPosition(-iceberg.getWidth()/2,iceberg.getPosition().y); //sets the last icerberg as "overlap"
     }
 }
+void Screen::setEnemyRows(const sf::RenderWindow &window)
+{
+    enemyrow=vector<Enemies>(4,enemy_); //initializes 1D
+cout<<"Enemy width "<<enemy_.getWidth();
+    for(int j = 0; j<enemyrow.size(); j++) //loops through columns
+    {
+        enemyrow[j].setPosition((20)+2*(j)*enemy_.getWidth()
+                                ,(0.3*window.getSize().y)+(frostbite.getPosition().y));
+    }
+    // enemyrow[enemyrow.size()-1].setPosition(-enemy_.getWidth()/2,enemy_.getPosition().y); //sets the last icerberg as "overlap"
+}
+
 //executes the up/down movement when as specific event is initiated
 void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &event, bool &pressed)
 {
@@ -102,6 +114,13 @@ void Screen::moveIcerow(sf::RenderWindow &window, const float &icebergSpeed, con
         {
             icerow[i][j].move(icebergSpeed*deltaTime,window.getSize().y,window.getSize().x,icerow[i][icerow[i].size()-1]);
         }
+    }
+}
+void Screen::moveEnemyRow(sf::RenderWindow &window, const float &enemySpeed, const float &deltaTime)
+{
+    for(int i = 0; i<enemyrow.size(); i++)
+    {
+        enemyrow[i].move(enemySpeed*deltaTime,window.getSize().y,window.getSize().x,enemyrow[i]);
     }
 }
 
@@ -153,6 +172,10 @@ void Screen::refresh(sf::RenderWindow &window)
         {
             icerow[i][j].draw(window);
         }
+    }
+    for(int i = 0; i < enemyrow.size(); i++)
+    {
+        enemyrow[i].draw(window);
     }
     frostbite.draw(window);
 }

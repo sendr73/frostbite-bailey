@@ -19,6 +19,7 @@ int main()
     const auto gameHeight = 800.f;
     const float frostbiteSpeed = 600.f;
     const float icebergSpeed = 150.f;
+    const float enemySpeed = 100.f;
     //setting up the window
     sf::RenderWindow window(sf::VideoMode(gameWidth, gameHeight), "");
     window.setVerticalSyncEnabled(true);
@@ -63,6 +64,7 @@ int main()
             screen.moveFrostbite(window, frostbiteSpeed, deltaTime);
             screen.moveIcerow(window, icebergSpeed, deltaTime); // (window,icebergSpeed,deltaTime);
             screen.icebergCollision(window,icebergSpeed,deltaTime);
+            screen.moveEnemyRow(window, enemySpeed, deltaTime);
             screen.refresh(window);
             temperature_timer.draw(window);
             window.display();
