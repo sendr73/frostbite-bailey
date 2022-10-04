@@ -10,7 +10,8 @@ class temperature
         temperature();
         virtual ~temperature();
         void draw(sf::RenderWindow &window);
-        void reset_temperature_clock(); //important so that the clock does not tick with splash screen up
+        void resetClock(); //important so that the clock does not tick with splash screen up
+        const int getTemperature() const;
 
     protected:
 

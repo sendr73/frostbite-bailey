@@ -12,7 +12,7 @@ temperature::temperature() //default constructor
     temperature_.setCharacterSize(30);
     temperature_.setFillColor(sf::Color::White);
 }
-void temperature::reset_temperature_clock()
+void temperature::resetClock()
 {
     clock.restart();
 }
@@ -36,6 +36,12 @@ void temperature::draw(sf::RenderWindow &window)
     temperature_.setString(myString + "°");
     window.draw(temperature_);
 }
+//getter for temperature
+const int temperature::getTemperature() const
+{
+    return temperature_int;
+}
+
 temperature::~temperature()
 {
     //dtor

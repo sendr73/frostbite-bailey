@@ -54,7 +54,7 @@ int main()
             splash_screen.draw(window);
             window.display();
             float deltaTime = clock.restart().asSeconds(); //Whithout this there might only be 1 iceberg per row
-            temperature_timer.reset_temperature_clock();
+            temperature_timer.resetClock();
         }
         else //play the game
         {
