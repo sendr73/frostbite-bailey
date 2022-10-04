@@ -62,7 +62,7 @@ void Screen::setIcebergRows(const sf::RenderWindow &window)
 void Screen::setEnemyRows(const sf::RenderWindow &window)
 {
     enemyrow=vector<Enemies>(4,enemy_); //initializes 1D
-cout<<"Enemy width "<<enemy_.getWidth();
+    cout<<"Enemy width "<<enemy_.getWidth();
     for(int j = 0; j<enemyrow.size(); j++) //loops through columns
     {
         enemyrow[j].setPosition((20)+2*(j)*enemy_.getWidth()
@@ -126,7 +126,7 @@ void Screen::moveEnemyRow(sf::RenderWindow &window, const float &enemySpeed, con
 
 bool Screen::isOnIceberg(const Iceberg &iceberg)
 {
-    if((frostbite.getPosition().x+frostbite.getWidth()/2>iceberg.getPosition().x-iceberg.getWidth()/2)
+    if((frostbite.getPosition().x-frostbite.getWidth()/2>iceberg.getPosition().x-iceberg.getWidth()/2)
             &&(frostbite.getPosition().x+frostbite.getWidth()/2<iceberg.getPosition().x+iceberg.getWidth()/2)
             &&((frostbite.getPosition().y>iceberg.getPosition().y-iceberg.getHeight()/2)
                &&(frostbite.getPosition().y<iceberg.getPosition().y+iceberg.getHeight()/2)))
@@ -147,6 +147,13 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
             {
                 frostbite.move(icerow[i][j].getDirection(),icebergSpeed*deltaTime,window.getSize().y,window.getSize().x);
                 landed = true;
+                if(!icerow[i][j].beenLandedOn())
+                {
+                    for (int k = 0; k<icerow[i].size(); k++)
+                    {
+                        icerow[i][k].landedOn("resources/iceberg_landed.png");
+                    }
+                }
                 break;
             }
             else if(frostbite.getPosition().y>0.45*window.getSize().y&&j==icerow[i].size()-1&&i==icerow.size()-1)

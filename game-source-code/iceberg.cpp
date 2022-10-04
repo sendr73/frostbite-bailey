@@ -15,6 +15,7 @@ Iceberg::Iceberg(std::string imDirectory, const sf::Vector2f &Size)
     iSprite.setScale(Size);
     iSprite.setOrigin(getWidth()/2,getHeight()/2); //origin reset to middle of iceberg
     direction = 'r';
+    landed = false;
 }
 
 void Iceberg::draw(sf::RenderWindow &window)
@@ -80,4 +81,19 @@ const float Iceberg::getWidth() const
 const float Iceberg::getHeight() const
 {
     return iSprite.getTexture()->getSize().y*iSprite.getScale().y;
+}
+//logic for when landed on
+void Iceberg::landedOn(std::string imDirectory)
+{
+    if(!iTexture.loadFromFile(imDirectory))
+    {
+        std::cerr<<"Error in loading iceberg texture when landed\n";
+    }
+    iSprite.setTexture(iTexture);
+    landed = true;
+}
+//returns if has been landed on
+bool Iceberg::beenLandedOn()
+{
+    return landed;
 }

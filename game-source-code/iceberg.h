@@ -24,12 +24,16 @@ class Iceberg
         //get iceberg dimensions
         const float getWidth() const;
         const float getHeight() const;
+        //logic for when landed on
+        void landedOn(std::string imDirectory);
+        bool beenLandedOn();
         virtual ~Iceberg();
 
     private:
         sf::Texture iTexture;
         sf::Sprite iSprite;
         char direction; //will be 'r' by default, see constructor
+        bool landed; //will be false by default
 };
 
 #endif
