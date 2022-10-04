@@ -15,7 +15,9 @@ class Frostbite
 
         //move player around
         void move(char direction, float moveSpeed, const float gameHeight, const float gameWidth);
-        //get and set players positon (should be center of player for now)
+        //make frostbite jump
+        void jump(char direction, float moveSpeed, const float gameHeight, const float gameWidth);
+        //get and set players positon (should be center of player for now);
         const sf::Vector2f getPosition() const ;
         void setPostion(float x, float y);
         //get players width

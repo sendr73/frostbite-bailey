@@ -74,7 +74,7 @@ TEST_CASE("Frostbite Move Up, keeps horizontal position and changes vertical pos
 {
     frostbite.setPostion(500,500); //set initial positon
     const auto up  = 'u'; //set direction
-    frostbite.move(up, FROSTBITE_SPEED, GAME_HEIGHT, GAME_WIDTH);
+    frostbite.jump(up, FROSTBITE_SPEED, GAME_HEIGHT, GAME_WIDTH);
     CHECK(500 == frostbite.getPosition().x); //check x axis that it remains the same
     CHECK((500 - FROSTBITE_SPEED) == frostbite.getPosition().y); //check y axis that it increase by the speed/jump
 }
@@ -83,7 +83,7 @@ TEST_CASE("Frostbite Move Down, keeps horizontal position and changes vertical p
 {
     frostbite.setPostion(500,500); //set initial positon
     const auto down  = 'd'; //set direction
-    frostbite.move(down, FROSTBITE_SPEED, GAME_HEIGHT, GAME_WIDTH);
+    frostbite.jump(down, FROSTBITE_SPEED, GAME_HEIGHT, GAME_WIDTH);
     CHECK(500 == frostbite.getPosition().x); //check x axis that it remains the same
     CHECK((500 + FROSTBITE_SPEED) == frostbite.getPosition().y); //check y axis that it increase by the speed/jump
 }
@@ -93,14 +93,14 @@ TEST_CASE("Frostbite Screen Collision at top prevents Sprite's vertical position
     auto frostbite_height = frostbite.getHeight();
     frostbite.setPostion(500,frostbite_height + 1); //set initial positon to be close to top
     const auto initial_y = frostbite.getPosition().y;
-    frostbite.move('u', FROSTBITE_SPEED, GAME_HEIGHT, GAME_WIDTH);
+    frostbite.jump('u', FROSTBITE_SPEED, GAME_HEIGHT, GAME_WIDTH);
     CHECK(initial_y == frostbite.getPosition().y); //check y position is set to frosbite_height with top collision
 }
 TEST_CASE("Frostbite Screen Collision at bottom prevents Sprite's vertical position from being greater than board height")
 {
     auto frostbite_height = frostbite.getHeight();
     frostbite.setPostion(500,GAME_HEIGHT-1); //set initial positon
-    frostbite.move('d', FROSTBITE_SPEED, GAME_HEIGHT, GAME_WIDTH);
+    frostbite.jump('d', FROSTBITE_SPEED, GAME_HEIGHT, GAME_WIDTH);
     CHECK(GAME_HEIGHT == frostbite.getPosition().y);//check y positon to be equal to game height
 }
 

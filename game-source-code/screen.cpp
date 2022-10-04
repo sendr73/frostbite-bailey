@@ -77,7 +77,7 @@ void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &even
     if ((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Up)&&(pressed == false))
     {
         pressed = true; //while true, cannot be double clicked
-        frostbite.move('u',0.125*window.getSize().y,window.getSize().y,window.getSize().x);
+        frostbite.jump('u',0.125*window.getSize().y,window.getSize().y,window.getSize().x);
     }
     if ((event.type == sf::Event::KeyReleased)&&(event.key.code == sf::Keyboard::Up))
     {
@@ -86,7 +86,7 @@ void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &even
     if ((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Down)&&(pressed == false))
     {
         pressed = true; //while true, cannot be double clicked
-        frostbite.move('d',0.125*window.getSize().y,window.getSize().y,window.getSize().x);
+        frostbite.jump('d',0.125*window.getSize().y,window.getSize().y,window.getSize().x);
     }
     if ((event.type == sf::Event::KeyReleased)&&(event.key.code == sf::Keyboard::Down))
     {
