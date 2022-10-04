@@ -16,6 +16,10 @@ class Igloo
         void generateBlocks(const float x, const float y);
         //helper method to increase block amount
         void incrementBlockAmount();
+        //method to get block amount
+        const int getBlockAmount() const;
+        //returns one block
+        sf::RectangleShape getBlock(const int &i);
         virtual ~Igloo();
 
     protected:

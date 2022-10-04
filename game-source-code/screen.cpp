@@ -9,6 +9,7 @@ Screen::Screen(sf::RenderWindow &window)
     setFrostbite(window);
     setIcebergRows(window);
     setEnemyRows(window);
+    setIgloo(window);
 }
 //sets texture of background based on dimensions of the window
 void Screen::setBackground(const sf::RenderWindow &window) //All take in the window as parameters, maybe change to height and width?
@@ -69,6 +70,11 @@ void Screen::setEnemyRows(const sf::RenderWindow &window)
                                 ,(0.3*window.getSize().y)+(frostbite.getPosition().y));
     }
     // enemyrow[enemyrow.size()-1].setPosition(-enemy_.getWidth()/2,enemy_.getPosition().y); //sets the last icerberg as "overlap"
+}
+//sets the positions of the blocks in the iceberg
+void Screen::setIgloo(const sf::RenderWindow &window)
+{
+    igloo.generateBlocks(window.getSize().x,window.getSize().y);
 }
 
 //executes the up/down movement when as specific event is initiated
@@ -154,8 +160,8 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
                         icerow[i][k].landedOn("resources/iceberg_landed.png");
                     }
                     score.increaseScore();
-                    igloo.incrementBlockAmount();
                 }
+                igloo.incrementBlockAmount();
                 break;
             }
             else if(frostbite.getPosition().y>0.45*window.getSize().y&&j==icerow[i].size()-1&&i==icerow.size()-1)
@@ -187,11 +193,21 @@ void Screen::drawScore(sf::RenderWindow &window)
     window.draw(score_text);
 }
 
+void Screen::drawIgloo(sf::RenderWindow &window)
+{
+    int blockNum = igloo.getBlockAmount();
+    for (int i = 0; i < blockNum; i++)
+    {
+        window.draw(igloo.getBlock(i));
+    }
+}
+
 void Screen::refresh(sf::RenderWindow &window)
 {
     window.clear(sf::Color(38,79,155));
     window.draw(background);
     drawScore(window);
+    drawIgloo(window);
     for(int i = 0; i<icerow.size(); i++)
     {
         for(int j = 0; j < icerow[i].size(); j++)

@@ -53,7 +53,9 @@ protected:
     void setFrostbite(const sf::RenderWindow &window); //sets frostbite properties on screen
     void setIcebergRows(const sf::RenderWindow &window); //sets iceberg properties on screen
     void setEnemyRows(const sf::RenderWindow &window); //set row of enemies
+    void setIgloo(const sf::RenderWindow &window); //set igloo
     bool isOnIceberg(const Iceberg &iceberg); //helper that returns if frostbite is on an iceberg
+    void drawIgloo(sf::RenderWindow &window); //helper that draws igloo
     void drawScore(sf::RenderWindow &window); //helper that draws score
 };
 
