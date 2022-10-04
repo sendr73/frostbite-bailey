@@ -9,9 +9,13 @@ using namespace std;
 class Igloo
 {
     public:
-        Igloo(const sf::RenderWindow &window);
+        Igloo();
         //getter to check if it is complete
         const bool isComplete() const;
+        //helper method to generate blocks
+        void generateBlocks(const float x, const float y);
+        //helper method to increase block amount
+        void incrementBlockAmount();
         virtual ~Igloo();
 
     protected:
@@ -20,10 +24,6 @@ class Igloo
         vector<sf::RectangleShape> blocks;
         bool complete;
         int blockAmount;
-        //helper method to generate blocks
-        void generateBlocks(const float x, const float y);
-        //helper method to increase block amount
-        void incrementBlockAmount();
         //helper method to check if a new row must be added
 };
 

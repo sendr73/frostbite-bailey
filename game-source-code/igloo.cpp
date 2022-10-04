@@ -1,12 +1,9 @@
 #include "igloo.h"
 
-Igloo::Igloo(const sf::RenderWindow &window)
+Igloo::Igloo()
 {
     complete = false;
     blockAmount = 0;
-    float x = window.getSize().x-150;
-    float y = 0.25*window.getSize().y;
-    generateBlocks(x,y);
 }
 //generates blocks
 void Igloo::generateBlocks(const float x, const float y)

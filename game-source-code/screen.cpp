@@ -153,6 +153,8 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
                     {
                         icerow[i][k].landedOn("resources/iceberg_landed.png");
                     }
+                    score.increaseScore();
+                    igloo.incrementBlockAmount();
                 }
                 break;
             }
@@ -169,10 +171,27 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
     }
 }
 
+void Screen::drawScore(sf::RenderWindow &window)
+{
+    if (!font.loadFromFile("resources/sansation.ttf"))
+    {
+        std::cout<<"Error Cannot load Font";
+    }
+    score_text.setFont(font); //set font, color etc
+    score_text.setCharacterSize(30);
+    score_text.setFillColor(sf::Color::White);
+    string s = "Level: "+to_string(score.getLevel())+'\t'+"Score: "+to_string(score.getScore())+'\t'+"Lives: "+to_string(score.getLives());
+    score_text.setString(s);
+    sf::FloatRect score_textbox = score_text.getLocalBounds();
+    score_text.setPosition(sf::Vector2f(5.f,30.f));
+    window.draw(score_text);
+}
+
 void Screen::refresh(sf::RenderWindow &window)
 {
     window.clear(sf::Color(38,79,155));
     window.draw(background);
+    drawScore(window);
     for(int i = 0; i<icerow.size(); i++)
     {
         for(int j = 0; j < icerow[i].size(); j++)

@@ -4,8 +4,8 @@ Score::Score()
 {
     point = 10;
     score = 0;
-    int level = 1;
-    int lives = 3;;
+    level = 1;
+    lives = 3;;
 }
 //getter for score
 const int Score::getScore() const

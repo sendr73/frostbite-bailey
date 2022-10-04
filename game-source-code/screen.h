@@ -7,6 +7,8 @@
 #include "iceberg.h"
 #include "frostbite.h"
 #include "enemies.h"
+#include "score.h"
+#include "igloo.h"
 
 using namespace std;
 
@@ -36,8 +38,12 @@ public:
 protected:
     sf::RenderTexture texture; //texture object
     sf::Sprite background; //sprite object for background
+    sf::Font font;
+    sf::Text score_text;
     Frostbite frostbite=Frostbite("resources/frostbite.png",sf::Vector2f(1.f,1.f)); //frostbite object
     Iceberg iceberg=Iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //iceberg object
+    Score score;
+    Igloo igloo;
     Enemies enemy_ = Enemies("resources/crab.png",sf::Vector2f(1.f,1.f)); //enemy (set to crab)
     float row=4; //amount of rows (default of 4)
     float column=4; //amount of columns (default of 3 + overlap)
@@ -48,6 +54,7 @@ protected:
     void setIcebergRows(const sf::RenderWindow &window); //sets iceberg properties on screen
     void setEnemyRows(const sf::RenderWindow &window); //set row of enemies
     bool isOnIceberg(const Iceberg &iceberg); //helper that returns if frostbite is on an iceberg
+    void drawScore(sf::RenderWindow &window); //helper that draws score
 };
 
 #endif
