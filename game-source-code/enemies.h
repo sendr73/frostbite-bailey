@@ -24,6 +24,8 @@ class Enemies
         //get enemies dimensions
         const float getWidth() const;
         const float getHeight() const;
+        //return global boundaries
+        sf::FloatRect getBounding () const;
         virtual ~Enemies();
 
     protected:

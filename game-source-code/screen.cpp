@@ -67,9 +67,8 @@ void Screen::setEnemyRows(const sf::RenderWindow &window)
     for(int j = 0; j<enemyrow.size(); j++) //loops through columns
     {
         enemyrow[j].setPosition((20)+2*(j)*enemy_.getWidth()
-                                ,(0.3*window.getSize().y)+(frostbite.getPosition().y));
+                                ,(0.3*window.getSize().y)+(frostbite.getPosition().y)+10);
     }
-    // enemyrow[enemyrow.size()-1].setPosition(-enemy_.getWidth()/2,enemy_.getPosition().y); //sets the last icerberg as "overlap"
 }
 //sets the positions of the blocks in the iceberg
 void Screen::setIgloo(const sf::RenderWindow &window)
@@ -141,7 +140,7 @@ bool Screen::isOnIceberg(const Iceberg &iceberg)
     }
     return false;
 }
-
+/*
 bool Screen::enemyClash(const Enemies &enemy)
 {
     if((frostbite.getPosition().x-frostbite.getWidth()/2>enemy.getPosition().x-enemy.getWidth()/2)
@@ -153,6 +152,7 @@ bool Screen::enemyClash(const Enemies &enemy)
     }
     return false;
 }
+*/
 
 void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed, const float &deltaTime)
 {
@@ -179,6 +179,7 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
             else if(frostbite.getPosition().y>0.45*window.getSize().y&&j==icerow[i].size()-1&&i==icerow.size()-1)
             {
                 frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y);
+                score.decreaseLives(); //decrease his lives if drowned
             }
         }
         if(landed)
@@ -188,15 +189,22 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
         }
     }
 }
-/*
+
 void Screen::enemyCollision(sf::RenderWindow &window,const float &, const float &)
 {
+    sf::FloatRect frostbite_boundary_box = frostbite.getBounding();
     for(int i =0; i<enemyrow.size(); i++)
     {
-        sf::FloatRect frosbite_boundary_box = frosbite.
+        sf::FloatRect enemy_boundary_box = enemyrow[i].getBounding();
+        if (frostbite_boundary_box.intersects(enemy_boundary_box))
+        {
+            score.decreaseLives(); //decrease his lives if collision
+            frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y); //reset his position
+        }
+
     }
 }
-*/
+
 
 void Screen::drawScore(sf::RenderWindow &window)
 {

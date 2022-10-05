@@ -23,6 +23,8 @@ class Frostbite
         //get players width
         const float getWidth() const ;
         const float getHeight() const ;
+        //return global boundaries
+        sf::FloatRect getBounding () const;
         virtual ~Frostbite();
 
     protected:

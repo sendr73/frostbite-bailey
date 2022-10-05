@@ -81,6 +81,12 @@ const float Enemies::getHeight() const
     return eSprite.getTexture()->getSize().y*eSprite.getScale().y;
 }
 
+//get bounding box
+sf::FloatRect Enemies::getBounding () const
+{
+    return eSprite.getGlobalBounds();
+}
+
 Enemies::~Enemies()
 {
     //dtor

@@ -75,3 +75,9 @@ const float Frostbite::getHeight() const
     return fSprite.getTexture()->getSize().y * fSprite.getScale().y;
 }
 
+//get bounding box
+sf::FloatRect Frostbite::getBounding () const
+{
+    return fSprite.getGlobalBounds();
+}
+
