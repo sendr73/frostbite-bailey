@@ -67,7 +67,7 @@ void Screen::setEnemyRows(const sf::RenderWindow &window)
     for(int j = 0; j<crabrow.size(); j++) //loops through columns
     {
         crabrow[j].setPosition((20)+2*(j)*enemy_crab.getWidth()
-                                ,(0.3*window.getSize().y)+(frostbite.getPosition().y)+10);
+                               ,(0.3*window.getSize().y)+(frostbite.getPosition().y)+10);
         clamrow[j].setPosition((70)+2*(j)*enemy_crab.getWidth()
                                ,(0.2*window.getSize().y)+(frostbite.getPosition().y)); //x position different to the crabs
         clamrow[j].setDirection('l');
@@ -85,7 +85,30 @@ void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &even
     if ((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Up)&&(pressed == false))
     {
         pressed = true; //while true, cannot be double clicked
-        frostbite.jump('u',0.125*window.getSize().y,window.getSize().y,window.getSize().x);
+        std::cout << igloo.isComplete()<<endl;
+        if((!igloo.isComplete()&&frostbite.getPosition().y<=0.375*window.getSize().y)||frostbite.getPosition().y<=0.25*window.getSize().y)
+        {
+            //do nothing
+        }
+        else if(igloo.isComplete()&&frostbite.getPosition().y==0.375*window.getSize().y)
+        {
+            frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y);
+            score.increaseLevel();
+            temperature_timer.resetClock();
+            frostbite.reset();
+                for (int m = 0; m<icerow.size(); m++)
+                {
+                    for (int n = 0; n<icerow[m].size(); n++)
+                    {
+                        icerow[m][n].reset("resources/iceberg.png");
+                    }
+                }
+                igloo.toggleComplete();
+        }
+        else
+        {
+            frostbite.jump('u',0.125*window.getSize().y,window.getSize().y,window.getSize().x);
+        }
     }
     if ((event.type == sf::Event::KeyReleased)&&(event.key.code == sf::Keyboard::Up))
     {
@@ -156,15 +179,19 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
             {
                 frostbite.move(icerow[i][j].getDirection(),icebergSpeed*deltaTime,window.getSize().y,window.getSize().x);
                 landed = true;
-                if(!icerow[i][j].beenLandedOn())
+                if(!icerow[i][j].beenLandedOn()&&frostbite.hasJumped())
                 {
                     for (int k = 0; k<icerow[i].size(); k++)
                     {
                         icerow[i][k].landedOn("resources/iceberg_landed.png");
                     }
                     score.increaseScore();
+                    igloo.incrementBlockAmount();
+                    if(igloo.getBlockAmount()==16)
+                    {
+                        igloo.toggleComplete();
+                    }
                 }
-                igloo.incrementBlockAmount();
                 break;
             }
             else if(frostbite.getPosition().y>0.45*window.getSize().y&&j==icerow[i].size()-1&&i==icerow.size()-1)
@@ -176,6 +203,17 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
         if(landed)
         {
             landed = false;
+            if(igloo.getBlockAmount()%4==0&&igloo.getBlockAmount()<16)
+            {
+                frostbite.reset();
+                for (int m = 0; m<icerow.size(); m++)
+                {
+                    for (int n = 0; n<icerow[m].size(); n++)
+                    {
+                        icerow[m][n].reset("resources/iceberg.png");
+                    }
+                }
+            }
             break;
         }
     }

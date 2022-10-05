@@ -13,7 +13,7 @@ Frostbite::Frostbite(std::string imDirectory, const sf::Vector2f &Size)
     fSprite.setScale(Size);
     fSprite.setOrigin(getWidth()/2,getHeight()); //set orign to bottom centre
     setPostion(getWidth()/2,getHeight()); //set Sprite to top left corner
-
+    jumped = false;
 }
 void Frostbite::draw(sf::RenderWindow &window)
 {
@@ -40,6 +40,7 @@ void Frostbite::move(char direction, float moveSpeed, const float gameHeight, co
 //make player jump
 void Frostbite::jump(char direction, float moveSpeed, const float gameHeight, const float gameWidth)
 {
+    jumped = true;
     if(direction == 'u')
     {
         if(!(getPosition().y-moveSpeed< 0.f + getHeight())) //if tries to exceed boundaries, don't move (avoids misalignment with icebergs)
@@ -54,6 +55,11 @@ void Frostbite::jump(char direction, float moveSpeed, const float gameHeight, co
         if(getPosition().y>gameHeight) //check to base line
             setPostion(getPosition().x,gameHeight);
     }
+}
+//returns if frostbite has jumped
+const bool Frostbite::hasJumped() const
+{
+    return jumped;
 }
 //get and set players positon (should be center of player for now)
 const sf::Vector2f Frostbite::getPosition() const
@@ -80,4 +86,8 @@ sf::FloatRect Frostbite::getBounding () const
 {
     return fSprite.getGlobalBounds();
 }
-
+//resets characterisitcs
+void Frostbite::reset()
+{
+    jumped = false;
+}

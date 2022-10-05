@@ -55,6 +55,18 @@ const bool Igloo::isComplete() const
 {
     return complete;
 }
+//sets complete
+void Igloo::toggleComplete()
+{
+    if(complete)
+    {
+        complete = false;
+    }
+    else
+    {
+        complete = true;
+    }
+}
 //draws igloo up until blockAmount
 const int Igloo::getBlockAmount() const
 {

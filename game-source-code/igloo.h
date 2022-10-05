@@ -12,6 +12,8 @@ class Igloo
         Igloo();
         //getter to check if it is complete
         const bool isComplete() const;
+        //method to set complete
+        void toggleComplete();
         //helper method to generate blocks
         void generateBlocks(const float x, const float y);
         //helper method to increase block amount

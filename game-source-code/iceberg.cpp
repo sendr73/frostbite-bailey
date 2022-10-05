@@ -97,3 +97,13 @@ bool Iceberg::beenLandedOn()
 {
     return landed;
 }
+//resets characteristics
+void Iceberg::reset(std::string imDirectory)
+{
+    if(!iTexture.loadFromFile(imDirectory))
+    {
+        std::cerr<<"Error in loading iceberg texture when landed\n";
+    }
+    iSprite.setTexture(iTexture);
+    landed = false;
+}

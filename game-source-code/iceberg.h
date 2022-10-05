@@ -27,6 +27,8 @@ class Iceberg
         //logic for when landed on
         void landedOn(std::string imDirectory);
         bool beenLandedOn();
+        //resets characteristics of iceberg
+        void reset(std::string imDirectory);
         virtual ~Iceberg();
 
     private:
