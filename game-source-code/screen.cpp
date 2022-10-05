@@ -62,12 +62,15 @@ void Screen::setIcebergRows(const sf::RenderWindow &window)
 }
 void Screen::setEnemyRows(const sf::RenderWindow &window)
 {
-    enemyrow=vector<Enemies>(4,enemy_); //initializes 1D
-    cout<<"Enemy width "<<enemy_.getWidth();
-    for(int j = 0; j<enemyrow.size(); j++) //loops through columns
+    crabrow=vector<Enemies>(4,enemy_crab); //initializes 1D
+    clamrow=vector<Enemies>(4,enemy_clam);
+    for(int j = 0; j<crabrow.size(); j++) //loops through columns
     {
-        enemyrow[j].setPosition((20)+2*(j)*enemy_.getWidth()
+        crabrow[j].setPosition((20)+2*(j)*enemy_crab.getWidth()
                                 ,(0.3*window.getSize().y)+(frostbite.getPosition().y)+10);
+        clamrow[j].setPosition((70)+2*(j)*enemy_crab.getWidth()
+                               ,(0.2*window.getSize().y)+(frostbite.getPosition().y)); //x position different to the crabs
+        clamrow[j].setDirection('l');
     }
 }
 //sets the positions of the blocks in the iceberg
@@ -123,9 +126,10 @@ void Screen::moveIcerow(sf::RenderWindow &window, const float &icebergSpeed, con
 }
 void Screen::moveEnemyRow(sf::RenderWindow &window, const float &enemySpeed, const float &deltaTime)
 {
-    for(int i = 0; i<enemyrow.size(); i++)
+    for(int i = 0; i<crabrow.size(); i++) //size of crab row == size of clam row
     {
-        enemyrow[i].move(enemySpeed*deltaTime,window.getSize().y,window.getSize().x,enemyrow[i]);
+        crabrow[i].move(enemySpeed*deltaTime,window.getSize().y,window.getSize().x,crabrow[i]);
+        clamrow[i].move(enemySpeed*deltaTime,window.getSize().y,window.getSize().x,clamrow[i]);
     }
 }
 
@@ -140,19 +144,6 @@ bool Screen::isOnIceberg(const Iceberg &iceberg)
     }
     return false;
 }
-/*
-bool Screen::enemyClash(const Enemies &enemy)
-{
-    if((frostbite.getPosition().x-frostbite.getWidth()/2>enemy.getPosition().x-enemy.getWidth()/2)
-            &&(frostbite.getPosition().x+frostbite.getWidth()/2<enemy.getPosition().x+enemy.getWidth()/2)
-            &&((frostbite.getPosition().y>enemy.getPosition().y-enemy.getHeight()/2)
-               &&(frostbite.getPosition().y<enemy.getPosition().y+enemy.getHeight()/2)))
-    {
-        return true;
-    }
-    return false;
-}
-*/
 
 void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed, const float &deltaTime)
 {
@@ -190,13 +181,14 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
     }
 }
 
-void Screen::enemyCollision(sf::RenderWindow &window,const float &, const float &)
+void Screen::enemyCollision(sf::RenderWindow &window)
 {
     sf::FloatRect frostbite_boundary_box = frostbite.getBounding();
-    for(int i =0; i<enemyrow.size(); i++)
+    for(int i =0; i<crabrow.size(); i++) //crab row size = clam row size
     {
-        sf::FloatRect enemy_boundary_box = enemyrow[i].getBounding();
-        if (frostbite_boundary_box.intersects(enemy_boundary_box))
+        sf::FloatRect enemy_boundary_box = crabrow[i].getBounding();
+        sf::FloatRect clam_boundary_box = clamrow[i].getBounding();
+        if (frostbite_boundary_box.intersects(enemy_boundary_box)||frostbite_boundary_box.intersects(clam_boundary_box))
         {
             score.decreaseLives(); //decrease his lives if collision
             frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y); //reset his position
@@ -244,9 +236,10 @@ void Screen::refresh(sf::RenderWindow &window)
             icerow[i][j].draw(window);
         }
     }
-    for(int i = 0; i < enemyrow.size(); i++)
+    for(int i = 0; i < crabrow.size(); i++) //for now size crab row = size clam row
     {
-        enemyrow[i].draw(window);
+        crabrow[i].draw(window);
+        clamrow[i].draw(window);
     }
     temperature_timer.draw(window);
     frostbite.draw(window);

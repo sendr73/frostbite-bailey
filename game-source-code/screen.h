@@ -32,7 +32,7 @@ public:
     //collsion logic between frostbite and icebergs
     void icebergCollision(sf::RenderWindow &window,const float &, const float &);
     //collsion logic between frostbite and enemies
-    void enemyCollision(sf::RenderWindow &window,const float &, const float &);
+    void enemyCollision(sf::RenderWindow &window);
     //check for negative temperature
     void checkTemperature();
     //refreshes the window
@@ -50,11 +50,13 @@ protected:
     Iceberg iceberg=Iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //iceberg object
     Score score;
     Igloo igloo;
-    Enemies enemy_ = Enemies("resources/crab.png",sf::Vector2f(1.f,1.f)); //enemy (set to crab)
+    Enemies enemy_crab = Enemies("resources/crab.png",sf::Vector2f(1.f,1.f)); //enemy (set to crab)
+    Enemies enemy_clam = Enemies("resources/clam.png",sf::Vector2f(1.f,1.f)); //enemy (set to crab)
     float row=4; //amount of rows (default of 4)
     float column=4; //amount of columns (default of 3 + overlap)
     vector<vector<Iceberg>> icerow; //2D vector of icebergs (could segregate into classes)
-    vector<Enemies> enemyrow;
+    vector<Enemies> crabrow;
+    vector<Enemies> clamrow;
     void setBackground(const sf::RenderWindow &window); //sets background on screen
     void setFrostbite(const sf::RenderWindow &window); //sets frostbite properties on screen
     void setIcebergRows(const sf::RenderWindow &window); //sets iceberg properties on screen

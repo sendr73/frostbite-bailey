@@ -61,7 +61,7 @@ int main()
             screen.icebergCollision(window,icebergSpeed,deltaTime);
             screen.checkTemperature(); //should be combined with the action class
             screen.moveEnemyRow(window, enemySpeed, deltaTime);
-            screen.enemyCollision(window, enemySpeed, deltaTime); //check for collision with crabs
+            screen.enemyCollision(window); //check for collision with crabs
             screen.refresh(window);
             window.display();
         }
