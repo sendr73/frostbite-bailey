@@ -9,6 +9,7 @@
 #include "enemies.h"
 #include "score.h"
 #include "igloo.h"
+#include "temperature.h"
 
 using namespace std;
 
@@ -30,6 +31,10 @@ public:
     void moveEnemyRow(sf::RenderWindow &window, const float &enemySpeed, const float &deltaTime);
     //collsion logic between frostbite and icebergs
     void icebergCollision(sf::RenderWindow &window,const float &, const float &);
+    //collsion logic between frostbite and enemies
+    void enemyCollision(sf::RenderWindow &window,const float &, const float &);
+    //check for negative temperature
+    void checkTemperature();
     //refreshes the window
     void refresh(sf::RenderWindow &window);
     //destructor
@@ -40,6 +45,7 @@ protected:
     sf::Sprite background; //sprite object for background
     sf::Font font;
     sf::Text score_text;
+    temperature temperature_timer;
     Frostbite frostbite=Frostbite("resources/frostbite.png",sf::Vector2f(1.f,1.f)); //frostbite object
     Iceberg iceberg=Iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //iceberg object
     Score score;
@@ -55,6 +61,7 @@ protected:
     void setEnemyRows(const sf::RenderWindow &window); //set row of enemies
     void setIgloo(const sf::RenderWindow &window); //set igloo
     bool isOnIceberg(const Iceberg &iceberg); //helper that returns if frostbite is on an iceberg
+    bool enemyClash(const Enemies &enemy);
     void drawIgloo(sf::RenderWindow &window); //helper that draws igloo
     void drawScore(sf::RenderWindow &window); //helper that draws score
 };

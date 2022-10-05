@@ -142,6 +142,18 @@ bool Screen::isOnIceberg(const Iceberg &iceberg)
     return false;
 }
 
+bool Screen::enemyClash(const Enemies &enemy)
+{
+    if((frostbite.getPosition().x-frostbite.getWidth()/2>enemy.getPosition().x-enemy.getWidth()/2)
+            &&(frostbite.getPosition().x+frostbite.getWidth()/2<enemy.getPosition().x+enemy.getWidth()/2)
+            &&((frostbite.getPosition().y>enemy.getPosition().y-enemy.getHeight()/2)
+               &&(frostbite.getPosition().y<enemy.getPosition().y+enemy.getHeight()/2)))
+    {
+        return true;
+    }
+    return false;
+}
+
 void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed, const float &deltaTime)
 {
     bool landed = false;
@@ -176,6 +188,15 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
         }
     }
 }
+/*
+void Screen::enemyCollision(sf::RenderWindow &window,const float &, const float &)
+{
+    for(int i =0; i<enemyrow.size(); i++)
+    {
+        sf::FloatRect frosbite_boundary_box = frosbite.
+    }
+}
+*/
 
 void Screen::drawScore(sf::RenderWindow &window)
 {
@@ -219,7 +240,17 @@ void Screen::refresh(sf::RenderWindow &window)
     {
         enemyrow[i].draw(window);
     }
+    temperature_timer.draw(window);
     frostbite.draw(window);
+}
+
+void Screen::checkTemperature()
+{
+    if(temperature_timer.getTemperature()<0) //if he has frozen
+    {
+        temperature_timer.resetClock(); //reset temperature
+        score.decreaseLives(); //decrease his lives
+    }
 }
 
 Screen::~Screen()
