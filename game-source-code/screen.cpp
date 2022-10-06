@@ -259,6 +259,7 @@ void Screen::setStage(const int &i)
 {
     stage = i;
 }
+//checks if has lives
 const bool Screen::hasLives() const
 {
     if(score.getLives()==0)
@@ -321,6 +322,7 @@ void Screen::drawIgloo(sf::RenderWindow &window)
         window.draw(igloo.getBlock(i));
     }
 }
+//initialises game to play
 void Screen::initialise(sf::RenderWindow &window)
 {
     stage = 2;

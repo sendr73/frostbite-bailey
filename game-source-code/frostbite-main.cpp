@@ -26,7 +26,6 @@ int main()
     Screen screen(window);
     //setting up splash screen
     splashScreen splash_screen(gameWidth, gameHeight);
-    auto drawSplashScreen = true;
 
     sf::Clock clock;
 
@@ -40,22 +39,23 @@ int main()
             {
                 window.close();
             }
-            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)&&screen.getStage()!=2)
             {
-                drawSplashScreen  = false; //close the text
+                screen.initialise(window);
             }
             screen.frostbiteJump(window, evnt, pressed);
         }
-        if(drawSplashScreen) //if the game has not yet started show instructions
+        float deltaTime = 0.f;
+        switch(screen.getStage())
         {
+        case 1:
             splash_screen.draw(window);
             window.display();
-            float deltaTime = clock.restart().asSeconds(); //Whithout this there might only be 1 iceberg per row
+            deltaTime = clock.restart().asSeconds(); //Whithout this there might only be 1 iceberg per row
             //temperature_timer.resetClock();
-        }
-        else //play the game
-        {
-            float deltaTime = clock.restart().asSeconds();
+            break;
+        case 2:
+            deltaTime = clock.restart().asSeconds();
             screen.moveFrostbite(window, frostbiteSpeed, deltaTime);
             screen.moveIcerow(window, icebergSpeed, deltaTime); // (window,icebergSpeed,deltaTime);
             screen.icebergCollision(window,icebergSpeed,deltaTime);
@@ -64,6 +64,18 @@ int main()
             screen.enemyCollision(window); //check for collision with crabs
             screen.refresh(window);
             window.display();
+            if (!screen.hasLives())
+            {
+                screen.setStage(3);
+            }
+            break;
+        case 3:
+            screen.drawLossScreen(window);
+            window.display();
+            deltaTime = clock.restart().asSeconds();
+            break;
+        default:
+            cout<<"Invalid game stage"<<endl;
         }
 
     }

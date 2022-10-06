@@ -8,6 +8,8 @@ Igloo::Igloo()
 //generates blocks
 void Igloo::generateBlocks(const float x, const float y)
 {
+    blockAmount = 0;
+    complete = false;
     sf::Vector2f blockSize{75.f,25.f};
     sf::Vector2f blockOrigin{blockSize.x/2,blockSize.y};
     //defining each block
