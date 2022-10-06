@@ -79,18 +79,31 @@ void Screen::setIgloo(const sf::RenderWindow &window)
     igloo.generateBlocks(window.getSize().x,window.getSize().y);
 }
 
+const bool Screen::isWithinDoorway() const
+{
+    const float x = igloo.getBlockPosition(16).x;
+    const float width = igloo.getBlockSize(16).x;
+    if((frostbite.getPosition().x<x+width/2)
+       &&(frostbite.getPosition().x>x-width/2))
+    {
+        return true;
+    }
+    return false;
+}
+
 //executes the up/down movement when as specific event is initiated
 void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &event, bool &pressed)
 {
     if ((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Up)&&(pressed == false))
     {
         pressed = true; //while true, cannot be double clicked
-        std::cout << igloo.isComplete()<<endl;
-        if((!igloo.isComplete()&&frostbite.getPosition().y<=0.375*window.getSize().y)||frostbite.getPosition().y<=0.25*window.getSize().y)
+        if((!igloo.isComplete()&&frostbite.getPosition().y<=0.375*window.getSize().y)
+           ||frostbite.getPosition().y<=0.25*window.getSize().y
+           ||(frostbite.getPosition().y==0.375*window.getSize().y&&!isWithinDoorway()))
         {
             //do nothing
         }
-        else if(igloo.isComplete()&&frostbite.getPosition().y==0.375*window.getSize().y)
+        else if(igloo.isComplete()&&frostbite.getPosition().y==0.375*window.getSize().y&&isWithinDoorway())
         {
             frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y);
             score.increaseLevel();
@@ -103,7 +116,7 @@ void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &even
                         icerow[m][n].reset("resources/iceberg.png");
                     }
                 }
-                igloo.toggleComplete();
+                igloo.reset();
         }
         else
         {
@@ -192,6 +205,7 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
                         igloo.toggleComplete();
                     }
                 }
+                igloo.incrementBlockAmount();
                 break;
             }
             else if(frostbite.getPosition().y>0.45*window.getSize().y&&j==icerow[i].size()-1&&i==icerow.size()-1)

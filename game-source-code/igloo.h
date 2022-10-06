@@ -21,7 +21,13 @@ class Igloo
         //method to get block amount
         const int getBlockAmount() const;
         //returns one block
-        sf::RectangleShape getBlock(const int &i);
+        const sf::RectangleShape getBlock(const int &i) const;
+        //returns block position
+        const sf::Vector2f getBlockPosition(const int &i) const;
+        //returns block position
+        const sf::Vector2f getBlockSize(const int &i) const;
+        //resets igloo characteristics
+        void reset();
         virtual ~Igloo();
 
     protected:

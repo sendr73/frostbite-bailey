@@ -28,13 +28,20 @@ void Igloo::generateBlocks(const float x, const float y)
         {
             blocks[i].setPosition(sf::Vector2f(x-blockSize.x/1.5-((i-5)*blockSize.x),0.25*y-blockSize.y));
         }
-        else if(i<14)
+        else if(i<13)
         {
-            blocks[i].setPosition(sf::Vector2f(x-blockSize.x/1.5-((i-10)*blockSize.x)-blockSize.x/2,0.25*y-(2*blockSize.y)));
+            blocks[i].setPosition(sf::Vector2f(x-blockSize.x/1.5-((i-10)*blockSize.x)-blockSize.x,0.25*y-(2*blockSize.y)));
         }
-        else if(i<16)
+        else if(i<15)
         {
-            blocks[i].setPosition(sf::Vector2f(x-blockSize.x/1.5-((i-15)*blockSize.x)-5*blockSize.x/2,0.25*y-(3*blockSize.y)));
+            blocks[i].setPosition(sf::Vector2f(x-blockSize.x/1.5-((i-13)*blockSize.x)-3*blockSize.x/2,0.25*y-(3*blockSize.y)));
+        }
+        else
+        {
+            blocks[i] = sf::RectangleShape(sf::Vector2f(45.f,60.f));
+            blocks[i].setOrigin(blocks[i].getSize().x/2,blocks[i].getSize().y);
+            blocks[i].setFillColor(sf::Color::Black);
+            blocks[i].setPosition(sf::Vector2f(x-blockSize.x/1.5-4*blockSize.x/2,0.25*y));
         }
     }
 }
@@ -73,11 +80,26 @@ const int Igloo::getBlockAmount() const
     return blockAmount;
 }
 
-sf::RectangleShape Igloo::getBlock(const int &i)
+const sf::RectangleShape Igloo::getBlock(const int &i) const
 {
     return blocks[i];
 }
-
+//returns block position
+const sf::Vector2f Igloo::getBlockPosition(const int &i) const
+{
+    return blocks[i-1].getPosition();
+}
+//returns block position
+const sf::Vector2f Igloo::getBlockSize(const int &i) const
+{
+    return blocks[i-1].getSize();
+}
+//resets igloo
+void Igloo::reset()
+{
+    toggleComplete();
+    blockAmount=0;
+}
 Igloo::~Igloo()
 {
     //dtor

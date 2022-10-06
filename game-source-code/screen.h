@@ -65,6 +65,7 @@ protected:
     bool isOnIceberg(const Iceberg &iceberg); //helper that returns if frostbite is on an iceberg
     void drawIgloo(sf::RenderWindow &window); //helper that draws igloo
     void drawScore(sf::RenderWindow &window); //helper that draws score
+    const bool isWithinDoorway() const;
 };
 
 #endif
