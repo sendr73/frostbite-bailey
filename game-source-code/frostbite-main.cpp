@@ -41,7 +41,14 @@ int main()
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)&&screen.getStage()!=2)
             {
-                screen.initialise(window);
+                if(screen.getStage()==4)
+                {
+                    screen.nextLevel(window);
+                }
+                else
+                {
+                    screen.initialise(window);
+                }
             }
             screen.frostbiteJump(window, evnt, pressed);
         }
@@ -70,7 +77,12 @@ int main()
             }
             break;
         case 3:
-            screen.drawLossScreen(window);
+            screen.drawMessageScreen("You Lose",sf::Color::Red,"Press the ENTER key to restart",window);
+            window.display();
+            deltaTime = clock.restart().asSeconds();
+            break;
+        case 4:
+            screen.drawMessageScreen("You Win",sf::Color::Green,"Press the ENTER key to proceed",window);
             window.display();
             deltaTime = clock.restart().asSeconds();
             break;

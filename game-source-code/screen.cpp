@@ -87,7 +87,7 @@ const bool Screen::isWithinDoorway() const
     const float x = igloo.getBlockPosition(16).x;
     const float width = igloo.getBlockSize(16).x;
     if((frostbite.getPosition().x<x+width/2)
-       &&(frostbite.getPosition().x>x-width/2))
+            &&(frostbite.getPosition().x>x-width/2))
     {
         return true;
     }
@@ -101,25 +101,15 @@ void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &even
     {
         pressed = true; //while true, cannot be double clicked
         if((!igloo.isComplete()&&frostbite.getPosition().y<=0.375*window.getSize().y)
-           ||frostbite.getPosition().y<=0.25*window.getSize().y
-           ||(frostbite.getPosition().y==0.375*window.getSize().y&&!isWithinDoorway()))
+                ||frostbite.getPosition().y<=0.25*window.getSize().y
+                ||(frostbite.getPosition().y==0.375*window.getSize().y&&!isWithinDoorway()))
         {
             //do nothing
         }
         else if(igloo.isComplete()&&frostbite.getPosition().y==0.375*window.getSize().y&&isWithinDoorway())
         {
-            frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y);
-            score.increaseLevel();
-            temperature_timer.resetClock();
-            frostbite.reset();
-                for (int m = 0; m<icerow.size(); m++)
-                {
-                    for (int n = 0; n<icerow[m].size(); n++)
-                    {
-                        icerow[m][n].reset("resources/iceberg.png");
-                    }
-                }
-                igloo.reset();
+
+            stage=4;
         }
         else
         {
@@ -158,8 +148,8 @@ void Screen::moveFrostbite(const sf::RenderWindow &window, const float &frostbit
         bool screenCollision = frostbite.move('r',frostbiteSpeed*deltaTime,window.getSize().y,window.getSize().x);
         if(screenCollision)
         {
-           score.decreaseLives();
-           frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y); //set Sprite to top middle
+            score.decreaseLives();
+            frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y); //set Sprite to top middle
         }
     }
 }
@@ -279,8 +269,24 @@ const bool Screen::hasLives() const
     }
     return true;
 }
+void Screen::nextLevel(const sf::RenderWindow &window)
+{
+    stage = 2;
+    frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y);
+    score.increaseLevel();
+    temperature_timer.resetClock();
+    frostbite.reset();
+    for (int m = 0; m<icerow.size(); m++)
+    {
+        for (int n = 0; n<icerow[m].size(); n++)
+        {
+            icerow[m][n].reset("resources/iceberg.png");
+        }
+    }
+    igloo.reset();
+}
 //drawing functions
-void Screen::drawLossScreen(sf::RenderWindow &window)
+void Screen::drawMessageScreen(const string &title, const sf::Color &title_colour, const string &message, sf::RenderWindow &window)
 {
     sf::Font font;
     if (!font.loadFromFile("resources/sansation.ttf"))
@@ -288,26 +294,26 @@ void Screen::drawLossScreen(sf::RenderWindow &window)
         std::cout<<"Error Cannot load Font";
     }
     window.clear(sf::Color::Black);
-    sf::Text header, message;
-    header.setFont(font); //set font, color etc
-    header.setString("You lose");
-    header.setCharacterSize(90);
-    header.setFillColor(sf::Color::Red);
-    header.setStyle(sf::Text::Bold|sf::Text::Underlined);
-    sf::FloatRect text_rectangle = header.getLocalBounds();
-    header.setOrigin(text_rectangle.left + text_rectangle.width/2.0f,
-                     text_rectangle.top  + text_rectangle.height/2.0f);
-    header.setPosition(sf::Vector2f(window.getSize().x/2.0f,window.getSize().y/4.0f));
-    message.setString("Press the ENTER key to restart.");
-    message.setFont(font); //set font, color etc
-    message.setCharacterSize(30);
-    message.setFillColor(sf::Color::White);
-    text_rectangle = message.getLocalBounds();
-    message.setOrigin(text_rectangle.left + text_rectangle.width/2.0f,
-                        text_rectangle.top  + text_rectangle.height/2.0f);
-    message.setPosition(sf::Vector2f(window.getSize().x/2.0f,window.getSize().y/2.0f));
-    window.draw(header);
-    window.draw(message);
+    sf::Text title_text, message_text;
+    title_text.setFont(font); //set font, color etc
+    title_text.setString(title);
+    title_text.setCharacterSize(90);
+    title_text.setFillColor(title_colour);
+    title_text.setStyle(sf::Text::Bold|sf::Text::Underlined);
+    sf::FloatRect text_rectangle = title_text.getLocalBounds();
+    title_text.setOrigin(text_rectangle.left + text_rectangle.width/2.0f,
+                         text_rectangle.top  + text_rectangle.height/2.0f);
+    title_text.setPosition(sf::Vector2f(window.getSize().x/2.0f,window.getSize().y/4.0f));
+    message_text.setString(message);
+    message_text.setFont(font); //set font, color etc
+    message_text.setCharacterSize(30);
+    message_text.setFillColor(sf::Color::White);
+    text_rectangle = message_text.getLocalBounds();
+    message_text.setOrigin(text_rectangle.left + text_rectangle.width/2.0f,
+                           text_rectangle.top  + text_rectangle.height/2.0f);
+    message_text.setPosition(sf::Vector2f(window.getSize().x/2.0f,window.getSize().y/2.0f));
+    window.draw(title_text);
+    window.draw(message_text);
 }
 void Screen::drawScore(sf::RenderWindow &window)
 {
