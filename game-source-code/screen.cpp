@@ -340,10 +340,13 @@ void Screen::drawIgloo(sf::RenderWindow &window)
     }
 }
 //initialises game to play
-void Screen::initialise(sf::RenderWindow &window)
+void Screen::initialise(sf::RenderWindow &window,const bool &resetScore)
 {
     stage = 2;
-    score.reset();
+    if(resetScore)
+    {
+            score.reset();
+    }
     setFrostbite(window);
     setIcebergRows(window);
     setEnemyRows(window);
@@ -378,6 +381,7 @@ void Screen::checkTemperature()
     {
         temperature_timer.resetClock(); //reset temperature
         score.decreaseLives(); //decrease his lives
+        stage = 5;
     }
 }
 

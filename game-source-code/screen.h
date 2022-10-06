@@ -41,7 +41,7 @@ public:
     const bool hasLives() const;
     void nextLevel(const sf::RenderWindow &window);
     void drawMessageScreen(const string &title, const sf::Color &title_colour, const string &message, sf::RenderWindow &window);
-    void initialise(sf::RenderWindow &window);
+    void initialise(sf::RenderWindow &window, const bool &resetScore);
     //refreshes the window
     void refresh(sf::RenderWindow &window);
     //destructor

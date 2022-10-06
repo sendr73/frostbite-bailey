@@ -45,9 +45,13 @@ int main()
                 {
                     screen.nextLevel(window);
                 }
+                else if(screen.getStage()==5)
+                {
+                    screen.initialise(window,false);
+                }
                 else
                 {
-                    screen.initialise(window);
+                    screen.initialise(window,true);
                 }
             }
             screen.frostbiteJump(window, evnt, pressed);
@@ -62,11 +66,11 @@ int main()
             //temperature_timer.resetClock();
             break;
         case 2:
+            screen.checkTemperature(); //should be combined with the action class
             deltaTime = clock.restart().asSeconds();
             screen.moveFrostbite(window, frostbiteSpeed, deltaTime);
             screen.moveIcerow(window, icebergSpeed, deltaTime); // (window,icebergSpeed,deltaTime);
             screen.icebergCollision(window,icebergSpeed,deltaTime);
-            screen.checkTemperature(); //should be combined with the action class
             screen.moveEnemyRow(window, enemySpeed, deltaTime);
             screen.enemyCollision(window); //check for collision with crabs
             screen.refresh(window);
@@ -83,6 +87,11 @@ int main()
             break;
         case 4:
             screen.drawMessageScreen("You Win",sf::Color::Green,"Press the ENTER key to proceed",window);
+            window.display();
+            deltaTime = clock.restart().asSeconds();
+            break;
+        case 5:
+            screen.drawMessageScreen("You Froze",sf::Color(171,219,227,255),"Lost a life. Press the ENTER key to proceed",window);
             window.display();
             deltaTime = clock.restart().asSeconds();
             break;
