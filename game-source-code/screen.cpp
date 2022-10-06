@@ -145,11 +145,22 @@ void Screen::moveFrostbite(const sf::RenderWindow &window, const float &frostbit
 {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-        frostbite.move('l',frostbiteSpeed*deltaTime,window.getSize().y,window.getSize().x);
+        bool screenCollision = frostbite.move('l',frostbiteSpeed*deltaTime,window.getSize().y,window.getSize().x);
+        if(screenCollision)
+        {
+            score.decreaseLives();
+            frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y); //set Sprite to top middle
+        }
+
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        frostbite.move('r',frostbiteSpeed*deltaTime,window.getSize().y,window.getSize().x);
+        bool screenCollision = frostbite.move('r',frostbiteSpeed*deltaTime,window.getSize().y,window.getSize().x);
+        if(screenCollision)
+        {
+           score.decreaseLives();
+           frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y); //set Sprite to top middle
+        }
     }
 }
 
