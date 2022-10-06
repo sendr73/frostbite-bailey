@@ -35,6 +35,12 @@ public:
     void enemyCollision(sf::RenderWindow &window);
     //check for negative temperature
     void checkTemperature();
+    //getter and setter for stage
+    const int getStage() const;
+    void setStage(const int &i);
+    const bool hasLives() const;
+    void drawLossScreen(sf::RenderWindow &window);
+    void initialise(sf::RenderWindow &window);
     //refreshes the window
     void refresh(sf::RenderWindow &window);
     //destructor
@@ -52,8 +58,9 @@ protected:
     Igloo igloo;
     Enemies enemy_crab = Enemies("resources/crab.png",sf::Vector2f(1.f,1.f)); //enemy (set to crab)
     Enemies enemy_clam = Enemies("resources/clam.png",sf::Vector2f(1.f,1.f)); //enemy (set to crab)
-    float row=4; //amount of rows (default of 4)
-    float column=4; //amount of columns (default of 3 + overlap)
+    float row; //amount of rows (default of 4)
+    float column; //amount of columns (default of 3 + overlap)
+    int stage;
     vector<vector<Iceberg>> icerow; //2D vector of icebergs (could segregate into classes)
     vector<Enemies> crabrow;
     vector<Enemies> clamrow;

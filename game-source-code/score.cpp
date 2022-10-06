@@ -47,6 +47,14 @@ void Score::decreaseLives()
 {
     lives--;
 }
+//resets lives
+void Score::reset()
+{
+    point = 10;
+    score = 0;
+    level = 1;
+    lives = 3;;
+}
 Score::~Score()
 {
     //dtor

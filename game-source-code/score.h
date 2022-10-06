@@ -18,6 +18,7 @@ class Score
         const int getLives() const;
         void increaseLives();
         void decreaseLives();
+        void reset();
         virtual ~Score();
 
     protected:

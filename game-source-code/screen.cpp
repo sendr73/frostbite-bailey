@@ -5,6 +5,9 @@ using namespace std;
 
 Screen::Screen(sf::RenderWindow &window)
 {
+    row = 4;
+    column = 4;
+    stage = 1;
     setBackground(window);
     setFrostbite(window);
     setIcebergRows(window);
@@ -247,8 +250,53 @@ void Screen::enemyCollision(sf::RenderWindow &window)
 
     }
 }
-
-
+//getter for game stage
+const int Screen::getStage() const
+{
+    return stage;
+}
+void Screen::setStage(const int &i)
+{
+    stage = i;
+}
+const bool Screen::hasLives() const
+{
+    if(score.getLives()==0)
+    {
+        return false;
+    }
+    return true;
+}
+//drawing functions
+void Screen::drawLossScreen(sf::RenderWindow &window)
+{
+    sf::Font font;
+    if (!font.loadFromFile("resources/sansation.ttf"))
+    {
+        std::cout<<"Error Cannot load Font";
+    }
+    window.clear(sf::Color::Black);
+    sf::Text header, message;
+    header.setFont(font); //set font, color etc
+    header.setString("You lose");
+    header.setCharacterSize(90);
+    header.setFillColor(sf::Color::Red);
+    header.setStyle(sf::Text::Bold|sf::Text::Underlined);
+    sf::FloatRect text_rectangle = header.getLocalBounds();
+    header.setOrigin(text_rectangle.left + text_rectangle.width/2.0f,
+                     text_rectangle.top  + text_rectangle.height/2.0f);
+    header.setPosition(sf::Vector2f(window.getSize().x/2.0f,window.getSize().y/4.0f));
+    message.setString("Press the ENTER key to restart.");
+    message.setFont(font); //set font, color etc
+    message.setCharacterSize(30);
+    message.setFillColor(sf::Color::White);
+    text_rectangle = message.getLocalBounds();
+    message.setOrigin(text_rectangle.left + text_rectangle.width/2.0f,
+                        text_rectangle.top  + text_rectangle.height/2.0f);
+    message.setPosition(sf::Vector2f(window.getSize().x/2.0f,window.getSize().y/2.0f));
+    window.draw(header);
+    window.draw(message);
+}
 void Screen::drawScore(sf::RenderWindow &window)
 {
     if (!font.loadFromFile("resources/sansation.ttf"))
@@ -273,7 +321,16 @@ void Screen::drawIgloo(sf::RenderWindow &window)
         window.draw(igloo.getBlock(i));
     }
 }
-
+void Screen::initialise(sf::RenderWindow &window)
+{
+    stage = 2;
+    score.reset();
+    setFrostbite(window);
+    setIcebergRows(window);
+    setEnemyRows(window);
+    setIgloo(window);
+    temperature_timer.resetClock();
+}
 void Screen::refresh(sf::RenderWindow &window)
 {
     window.clear(sf::Color(38,79,155));
