@@ -205,7 +205,6 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
                         igloo.toggleComplete();
                     }
                 }
-                igloo.incrementBlockAmount();
                 break;
             }
             else if(frostbite.getPosition().y>0.45*window.getSize().y&&j==icerow[i].size()-1&&i==icerow.size()-1)
