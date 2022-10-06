@@ -3,6 +3,8 @@
 
 #include "../game-source-code/iceberg.h"
 #include "../game-source-code/frostbite.h"
+#include "../game-source-code/enemies.h"
+#include "../game-source-code/temperature.h"
 
 Iceberg iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //known to exist, will create another test case later on
 Iceberg overlap("resources/iceberg.png",sf::Vector2f(1.f,1.f));
@@ -13,6 +15,8 @@ const auto ICEBERG_HEIGHT = GAME_HEIGHT - 200.f;
 
 Frostbite frostbite("resources/iceberg.png",sf::Vector2f(1.f,1.f));
 const auto FROSTBITE_SPEED = 6.f;
+
+Enemies enemyCrab("resources/iceberg.png",sf::Vector2f(1.f,1.f));
 
 
 using namespace std;
@@ -46,9 +50,9 @@ TEST_CASE("Iceberg overlaps correctly") //Multiple assertions, commented below
     iceberg.move(ICEBERG_SPEED,GAME_HEIGHT,GAME_WIDTH,overlap); //Should NOT overlap, x should not change
     CHECK(overlap.getPosition().x==initial_x);
     iceberg.setPosition(GAME_WIDTH-80.f,ICEBERG_HEIGHT); //when moved, the right-hand side exceeds bounds by 70
-    cout << iceberg.getPosition().x << endl;
+   // cout << iceberg.getPosition().x << endl;
     iceberg.move(ICEBERG_SPEED,GAME_HEIGHT,GAME_WIDTH,overlap); //Should overlap, x should be at at iceberg.x-GAME_WIDTH
-    cout << iceberg.getPosition().x << endl;
+    //cout << iceberg.getPosition().x << endl;
     CHECK(overlap.getPosition().x==iceberg.getPosition().x-GAME_WIDTH);
 }
 
@@ -119,3 +123,45 @@ TEST_CASE("Frostbite Screen Collision at left prevents Sprite from sticking over
     frostbite.move('l', FROSTBITE_SPEED, GAME_HEIGHT, GAME_WIDTH);
     CHECK(frostbite_half_width== frostbite.getPosition().x); //check x axis that it is half of Frostbite's width
 }
+
+//enemies test cases
+TEST_CASE("Enemies Location can be Set Correctly")
+{
+    enemyCrab.setPosition(10.0f, 10.0f);
+    CHECK(enemyCrab.getPosition().x==10.0f);
+    CHECK(enemyCrab.getPosition().y==10.0f);
+}
+
+TEST_CASE("Enemies default direction is right")
+{
+    CHECK('r' == enemyCrab.getDirection());
+}
+
+TEST_CASE("If enemies direction is right, enemy will move to the right at given speed")
+{
+    enemyCrab.setPosition(10.0f, 10.0f);
+    enemyCrab.move(100.0f, GAME_HEIGHT, GAME_WIDTH, enemyCrab);
+    CHECK(enemyCrab.getPosition().x==110.0f);
+    CHECK(enemyCrab.getPosition().y==10.0f); //check that y-driection has not changed
+}
+
+TEST_CASE("Enemies direction can be changed to left")
+{
+    enemyCrab.setDirection('l');
+    CHECK('l' == enemyCrab.getDirection());
+}
+
+TEST_CASE("If enemies direction is left, enemy will move to the left at given speed")
+{
+    enemyCrab.setDirection('l');
+    enemyCrab.setPosition(210.0f, 10.0f);
+    enemyCrab.move(100.0f, GAME_HEIGHT, GAME_WIDTH, enemyCrab);
+    CHECK(enemyCrab.getPosition().x==110.0f);
+    CHECK(enemyCrab.getPosition().y==10.0f); //check that y-driection has not changed
+}
+
+//Don't understand the overlap function of the iceberge and enemies
+
+
+
+
