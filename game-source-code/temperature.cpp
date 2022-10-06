@@ -26,15 +26,7 @@ void temperature::draw(sf::RenderWindow &window)
         temperature_int--; //decrement the temperature deisplayed on the screen
         clock.restart(); //reset the clock
     }
-    /*
-    if(temperature_int < 0)
-    {
-        std::cout<<"Frostbite Dies"<<std::endl;
-        //need to deduct a life from frostbite
-        temperature_int = 45; //reset temperature
-    }
-    */
-    //turn the interger into a sfml text
+
     std::string myString = std:: to_string(temperature_int);
     temperature_.setString(myString + "°");
     window.draw(temperature_);

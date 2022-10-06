@@ -1,4 +1,5 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <Windows.h>
 #include "doctest.h"
 
 #include "../game-source-code/iceberg.h"
@@ -17,6 +18,9 @@ Frostbite frostbite("resources/iceberg.png",sf::Vector2f(1.f,1.f));
 const auto FROSTBITE_SPEED = 6.f;
 
 Enemies enemyCrab("resources/iceberg.png",sf::Vector2f(1.f,1.f));
+Enemies overlapE("resources/iceberg.png",sf::Vector2f(1.f,1.f));
+
+temperature temperature_timer;
 
 
 using namespace std;
@@ -102,7 +106,6 @@ TEST_CASE("Frostbite Screen Collision at top prevents Sprite's vertical position
 }
 TEST_CASE("Frostbite Screen Collision at bottom prevents Sprite's vertical position from being greater than board height")
 {
-    auto frostbite_height = frostbite.getHeight();
     frostbite.setPostion(500,GAME_HEIGHT-1); //set initial positon
     frostbite.jump('d', FROSTBITE_SPEED, GAME_HEIGHT, GAME_WIDTH);
     CHECK(GAME_HEIGHT == frostbite.getPosition().y);//check y positon to be equal to game height
@@ -126,6 +129,7 @@ TEST_CASE("Frostbite Screen Collision at left prevents Sprite from sticking over
 
 //enemies test cases
 TEST_CASE("Enemies Location can be Set Correctly")
+
 {
     enemyCrab.setPosition(10.0f, 10.0f);
     CHECK(enemyCrab.getPosition().x==10.0f);
@@ -160,8 +164,35 @@ TEST_CASE("If enemies direction is left, enemy will move to the left at given sp
     CHECK(enemyCrab.getPosition().y==10.0f); //check that y-driection has not changed
 }
 
-//Don't understand the overlap function of the iceberge and enemies
+TEST_CASE("Enemies moving off the screen uses the overlap correctly") //Multiple assertions, commented below
+{
+    auto enemyHeight = enemyCrab.getHeight(); //get height of enemy crab
+    overlapE.setPosition(-overlapE.getWidth()/2,enemyHeight);
+    const auto initial_x = overlapE.getPosition().x;
+    enemyCrab.setDirection('r'); //set to move right
+    enemyCrab.setPosition(100,overlapE.getPosition().y);
+    enemyCrab.move(100,GAME_HEIGHT,GAME_WIDTH,overlapE); //Should NOT overlap, the overlap enemy's position should not change
+    CHECK(overlapE.getPosition().x==initial_x);
+    enemyCrab.setPosition(GAME_WIDTH-80.f,ICEBERG_HEIGHT); //when moved, the right-hand side exceeds boundary
+    enemyCrab.move(100,GAME_HEIGHT,GAME_WIDTH,overlapE); //Extra enemy should appear at overlap
+    CHECK(overlapE.getPosition().x==enemyCrab.getPosition().x-GAME_WIDTH);
+}
 
 
+TEST_CASE("Check Default reset temperature is 45")
+{
+    temperature_timer.resetClock(); //reset clock and temperature
+    CHECK(45 == temperature_timer.getTemperature());
+}
+
+TEST_CASE("Check that the temperature decreaes over time")
+{
+    sf::RenderWindow window(sf::VideoMode(GAME_WIDTH, GAME_HEIGHT), "");
+    temperature_timer.resetClock(); //reset clock and temperature
+    Sleep(1000); //sleep for some time
+    temperature_timer.draw(window); //this functions will update the temperature
+    CHECK( temperature_timer.getTemperature()<45); //check the temperatuer
+
+}
 
 
