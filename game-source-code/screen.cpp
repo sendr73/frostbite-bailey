@@ -38,7 +38,7 @@ void Screen::setBackground(const sf::RenderWindow &window) //All take in the win
 //sets the starting position of Frostbite
 void Screen::setFrostbite(const sf::RenderWindow &window)
 {
-    frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y); //maybe setting an origin is more optimal for resetting
+    frostbite.setPosition(window.getSize().x/2,0.375*window.getSize().y); //maybe setting an origin is more optimal for resetting
 }
 //sets the positions and directions of icebergs in specific rows
 void Screen::setIcebergRows(const sf::RenderWindow &window)
@@ -202,7 +202,7 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
             }
             else if(frostbite.getPosition().y>0.45*window.getSize().y&&j==icerow[i].size()-1&&i==icerow.size()-1)
             {
-                frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y);
+                frostbite.setPosition(window.getSize().x/2,0.375*window.getSize().y);
                 score.decreaseLives(); //decrease his lives if drowned
             }
         }
@@ -227,15 +227,15 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
 
 void Screen::enemyCollision(sf::RenderWindow &window)
 {
-    sf::FloatRect frostbite_boundary_box = frostbite.getBounding();
+    sf::FloatRect frostbite_boundary_box = frostbite.getBoundaries();
     for(int i =0; i<crabrow.size(); i++) //crab row size = clam row size
     {
-        sf::FloatRect enemy_boundary_box = crabrow[i].getBounding();
-        sf::FloatRect clam_boundary_box = clamrow[i].getBounding();
+        sf::FloatRect enemy_boundary_box = crabrow[i].getBoundaries();
+        sf::FloatRect clam_boundary_box = clamrow[i].getBoundaries();
         if (frostbite_boundary_box.intersects(enemy_boundary_box)||frostbite_boundary_box.intersects(clam_boundary_box))
         {
             score.decreaseLives(); //decrease his lives if collision
-            frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y); //reset his position
+            frostbite.setPosition(window.getSize().x/2,0.375*window.getSize().y); //reset his position
         }
 
     }
@@ -261,7 +261,7 @@ const bool Screen::hasLives() const
 void Screen::nextLevel(const sf::RenderWindow &window)
 {
     stage = 2;
-    frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y);
+    frostbite.setPosition(window.getSize().x/2,0.375*window.getSize().y);
     score.increaseLevel();
     temperature_timer.resetClock();
     frostbite.reset();

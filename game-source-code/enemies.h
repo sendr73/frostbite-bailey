@@ -3,8 +3,9 @@
 #include <iostream>
 #include <SFML\Graphics.hpp>
 #include "motion.h"
+#include "element.h"
 
-class Enemies: public Motion
+class Enemies: public Motion, public Element
 {
     public:
         Enemies();
@@ -13,12 +14,12 @@ class Enemies: public Motion
         //consider creating another base code for sprite which has move, get dimenstions etc
 
         //draws enemy on the window
-        void draw(sf::RenderWindow &window);
+        //void draw(sf::RenderWindow &window);
         //moves enemy
        virtual void move(char direction, const sf::RenderWindow &window, float moveSpeed) override;
         //getter and setter for the position of enemy
-        const sf::Vector2f getPosition() const;
-        void setPosition(float x, float y);
+      //  const sf::Vector2f getPosition() const;
+       // void setPosition(float x, float y);
         //getter and setter for the direction of enemy
         const char getDirection() const;
         void setDirection(const char dir);
@@ -32,8 +33,8 @@ class Enemies: public Motion
     protected:
 
     private:
-        sf::Texture eTexture;
-        sf::Sprite eSprite;
+       // sf::Texture eTexture;
+        //sf::Sprite eSprite;
         char direction; //will be 'r' by default, see constructor
 };
 
