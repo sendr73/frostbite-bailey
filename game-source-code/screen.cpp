@@ -130,6 +130,16 @@ void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &even
         pressed = false;
     }
 }
+void Screen::moveAllSprites(sf::RenderWindow& window,const float& icebergeSpeed,const float& enemySpeed,const float& frostbiteSpeed,const float& deltaTime)
+{
+    moveSprite(frostbite, 'Q', window, frostbiteSpeed); //set random direction
+}
+
+void Screen::moveSprite(Motion& spriteA, char direction, sf::RenderWindow &window, const float &moveSpeed) const
+{
+    spriteA.move(direction, window, moveSpeed);
+}
+
 //moves Frostbite based on keyboard input, based on the refresh rate (deltaTime)
 void Screen::moveFrostbite(const sf::RenderWindow &window, const float &frostbiteSpeed, const float &deltaTime)
 {

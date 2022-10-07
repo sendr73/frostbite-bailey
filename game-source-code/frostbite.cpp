@@ -24,7 +24,15 @@ void Frostbite::move(char direction, const sf::RenderWindow &window, float moveS
 {
     auto gameHeight = window.getSize().y;
     auto gameWidth = window.getSize().x;
-    if(direction == 'l')
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) //set direction from input keyboard
+    {
+        direction = 'l';
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    {
+        direction = 'r';
+    }
+    if(direction == 'l') //allows for presset direction
     {
         fSprite.move(-moveSpeed, 0);
         //screen colision on the left
