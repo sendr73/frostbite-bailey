@@ -14,23 +14,16 @@ class Frostbite: public Motion, public Element
 
         };
         Frostbite(std::string imDirectory, const sf::Vector2f &Size);
-        //void draw(sf::RenderWindow &window);
-
-        //move player around
+         //move player around
         virtual void move(char direction, const sf::RenderWindow &window, float moveSpeed) override;
         //make frostbite jump
         void jump(char direction, float moveSpeed, const float gameHeight, const float gameWidth);
-        //returns if frostbite has jumped
+        //returns true if frostbite has jumped
         const bool hasJumped() const;
-        //get and set players positon (should be center of player for now);
-        //const sf::Vector2f getPosition() const ;
-       // void setPostion(float x, float y);
-        //get players width
+        //using base class getSize, get the width and height of Frosbite
         const float getWidth() const ;
         const float getHeight() const ;
-        //return global boundaries
-        //sf::FloatRect getBounding () const;
-        //resets Frostbite characteristics
+        //reset Frostbite's starting postion
         void reset();
         virtual ~Frostbite();
 
