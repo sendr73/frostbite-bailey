@@ -2,8 +2,9 @@
 #define ENEMIES_H
 #include <iostream>
 #include <SFML\Graphics.hpp>
+#include "motion.h"
 
-class Enemies
+class Enemies: public Motion
 {
     public:
         Enemies();
@@ -14,7 +15,7 @@ class Enemies
         //draws enemy on the window
         void draw(sf::RenderWindow &window);
         //moves enemy
-        void move(float moveSpeed, const float gameHeight, const float gameWidth, Enemies &overlapEnemy);
+       virtual void move(char direction, const sf::RenderWindow &window, float moveSpeed) override;
         //getter and setter for the position of enemy
         const sf::Vector2f getPosition() const;
         void setPosition(float x, float y);

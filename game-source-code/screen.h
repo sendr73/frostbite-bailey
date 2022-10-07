@@ -23,6 +23,10 @@ public:
     Screen(sf::RenderWindow &window);
     //making the frostbite object jump on window, based on events
     void frostbiteJump(const sf::RenderWindow &window, const sf::Event &event, bool &pressed);
+    //function to use overwritten move function
+    void moveAllSprites(sf::RenderWindow& window,const float& icebergeSpeed,const float& enemySpeed,const float& frostbiteSpeed,const float& deltaTime);
+    //function to move any class inherited from motion
+    void moveSprite(Motion& spriteA, char direction, sf::RenderWindow &window, const float &moveSpeed) const;
     //moving the frostbite object on window
     void moveFrostbite(const sf::RenderWindow &window, const float &speed, const float &deltaTime);
     //moving the rows of ice on screen

@@ -20,15 +20,27 @@ void Frostbite::draw(sf::RenderWindow &window)
     window.draw(fSprite);
 }
 //move player around
-void Frostbite::move(char direction, float moveSpeed, const float gameHeight, const float gameWidth)
+
+void Frostbite::move(char direction, const sf::RenderWindow &window, float moveSpeed)
 {
-    if(direction == 'l')
+    auto gameHeight = window.getSize().y;
+    auto gameWidth = window.getSize().x;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) //set direction from input keyboard
+    {
+        direction = 'l';
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    {
+        direction = 'r';
+    }
+    if(direction == 'l') //allows for presset direction
     {
         fSprite.move(-moveSpeed, 0);
         //screen colision on the left
         if(getPosition().x<0 + getWidth()/2)
         {//adjust the sides by width/2 when checking left and right
            setPostion(getWidth()/2,getPosition().y);
+
         }
     }
     else if(direction == 'r')
