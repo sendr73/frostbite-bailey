@@ -16,7 +16,7 @@ int main()
     //Game parameters
     const auto gameWidth = 1000.f;
     const auto gameHeight = 800.f;
-    const float frostbiteSpeed = 600.f;
+    const float frostbiteSpeed = 6.f;
     const float icebergSpeed = 150.f;
     const float enemySpeed = 100.f;
     //setting up the window
@@ -68,10 +68,10 @@ int main()
         case 2:
             screen.checkTemperature(); //should be combined with the action class
             deltaTime = clock.restart().asSeconds();
-            screen.moveFrostbite(window, frostbiteSpeed, deltaTime);
-            screen.moveIcerow(window, icebergSpeed, deltaTime); // (window,icebergSpeed,deltaTime);
+            screen.moveAllSprites(window,icebergSpeed,enemySpeed,frostbiteSpeed, deltaTime);
+            //screen.moveFrostbite(window, frostbiteSpeed, deltaTime);
+            //screen.moveIcerow(window, icebergSpeed, deltaTime); // (window,icebergSpeed,deltaTime);
             screen.icebergCollision(window,icebergSpeed,deltaTime);
-            screen.moveEnemyRow(window, enemySpeed, deltaTime);
             screen.enemyCollision(window); //check for collision with crabs
             screen.refresh(window);
             window.display();

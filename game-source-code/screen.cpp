@@ -130,9 +130,11 @@ void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &even
         pressed = false;
     }
 }
-void Screen::moveAllSprites(sf::RenderWindow& window,const float& icebergeSpeed,const float& enemySpeed,const float& frostbiteSpeed,const float& deltaTime)
+void Screen::moveAllSprites(sf::RenderWindow& window,const float& icebergSpeed,const float& enemySpeed,const float& frostbiteSpeed,const float& deltaTime)
 {
     moveSprite(frostbite, 'Q', window, frostbiteSpeed); //set random direction
+    moveEnemyRow(window, enemySpeed, deltaTime);
+    moveIcerow(window, icebergSpeed, deltaTime);
 }
 
 void Screen::moveSprite(Motion& spriteA, char direction, sf::RenderWindow &window, const float &moveSpeed) const
@@ -140,30 +142,6 @@ void Screen::moveSprite(Motion& spriteA, char direction, sf::RenderWindow &windo
     spriteA.move(direction, window, moveSpeed);
 }
 
-//moves Frostbite based on keyboard input, based on the refresh rate (deltaTime)
-void Screen::moveFrostbite(const sf::RenderWindow &window, const float &frostbiteSpeed, const float &deltaTime)
-{
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-    {
-        frostbite.move('l', window, frostbiteSpeed*deltaTime);
-        /*if(screenCollision)
-        {
-            score.decreaseLives();
-            frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y); //set Sprite to top middle
-        } */
-
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-    {
-        frostbite.move('r',window, frostbiteSpeed*deltaTime);
-        /*if(screenCollision)
-        {
-            score.decreaseLives();
-            frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y); //set Sprite to top middle
-        }
-        */
-    }
-}
 
 void Screen::moveIcerow(sf::RenderWindow &window, const float &icebergSpeed, const float &deltaTime)
 {
@@ -171,7 +149,7 @@ void Screen::moveIcerow(sf::RenderWindow &window, const float &icebergSpeed, con
     {
         for(int j = 0; j<icerow[i].size()-1; j++)
         {
-            icerow[i][j].move(icebergSpeed*deltaTime,window.getSize().y,window.getSize().x,icerow[i][icerow[i].size()-1]);
+            moveSprite(icerow[i][j], icerow[i][j].getDirection(), window, icebergSpeed*deltaTime); //.getSize().y,window.getSize().x,icerow[i][icerow[i].size()-1]);
         }
     }
 }
@@ -179,8 +157,8 @@ void Screen::moveEnemyRow(sf::RenderWindow &window, const float &enemySpeed, con
 {
     for(int i = 0; i<crabrow.size(); i++) //size of crab row == size of clam row
     {
-        crabrow[i].move(enemySpeed*deltaTime,window.getSize().y,window.getSize().x,crabrow[i]);
-        clamrow[i].move(enemySpeed*deltaTime,window.getSize().y,window.getSize().x,clamrow[i]);
+        moveSprite(crabrow[i],'l',window, enemySpeed*deltaTime);
+        moveSprite(clamrow[i],'r',window, enemySpeed*deltaTime);
     }
 }
 
@@ -205,7 +183,7 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
         {
             if(isOnIceberg(icerow[i][j]))
             {
-                frostbite.move(icerow[i][j].getDirection(),window, icebergSpeed*deltaTime);
+                moveSprite(frostbite,icerow[i][j].getDirection(),window, icebergSpeed*deltaTime);
                 landed = true;
                 if(!icerow[i][j].beenLandedOn()&&frostbite.hasJumped())
                 {

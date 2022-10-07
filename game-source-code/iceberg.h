@@ -3,8 +3,9 @@
 
 #include <iostream>
 #include <SFML\Graphics.hpp>
+#include "motion.h"
 
-class Iceberg
+class Iceberg: public Motion
 {
     public:
         Iceberg(){
@@ -14,7 +15,7 @@ class Iceberg
         //draws the iceberg on the window
         void draw(sf::RenderWindow &window);
         //moves the iceberg
-        void move(float moveSpeed, const float gameHeight, const float gameWidth, Iceberg &overlapIceberg);
+        virtual void move(char direction, const sf::RenderWindow &window, float moveSpeed) override;
         //getter and setter for the position of the iceberg
         const sf::Vector2f getPosition() const;
         void setPosition(float x, float y);
