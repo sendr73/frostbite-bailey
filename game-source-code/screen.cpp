@@ -38,7 +38,7 @@ void Screen::setBackground(const sf::RenderWindow &window) //All take in the win
 //sets the starting position of Frostbite
 void Screen::setFrostbite(const sf::RenderWindow &window)
 {
-    frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y); //maybe setting an origin is more optimal for resetting
+    frostbite.setPosition(window.getSize().x/2,0.375*window.getSize().y); //maybe setting an origin is more optimal for resetting
 }
 //sets the positions and directions of icebergs in specific rows
 void Screen::setIcebergRows(const sf::RenderWindow &window)
@@ -100,13 +100,14 @@ void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &even
     if ((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Up)&&(pressed == false))
     {
         pressed = true; //while true, cannot be double clicked
-        if((!igloo.isComplete()&&frostbite.getPosition().y<=0.375*window.getSize().y)
+       /* if((!igloo.isComplete()&&frostbite.getPosition().y<=0.375*window.getSize().y)
                 ||frostbite.getPosition().y<=0.25*window.getSize().y
                 ||(frostbite.getPosition().y==0.375*window.getSize().y&&!isWithinDoorway()))
         {
             //do nothing
         }
-        else if(igloo.isComplete()&&frostbite.getPosition().y==0.375*window.getSize().y&&isWithinDoorway())
+        else
+            */if(igloo.isComplete()&&frostbite.getPosition().y==0.375*window.getSize().y&&isWithinDoorway())
         {
 
             stage=4;
@@ -202,7 +203,7 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
             }
             else if(frostbite.getPosition().y>0.45*window.getSize().y&&j==icerow[i].size()-1&&i==icerow.size()-1)
             {
-                frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y);
+                frostbite.setPosition(window.getSize().x/2,0.375*window.getSize().y);
                 score.decreaseLives(); //decrease his lives if drowned
             }
         }
@@ -227,7 +228,7 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
 
 void Screen::enemyCollision(sf::RenderWindow &window)
 {
-    sf::FloatRect frostbite_boundary_box = frostbite.getBounding();
+    sf::FloatRect frostbite_boundary_box = frostbite.getBoundaries();
     for(int i =0; i<crabrow.size(); i++) //crab row size = clam row size
     {
         sf::FloatRect enemy_boundary_box = crabrow[i].getBounding();
@@ -235,7 +236,7 @@ void Screen::enemyCollision(sf::RenderWindow &window)
         if (frostbite_boundary_box.intersects(enemy_boundary_box)||frostbite_boundary_box.intersects(clam_boundary_box))
         {
             score.decreaseLives(); //decrease his lives if collision
-            frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y); //reset his position
+            frostbite.setPosition(window.getSize().x/2,0.375*window.getSize().y); //reset his position
         }
 
     }
@@ -261,7 +262,7 @@ const bool Screen::hasLives() const
 void Screen::nextLevel(const sf::RenderWindow &window)
 {
     stage = 2;
-    frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y);
+    frostbite.setPosition(window.getSize().x/2,0.375*window.getSize().y);
     score.increaseLevel();
     temperature_timer.resetClock();
     frostbite.reset();
