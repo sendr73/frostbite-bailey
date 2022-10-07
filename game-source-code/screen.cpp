@@ -135,22 +135,23 @@ void Screen::moveFrostbite(const sf::RenderWindow &window, const float &frostbit
 {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-        bool screenCollision = frostbite.move('l',frostbiteSpeed*deltaTime,window.getSize().y,window.getSize().x);
-        if(screenCollision)
+        frostbite.move('l', window, frostbiteSpeed*deltaTime);
+        /*if(screenCollision)
         {
             score.decreaseLives();
             frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y); //set Sprite to top middle
-        }
+        } */
 
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        bool screenCollision = frostbite.move('r',frostbiteSpeed*deltaTime,window.getSize().y,window.getSize().x);
-        if(screenCollision)
+        frostbite.move('r',window, frostbiteSpeed*deltaTime);
+        /*if(screenCollision)
         {
             score.decreaseLives();
             frostbite.setPostion(window.getSize().x/2,0.375*window.getSize().y); //set Sprite to top middle
         }
+        */
     }
 }
 
@@ -194,7 +195,7 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
         {
             if(isOnIceberg(icerow[i][j]))
             {
-                frostbite.move(icerow[i][j].getDirection(),icebergSpeed*deltaTime,window.getSize().y,window.getSize().x);
+                frostbite.move(icerow[i][j].getDirection(),window, icebergSpeed*deltaTime);
                 landed = true;
                 if(!icerow[i][j].beenLandedOn()&&frostbite.hasJumped())
                 {

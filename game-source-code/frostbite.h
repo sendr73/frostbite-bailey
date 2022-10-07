@@ -3,8 +3,9 @@
 
 #include <iostream>
 #include <SFML\Graphics.hpp>
+#include "motion.h"
 
-class Frostbite
+class Frostbite: public Motion
 {
     public:
         Frostbite(){
@@ -14,7 +15,7 @@ class Frostbite
         void draw(sf::RenderWindow &window);
 
         //move player around
-        bool move(char direction, float moveSpeed, const float gameHeight, const float gameWidth);
+        virtual void move(char direction, const sf::RenderWindow &window, float moveSpeed) override;
         //make frostbite jump
         void jump(char direction, float moveSpeed, const float gameHeight, const float gameWidth);
         //returns if frostbite has jumped

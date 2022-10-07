@@ -20,17 +20,19 @@ void Frostbite::draw(sf::RenderWindow &window)
     window.draw(fSprite);
 }
 //move player around
-bool Frostbite::move(char direction, float moveSpeed, const float gameHeight, const float gameWidth)
+void Frostbite::move(char direction, const sf::RenderWindow &window, float moveSpeed)
 {
+    auto gameHeight = window.getSize().y;
+    auto gameWidth = window.getSize().x;
     if(direction == 'l')
     {
         fSprite.move(-moveSpeed, 0);
         //screen colision on the left
         if(getPosition().x<0 + getWidth()/2)
         {//adjust the sides by width/2 when checking left and right
-            //setPostion(getWidth()/2,getPosition().y);
+            setPostion(getWidth()/2,getPosition().y);
             //setPostion(gameWidth/2,0.375*gameHeight);//set Sprite to top middle
-            return true; //indicate there was a clash
+            //return true; //indicate there was a clash
         }
     }
     else if(direction == 'r')
@@ -39,11 +41,11 @@ bool Frostbite::move(char direction, float moveSpeed, const float gameHeight, co
         //screen colision on the right
         if(getPosition().x>gameWidth-getWidth()/2) //adjust the sides by width/2 when checking left and right
          {
-             //setPostion(gameWidth-getWidth()/2, getPosition().y);
-             return true;
+             setPostion(gameWidth-getWidth()/2, getPosition().y);
+             //return true;
          }
     }
-    return false;
+    //return false;
 }
 //make player jump
 void Frostbite::jump(char direction, float moveSpeed, const float gameHeight, const float gameWidth)
