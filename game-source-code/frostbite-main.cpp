@@ -9,6 +9,7 @@
 #include <iostream>
 #include "screen.h"
 #include "splashscreen.h"
+
 using namespace std;
 
 int main()
@@ -26,6 +27,7 @@ int main()
     Screen screen(window);
     //setting up splash screen
     splashScreen splash_screen(gameWidth, gameHeight);
+    Frostbite frosty;
 
     sf::Clock clock;
 

@@ -230,8 +230,8 @@ void Screen::enemyCollision(sf::RenderWindow &window)
     sf::FloatRect frostbite_boundary_box = frostbite.getBoundaries();
     for(int i =0; i<crabrow.size(); i++) //crab row size = clam row size
     {
-        sf::FloatRect enemy_boundary_box = crabrow[i].getBounding();
-        sf::FloatRect clam_boundary_box = clamrow[i].getBounding();
+        sf::FloatRect enemy_boundary_box = crabrow[i].getBoundaries();
+        sf::FloatRect clam_boundary_box = clamrow[i].getBoundaries();
         if (frostbite_boundary_box.intersects(enemy_boundary_box)||frostbite_boundary_box.intersects(clam_boundary_box))
         {
             score.decreaseLives(); //decrease his lives if collision

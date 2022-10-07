@@ -31,7 +31,7 @@ void Iceberg::move(char direction, const sf::RenderWindow &window, float moveSpe
     moveElement(direction, moveSpeed);
     // if(direction == 'l')
     // {
-    iSprite.move(-moveSpeed, 0);
+    //iSprite.move(-moveSpeed, 0);
     if(getPosition().x+getWidth()/2<=0)
     {
         setPosition(gameWidth-getWidth()/2,getPosition().y);
@@ -78,10 +78,6 @@ const float Iceberg::getHeight() const
 //logic for when landed on
 void Iceberg::landedOn(std::string imDirectory)
 {
-    if(!iTexture.loadFromFile(imDirectory))
-    {
-        std::cerr<<"Error in loading iceberg texture when landed\n";
-    }
     setTexture(imDirectory);
     landed = true;
 }
@@ -93,10 +89,6 @@ bool Iceberg::beenLandedOn()
 //resets characteristics
 void Iceberg::reset(std::string imDirectory)
 {
-    if(!iTexture.loadFromFile(imDirectory))
-    {
-        std::cerr<<"Error in loading iceberg texture when landed\n";
-    }
-    iSprite.setTexture(iTexture);
+    setTexture(imDirectory);
     landed = false;
 }

@@ -34,8 +34,8 @@ class Iceberg: public Motion, public Element
         virtual ~Iceberg();
 
     private:
-        sf::Texture iTexture;
-        sf::Sprite iSprite;
+        //sf::Texture iTexture;
+        //sf::Sprite iSprite;
         char direction; //will be 'r' by default, see constructor
         bool landed; //will be false by default
 };
