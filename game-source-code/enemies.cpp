@@ -21,20 +21,24 @@ void Enemies::draw(sf::RenderWindow &window)
     window.draw(eSprite);
 }
 
-void Enemies::move(float moveSpeed, const float gameHeight, const float gameWidth, Enemies &overlapEnemy)
+void Enemies::move(char direction, const sf::RenderWindow &window, float moveSpeed) //enemeis must store its own speed
 {
+    auto gameHeight = window.getSize().y;
+    auto gameWidth = window.getSize().x;
     if(direction == 'l')
     {
         eSprite.move(-moveSpeed, 0);
-        if(getPosition().x+getWidth()/2<=0)
+       if(getPosition().x+getWidth()/2<=0)
         {
             setPosition(gameWidth-getWidth()/2,getPosition().y);
-            overlapEnemy.setPosition(-overlapEnemy.getWidth()/2,getPosition().y);
+            //overlapEnemy.setPosition(-overlapEnemy.getWidth()/2,getPosition().y);
         }
+
         else if(getPosition().x-getWidth()/2<0)
         {
-            overlapEnemy.setPosition((gameWidth+getPosition().x),getPosition().y);
+            //overlapEnemy.setPosition((gameWidth+getPosition().x),getPosition().y);
         }
+
     }
     else if(direction == 'r')
     {
@@ -42,11 +46,11 @@ void Enemies::move(float moveSpeed, const float gameHeight, const float gameWidt
         if(getPosition().x-getWidth()/2>=gameWidth)
         {
             setPosition(getWidth()/2,getPosition().y);
-            overlapEnemy.setPosition(-overlapEnemy.getWidth()/2,getPosition().y);
+            //overlapEnemy.setPosition(-overlapEnemy.getWidth()/2,getPosition().y);
         }
         else if(getPosition().x+getWidth()/2>gameWidth)
         {
-            overlapEnemy.setPosition((getPosition().x-gameWidth),getPosition().y);
+            //overlapEnemy.setPosition((getPosition().x-gameWidth),getPosition().y);
         }
     }
 }
