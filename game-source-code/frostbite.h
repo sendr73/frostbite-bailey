@@ -14,7 +14,7 @@ class Frostbite
         void draw(sf::RenderWindow &window);
 
         //move player around
-        bool move(char direction, float moveSpeed, const float gameHeight, const float gameWidth);
+        void move(char direction, float moveSpeed, const float gameHeight, const float gameWidth);
         //make frostbite jump
         void jump(char direction, float moveSpeed, const float gameHeight, const float gameWidth);
         //returns if frostbite has jumped
