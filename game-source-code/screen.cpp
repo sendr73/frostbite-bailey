@@ -100,14 +100,13 @@ void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &even
     if ((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Up)&&(pressed == false))
     {
         pressed = true; //while true, cannot be double clicked
-       /* if((!igloo.isComplete()&&frostbite.getPosition().y<=0.375*window.getSize().y)
+        if((!igloo.isComplete()&&frostbite.getPosition().y<=0.375*window.getSize().y)
                 ||frostbite.getPosition().y<=0.25*window.getSize().y
                 ||(frostbite.getPosition().y==0.375*window.getSize().y&&!isWithinDoorway()))
         {
             //do nothing
         }
-        else
-            */if(igloo.isComplete()&&frostbite.getPosition().y==0.375*window.getSize().y&&isWithinDoorway())
+        else if(igloo.isComplete()&&frostbite.getPosition().y==0.375*window.getSize().y&&isWithinDoorway())
         {
 
             stage=4;
