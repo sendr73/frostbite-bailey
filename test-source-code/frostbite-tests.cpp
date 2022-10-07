@@ -185,6 +185,7 @@ TEST_CASE("Check Default reset temperature is 45")
     CHECK(45 == temperature_timer.getTemperature());
 }
 
+/*
 TEST_CASE("Check that the temperature decreaes over time")
 {
     sf::RenderWindow window(sf::VideoMode(GAME_WIDTH, GAME_HEIGHT), "");
@@ -194,5 +195,6 @@ TEST_CASE("Check that the temperature decreaes over time")
     CHECK( temperature_timer.getTemperature()<45); //check the temperatuer
 
 }
+*/
 
 
