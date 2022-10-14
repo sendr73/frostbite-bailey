@@ -1,11 +1,11 @@
-#include "enemies.h"
+#include "enemy.h"
 
-Enemies::Enemies(): Element("resources/crab.png",sf::Vector2f(1.f,1.f)), direction{'r'}
+Enemy::Enemy(): Element("resources/crab.png",sf::Vector2f(1.f,1.f)), direction{'r'}
 {
     //ctor
 }
 
-Enemies::Enemies(std::string imDirectory, const sf::Vector2f &Size): Element(imDirectory,Size), direction{'r'}
+Enemy::Enemy(std::string imDirectory, const sf::Vector2f &Size): Element(imDirectory,Size), direction{'r'}
 {}
 /*
 void Enemies::draw(sf::RenderWindow &window)
@@ -14,7 +14,7 @@ void Enemies::draw(sf::RenderWindow &window)
 }
 */
 
-void Enemies::move(char direction, const sf::RenderWindow &window, float moveSpeed) //enemeis must store its own speed
+void Enemy::move(char direction, const sf::RenderWindow &window, float moveSpeed) //enemeis must store its own speed
 {
     auto gameHeight = window.getSize().y;
     auto gameWidth = window.getSize().x;
@@ -53,22 +53,22 @@ void Enemies::setPosition(float x, float y)
 }
 */
 
-const char Enemies::getDirection() const
+const char Enemy::getDirection() const
 {
     return direction;
 }
 
-void Enemies::setDirection(const char dir)
+void Enemy::setDirection(const char dir)
 {
     direction = dir;
 }
 
-const float Enemies::getWidth() const
+const float Enemy::getWidth() const
 {
     return getSize().x;
 }
 
-const float Enemies::getHeight() const
+const float Enemy::getHeight() const
 {
     return getSize().y;
 }
@@ -81,7 +81,7 @@ sf::FloatRect Enemies::getBounding () const
 }
 */
 
-Enemies::~Enemies()
+Enemy::~Enemy()
 {
     //dtor
 }

@@ -65,8 +65,8 @@ void Screen::setIcebergRows(const sf::RenderWindow &window)
 }
 void Screen::setEnemyRows(const sf::RenderWindow &window)
 {
-    crabrow=vector<Enemies>(4,enemy_crab); //initializes 1D
-    clamrow=vector<Enemies>(4,enemy_clam);
+    crabrow=vector<Enemy>(4,enemy_crab); //initializes 1D
+    clamrow=vector<Enemy>(4,enemy_clam);
     for(int j = 0; j<crabrow.size(); j++) //loops through columns
     {
         crabrow[j].setPosition((20)+2*(j)*enemy_crab.getWidth()

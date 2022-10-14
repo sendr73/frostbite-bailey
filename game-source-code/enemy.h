@@ -5,11 +5,11 @@
 #include "motion.h"
 #include "element.h"
 
-class Enemies: public Motion, public Element
+class Enemy: public Motion, public Element
 {
     public:
-        Enemies();
-        Enemies(std::string imDirectory, const sf::Vector2f &Size);
+        Enemy();
+        Enemy(std::string imDirectory, const sf::Vector2f &Size);
         //for now much of this code is repeated in the iceberge class
         //consider creating another base code for sprite which has move, get dimenstions etc
 
@@ -28,7 +28,7 @@ class Enemies: public Motion, public Element
         const float getHeight() const;
         //return global boundaries
         sf::FloatRect getBounding () const;
-        virtual ~Enemies();
+        virtual ~Enemy();
 
     protected:
 
