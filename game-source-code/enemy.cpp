@@ -5,8 +5,10 @@ Enemy::Enemy(): Element("resources/crab.png",sf::Vector2f(1.f,1.f)), direction{'
     //ctor
 }
 
-Enemy::Enemy(std::string imDirectory, const sf::Vector2f &Size): Element(imDirectory,Size), direction{'r'}
-{}
+Enemy::Enemy(std::string imDirectory): Element(imDirectory,sf::Vector2f(1.f,1.f)), direction{'r'}
+{
+
+}
 /*
 void Enemies::draw(sf::RenderWindow &window)
 {

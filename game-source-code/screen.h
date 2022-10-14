@@ -10,6 +10,7 @@
 #include "score.h"
 #include "igloo.h"
 #include "temperature.h"
+#include "enemyrow.h"
 
 using namespace std;
 
@@ -61,8 +62,9 @@ protected:
     Iceberg iceberg=Iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //iceberg object
     Score score;
     Igloo igloo;
-    Enemy enemy_crab = Enemy("resources/crab.png",sf::Vector2f(1.f,1.f)); //enemy (set to crab)
-    Enemy enemy_clam = Enemy("resources/clam.png",sf::Vector2f(1.f,1.f)); //enemy (set to crab)
+    Enemy enemy_crab = Enemy("resources/crab.png"); //enemy (set to crab)
+    Enemy enemy_clam = Enemy("resources/clam.png"); //enemy (set to crab)
+    EnemyRow enemy_row = EnemyRow("resources/crab.png", Glide, 1000.f, 800.f); //screen width should be passed in at some time
     float row; //amount of rows (default of 4)
     float column; //amount of columns (default of 3 + overlap)
     int stage;
