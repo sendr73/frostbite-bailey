@@ -23,7 +23,6 @@ public:
     //parametized constructor
     Screen(sf::RenderWindow &window);
     //making the frostbite object jump on window, based on events
-    void intializeBoard(sf::RenderWindow &window); //virtual function cannot be called in constructor so this will draw all basic things
 
     void frostbiteJump(const sf::RenderWindow &window, const sf::Event &event, bool &pressed);
     //function to use overwritten move function

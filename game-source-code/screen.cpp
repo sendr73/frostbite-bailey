@@ -9,24 +9,15 @@ Screen::Screen(sf::RenderWindow &window)
     row = 4;
     column = 4;
     stage = 1;
-    /*
+
     setBackground(window);
     setFrostbite(window);
     setIcebergRows(window);
-    setEnemyRows(window);
-    setIgloo(window);
-    */
-}
-
-void Screen::intializeBoard(sf::RenderWindow &window) //cant use virtual print in any constructor, so created a new funciton
-{
-    setBackground(window);
-    setFrostbite(window);
-    setIcebergRows(window);
-//    setEnemyRows(window);
+    //setEnemyRows(window);
     setIgloo(window);
 
 }
+
 //sets texture of background based on dimensions of the window
 void Screen::setBackground(const sf::RenderWindow &window) //All take in the window as parameters, maybe change to height and width?
 {

@@ -74,7 +74,7 @@ int main()
             //screen.moveFrostbite(window, frostbiteSpeed, deltaTime);
             //screen.moveIcerow(window, icebergSpeed, deltaTime); // (window,icebergSpeed,deltaTime);
             screen.icebergCollision(window,icebergSpeed,deltaTime);
-            screen.enemyCollision(window); //check for collision with crabs
+//            screen.enemyCollision(window); //check for collision with crabs
             screen.refresh(window);
             window.display();
             if (!screen.hasLives())
