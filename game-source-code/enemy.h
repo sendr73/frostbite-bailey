@@ -35,6 +35,7 @@ class Enemy: public Motion, public Element
     private:
        // sf::Texture eTexture;
         //sf::Sprite eSprite;
+        const float enemySpeed = 100.0f;
         char direction; //will be 'r' by default, see constructor
 };
 

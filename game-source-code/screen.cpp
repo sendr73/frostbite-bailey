@@ -138,6 +138,7 @@ void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &even
 }
 void Screen::moveAllSprites(sf::RenderWindow& window,const float& icebergSpeed,const float& enemySpeed,const float& frostbiteSpeed,const float& deltaTime)
 {
+    moveSprite(frostbite, 'Q', window, frostbiteSpeed);
     moveSprite(enemy_row, 'Q', window, deltaTime); //set random direction
 //    moveEnemyRow(window, enemySpeed, deltaTime);
     moveIcerow(window, icebergSpeed, deltaTime);

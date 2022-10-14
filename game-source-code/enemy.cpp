@@ -16,11 +16,11 @@ void Enemies::draw(sf::RenderWindow &window)
 }
 */
 
-void Enemy::move(char direction, const sf::RenderWindow &window, float moveSpeed) //enemeis must store its own speed
+void Enemy::move(char direction, const sf::RenderWindow &window, float deltaTime) //enemeis must store its own speed
 {
     auto gameHeight = window.getSize().y;
     auto gameWidth = window.getSize().x;
-    moveElement(direction, moveSpeed);
+    moveElement(direction, deltaTime*enemySpeed);
 //  eSprite.move(-moveSpeed, 0);
     if(getPosition().x+getWidth()/2<=0)
     {
