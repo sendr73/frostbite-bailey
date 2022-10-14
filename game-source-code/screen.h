@@ -6,7 +6,7 @@
 #include <SFML\Graphics.hpp>
 #include "iceberg.h"
 #include "frostbite.h"
-#include "enemies.h"
+#include "enemy.h"
 #include "score.h"
 #include "igloo.h"
 #include "temperature.h"
@@ -61,14 +61,14 @@ protected:
     Iceberg iceberg=Iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //iceberg object
     Score score;
     Igloo igloo;
-    Enemies enemy_crab = Enemies("resources/crab.png",sf::Vector2f(1.f,1.f)); //enemy (set to crab)
-    Enemies enemy_clam = Enemies("resources/clam.png",sf::Vector2f(1.f,1.f)); //enemy (set to crab)
+    Enemy enemy_crab = Enemy("resources/crab.png",sf::Vector2f(1.f,1.f)); //enemy (set to crab)
+    Enemy enemy_clam = Enemy("resources/clam.png",sf::Vector2f(1.f,1.f)); //enemy (set to crab)
     float row; //amount of rows (default of 4)
     float column; //amount of columns (default of 3 + overlap)
     int stage;
     vector<vector<Iceberg>> icerow; //2D vector of icebergs (could segregate into classes)
-    vector<Enemies> crabrow;
-    vector<Enemies> clamrow;
+    vector<Enemy> crabrow;
+    vector<Enemy> clamrow;
     void setBackground(const sf::RenderWindow &window); //sets background on screen
     void setFrostbite(const sf::RenderWindow &window); //sets frostbite properties on screen
     void setIcebergRows(const sf::RenderWindow &window); //sets iceberg properties on screen
