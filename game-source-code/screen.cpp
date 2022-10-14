@@ -1,6 +1,7 @@
 //Screen implementation
 #include "screen.h"
 
+
 using namespace std;
 
 Screen::Screen(sf::RenderWindow &window)
@@ -8,12 +9,15 @@ Screen::Screen(sf::RenderWindow &window)
     row = 4;
     column = 4;
     stage = 1;
+
     setBackground(window);
     setFrostbite(window);
     setIcebergRows(window);
-    setEnemyRows(window);
+    //setEnemyRows(window);
     setIgloo(window);
+
 }
+
 //sets texture of background based on dimensions of the window
 void Screen::setBackground(const sf::RenderWindow &window) //All take in the window as parameters, maybe change to height and width?
 {
@@ -63,6 +67,7 @@ void Screen::setIcebergRows(const sf::RenderWindow &window)
         icerow[i][icerow.size()-1].setPosition(-iceberg.getWidth()/2,iceberg.getPosition().y); //sets the last icerberg as "overlap"
     }
 }
+/*
 void Screen::setEnemyRows(const sf::RenderWindow &window)
 {
     crabrow=vector<Enemy>(4,enemy_crab); //initializes 1D
@@ -76,6 +81,7 @@ void Screen::setEnemyRows(const sf::RenderWindow &window)
         clamrow[j].setDirection('l');
     }
 }
+*/
 //sets the positions of the blocks in the iceberg
 void Screen::setIgloo(const sf::RenderWindow &window)
 {
@@ -132,9 +138,12 @@ void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &even
 }
 void Screen::moveAllSprites(sf::RenderWindow& window,const float& icebergSpeed,const float& enemySpeed,const float& frostbiteSpeed,const float& deltaTime)
 {
-    moveSprite(frostbite, 'Q', window, frostbiteSpeed); //set random direction
-    moveEnemyRow(window, enemySpeed, deltaTime);
+    moveSprite(frostbite, 'Q', window, frostbiteSpeed);
+    moveSprite(enemy_row, 'Q', window, deltaTime); //set random direction
+//    moveEnemyRow(window, enemySpeed, deltaTime);
     moveIcerow(window, icebergSpeed, deltaTime);
+    //enemy_row.move('l', window, deltaTime);
+    //moveSprite(enemy_row, 'l', window, frostbiteSpeed);
 }
 
 void Screen::moveSprite(Motion& spriteA, char direction, sf::RenderWindow &window, const float &moveSpeed) const
@@ -153,6 +162,7 @@ void Screen::moveIcerow(sf::RenderWindow &window, const float &icebergSpeed, con
         }
     }
 }
+/*
 void Screen::moveEnemyRow(sf::RenderWindow &window, const float &enemySpeed, const float &deltaTime)
 {
     for(int i = 0; i<crabrow.size(); i++) //size of crab row == size of clam row
@@ -161,6 +171,7 @@ void Screen::moveEnemyRow(sf::RenderWindow &window, const float &enemySpeed, con
         moveSprite(clamrow[i],'r',window, enemySpeed*deltaTime);
     }
 }
+*/
 
 bool Screen::isOnIceberg(const Iceberg &iceberg)
 {
@@ -224,7 +235,7 @@ void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed
         }
     }
 }
-
+/*
 void Screen::enemyCollision(sf::RenderWindow &window)
 {
     sf::FloatRect frostbite_boundary_box = frostbite.getBoundaries();
@@ -240,6 +251,7 @@ void Screen::enemyCollision(sf::RenderWindow &window)
 
     }
 }
+*/
 //getter for game stage
 const int Screen::getStage() const
 {
@@ -338,7 +350,7 @@ void Screen::initialise(sf::RenderWindow &window,const bool &resetScore)
     }
     setFrostbite(window);
     setIcebergRows(window);
-    setEnemyRows(window);
+//    setEnemyRows(window);
     setIgloo(window);
     temperature_timer.resetClock();
 }
@@ -348,6 +360,7 @@ void Screen::refresh(sf::RenderWindow &window)
     window.draw(background);
     drawScore(window);
     drawIgloo(window);
+    enemy_row.draw(window);
     for(int i = 0; i<icerow.size(); i++)
     {
         for(int j = 0; j < icerow[i].size(); j++)
@@ -355,11 +368,13 @@ void Screen::refresh(sf::RenderWindow &window)
             icerow[i][j].draw(window);
         }
     }
+    /*
     for(int i = 0; i < crabrow.size(); i++) //for now size crab row = size clam row
     {
-        crabrow[i].draw(window);
-        clamrow[i].draw(window);
+        crabrow[i].drawPrint(window);
+        clamrow[i].drawPrint(window);
     }
+    */
     temperature_timer.draw(window);
     frostbite.draw(window);
 }

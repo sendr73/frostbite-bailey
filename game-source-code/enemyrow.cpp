@@ -8,7 +8,7 @@ EnemyRow::EnemyRow()
 
 EnemyRow::EnemyRow(std::string imDirectory, const MovementType &movement, float screenWidth, float screenHeight)
 {
-    /*
+
     std::cout<<"Constructor";
 
     enemy_row=vector<Enemy>(4,enemy_crab); //initializes 1D
@@ -20,12 +20,12 @@ EnemyRow::EnemyRow(std::string imDirectory, const MovementType &movement, float 
         enemy_row[j].setDirection('l');
     }
     movement_type_ = movement;
-    */
+
 
 }
 void EnemyRow::move(char direction, const sf::RenderWindow &window, float deltaTime)
 {
-/*
+
 
     auto gameWidth = window.getSize().x;
     auto gameHeight = window.getSize().y;
@@ -35,18 +35,18 @@ void EnemyRow::move(char direction, const sf::RenderWindow &window, float deltaT
         enemy_row[i].move('l',window, deltaTime);
         //moveSprite(clamrow[i],'r',window, enemySpeed*deltaTime);
     }
-*/
+
 }
 void EnemyRow::draw(sf::RenderWindow &window)
 {
-    /*
+
     //std::cout<<"Draw";
     for(auto i =0; i<enemy_row.size(); i++)
     {
         //std::cout<<"Draw 2";
         enemy_row[i].draw(window);
     }
-    */
+
 }
 
 

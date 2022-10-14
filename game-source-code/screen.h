@@ -10,6 +10,7 @@
 #include "score.h"
 #include "igloo.h"
 #include "temperature.h"
+#include "enemyrow.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ public:
     //parametized constructor
     Screen(sf::RenderWindow &window);
     //making the frostbite object jump on window, based on events
+
     void frostbiteJump(const sf::RenderWindow &window, const sf::Event &event, bool &pressed);
     //function to use overwritten move function
     void moveAllSprites(sf::RenderWindow& window,const float& icebergeSpeed,const float& enemySpeed,const float& frostbiteSpeed,const float& deltaTime);
@@ -32,7 +34,7 @@ public:
     //moving the rows of ice on screen
     void moveIcerow(sf::RenderWindow &window, const float &speed, const float &deltaTime);
     //move enemies
-    void moveEnemyRow(sf::RenderWindow &window, const float &enemySpeed, const float &deltaTime);
+    //void moveEnemyRow(sf::RenderWindow &window, const float &enemySpeed, const float &deltaTime);
     //collsion logic between frostbite and icebergs
     void icebergCollision(sf::RenderWindow &window,const float &, const float &);
     //collsion logic between frostbite and enemies
@@ -61,18 +63,19 @@ protected:
     Iceberg iceberg=Iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //iceberg object
     Score score;
     Igloo igloo;
-    Enemy enemy_crab = Enemy("resources/crab.png",sf::Vector2f(1.f,1.f)); //enemy (set to crab)
-    Enemy enemy_clam = Enemy("resources/clam.png",sf::Vector2f(1.f,1.f)); //enemy (set to crab)
+   // Enemy enemy_crab = Enemy("resources/crab.png"); //enemy (set to crab)
+   // Enemy enemy_clam = Enemy("resources/clam.png"); //enemy (set to crab)
+    EnemyRow enemy_row = EnemyRow("resources/crab.png", MovementType::Glide, 1000.f, 800.f); //screen width should be passed in at some time
     float row; //amount of rows (default of 4)
     float column; //amount of columns (default of 3 + overlap)
     int stage;
     vector<vector<Iceberg>> icerow; //2D vector of icebergs (could segregate into classes)
-    vector<Enemy> crabrow;
-    vector<Enemy> clamrow;
+   // vector<Enemy> crabrow;
+   // vector<Enemy> clamrow;
     void setBackground(const sf::RenderWindow &window); //sets background on screen
     void setFrostbite(const sf::RenderWindow &window); //sets frostbite properties on screen
     void setIcebergRows(const sf::RenderWindow &window); //sets iceberg properties on screen
-    void setEnemyRows(const sf::RenderWindow &window); //set row of enemies
+   // void setEnemyRows(const sf::RenderWindow &window); //set row of enemies
     void setIgloo(const sf::RenderWindow &window); //set igloo
     bool isOnIceberg(const Iceberg &iceberg); //helper that returns if frostbite is on an iceberg
     void drawIgloo(sf::RenderWindow &window); //helper that draws igloo

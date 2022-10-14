@@ -5,8 +5,10 @@ Enemy::Enemy(): Element("resources/crab.png",sf::Vector2f(1.f,1.f)), direction{'
     //ctor
 }
 
-Enemy::Enemy(std::string imDirectory, const sf::Vector2f &Size): Element(imDirectory,Size), direction{'r'}
-{}
+Enemy::Enemy(std::string imDirectory): Element(imDirectory,sf::Vector2f(1.f,1.f)), direction{'r'}
+{
+
+}
 /*
 void Enemies::draw(sf::RenderWindow &window)
 {
@@ -14,11 +16,11 @@ void Enemies::draw(sf::RenderWindow &window)
 }
 */
 
-void Enemy::move(char direction, const sf::RenderWindow &window, float moveSpeed) //enemeis must store its own speed
+void Enemy::move(char direction, const sf::RenderWindow &window, float deltaTime) //enemeis must store its own speed
 {
     auto gameHeight = window.getSize().y;
     auto gameWidth = window.getSize().x;
-    moveElement(direction, moveSpeed);
+    moveElement(direction, deltaTime*enemySpeed);
 //  eSprite.move(-moveSpeed, 0);
     if(getPosition().x+getWidth()/2<=0)
     {

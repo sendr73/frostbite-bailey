@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <SFML\Graphics.hpp>
+
 class Element
 {
     public:
@@ -14,7 +15,7 @@ class Element
         sf::FloatRect getBoundaries() const;
         void moveElement(char direction, float moveSpeed);
         void setTexture(std::string imDirectory);
-        void draw(sf::RenderWindow &window); //must be removed in due course
+        void draw(sf::RenderWindow &window); //overriding the draw function from print class, interface inheritance
         virtual ~Element();
         sf::Sprite sprite_;
         sf::Texture texture_;

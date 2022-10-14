@@ -22,11 +22,11 @@ class EnemyRow: public Motion
     protected:
 
     private:
-       // Enemy enemy_crab = Enemy("resources/crab.png"); //enemy (set to crab)
-        //Enemy enemy_clam = Enemy("resources/clam.png"); //enemy (set to crab)
+        Enemy enemy_crab = Enemy("resources/crab.png"); //enemy (set to crab)
+        Enemy enemy_clam = Enemy("resources/clam.png"); //enemy (set to crab)
         const char direction = 'l'; //should be able to be changed
         vector<Enemy> enemy_row;
-//        Enemy overlap_enemy = Enemy("resources/frostbite.png");
+        Enemy overlap_enemy = Enemy("resources/frostbite.png");
         MovementType movement_type_ = MovementType::Glide; //initialized as glide
 };
 

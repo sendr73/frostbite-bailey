@@ -9,7 +9,7 @@ class Enemy: public Motion, public Element
 {
     public:
         Enemy();
-        Enemy(std::string imDirectory, const sf::Vector2f &Size);
+        Enemy(std::string imDirectory);
         //for now much of this code is repeated in the iceberge class
         //consider creating another base code for sprite which has move, get dimenstions etc
 
@@ -35,6 +35,7 @@ class Enemy: public Motion, public Element
     private:
        // sf::Texture eTexture;
         //sf::Sprite eSprite;
+        const float enemySpeed = 100.0f;
         char direction; //will be 'r' by default, see constructor
 };
 
