@@ -16,6 +16,9 @@ class EnemyRow: public Motion
         EnemyRow();
         EnemyRow(std::string imDirectory, const MovementType &movement,float xStartPosition, float yStartPosition);
         virtual void move(char direction, const sf::RenderWindow &window, float moveSpeed) override;
+        char getDirection();
+        const float getSpeed();
+        vector<sf::FloatRect> getRowBoundaries() const;
         void draw(sf::RenderWindow &window);
         virtual ~EnemyRow();
 
@@ -25,6 +28,7 @@ class EnemyRow: public Motion
         Enemy enemy_ = Enemy("resources/crab.png"); //enemy (set to crab)
         Enemy enemy_clam = Enemy("resources/clam.png"); //enemy (set to crab)
         const char direction = 'l'; //should be able to be changed
+        const float EnemySpeed = 100.0f;
         vector<Enemy> enemy_row;
         Enemy overlap_enemy = Enemy("resources/frostbite.png");
         MovementType movement_type_ = MovementType::Glide; //initialized as glide

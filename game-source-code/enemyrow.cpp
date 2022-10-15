@@ -37,6 +37,25 @@ void EnemyRow::move(char direction, const sf::RenderWindow &window, float deltaT
     }
 
 }
+char EnemyRow::getDirection()
+{
+    return direction;
+}
+const float EnemyRow::getSpeed()
+{
+    return EnemySpeed;
+}
+
+vector<sf::FloatRect> EnemyRow::getRowBoundaries() const
+{
+    vector<sf::FloatRect> rowBoundaries;
+    for(auto enemy_it : enemy_row)
+    {
+        auto boundary = enemy_it.getBoundaries();
+        rowBoundaries.push_back(boundary);
+    }
+    return rowBoundaries;
+}
 void EnemyRow::draw(sf::RenderWindow &window)
 {
 

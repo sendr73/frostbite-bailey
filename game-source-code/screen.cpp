@@ -227,7 +227,14 @@ void Screen::enemyCollision(sf::RenderWindow &window)
 
     }
 }
+
+
 */
+void Screen::enemyCollision(sf::RenderWindow &window)
+{
+
+    enemy_matrix.collision(frostbite, window);
+}
 //getter for game stage
 const int Screen::getStage() const
 {
@@ -307,6 +314,7 @@ void Screen::drawScore(sf::RenderWindow &window)
     score_text.setPosition(sf::Vector2f(5.f,30.f));
     window.draw(score_text);
 }
+
 
 void Screen::drawIgloo(sf::RenderWindow &window)
 {

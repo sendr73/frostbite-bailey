@@ -64,7 +64,10 @@ void Enemy::setDirection(const char dir)
 {
     direction = dir;
 }
-
+const float Enemy::getSpeed() const
+{
+    return enemySpeed;
+}
 const float Enemy::getWidth() const
 {
     return getSize().x;

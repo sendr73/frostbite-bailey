@@ -21,7 +21,8 @@ class Enemy: public Motion, public Element
       //  const sf::Vector2f getPosition() const;
        // void setPosition(float x, float y);
         //getter and setter for the direction of enemy
-        const char getDirection() const;
+        const char getDirection() const; //is this used???
+        const float getSpeed() const;
         void setDirection(const char dir);
         //get enemies dimensions
         const float getWidth() const;

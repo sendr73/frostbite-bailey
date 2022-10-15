@@ -14,6 +14,22 @@ void EnemyMatrix::move(char direction, const sf::RenderWindow &window, float mov
     enemy_matrix[01].move('r', window, moveSpeed);
 
 }
+void EnemyMatrix::collision(Frostbite &frostbite,const sf::RenderWindow &window)
+{
+    sf::FloatRect frostbite_boundary_box = frostbite.getBoundaries();
+    for(auto i =0; i<enemy_matrix.size(); i++)
+    {
+        auto enemy_rowBoundary = enemy_matrix[i].getRowBoundaries();
+        for(auto i =0; i<enemy_rowBoundary.size(); i++)
+        {
+          if(frostbite_boundary_box.intersects(enemy_rowBoundary[i]))
+            {
+                std::cout<<"Intersect";
+                frostbite.move(enemy_matrix[i].getDirection(),window, enemy_matrix[i].getSpeed());
+            }
+        }
+    }
+}
 void EnemyMatrix::draw(sf::RenderWindow &window)
 {
 
