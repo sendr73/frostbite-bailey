@@ -6,12 +6,10 @@ using namespace std;
 
 Screen::Screen(sf::RenderWindow &window)
 {
-
     stage = 1;
     setBackground(window);
     setFrostbite(window);
     setIgloo(window);
-
 }
 
 //sets texture of background based on dimensions of the window
@@ -107,91 +105,15 @@ void Screen::moveSprite(Motion& spriteA, char direction, sf::RenderWindow &windo
     spriteA.move(direction, window, moveSpeed);
 }
 
-bool Screen::isOnIceberg(const Iceberg &iceberg)
+void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed, const float &deltaTime)
 {
-    if((frostbite.getPosition().x-frostbite.getWidth()/2>iceberg.getPosition().x-iceberg.getWidth()/2)
-            &&(frostbite.getPosition().x+frostbite.getWidth()/2<iceberg.getPosition().x+iceberg.getWidth()/2)
-            &&((frostbite.getPosition().y>iceberg.getPosition().y-iceberg.getHeight()/2)
-               &&(frostbite.getPosition().y<iceberg.getPosition().y+iceberg.getHeight()/2)))
-    {
-        return true;
-    }
-    return false;
+    ice_system.collision(frostbite,window,deltaTime);
 }
 
-/*void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed, const float &deltaTime)
-{
-    bool landed = false;
-    for(int i = 0; i<icerow.size(); i++)
-    {
-        for(int j = 0; j<icerow[i].size(); j++)
-        {
-            if(isOnIceberg(icerow[i][j]))
-            {
-                moveSprite(frostbite,icerow[i][j].getDirection(),window, icebergSpeed*deltaTime);
-                landed = true;
-                if(!icerow[i][j].beenLandedOn()&&frostbite.hasJumped())
-                {
-                    for (int k = 0; k<icerow[i].size(); k++)
-                    {
-                        icerow[i][k].landedOn("resources/iceberg_landed.png");
-                    }
-                    score.increaseScore();
-                    igloo.incrementBlockAmount();
-                    if(igloo.getBlockAmount()==16)
-                    {
-                        igloo.toggleComplete();
-                    }
-                }
-                break;
-            }
-            else if(frostbite.getPosition().y>0.45*window.getSize().y&&j==icerow[i].size()-1&&i==icerow.size()-1)
-            {
-                frostbite.setPosition(window.getSize().x/2,0.375*window.getSize().y);
-                score.decreaseLives(); //decrease his lives if drowned
-            }
-        }
-        if(landed)
-        {
-            landed = false;
-            if(igloo.getBlockAmount()%4==0&&igloo.getBlockAmount()<16)
-            {
-                frostbite.reset();
-                for (int m = 0; m<icerow.size(); m++)
-                {
-                    for (int n = 0; n<icerow[m].size(); n++)
-                    {
-                        icerow[m][n].reset("resources/iceberg.png");
-                    }
-                }
-            }
-            break;
-        }
-    }
-}
-/*
-void Screen::enemyCollision(sf::RenderWindow &window)
-{
-    sf::FloatRect frostbite_boundary_box = frostbite.getBoundaries();
-    for(int i =0; i<crabrow.size(); i++) //crab row size = clam row size
-    {
-        sf::FloatRect enemy_boundary_box = crabrow[i].getBoundaries();
-        sf::FloatRect clam_boundary_box = clamrow[i].getBoundaries();
-        if (frostbite_boundary_box.intersects(enemy_boundary_box)||frostbite_boundary_box.intersects(clam_boundary_box))
-        {
-            score.decreaseLives(); //decrease his lives if collision
-            frostbite.setPosition(window.getSize().x/2,0.375*window.getSize().y); //reset his position
-        }
-
-    }
-}
-
-
-*/
-void Screen::enemyCollision(sf::RenderWindow &window)
+void Screen::enemyCollision(sf::RenderWindow &window, const float &deltaTime)
 {
 
-    enemy_matrix.collision(frostbite, window);
+    enemy_matrix.collision(frostbite, window, deltaTime);
 }
 //getter for game stage
 const int Screen::getStage() const
@@ -288,10 +210,9 @@ void Screen::initialise(sf::RenderWindow &window,const bool &resetScore)
     stage = 2;
     if(resetScore)
     {
-            score.reset();
+        score.reset();
     }
     setFrostbite(window);
-//    setEnemyRows(window);
     setIgloo(window);
     temperature_timer.resetClock();
 }

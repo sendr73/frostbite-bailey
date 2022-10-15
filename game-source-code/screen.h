@@ -33,7 +33,7 @@ public:
     //moving the rows of ice on screen
     void icebergCollision(sf::RenderWindow &window,const float &, const float &);
     //collsion logic between frostbite and enemies
-    void enemyCollision(sf::RenderWindow &window);
+    void enemyCollision(sf::RenderWindow &window,const float &);
     //check for negative temperature
     void checkTemperature();
     //getter and setter for stage
