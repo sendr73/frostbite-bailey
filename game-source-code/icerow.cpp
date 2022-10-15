@@ -2,28 +2,57 @@
 
 Icerow::Icerow(const float &x, const float &y, const int &row)
 {
-    Iceberg iceberg;
-    icerow_ = std::vector<Iceberg>(4,iceberg);
+    //Iceberg iceberg_;
+    icerow_ = std::vector<Iceberg>(4,iceberg_);
     int height = (row+1)*(0.125*y)+(0.375*y);
-    for(int i = 0; i < icerow_.size();i++)
+    if(row%2==1)
     {
-        if(i%2==1)
+        for(int i = 0; i < icerow_.size(); i++)
         {
             icerow_[i].setDirection('l');
-            icerow_[i].setPosition(-(i)*(20+iceberg.getWidth()),height);
+            icerow_[i].setPosition(-(i+1)*(iceberg_.getWidth())-20,height);
         }
-        else
+    }
+    else
+    {
+        for(int i = 0; i < icerow_.size(); i++)
         {
-            icerow_[i].setPosition(x+(i)*(20+iceberg.getWidth()),height);
+            icerow_[i].setPosition(x+(i+1)*(iceberg_.getWidth())+20,height);
         }
     }
 }
 
-void Icerow::moveRow(const sf::RenderWindow &window, const float &moveSpeed)
+void Icerow::move(char direction, const sf::RenderWindow &window, float deltaTime)
 {
-    for(int i = 0; i < icerow_.size();i++)
+    //the passed in direction is not needed, as each row has a direciton set at construction
+    auto gameWidth = window.getSize().x;
+    auto gameHeight = window.getSize().y;
+    const int last = icerow_.size();
+    for(int i = 0; i<last-1; i++) //itterate through row and moves each enemy
     {
-        icerow_[i].move(icerow_[i].getDirection(), window, moveSpeed);
+        icerow_[i].move(icerow_[i].getDirection(),window, deltaTime);
+        if(icerow_[i].getDirection()=='r')
+        {
+            if(icerow_[i].getPosition().x-icerow_[i].getWidth()/2>=gameWidth)
+            {
+                icerow_[i].setPosition(gameWidth-icerow_[i].getPosition().x,icerow_[i].getPosition().y);
+            }
+        }
+        else
+        {
+            if(icerow_[i].getPosition().x+icerow_[i].getWidth()/2<=0)
+            {
+                icerow_[i].setPosition(gameWidth-icerow_[i].getPosition().x,icerow_[i].getPosition().y);
+            }
+        }
+    }
+}
+
+void Icerow::draw(sf::RenderWindow &window)
+{
+    for(auto i =0; i<icerow_.size(); i++)
+    {
+        icerow_[i].draw(window);
     }
 }
 

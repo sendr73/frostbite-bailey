@@ -2,18 +2,25 @@
 
 IceSystem::IceSystem(const float &x, const float &y)
 {
-    for (int i = 0; i < row; i++)
+    icesystem_.push_back(i1);
+    icesystem_.push_back(i2);
+    icesystem_.push_back(i3);
+    icesystem_.push_back(i4);
+}
+
+void IceSystem::move(char direction, const sf::RenderWindow &window, float moveSpeed) //move both rows
+{
+    for(int i = 0; i < row; i++)
     {
-        Icerow icerow(x,y,row);
-        icesystem_.push_back(icerow);
+        icesystem_[i].move('q', window, moveSpeed); //q is passed in as a direction as direction is specified in the rows themselves
     }
 }
 
-void IceSystem::move(const sf::RenderWindow &window,const float &moveSpeed)
+void IceSystem::draw(sf::RenderWindow &window) //should be separated into a different class (print class)
 {
-    for(int i = 0; i < icesystem_.size(); i++)
+    for(auto i =0; i<icesystem_.size(); i++)
     {
-        icesystem_[i].moveRow(window,moveSpeed);
+        icesystem_[i].draw(window);
     }
 }
 
