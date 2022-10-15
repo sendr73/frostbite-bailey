@@ -19,6 +19,8 @@ class Enemy: public Motion, public Element
 
         const float getWidth() const; //uses elements functions to get clearer dimensions
         const float getHeight() const;
+        const char getDirection() const;
+        void setDirection(const char dir);
         const float getSpeed() const;
         //return global boundaries
         sf::FloatRect getBounding () const;
@@ -28,6 +30,7 @@ class Enemy: public Motion, public Element
 
     private:
         const float enemySpeed = 100.0f;
+        char direction;
 };
 
 #endif // ENEMIES_H
