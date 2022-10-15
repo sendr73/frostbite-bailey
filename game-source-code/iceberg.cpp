@@ -9,6 +9,7 @@ Iceberg::Iceberg(std::string imDirectory, const sf::Vector2f &Size): Element("re
 {
     direction = 'r';
     landed = false;
+    speed = 150.f;
 }
 
 void Iceberg::move(char direction, const sf::RenderWindow &window, float moveSpeed)
@@ -47,6 +48,11 @@ void Iceberg::landedOn(std::string imDirectory)
 bool Iceberg::beenLandedOn()
 {
     return landed;
+}
+
+const float Iceberg::getSpeed()
+{
+    return speed;
 }
 //resets characteristics
 void Iceberg::reset(std::string imDirectory)

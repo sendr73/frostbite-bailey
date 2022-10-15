@@ -3,7 +3,7 @@
 Icerow::Icerow(const float &x, const float &y, const int &row)
 {
     //Iceberg iceberg_;
-    icerow_ = std::vector<Iceberg>(4,iceberg_);
+    icerow_ = vector<Iceberg>(4,iceberg_);
     int height = (row+1)*(0.125*y)+(0.390*y);
     if(row%2==1)
     {
@@ -64,6 +64,17 @@ void Icerow::draw(sf::RenderWindow &window)
     {
         icerow_[i].draw(window);
     }
+}
+
+vector<sf::FloatRect> Icerow::getRowBoundaries() const //returns a vector containing the boundaries of each enemy in the row
+{
+    vector<sf::FloatRect> rowBoundaries;
+    for(auto icerow_it : icerow_)
+    {
+        auto boundary = icerow_it.getBoundaries();
+        rowBoundaries.push_back(boundary);
+    }
+    return rowBoundaries;
 }
 
 Icerow::~Icerow()

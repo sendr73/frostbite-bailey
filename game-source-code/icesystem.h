@@ -4,12 +4,14 @@
 #include "icerow.h"
 #include <SFML\Graphics.hpp>
 #include <vector>
+#include "Collisions.h"
 
-class IceSystem: public Motion
+class IceSystem: public Motion, public Collisions
 {
     public:
         IceSystem(const float &x=0, const float &y=0);
         virtual void move(char direction, const sf::RenderWindow &window, float deltaTime) override;
+        virtual void collision(Frostbite &frostbite, const sf::RenderWindow &window) override;
         Icerow operator[](const int& index);
         int const size() const;
         void draw(sf::RenderWindow &window);

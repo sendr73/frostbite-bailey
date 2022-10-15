@@ -5,6 +5,8 @@
 #include <SFML\Graphics.hpp>
 #include <vector>
 
+using namespace std;
+
 class Icerow: public Motion
 {
     public:
@@ -13,6 +15,7 @@ class Icerow: public Motion
         const int size() const;
         void draw(sf::RenderWindow &window);
         virtual void move(char direction, const sf::RenderWindow &window, float deltaTime) override;
+        vector<sf::FloatRect> getRowBoundaries() const;
         virtual ~Icerow();
 
     protected:
