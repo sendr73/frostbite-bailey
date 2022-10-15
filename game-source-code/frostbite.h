@@ -10,8 +10,6 @@ class Frostbite: public Motion, public Element
 {
     public:
         Frostbite(): Element("resources/frostbite.png",sf::Vector2f(1.f,1.f)){
-        //default
-
         };
         Frostbite(std::string imDirectory, const sf::Vector2f &Size);
          //move player around

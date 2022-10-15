@@ -6,11 +6,9 @@
 #include <SFML\Graphics.hpp>
 #include "iceberg.h"
 #include "frostbite.h"
-//#include "enemy.h"
 #include "score.h"
 #include "igloo.h"
 #include "temperature.h"
-//#include "enemyrow.h"
 #include "EnemyMatrix.h"
 
 using namespace std;
@@ -34,8 +32,6 @@ public:
     void moveFrostbite(const sf::RenderWindow &window, const float &speed, const float &deltaTime);
     //moving the rows of ice on screen
     void moveIcerow(sf::RenderWindow &window, const float &speed, const float &deltaTime);
-    //move enemies
-    //void moveEnemyRow(sf::RenderWindow &window, const float &enemySpeed, const float &deltaTime);
     //collsion logic between frostbite and icebergs
     void icebergCollision(sf::RenderWindow &window,const float &, const float &);
     //collsion logic between frostbite and enemies
