@@ -71,10 +71,8 @@ int main()
             screen.checkTemperature(); //should be combined with the action class
             deltaTime = clock.restart().asSeconds();
             screen.moveAllSprites(window,frostbiteSpeed, deltaTime);
-            //screen.moveFrostbite(window, frostbiteSpeed, deltaTime);
-            //screen.moveIcerow(window, icebergSpeed, deltaTime); // (window,icebergSpeed,deltaTime);
-            //screen.icebergCollision(window,icebergSpeed,deltaTime);
-            screen.enemyCollision(window); //check for collision with crabs
+            screen.icebergCollision(window,icebergSpeed,deltaTime);
+            screen.enemyCollision(window,deltaTime); //check for collision with crabs
             screen.refresh(window);
             window.display();
             if (!screen.hasLives())

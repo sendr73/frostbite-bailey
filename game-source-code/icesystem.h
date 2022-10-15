@@ -11,7 +11,7 @@ class IceSystem: public Motion, public Collisions
     public:
         IceSystem();
         virtual void move(char direction, const sf::RenderWindow &window, float deltaTime) override;
-        virtual void collision(Frostbite &frostbite, const sf::RenderWindow &window) override;
+        virtual void collision(Frostbite &frostbite, const sf::RenderWindow &window, const float &deltaTime) override;
         Icerow operator[](const int& index);
         int const size() const;
         void draw(sf::RenderWindow &window);

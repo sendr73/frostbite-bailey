@@ -71,7 +71,9 @@ vector<sf::FloatRect> Icerow::getRowBoundaries() const //returns a vector contai
     vector<sf::FloatRect> rowBoundaries;
     for(auto icerow_it : icerow_)
     {
-        auto boundary = icerow_it.getBoundaries();
+        sf::FloatRect boundary = icerow_it.getBoundaries();
+        boundary.width -= 40.f;
+        boundary.left += 40.f;
         rowBoundaries.push_back(boundary);
     }
     return rowBoundaries;

@@ -16,7 +16,7 @@ void IceSystem::move(char direction, const sf::RenderWindow &window, float moveS
     }
 }
 
-void IceSystem::collision(Frostbite &frostbite, const sf::RenderWindow &window)
+void IceSystem::collision(Frostbite &frostbite, const sf::RenderWindow &window, const float &deltaTime)
 {
     sf::FloatRect frostbite_boundary_box = frostbite.getBoundaries();
     for(auto ice_row_it:icesystem_)
@@ -26,7 +26,7 @@ void IceSystem::collision(Frostbite &frostbite, const sf::RenderWindow &window)
         {
           if(frostbite_boundary_box.intersects(ice_boundary_it)) //if they intersect, the enemy will push frostbite along with them, generally causing him to fall off an iceberg
             {
-                frostbite.move(ice_row_it[0].getDirection(),window,ice_row_it[0].getSpeed());
+                frostbite.move(ice_row_it[0].getDirection(),window,ice_row_it[0].getSpeed()*deltaTime);
             }
         }
     }
