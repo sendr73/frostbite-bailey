@@ -14,7 +14,7 @@ class EnemyRow: public Motion
 {
     public:
         EnemyRow();
-        EnemyRow(std::string imDirectory, const MovementType &movement,float screenWidth, float screenHeight );
+        EnemyRow(std::string imDirectory, const MovementType &movement,float xStartPosition, float yStartPosition);
         virtual void move(char direction, const sf::RenderWindow &window, float moveSpeed) override;
         void draw(sf::RenderWindow &window);
         virtual ~EnemyRow();
@@ -22,7 +22,7 @@ class EnemyRow: public Motion
     protected:
 
     private:
-        Enemy enemy_crab = Enemy("resources/crab.png"); //enemy (set to crab)
+        Enemy enemy_ = Enemy("resources/crab.png"); //enemy (set to crab)
         Enemy enemy_clam = Enemy("resources/clam.png"); //enemy (set to crab)
         const char direction = 'l'; //should be able to be changed
         vector<Enemy> enemy_row;

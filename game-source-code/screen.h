@@ -6,11 +6,12 @@
 #include <SFML\Graphics.hpp>
 #include "iceberg.h"
 #include "frostbite.h"
-#include "enemy.h"
+//#include "enemy.h"
 #include "score.h"
 #include "igloo.h"
 #include "temperature.h"
-#include "enemyrow.h"
+//#include "enemyrow.h"
+#include "EnemyMatrix.h"
 
 using namespace std;
 
@@ -63,19 +64,14 @@ protected:
     Iceberg iceberg=Iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //iceberg object
     Score score;
     Igloo igloo;
-   // Enemy enemy_crab = Enemy("resources/crab.png"); //enemy (set to crab)
-   // Enemy enemy_clam = Enemy("resources/clam.png"); //enemy (set to crab)
-    EnemyRow enemy_row = EnemyRow("resources/crab.png", MovementType::Glide, 1000.f, 800.f); //screen width should be passed in at some time
+    EnemyMatrix enemy_matrix;
     float row; //amount of rows (default of 4)
     float column; //amount of columns (default of 3 + overlap)
     int stage;
     vector<vector<Iceberg>> icerow; //2D vector of icebergs (could segregate into classes)
-   // vector<Enemy> crabrow;
-   // vector<Enemy> clamrow;
     void setBackground(const sf::RenderWindow &window); //sets background on screen
     void setFrostbite(const sf::RenderWindow &window); //sets frostbite properties on screen
     void setIcebergRows(const sf::RenderWindow &window); //sets iceberg properties on screen
-   // void setEnemyRows(const sf::RenderWindow &window); //set row of enemies
     void setIgloo(const sf::RenderWindow &window); //set igloo
     bool isOnIceberg(const Iceberg &iceberg); //helper that returns if frostbite is on an iceberg
     void drawIgloo(sf::RenderWindow &window); //helper that draws igloo

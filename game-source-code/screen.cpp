@@ -67,21 +67,7 @@ void Screen::setIcebergRows(const sf::RenderWindow &window)
         icerow[i][icerow.size()-1].setPosition(-iceberg.getWidth()/2,iceberg.getPosition().y); //sets the last icerberg as "overlap"
     }
 }
-/*
-void Screen::setEnemyRows(const sf::RenderWindow &window)
-{
-    crabrow=vector<Enemy>(4,enemy_crab); //initializes 1D
-    clamrow=vector<Enemy>(4,enemy_clam);
-    for(int j = 0; j<crabrow.size(); j++) //loops through columns
-    {
-        crabrow[j].setPosition((20)+2*(j)*enemy_crab.getWidth()
-                               ,(0.3*window.getSize().y)+(frostbite.getPosition().y)+10);
-        clamrow[j].setPosition((70)+2*(j)*enemy_crab.getWidth()
-                               ,(0.2*window.getSize().y)+(frostbite.getPosition().y)); //x position different to the crabs
-        clamrow[j].setDirection('l');
-    }
-}
-*/
+
 //sets the positions of the blocks in the iceberg
 void Screen::setIgloo(const sf::RenderWindow &window)
 {
@@ -139,7 +125,7 @@ void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &even
 void Screen::moveAllSprites(sf::RenderWindow& window,const float& icebergSpeed,const float& enemySpeed,const float& frostbiteSpeed,const float& deltaTime)
 {
     moveSprite(frostbite, 'Q', window, frostbiteSpeed);
-    moveSprite(enemy_row, 'Q', window, deltaTime); //set random direction
+    moveSprite(enemy_matrix, 'Q', window, deltaTime); //set random direction
 //    moveEnemyRow(window, enemySpeed, deltaTime);
     moveIcerow(window, icebergSpeed, deltaTime);
     //enemy_row.move('l', window, deltaTime);
@@ -162,16 +148,6 @@ void Screen::moveIcerow(sf::RenderWindow &window, const float &icebergSpeed, con
         }
     }
 }
-/*
-void Screen::moveEnemyRow(sf::RenderWindow &window, const float &enemySpeed, const float &deltaTime)
-{
-    for(int i = 0; i<crabrow.size(); i++) //size of crab row == size of clam row
-    {
-        moveSprite(crabrow[i],'l',window, enemySpeed*deltaTime);
-        moveSprite(clamrow[i],'r',window, enemySpeed*deltaTime);
-    }
-}
-*/
 
 bool Screen::isOnIceberg(const Iceberg &iceberg)
 {
@@ -360,7 +336,7 @@ void Screen::refresh(sf::RenderWindow &window)
     window.draw(background);
     drawScore(window);
     drawIgloo(window);
-    enemy_row.draw(window);
+    enemy_matrix.draw(window);
     for(int i = 0; i<icerow.size(); i++)
     {
         for(int j = 0; j < icerow[i].size(); j++)
@@ -368,13 +344,6 @@ void Screen::refresh(sf::RenderWindow &window)
             icerow[i][j].draw(window);
         }
     }
-    /*
-    for(int i = 0; i < crabrow.size(); i++) //for now size crab row = size clam row
-    {
-        crabrow[i].drawPrint(window);
-        clamrow[i].drawPrint(window);
-    }
-    */
     temperature_timer.draw(window);
     frostbite.draw(window);
 }

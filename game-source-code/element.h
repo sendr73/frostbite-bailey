@@ -1,3 +1,4 @@
+//basic element class, used later for implementation (probably should be changed to be used in compositon)
 #ifndef ELEMENT_H
 #define ELEMENT_H
 #include <string>
