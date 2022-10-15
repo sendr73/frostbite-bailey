@@ -1,3 +1,7 @@
+//Enemy Class
+//Uses implementation inheritance to inherite elements public functions (should ideally change to composition)
+//Uses interface inheritance with move function
+//Has a set speed (direction is set in the enemy_rows)
 #ifndef ENEMIES_H
 #define ENEMIES_H
 #include <iostream>
@@ -10,23 +14,12 @@ class Enemy: public Motion, public Element
     public:
         Enemy();
         Enemy(std::string imDirectory);
-        //for now much of this code is repeated in the iceberge class
-        //consider creating another base code for sprite which has move, get dimenstions etc
 
-        //draws enemy on the window
-        //void draw(sf::RenderWindow &window);
-        //moves enemy
-       virtual void move(char direction, const sf::RenderWindow &window, float moveSpeed) override;
-        //getter and setter for the position of enemy
-      //  const sf::Vector2f getPosition() const;
-       // void setPosition(float x, float y);
-        //getter and setter for the direction of enemy
-        const char getDirection() const; //is this used???
-        const float getSpeed() const;
-        void setDirection(const char dir);
-        //get enemies dimensions
-        const float getWidth() const;
+       virtual void move(char direction, const sf::RenderWindow &window, float deltaTime) override; //function of class motion to move
+
+        const float getWidth() const; //uses elements functions to get clearer dimensions
         const float getHeight() const;
+        const float getSpeed() const;
         //return global boundaries
         sf::FloatRect getBounding () const;
         virtual ~Enemy();
@@ -34,10 +27,7 @@ class Enemy: public Motion, public Element
     protected:
 
     private:
-       // sf::Texture eTexture;
-        //sf::Sprite eSprite;
         const float enemySpeed = 100.0f;
-        char direction; //will be 'r' by default, see constructor
 };
 
 #endif // ENEMIES_H

@@ -1,11 +1,11 @@
 #include "enemy.h"
 
-Enemy::Enemy(): Element("resources/crab.png",sf::Vector2f(1.f,1.f)), direction{'r'}
+Enemy::Enemy(): Element("resources/crab.png",sf::Vector2f(1.f,1.f))
 {
     //ctor
 }
 
-Enemy::Enemy(std::string imDirectory): Element(imDirectory,sf::Vector2f(1.f,1.f)), direction{'r'}
+Enemy::Enemy(std::string imDirectory): Element(imDirectory,sf::Vector2f(1.f,1.f))
 {
 
 }
@@ -21,27 +21,15 @@ void Enemy::move(char direction, const sf::RenderWindow &window, float deltaTime
     auto gameHeight = window.getSize().y;
     auto gameWidth = window.getSize().x;
     moveElement(direction, deltaTime*enemySpeed);
-//  eSprite.move(-moveSpeed, 0);
     if(getPosition().x+getWidth()/2<=0)
     {
         setPosition(gameWidth-getWidth()/2,getPosition().y);
-        //overlapEnemy.setPosition(-overlapEnemy.getWidth()/2,getPosition().y);
     }
 
-    /*        else if(getPosition().x-getWidth()/2<0)
-            {
-                //overlapEnemy.setPosition((gameWidth+getPosition().x),getPosition().y);
-            } */
     if(getPosition().x-getWidth()/2>=gameWidth)
     {
         setPosition(getWidth()/2,getPosition().y);
-        //overlapEnemy.setPosition(-overlapEnemy.getWidth()/2,getPosition().y);
     }
-    else if(getPosition().x+getWidth()/2>gameWidth)
-    {
-        //overlapEnemy.setPosition((getPosition().x-gameWidth),getPosition().y);
-    }
-
 }
 /*
 const sf::Vector2f Enemies::getPosition() const
