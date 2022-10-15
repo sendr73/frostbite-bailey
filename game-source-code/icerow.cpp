@@ -4,7 +4,7 @@ Icerow::Icerow(const float &x, const float &y, const int &row)
 {
     //Iceberg iceberg_;
     icerow_ = std::vector<Iceberg>(4,iceberg_);
-    int height = (row+1)*(0.125*y)+(0.375*y);
+    int height = (row+1)*(0.125*y)+(0.390*y);
     if(row%2==1)
     {
         for(int i = 0; i < icerow_.size(); i++)
@@ -20,6 +20,16 @@ Icerow::Icerow(const float &x, const float &y, const int &row)
             icerow_[i].setPosition(x+(i+1)*(iceberg_.getWidth())+20,height);
         }
     }
+}
+
+Iceberg Icerow::operator[](const int& index)
+{
+    return icerow_[index];
+}
+
+const int Icerow::size() const
+{
+    return icerow_.size();
 }
 
 void Icerow::move(char direction, const sf::RenderWindow &window, float deltaTime)

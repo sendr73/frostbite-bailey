@@ -10,6 +10,8 @@ class IceSystem: public Motion
     public:
         IceSystem(const float &x=0, const float &y=0);
         virtual void move(char direction, const sf::RenderWindow &window, float deltaTime) override;
+        Icerow operator[](const int& index);
+        int const size() const;
         void draw(sf::RenderWindow &window);
         virtual ~IceSystem();
 

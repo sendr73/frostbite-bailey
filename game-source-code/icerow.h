@@ -9,6 +9,8 @@ class Icerow: public Motion
 {
     public:
         Icerow(const float &x=1000.f, const float &y=800.f,const int &row=0);
+        Iceberg operator[](const int& index);
+        const int size() const;
         void draw(sf::RenderWindow &window);
         virtual void move(char direction, const sf::RenderWindow &window, float deltaTime) override;
         virtual ~Icerow();

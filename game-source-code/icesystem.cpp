@@ -16,6 +16,16 @@ void IceSystem::move(char direction, const sf::RenderWindow &window, float moveS
     }
 }
 
+Icerow IceSystem::operator[](const int& index)
+{
+    return icesystem_[index];
+}
+
+const int IceSystem::size() const
+{
+    return icesystem_.size();
+}
+
 void IceSystem::draw(sf::RenderWindow &window) //should be separated into a different class (print class)
 {
     for(auto i =0; i<icesystem_.size(); i++)
