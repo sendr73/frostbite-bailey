@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <SFML\Graphics.hpp>
-#include "iceberg.h"
+#include "icesystem.h"
 #include "frostbite.h"
 #include "score.h"
 #include "igloo.h"
@@ -25,14 +25,12 @@ public:
 
     void frostbiteJump(const sf::RenderWindow &window, const sf::Event &event, bool &pressed);
     //function to use overwritten move function
-    void moveAllSprites(sf::RenderWindow& window,const float& icebergeSpeed,const float& enemySpeed,const float& frostbiteSpeed,const float& deltaTime);
+    void moveAllSprites(sf::RenderWindow& window,const float& frostbiteSpeed,const float& deltaTime);
     //function to move any class inherited from motion
     void moveSprite(Motion& spriteA, char direction, sf::RenderWindow &window, const float &moveSpeed) const;
     //moving the frostbite object on window
     void moveFrostbite(const sf::RenderWindow &window, const float &speed, const float &deltaTime);
     //moving the rows of ice on screen
-    void moveIcerow(sf::RenderWindow &window, const float &speed, const float &deltaTime);
-    //collsion logic between frostbite and icebergs
     void icebergCollision(sf::RenderWindow &window,const float &, const float &);
     //collsion logic between frostbite and enemies
     void enemyCollision(sf::RenderWindow &window);
@@ -57,17 +55,13 @@ protected:
     sf::Text score_text;
     temperature temperature_timer;
     Frostbite frostbite=Frostbite("resources/frostbite.png",sf::Vector2f(1.f,1.f)); //frostbite object
-    Iceberg iceberg=Iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //iceberg object
     Score score;
     Igloo igloo;
+    IceSystem ice_system;
     EnemyMatrix enemy_matrix;
-    float row; //amount of rows (default of 4)
-    float column; //amount of columns (default of 3 + overlap)
     int stage;
-    vector<vector<Iceberg>> icerow; //2D vector of icebergs (could segregate into classes)
     void setBackground(const sf::RenderWindow &window); //sets background on screen
     void setFrostbite(const sf::RenderWindow &window); //sets frostbite properties on screen
-    void setIcebergRows(const sf::RenderWindow &window); //sets iceberg properties on screen
     void setIgloo(const sf::RenderWindow &window); //set igloo
     bool isOnIceberg(const Iceberg &iceberg); //helper that returns if frostbite is on an iceberg
     void drawIgloo(sf::RenderWindow &window); //helper that draws igloo

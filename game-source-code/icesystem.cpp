@@ -1,6 +1,6 @@
 #include "icesystem.h"
 
-IceSystem::IceSystem(const float &x, const float &y)
+IceSystem::IceSystem()
 {
     icesystem_.push_back(i1);
     icesystem_.push_back(i2);

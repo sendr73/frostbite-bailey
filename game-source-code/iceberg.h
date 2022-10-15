@@ -39,7 +39,7 @@ class Iceberg: public Motion, public Element
         //sf::Sprite iSprite;
         char direction; //will be 'r' by default, see constructor
         bool landed; //will be false by default
-        float speed;
+        float speed=150.f;
 };
 
 #endif

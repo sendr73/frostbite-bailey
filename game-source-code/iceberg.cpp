@@ -16,7 +16,7 @@ void Iceberg::move(char direction, const sf::RenderWindow &window, float moveSpe
 {
     auto gameHeight = window.getSize().y;
     auto gameWidth = window.getSize().x;
-    moveElement(direction, moveSpeed);
+    moveElement(direction, moveSpeed*speed);
 }
 
 const char Iceberg::getDirection() const

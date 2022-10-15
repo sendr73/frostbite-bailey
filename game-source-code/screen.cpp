@@ -6,14 +6,10 @@ using namespace std;
 
 Screen::Screen(sf::RenderWindow &window)
 {
-    row = 4;
-    column = 4;
-    stage = 1;
 
+    stage = 1;
     setBackground(window);
     setFrostbite(window);
-    setIcebergRows(window);
-    //setEnemyRows(window);
     setIgloo(window);
 
 }
@@ -43,29 +39,6 @@ void Screen::setBackground(const sf::RenderWindow &window) //All take in the win
 void Screen::setFrostbite(const sf::RenderWindow &window)
 {
     frostbite.setPosition(window.getSize().x/2,0.375*window.getSize().y); //maybe setting an origin is more optimal for resetting
-}
-//sets the positions and directions of icebergs in specific rows
-void Screen::setIcebergRows(const sf::RenderWindow &window)
-{
-    icerow=vector<vector<Iceberg>>(row,vector<Iceberg>(column,iceberg)); //initializes 2D
-    for(int i = 0; i < icerow.size(); i++) //loops through rows
-    {
-        for(int j = 0; j<icerow[i].size(); j++) //loops through columns
-        {
-            if(i%2==0)
-            {
-                icerow[i][j].setPosition(-(j)*(20+iceberg.getWidth()) //this loop creates distance between objects
-                                         ,(i+1)*(0.125*window.getSize().y)+(frostbite.getPosition().y));
-            }
-            else
-            {
-                icerow[i][j].setDirection('l'); //additionally needs to make rows travel in the opposite direction if odd row
-                icerow[i][j].setPosition((window.getSize().x)+(j)*(20+iceberg.getWidth())
-                                         ,(i+1)*(0.125*window.getSize().y)+(frostbite.getPosition().y));
-            }
-        }
-        icerow[i][icerow.size()-1].setPosition(-iceberg.getWidth()/2,iceberg.getPosition().y); //sets the last icerberg as "overlap"
-    }
 }
 
 //sets the positions of the blocks in the iceberg
@@ -122,31 +95,16 @@ void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &even
         pressed = false;
     }
 }
-void Screen::moveAllSprites(sf::RenderWindow& window,const float& icebergSpeed,const float& enemySpeed,const float& frostbiteSpeed,const float& deltaTime)
+void Screen::moveAllSprites(sf::RenderWindow& window,const float& frostbiteSpeed,const float& deltaTime)
 {
     moveSprite(frostbite, 'Q', window, frostbiteSpeed);
     moveSprite(enemy_matrix, 'Q', window, deltaTime); //set random direction
-//    moveEnemyRow(window, enemySpeed, deltaTime);
-    moveIcerow(window, icebergSpeed, deltaTime);
-    //enemy_row.move('l', window, deltaTime);
-    //moveSprite(enemy_row, 'l', window, frostbiteSpeed);
+    moveSprite(ice_system, 'Q', window, deltaTime);
 }
 
 void Screen::moveSprite(Motion& spriteA, char direction, sf::RenderWindow &window, const float &moveSpeed) const
 {
     spriteA.move(direction, window, moveSpeed);
-}
-
-
-void Screen::moveIcerow(sf::RenderWindow &window, const float &icebergSpeed, const float &deltaTime)
-{
-    for(int i = 0; i<icerow.size(); i++)
-    {
-        for(int j = 0; j<icerow[i].size()-1; j++)
-        {
-            moveSprite(icerow[i][j], icerow[i][j].getDirection(), window, icebergSpeed*deltaTime); //.getSize().y,window.getSize().x,icerow[i][icerow[i].size()-1]);
-        }
-    }
 }
 
 bool Screen::isOnIceberg(const Iceberg &iceberg)
@@ -161,7 +119,7 @@ bool Screen::isOnIceberg(const Iceberg &iceberg)
     return false;
 }
 
-void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed, const float &deltaTime)
+/*void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed, const float &deltaTime)
 {
     bool landed = false;
     for(int i = 0; i<icerow.size(); i++)
@@ -260,11 +218,11 @@ void Screen::nextLevel(const sf::RenderWindow &window)
     score.increaseLevel();
     temperature_timer.resetClock();
     frostbite.reset();
-    for (int m = 0; m<icerow.size(); m++)
+    for (int m = 0; m<ice_system.size(); m++)
     {
-        for (int n = 0; n<icerow[m].size(); n++)
+        for (int n = 0; n<ice_system[m].size(); n++)
         {
-            icerow[m][n].reset("resources/iceberg.png");
+            ice_system[m][n].reset("resources/iceberg.png");
         }
     }
     igloo.reset();
@@ -333,7 +291,6 @@ void Screen::initialise(sf::RenderWindow &window,const bool &resetScore)
             score.reset();
     }
     setFrostbite(window);
-    setIcebergRows(window);
 //    setEnemyRows(window);
     setIgloo(window);
     temperature_timer.resetClock();
@@ -345,13 +302,7 @@ void Screen::refresh(sf::RenderWindow &window)
     drawScore(window);
     drawIgloo(window);
     enemy_matrix.draw(window);
-    for(int i = 0; i<icerow.size(); i++)
-    {
-        for(int j = 0; j < icerow[i].size(); j++)
-        {
-            icerow[i][j].draw(window);
-        }
-    }
+    ice_system.draw(window);
     temperature_timer.draw(window);
     frostbite.draw(window);
 }
