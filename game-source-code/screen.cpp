@@ -122,6 +122,9 @@ void Screen::icebergCollision(sf::RenderWindow &window, const float &deltaTime)
                 {
                     //ice_system[0][i].landedOn("resources/iceberg_landed.png");
                 }
+                score.increaseScore();
+                igloo.incrementBlockAmount();
+                frostbite.reset();
             }
             break;
         case 2:
@@ -131,6 +134,9 @@ void Screen::icebergCollision(sf::RenderWindow &window, const float &deltaTime)
                 {
                     //ice_system[1][i].landedOn("resources/iceberg_landed.png");
                 }
+                score.increaseScore();
+                igloo.incrementBlockAmount();
+                frostbite.reset();
             }
             break;
         case 3:
@@ -140,6 +146,9 @@ void Screen::icebergCollision(sf::RenderWindow &window, const float &deltaTime)
                 {
                     //ice_system[2][i].landedOn("resources/iceberg_landed.png");
                 }
+                score.increaseScore();
+                igloo.incrementBlockAmount();
+                frostbite.reset();
             }
             break;
         case 4:
@@ -149,6 +158,9 @@ void Screen::icebergCollision(sf::RenderWindow &window, const float &deltaTime)
                 {
                     //ice_system[3][i].landedOn("resources/iceberg_landed.png");
                 }
+                score.increaseScore();
+                igloo.incrementBlockAmount();
+                frostbite.reset();
             }
             break;
         default:
