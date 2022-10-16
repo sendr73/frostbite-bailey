@@ -2,7 +2,9 @@
 
 Game::Game()
 {
-    //ctor
+    setBackground(window);
+    setFrostbite(window);
+    setIgloo(window);
 }
 
 Game::~Game()

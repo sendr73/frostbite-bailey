@@ -7,9 +7,6 @@ using namespace std;
 Screen::Screen(sf::RenderWindow &window)
 {
     stage = 1;
-    setBackground(window);
-    setFrostbite(window);
-    setIgloo(window);
 }
 
 //sets texture of background based on dimensions of the window
@@ -171,7 +168,6 @@ void Screen::icebergCollision(sf::RenderWindow &window, const float &deltaTime)
 
 void Screen::enemyCollision(sf::RenderWindow &window, const float &deltaTime)
 {
-
     enemy_matrix.collision(frostbite, window, deltaTime);
 }
 //getter for game stage
