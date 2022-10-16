@@ -17,7 +17,7 @@ class Igloo
         //helper method to generate blocks
         void generateBlocks(const float x, const float y);
         //helper method to increase block amount
-        void incrementBlockAmount();
+        void incrementBlockAmount(bool subtract);
         //method to get block amount
         const int getBlockAmount() const;
         //returns one block

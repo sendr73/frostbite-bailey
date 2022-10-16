@@ -16,6 +16,7 @@ class Game
     public:
         Game(const float &width=1000.f,const float &height = 800.f);
         //making the frostbite object jump on window, based on events
+        void reverseIceberg();
         virtual ~Game();
 
     protected:

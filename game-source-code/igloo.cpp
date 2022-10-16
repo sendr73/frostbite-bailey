@@ -48,16 +48,21 @@ void Igloo::generateBlocks(const float x, const float y)
     }
 }
 //increments block amount
-void Igloo::incrementBlockAmount()
+void Igloo::incrementBlockAmount(bool subtract)
 {
-    if (blockAmount==15)
+    if (blockAmount==15&&!subtract)
     {
         complete = true;
         blockAmount++;
     }
-    else if(blockAmount<15)
+    else if(blockAmount<15&&!subtract)
     {
         blockAmount++;
+    }
+    else
+    {
+        complete = false;
+        blockAmount--;
     }
 }
 //checks if Igloo is finished building

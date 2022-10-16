@@ -60,6 +60,11 @@ void IceSystem::draw(sf::RenderWindow &window) //should be separated into a diff
     }
 }
 
+void IceSystem::reverse(const int &i)
+{
+    icesystem_[i].reverse();
+}
+
 void IceSystem::reset()
 {
     for(int i = 0; i < icesystem_.size();i++)

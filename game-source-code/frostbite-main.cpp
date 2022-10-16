@@ -31,7 +31,8 @@ int main()
     Frostbite frosty;
     Game game;
     sf::Clock clock;
-    bool pressed = false; //used to stop multiple jumps
+    bool jump_pressed = false; //used to stop multiple jumps
+    bool rev_pressed = false;
     while(window.isOpen( ))
     {
         sf::Event evnt; //not using reserved word event
@@ -46,7 +47,15 @@ int main()
             {
                 screen.changeDisplay();
             }
-            //game.frostbiteJump(evnt,pressed);
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)&&screen.getStage()==2&&!rev_pressed)
+            {
+                rev_pressed=true;
+                screen.reverseIceberg();
+            }
+            else if((evnt.type == sf::Event::KeyReleased)&&(evnt.key.code == sf::Keyboard::Space))
+            {
+                rev_pressed=false;
+            }
         }
         float deltaTime = 0.f;
         switch(screen.getStage())
@@ -71,7 +80,7 @@ int main()
             }
             */
             deltaTime = clock.restart().asSeconds();
-            pressed=screen.refresh(window, deltaTime, evnt, pressed);
+            jump_pressed=screen.refresh(window, deltaTime, evnt, jump_pressed);
             window.display();
             break;
         case 3:

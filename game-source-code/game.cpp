@@ -111,14 +111,25 @@ void Game::landing(const int &i)
 {
     ice_system.rowLandedOn(i);
     score.increaseScore();
-    igloo.incrementBlockAmount();
+    igloo.incrementBlockAmount(false);
     frostbite.reset();
     if(igloo.getBlockAmount()%4==0&!igloo.isComplete())
     {
         ice_system.reset();
     }
 }
-//checks if has lives
+// reverses iceberg direction
+void Game::reverseIceberg()
+{
+    auto row = ice_system.collision(frostbite,GAME_WIDTH,GAME_HEIGHT,0);
+    if(row!=-1)
+    {
+        ice_system.reverse(row-1);
+        igloo.incrementBlockAmount(true);
+        ice_system.reset();
+    }
+}
+// checks if has lives
 const bool Game::hasLives() const
 {
     if(score.getLives()==0)

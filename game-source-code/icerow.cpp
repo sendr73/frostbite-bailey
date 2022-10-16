@@ -84,6 +84,18 @@ vector<sf::FloatRect> Icerow::getRowBoundaries() const //returns a vector contai
     }
     return rowBoundaries;
 }
+void Icerow::reverse()
+{
+    char d;
+    if(icerow_[0].getDirection()=='r')
+    {d = 'l';}
+    else
+    {d = 'r';}
+    for(int i = 0; i < icerow_.size();i++)
+    {
+        icerow_[i].setDirection(d);
+    }
+}
 
 void Icerow::reset()
 {

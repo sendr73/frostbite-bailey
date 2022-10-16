@@ -16,6 +16,7 @@ class IceSystem: public Motion, public Collisions
         int const size() const;
         void rowLandedOn(const int &i);
         void draw(sf::RenderWindow &window);
+        void reverse(const int &i);
         void reset();
         virtual ~IceSystem();
 
