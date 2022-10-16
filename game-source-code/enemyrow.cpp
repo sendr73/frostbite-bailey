@@ -20,15 +20,12 @@ EnemyRow::EnemyRow(std::string imDirectory, const MovementType &movement, float 
     movement_type_ = movement;
     direction_ = direction;
 }
-void EnemyRow::move(char direction, const sf::RenderWindow &window, float deltaTime)
+void EnemyRow::move(char direction, const float &x, const float &y, float deltaTime)
 {
     //the passed in direction is not needed, as each row has a direciton set at construction
-    auto gameWidth = window.getSize().x;
-    auto gameHeight = window.getSize().y;
-
     for(int i = 0; i<enemy_row.size(); i++) //itterate through row and moves each enemy
     {
-        enemy_row[i].move(direction_,window, deltaTime);
+        enemy_row[i].move(direction_,x,y, deltaTime);
     }
 }
 char EnemyRow::getDirection()

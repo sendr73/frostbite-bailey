@@ -16,7 +16,7 @@ class Iceberg: public Motion, public Element
         //draws the iceberg on the window
        // void draw(sf::RenderWindow &window);
         //moves the iceberg
-        virtual void move(char direction, const sf::RenderWindow &window, float moveSpeed) override;
+        virtual void move(char direction, const float &x, const float &y, float moveSpeed) override;
         //getter and setter for the position of the iceberg
        // const sf::Vector2f getPosition() const;
         //void setPosition(float x, float y);

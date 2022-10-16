@@ -16,17 +16,15 @@ void Enemies::draw(sf::RenderWindow &window)
 }
 */
 
-void Enemy::move(char direction, const sf::RenderWindow &window, float deltaTime) //enemeis must store its own speed
+void Enemy::move(char direction, const float &x, const float &y, float deltaTime) //enemeis must store its own speed
 {
-    auto gameHeight = window.getSize().y;
-    auto gameWidth = window.getSize().x;
     moveElement(direction, deltaTime*enemySpeed);
     if(getPosition().x+getWidth()/2<=0)
     {
-        setPosition(gameWidth-getWidth()/2,getPosition().y);
+        setPosition(x-getWidth()/2,getPosition().y);
     }
 
-    if(getPosition().x-getWidth()/2>=gameWidth)
+    if(getPosition().x-getWidth()/2>=x)
     {
         setPosition(getWidth()/2,getPosition().y);
     }

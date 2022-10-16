@@ -7,7 +7,7 @@ class Motion
     public:
         Motion();
         virtual ~Motion();
-        virtual void move(char direction, const sf::RenderWindow &window, float moveSpeed) = 0;
+        virtual void move(char direction, const float &x, const float &y, float moveSpeed) = 0;
 
     protected:
 

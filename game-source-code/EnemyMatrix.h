@@ -14,8 +14,8 @@ class EnemyMatrix: public Motion, public Collisions
 {
     public:
         EnemyMatrix(); //default construction is fine, not parameters are required to be passed through
-        virtual void move(char direction, const sf::RenderWindow &window, float moveSpeed) override;
-        virtual int collision(Frostbite &frostbite, const sf::RenderWindow &window, const float &deltaTime) override;
+        virtual void move(char direction, const float &x, const float &y, float moveSpeed) override;
+        virtual int collision(Frostbite &frostbite, const float &x, const float &y, const float &deltaTime) override;
         void draw(sf::RenderWindow &window);
         virtual ~EnemyMatrix();
 

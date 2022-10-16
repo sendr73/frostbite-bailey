@@ -65,8 +65,7 @@ void Game::move(const float& deltaTime)
 //helper to move Sprites
 void Game::move(Motion& spriteA, char direction, const float &moveSpeed) const
 {
-    sf::RenderWindow window(sf::VideoMode(GAME_WIDTH,GAME_HEIGHT),"");
-    spriteA.move(direction, window, moveSpeed);
+    spriteA.move(direction, GAME_WIDTH,GAME_HEIGHT, moveSpeed);
 }
 
 //sets the positions of the blocks in the iceberg
@@ -80,7 +79,7 @@ void Game::icebergCollision(const float &deltaTime)
     sf::RenderWindow window(sf::VideoMode(GAME_WIDTH,GAME_HEIGHT),"");
     if(frostbite.getPosition().y>0.45*GAME_HEIGHT)
     {
-        switch(ice_system.collision(frostbite,window,deltaTime))
+        switch(ice_system.collision(frostbite,GAME_WIDTH,GAME_HEIGHT,deltaTime))
         {
         case -1:
             respawn();
@@ -105,8 +104,7 @@ void Game::icebergCollision(const float &deltaTime)
 // enemy collisions
 void Game::enemyCollision(const float &deltaTime)
 {
-    sf::RenderWindow window(sf::VideoMode(GAME_WIDTH,GAME_HEIGHT),"");
-    enemy_matrix.collision(frostbite, window, deltaTime);
+    enemy_matrix.collision(frostbite, GAME_WIDTH,GAME_HEIGHT, deltaTime);
 }
 //initialises game to play
 void Game::initialize(const bool &resetScore)

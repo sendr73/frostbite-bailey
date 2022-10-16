@@ -13,7 +13,7 @@ class Frostbite: public Motion, public Element
         };
         Frostbite(std::string imDirectory, const sf::Vector2f &Size);
          //move player around
-        virtual void move(char direction, const sf::RenderWindow &window, float moveSpeed) override;
+        virtual void move(char direction, const float &x, const float &y, float moveSpeed) override;
         //make frostbite jump
         void jump(char direction, float moveSpeed, const float gameHeight, const float gameWidth);
         //returns true if frostbite has jumped

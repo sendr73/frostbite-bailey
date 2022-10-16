@@ -32,27 +32,25 @@ const int Icerow::size() const
     return icerow_.size();
 }
 
-void Icerow::move(char direction, const sf::RenderWindow &window, float deltaTime)
+void Icerow::move(char direction, const float &x, const float &y, float deltaTime)
 {
     //the passed in direction is not needed, as each row has a direciton set at construction
-    auto gameWidth = window.getSize().x;
-    auto gameHeight = window.getSize().y;
     const int last = icerow_.size();
     for(int i = 0; i<last-1; i++) //itterate through row and moves each enemy
     {
-        icerow_[i].move(icerow_[i].getDirection(),window, deltaTime);
+        icerow_[i].move(icerow_[i].getDirection(),x,y, deltaTime);
         if(icerow_[i].getDirection()=='r')
         {
-            if(icerow_[i].getPosition().x-icerow_[i].getWidth()/2>=gameWidth)
+            if(icerow_[i].getPosition().x-icerow_[i].getWidth()/2>=x)
             {
-                icerow_[i].setPosition(gameWidth-icerow_[i].getPosition().x,icerow_[i].getPosition().y);
+                icerow_[i].setPosition(x-icerow_[i].getPosition().x,icerow_[i].getPosition().y);
             }
         }
         else
         {
             if(icerow_[i].getPosition().x+icerow_[i].getWidth()/2<=0)
             {
-                icerow_[i].setPosition(gameWidth-icerow_[i].getPosition().x,icerow_[i].getPosition().y);
+                icerow_[i].setPosition(x-icerow_[i].getPosition().x,icerow_[i].getPosition().y);
             }
         }
     }

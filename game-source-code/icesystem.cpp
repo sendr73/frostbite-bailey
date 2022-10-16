@@ -8,15 +8,15 @@ IceSystem::IceSystem()
     icesystem_.push_back(i4);
 }
 
-void IceSystem::move(char direction, const sf::RenderWindow &window, float moveSpeed) //move both rows
+void IceSystem::move(char direction, const float &x, const float &y, float moveSpeed) //move both rows
 {
     for(int i = 0; i < row; i++)
     {
-        icesystem_[i].move('q', window, moveSpeed); //q is passed in as a direction as direction is specified in the rows themselves
+        icesystem_[i].move('q', x,y, moveSpeed); //q is passed in as a direction as direction is specified in the rows themselves
     }
 }
 
-int IceSystem::collision(Frostbite &frostbite, const sf::RenderWindow &window, const float &deltaTime)
+int IceSystem::collision(Frostbite &frostbite, const float &x, const float &y, const float &deltaTime)
 {
     int index = -1;
     int num = 0;
@@ -29,7 +29,7 @@ int IceSystem::collision(Frostbite &frostbite, const sf::RenderWindow &window, c
         {
           if(frostbite_boundary_box.intersects(ice_boundary_it)) //if they intersect, the enemy will push frostbite along with them, generally causing him to fall off an iceberg
             {
-                frostbite.move(ice_row_it[0].getDirection(),window,ice_row_it[0].getSpeed()*deltaTime);
+                frostbite.move(ice_row_it[0].getDirection(),x,y,ice_row_it[0].getSpeed()*deltaTime);
                 index = num;
             }
         }

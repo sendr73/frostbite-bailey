@@ -14,7 +14,7 @@ class Icerow: public Motion
         Iceberg operator[](const int& index);
         const int size() const;
         void draw(sf::RenderWindow &window);
-        virtual void move(char direction, const sf::RenderWindow &window, float deltaTime) override;
+        virtual void move(char direction, const float &x, const float &y, float deltaTime) override;
         void landedOn();
         vector<sf::FloatRect> getRowBoundaries() const;
         virtual ~Icerow();

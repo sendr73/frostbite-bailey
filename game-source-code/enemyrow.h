@@ -19,7 +19,7 @@ class EnemyRow: public Motion
     public:
         EnemyRow();
         EnemyRow(std::string imDirectory, const MovementType &movement,float xStartPosition, float yStartPositionm, char direction);
-        virtual void move(char direction, const sf::RenderWindow &window, float deltaTime) override;
+        virtual void move(char direction, const float &x, const float &y, float deltaTime) override;
         char getDirection();
         const float getSpeed();
         vector<sf::FloatRect> getRowBoundaries() const;

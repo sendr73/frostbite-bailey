@@ -12,10 +12,8 @@ Iceberg::Iceberg(std::string imDirectory, const sf::Vector2f &Size): Element("re
     speed = 150.f;
 }
 
-void Iceberg::move(char direction, const sf::RenderWindow &window, float moveSpeed)
+void Iceberg::move(char direction, const float &x, const float &y, float moveSpeed)
 {
-    auto gameHeight = window.getSize().y;
-    auto gameWidth = window.getSize().x;
     moveElement(direction, moveSpeed*speed);
 }
 

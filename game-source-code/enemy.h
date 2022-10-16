@@ -15,7 +15,7 @@ class Enemy: public Motion, public Element
         Enemy();
         Enemy(std::string imDirectory);
 
-       virtual void move(char direction, const sf::RenderWindow &window, float deltaTime) override; //function of class motion to move
+       virtual void move(char direction, const float &x, const float &y, float deltaTime) override; //function of class motion to move
 
         const float getWidth() const; //uses elements functions to get clearer dimensions
         const float getHeight() const;

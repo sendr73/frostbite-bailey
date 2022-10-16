@@ -12,10 +12,8 @@ Frostbite::Frostbite(std::string imDirectory, const sf::Vector2f &Size): Element
 */
 //move player around
 
-void Frostbite::move(char direction, const sf::RenderWindow &window, float moveSpeed)
+void Frostbite::move(char direction, const float &x, const float &y, float moveSpeed)
 {
-    auto gameHeight = window.getSize().y;
-    auto gameWidth = window.getSize().x;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) //set direction from input keyboard
     {
         direction = 'l';
@@ -35,9 +33,9 @@ void Frostbite::move(char direction, const sf::RenderWindow &window, float moveS
     }
 
     //screen colision on the right
-    if(getPosition().x>gameWidth-getWidth()/2) //adjust the sides by width/2 when checking left and right
+    if(getPosition().x>x-getWidth()/2) //adjust the sides by width/2 when checking left and right
     {
-        setPosition(gameWidth-getWidth()/2, getPosition().y);
+        setPosition(x-getWidth()/2, getPosition().y);
     }
 }
 //make player jump
