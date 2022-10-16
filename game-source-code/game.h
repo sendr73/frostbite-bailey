@@ -39,6 +39,7 @@ class Game
         void respawn();
         void checkTemperature(); //check for negative temperature
         void nextLevel();
+        const bool hasLives() const;
 
     private:
         float GAME_WIDTH=1000.f, GAME_HEIGHT=800.f;
@@ -48,7 +49,6 @@ class Game
         const bool isWithinDoorway() const;
         const bool cannotEnter() const;
         const bool canEnter() const;
-        const bool hasLives() const;
 };
 
 #endif // GAME_H

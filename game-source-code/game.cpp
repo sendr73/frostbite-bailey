@@ -6,16 +6,6 @@ Game::Game(const float &width,const float &height)
     GAME_HEIGHT=height;
     stage = 1;
 }
-// plays the game
-void Game::play(const sf::Event &event, bool &pressed, const float &deltaTime)
-{
-    frostbiteJump(event, pressed);
-    checkTemperature(); //should be combined with the action class
-    move(deltaTime);
-    icebergCollision(deltaTime);
-    enemyCollision(deltaTime); //check for collision with crabs
-    if (!hasLives()){stage=3;}
-}
 //sets the starting position of Frostbite
 void Game::setFrostbite()
 {
@@ -27,18 +17,11 @@ bool Game::frostbiteJump(const sf::Event &event, bool &pressed)
     if ((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Up)&&(pressed == false))
     {
         pressed = true; //while true, cannot be double clicked
-        if(cannotEnter())
-        {
-            //do nothing
-        }
+        if(cannotEnter()){}
         else if(canEnter())
-        {
-            stage=4;
-        }
+        {stage=4;}
         else
-        {
-            frostbite.jump('u',0.125*GAME_HEIGHT,GAME_HEIGHT,GAME_WIDTH);
-        }
+        {frostbite.jump('u',0.125*GAME_HEIGHT,GAME_HEIGHT,GAME_WIDTH);}
     }
     if ((event.type == sf::Event::KeyReleased)&&(event.key.code == sf::Keyboard::Up))
     {
@@ -110,10 +93,8 @@ void Game::enemyCollision(const float &deltaTime)
 void Game::initialize(const bool &resetScore)
 {
     stage = 2;
-    if(resetScore)
-    {
-        score.reset();
-    }
+    ice_system.reset();
+    if(resetScore){score.reset();}
     setFrostbite();
     setIgloo();
     temperature_timer.resetClock();
@@ -132,14 +113,16 @@ void Game::landing(const int &i)
     score.increaseScore();
     igloo.incrementBlockAmount();
     frostbite.reset();
+    if(igloo.getBlockAmount()%4==0&!igloo.isComplete())
+    {
+        ice_system.reset();
+    }
 }
 //checks if has lives
 const bool Game::hasLives() const
 {
     if(score.getLives()==0)
-    {
-        return false;
-    }
+    {return false;}
     return true;
 }
 //enters a new level
@@ -150,22 +133,19 @@ void Game::nextLevel()
     score.increaseLevel();
     temperature_timer.resetClock();
     frostbite.reset();
-    for (int m = 0; m<ice_system.size(); m++)
-    {
-        for (int n = 0; n<ice_system[m].size(); n++)
-        {
-            ice_system[m][n].reset("resources/iceberg.png");
-        }
-    }
+    ice_system.reset();
     igloo.reset();
 }
 void Game::checkTemperature()
 {
-    if(temperature_timer.getTemperature()<0) //if he has frozen
+    if(temperature_timer.getTemperature()<=0) //if he has frozen
     {
         temperature_timer.resetClock(); //reset temperature
         score.decreaseLives(); //decrease his lives
-        stage = 5;
+        if(score.getLives()==0)
+        {stage = 3;}
+        else
+        {stage = 5;}
     }
 }
 // checks in line with enterence
@@ -175,9 +155,7 @@ const bool Game::isWithinDoorway() const
     const float width = igloo.getBlockSize(16).x;
     if((frostbite.getPosition().x<x+width)
             &&(frostbite.getPosition().x>x-width))
-    {
-        return true;
-    }
+    {return true;}
     return false;
 }
 
@@ -186,18 +164,14 @@ const bool Game::cannotEnter() const
     if((!igloo.isComplete()&&frostbite.getPosition().y<=0.375*GAME_HEIGHT)
         ||frostbite.getPosition().y<=0.25*GAME_HEIGHT
         ||(frostbite.getPosition().y==0.375*GAME_HEIGHT&&!isWithinDoorway()))
-        {
-            return true;
-        }
+        {return true;}
         return false;
 }
 // checks if frostbite can enter igloo
 const bool Game::canEnter() const
 {
     if(igloo.isComplete()&&frostbite.getPosition().y<=0.375*GAME_HEIGHT&&isWithinDoorway())
-    {
-        return true;
-    }
+    {return true;}
     return false;
 }
 

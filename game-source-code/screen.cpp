@@ -101,6 +101,9 @@ void Screen::drawIgloo(sf::RenderWindow &window)
 
 bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Event &evnt, bool &pressed)
 {
+    checkTemperature();
+    if(!hasLives())
+    {stage = 3;}
     move(deltaTime);
     pressed = frostbiteJump(evnt,pressed);
     icebergCollision(deltaTime);

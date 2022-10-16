@@ -50,11 +50,12 @@ void Igloo::generateBlocks(const float x, const float y)
 //increments block amount
 void Igloo::incrementBlockAmount()
 {
-    if (blockAmount==16)
+    if (blockAmount==15)
     {
         complete = true;
+        blockAmount++;
     }
-    else
+    else if(blockAmount<15)
     {
         blockAmount++;
     }
