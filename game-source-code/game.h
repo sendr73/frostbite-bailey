@@ -30,7 +30,7 @@ class Game
     protected:
 
     private:
-        const float GAME_WIDTH=1000.f, GAME_HEIGHT=800.f;
+        float GAME_WIDTH=1000.f, GAME_HEIGHT=800.f;
         temperature temperature_timer;
         Frostbite frostbite=Frostbite("resources/frostbite.png",sf::Vector2f(1.f,1.f)); //frostbite object
         Score score;

@@ -31,41 +31,7 @@ void Screen::setBackground(const sf::RenderWindow &window) //All take in the win
     background.setTexture(texture.getTexture()); //set texture of background
 }
 
-//executes the up/down movement when as specific event is initiated
-void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &event, bool &pressed)
-{
-    if ((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Up)&&(pressed == false))
-    {
-        pressed = true; //while true, cannot be double clicked
-        if((!igloo.isComplete()&&frostbite.getPosition().y<=0.375*window.getSize().y)
-                ||frostbite.getPosition().y<=0.25*window.getSize().y
-                ||(frostbite.getPosition().y==0.375*window.getSize().y&&!isWithinDoorway()))
-        {
-            //do nothing
-        }
-        else if(igloo.isComplete()&&frostbite.getPosition().y<=0.375*window.getSize().y&&isWithinDoorway())
-        {
-            stage=4;
-        }
-        else
-        {
-            frostbite.jump('u',0.125*window.getSize().y,window.getSize().y,window.getSize().x);
-        }
-    }
-    if ((event.type == sf::Event::KeyReleased)&&(event.key.code == sf::Keyboard::Up))
-    {
-        pressed = false;
-    }
-    if ((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Down)&&(pressed == false))
-    {
-        pressed = true; //while true, cannot be double clicked
-        frostbite.jump('d',0.125*window.getSize().y,window.getSize().y,window.getSize().x);
-    }
-    if ((event.type == sf::Event::KeyReleased)&&(event.key.code == sf::Keyboard::Down))
-    {
-        pressed = false;
-    }
-}
+
 
 
 void Screen::icebergCollision(sf::RenderWindow &window, const float &deltaTime)
