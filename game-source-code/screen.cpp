@@ -34,7 +34,7 @@ void Screen::setBackground(const sf::RenderWindow &window) //All take in the win
 
 
 
-void Screen::icebergCollision(sf::RenderWindow &window, const float &deltaTime)
+/*void Screen::icebergCollision(sf::RenderWindow &window, const float &deltaTime)
 {
     if(frostbite.getPosition().y>0.45*window.getSize().y)
     {
@@ -97,7 +97,7 @@ void Screen::icebergCollision(sf::RenderWindow &window, const float &deltaTime)
             break;
         }
     }
-}
+}*/
 
 void Screen::enemyCollision(sf::RenderWindow &window, const float &deltaTime)
 {

@@ -41,6 +41,7 @@ class Game
         void setIgloo(); //set igloo
         void landing(const int &i);
         void initialize(const bool &resetScore);
+        void respawn();
         void nextLevel();
         void checkTemperature(); //check for negative temperature
         const bool isWithinDoorway() const;

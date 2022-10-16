@@ -66,7 +66,46 @@ void Game::setIgloo()
 {
     igloo.generateBlocks(GAME_WIDTH,GAME_HEIGHT);
 }
-
+void Game::icebergCollision(const float &deltaTime)
+{
+    sf::RenderWindow window(sf::VideoMode(GAME_WIDTH,GAME_HEIGHT),"");
+    if(frostbite.getPosition().y>0.45*GAME_HEIGHT)
+    {
+        switch(ice_system.collision(frostbite,window,deltaTime))
+        {
+        case -1:
+            respawn();
+            break;
+        case 1:
+            if(!ice_system[0][0].beenLandedOn()&&frostbite.hasJumped()){landing(0);}
+            break;
+        case 2:
+            if(!ice_system[1][0].beenLandedOn()&&frostbite.hasJumped()){landing(1);}
+            break;
+        case 3:
+            if(!ice_system[2][0].beenLandedOn()&&frostbite.hasJumped()){landing(2);}
+            break;
+        case 4:
+            if(!ice_system[3][0].beenLandedOn()&&frostbite.hasJumped()){landing(3);}
+            break;
+        default:
+            break;
+        }
+    }
+}
+void Game::respawn()
+{
+    frostbite.reset();
+    frostbite.setPosition(GAME_WIDTH/2,0.375*GAME_HEIGHT);
+    score.decreaseLives();
+}
+void Game::landing(const int &i)
+{
+    ice_system.rowLandedOn(i);
+    score.increaseScore();
+    igloo.incrementBlockAmount();
+    frostbite.reset();
+}
 const bool Game::isWithinDoorway() const
 {
     const float x = igloo.getBlockPosition(16).x;
