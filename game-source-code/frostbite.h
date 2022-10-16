@@ -21,6 +21,7 @@ class Frostbite: public Motion, public Element
         //using base class getSize, get the width and height of Frosbite
         const float getWidth() const ;
         const float getHeight() const ;
+        const float getSpeed() const;
         //reset Frostbite's starting postion
         void reset();
         virtual ~Frostbite();
@@ -31,6 +32,7 @@ class Frostbite: public Motion, public Element
        // sf::Texture fTexture;
        // sf::Sprite fSprite;
         bool jumped; //to see if the player has jumped, has implicatiins when counting icebergs for score
+        const float speed = 400.f;
 };
 
 #endif // FROSTBITE_H

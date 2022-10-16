@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include "game.h"
 #include "screen.h"
 #include "splashscreen.h"
 
@@ -28,36 +29,24 @@ int main()
     //setting up splash screen
     splashScreen splash_screen(gameWidth, gameHeight);
     Frostbite frosty;
-
+    Game game;
     sf::Clock clock;
-
+    bool pressed = false; //used to stop multiple jumps
     while(window.isOpen( ))
     {
         sf::Event evnt; //not using reserved word event
-        bool pressed = false; //used to stop multiple jumps
         while(window.pollEvent(evnt))
         {
+            cout << screen.getStage() << endl;
             if (evnt.type == sf::Event::Closed)
             {
                 window.close();
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)&&screen.getStage()!=2)
             {
-                /*if(screen.getStage()==4)
-                {
-                    screen.nextLevel(window);
-                }
-                else if(screen.getStage()==5)
-                {
-                    screen.initialise(window,false);
-                }
-                else
-                {
-                    screen.initialise(window,true);
-                }
-                */
                 screen.changeDisplay();
             }
+            //game.frostbiteJump(evnt,pressed);
         }
         float deltaTime = 0.f;
         switch(screen.getStage())
@@ -81,6 +70,9 @@ int main()
                 screen.setStage(3);
             }
             */
+            deltaTime = clock.restart().asSeconds();
+            pressed=screen.refresh(window, deltaTime, evnt, pressed);
+            window.display();
             break;
         case 3:
             screen.drawMessageScreen("You Lose",sf::Color::Red,"Press the ENTER key to restart",window);

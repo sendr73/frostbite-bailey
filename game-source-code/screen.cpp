@@ -99,8 +99,12 @@ void Screen::drawIgloo(sf::RenderWindow &window)
     }
 }
 
-void Screen::refresh(sf::RenderWindow &window)
+bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Event &evnt, bool &pressed)
 {
+    move(deltaTime);
+    pressed = frostbiteJump(evnt,pressed);
+    icebergCollision(deltaTime);
+    enemyCollision(deltaTime); //check for collision with crabs
     window.clear(sf::Color(38,79,155));
     window.draw(background);
     drawScore(window);
@@ -109,6 +113,7 @@ void Screen::refresh(sf::RenderWindow &window)
     ice_system.draw(window);
     temperature_timer.draw(window);
     frostbite.draw(window);
+    return pressed;
 }
 
 Screen::~Screen()

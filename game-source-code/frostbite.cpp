@@ -70,6 +70,11 @@ const float Frostbite::getHeight() const
     return getSize().y ;
 }
 
+const float Frostbite::getSpeed() const
+{
+    return speed;
+}
+
 //resets characterisitcs
 void Frostbite::reset()
 {

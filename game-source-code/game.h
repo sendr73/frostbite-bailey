@@ -17,7 +17,7 @@ class Game
         Game(const float &width=1000.f,const float &height = 800.f);
         void play(const sf::Event &event, bool &pressed, const float &deltaTime);
         //making the frostbite object jump on window, based on events
-        void frostbiteJump(const sf::Event &event, bool &pressed);
+        bool frostbiteJump(const sf::Event &event, bool &pressed);
         //function to use overwritten move function
         void move(const float& deltaTime);
         //function to move any class inherited from motion

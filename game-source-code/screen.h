@@ -19,7 +19,7 @@ public:
     void setStage(const int &i);
     void drawMessageScreen(const string &title, const sf::Color &title_colour, const string &message, sf::RenderWindow &window);
     //refreshes the window
-    void refresh(sf::RenderWindow &window);
+    bool refresh(sf::RenderWindow &window, float &deltaTime,sf::Event &evnt, bool &pressed);
     //destructor
     virtual ~Screen();
 

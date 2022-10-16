@@ -22,7 +22,7 @@ void Game::setFrostbite()
     frostbite.setPosition(GAME_WIDTH/2,0.375*GAME_HEIGHT); //maybe setting an origin is more optimal for resetting
 }
 //executes the up/down movement when as specific event is initiated
-void Game::frostbiteJump(const sf::Event &event, bool &pressed)
+bool Game::frostbiteJump(const sf::Event &event, bool &pressed)
 {
     if ((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Up)&&(pressed == false))
     {
@@ -53,11 +53,12 @@ void Game::frostbiteJump(const sf::Event &event, bool &pressed)
     {
         pressed = false;
     }
+    return pressed;
 }
 
 void Game::move(const float& deltaTime)
 {
-    move(frostbite, 'Q', deltaTime);
+    move(frostbite, 'Q', frostbite.getSpeed()*deltaTime);
     move(enemy_matrix, 'Q', deltaTime); //set random direction
     move(ice_system, 'Q', deltaTime);
 }
@@ -76,7 +77,6 @@ void Game::setIgloo()
 // iceberg collisions
 void Game::icebergCollision(const float &deltaTime)
 {
-    sf::RenderWindow window(sf::VideoMode(GAME_WIDTH,GAME_HEIGHT),"");
     if(frostbite.getPosition().y>0.45*GAME_HEIGHT)
     {
         switch(ice_system.collision(frostbite,GAME_WIDTH,GAME_HEIGHT,deltaTime))
