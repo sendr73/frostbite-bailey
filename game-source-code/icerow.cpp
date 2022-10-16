@@ -85,6 +85,14 @@ vector<sf::FloatRect> Icerow::getRowBoundaries() const //returns a vector contai
     return rowBoundaries;
 }
 
+void Icerow::reset()
+{
+    for(int i = 0; i < icerow_.size();i++)
+    {
+        icerow_[i].reset("resources/iceberg.png");
+    }
+}
+
 Icerow::~Icerow()
 {
     //dtor

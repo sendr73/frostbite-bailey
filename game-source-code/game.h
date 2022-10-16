@@ -15,17 +15,7 @@ class Game
 {
     public:
         Game(const float &width=1000.f,const float &height = 800.f);
-        void play(const sf::Event &event, bool &pressed, const float &deltaTime);
         //making the frostbite object jump on window, based on events
-        bool frostbiteJump(const sf::Event &event, bool &pressed);
-        //function to use overwritten move function
-        void move(const float& deltaTime);
-        //function to move any class inherited from motion
-        void move(Motion& spriteA, char direction, const float &moveSpeed) const;
-        //moving the rows of ice on screen
-        void icebergCollision(const float &deltaTime);
-        //collsion logic between frostbite and enemies
-        void enemyCollision(const float &deltaTime);
         virtual ~Game();
 
     protected:
@@ -36,8 +26,18 @@ class Game
         IceSystem ice_system;
         EnemyMatrix enemy_matrix;
         int stage;
+        bool frostbiteJump(const sf::Event &event, bool &pressed);
+        //function to use overwritten move function
+        void move(const float& deltaTime);
+        //function to move any class inherited from motion
+        void move(Motion& spriteA, char direction, const float &moveSpeed) const;
+        //moving the rows of ice on screen
+        void icebergCollision(const float &deltaTime);
+        //collsion logic between frostbite and enemies
+        void enemyCollision(const float &deltaTime);
         void initialize(const bool &resetScore);
         void respawn();
+        void checkTemperature(); //check for negative temperature
         void nextLevel();
 
     private:
@@ -45,7 +45,6 @@ class Game
         void setFrostbite(); //sets frostbite properties on screen
         void setIgloo(); //set igloo
         void landing(const int &i);
-        void checkTemperature(); //check for negative temperature
         const bool isWithinDoorway() const;
         const bool cannotEnter() const;
         const bool canEnter() const;

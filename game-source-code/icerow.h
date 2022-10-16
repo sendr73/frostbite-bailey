@@ -17,6 +17,7 @@ class Icerow: public Motion
         virtual void move(char direction, const float &x, const float &y, float deltaTime) override;
         void landedOn();
         vector<sf::FloatRect> getRowBoundaries() const;
+        void reset();
         virtual ~Icerow();
 
     protected:
