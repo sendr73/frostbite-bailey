@@ -14,8 +14,7 @@
 class Game
 {
     public:
-        Game(const float &width=1000.f,const float &height = 800.f):
-            GAME_WIDTH=width, GAME_HEIGHT=height;
+        Game(const float &width=1000.f,const float &height = 800.f);
         //making the frostbite object jump on window, based on events
         void frostbiteJump(const sf::Event &event, bool &pressed);
         //function to use overwritten move function
@@ -31,7 +30,7 @@ class Game
     protected:
 
     private:
-        const float GAME_WIDTH, GAME_HEIGHT;
+        const float GAME_WIDTH=1000.f, GAME_HEIGHT=800.f;
         temperature temperature_timer;
         Frostbite frostbite=Frostbite("resources/frostbite.png",sf::Vector2f(1.f,1.f)); //frostbite object
         Score score;

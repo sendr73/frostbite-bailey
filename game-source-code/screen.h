@@ -29,7 +29,7 @@ protected:
     sf::Font font;
     sf::Text score_text;
     int stage;
-    void setBackground(); //sets background on screen
+    void setBackground(const sf::RenderWindow &window); //sets background on screen
     void drawIgloo(sf::RenderWindow &window); //helper that draws igloo
     void drawScore(sf::RenderWindow &window); //helper that draws score
 };

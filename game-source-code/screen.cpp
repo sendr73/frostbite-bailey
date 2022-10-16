@@ -30,29 +30,6 @@ void Screen::setBackground(const sf::RenderWindow &window) //All take in the win
     texture.draw(sky);
     background.setTexture(texture.getTexture()); //set texture of background
 }
-//sets the starting position of Frostbite
-void Screen::setFrostbite(const sf::RenderWindow &window)
-{
-    frostbite.setPosition(window.getSize().x/2,0.375*window.getSize().y); //maybe setting an origin is more optimal for resetting
-}
-
-//sets the positions of the blocks in the iceberg
-void Screen::setIgloo(const sf::RenderWindow &window)
-{
-    igloo.generateBlocks(window.getSize().x,window.getSize().y);
-}
-
-const bool Screen::isWithinDoorway() const
-{
-    const float x = igloo.getBlockPosition(16).x;
-    const float width = igloo.getBlockSize(16).x;
-    if((frostbite.getPosition().x<x+width)
-            &&(frostbite.getPosition().x>x-width))
-    {
-        return true;
-    }
-    return false;
-}
 
 //executes the up/down movement when as specific event is initiated
 void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &event, bool &pressed)
@@ -89,17 +66,7 @@ void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &even
         pressed = false;
     }
 }
-void Screen::moveAllSprites(sf::RenderWindow& window,const float& frostbiteSpeed,const float& deltaTime)
-{
-    moveSprite(frostbite, 'Q', window, frostbiteSpeed);
-    moveSprite(enemy_matrix, 'Q', window, deltaTime); //set random direction
-    moveSprite(ice_system, 'Q', window, deltaTime);
-}
 
-void Screen::moveSprite(Motion& spriteA, char direction, sf::RenderWindow &window, const float &moveSpeed) const
-{
-    spriteA.move(direction, window, moveSpeed);
-}
 
 void Screen::icebergCollision(sf::RenderWindow &window, const float &deltaTime)
 {
