@@ -66,6 +66,7 @@ void Game::setIgloo()
 {
     igloo.generateBlocks(GAME_WIDTH,GAME_HEIGHT);
 }
+// iceberg collisions
 void Game::icebergCollision(const float &deltaTime)
 {
     sf::RenderWindow window(sf::VideoMode(GAME_WIDTH,GAME_HEIGHT),"");
@@ -93,12 +94,20 @@ void Game::icebergCollision(const float &deltaTime)
         }
     }
 }
+// enemy collisions
+void Game::enemyCollision(const float &deltaTime)
+{
+    sf::RenderWindow window(sf::VideoMode(GAME_WIDTH,GAME_HEIGHT),"");
+    enemy_matrix.collision(frostbite, window, deltaTime);
+}
+// frostbite respawns
 void Game::respawn()
 {
     frostbite.reset();
     frostbite.setPosition(GAME_WIDTH/2,0.375*GAME_HEIGHT);
     score.decreaseLives();
 }
+// make frostbite land
 void Game::landing(const int &i)
 {
     ice_system.rowLandedOn(i);
@@ -106,6 +115,7 @@ void Game::landing(const int &i)
     igloo.incrementBlockAmount();
     frostbite.reset();
 }
+// checks in line with enterence
 const bool Game::isWithinDoorway() const
 {
     const float x = igloo.getBlockPosition(16).x;
@@ -128,6 +138,7 @@ const bool Game::cannotEnter() const
         }
         return false;
 }
+// checks if frostbite can enter igloo
 const bool Game::canEnter() const
 {
     if(igloo.isComplete()&&frostbite.getPosition().y<=0.375*GAME_HEIGHT&&isWithinDoorway())
