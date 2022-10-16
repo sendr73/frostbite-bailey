@@ -25,11 +25,12 @@ class Game
         void icebergCollision(const float &deltaTime);
         //collsion logic between frostbite and enemies
         void enemyCollision(const float &deltaTime);
+        //getter and setter for stage
+        const int getStage() const;
+        void setStage(const int &i);
         virtual ~Game();
 
     protected:
-
-    private:
         float GAME_WIDTH=1000.f, GAME_HEIGHT=800.f;
         temperature temperature_timer;
         Frostbite frostbite=Frostbite("resources/frostbite.png",sf::Vector2f(1.f,1.f)); //frostbite object
@@ -37,6 +38,7 @@ class Game
         Igloo igloo;
         IceSystem ice_system;
         EnemyMatrix enemy_matrix;
+        int stage;
         void setFrostbite(); //sets frostbite properties on screen
         void setIgloo(); //set igloo
         void landing(const int &i);

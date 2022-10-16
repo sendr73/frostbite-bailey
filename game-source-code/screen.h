@@ -3,10 +3,11 @@
 
 #include <vector>
 #include <SFML\Graphics.hpp>
+#include "game.h"
 
 using namespace std;
 
-class Screen
+class Screen: public Game
 {
 public:
     Screen(){
@@ -14,9 +15,6 @@ public:
     }
     //parametized constructor
     Screen(sf::RenderWindow &window);
-    //getter and setter for stage
-    const int getStage() const;
-    void setStage(const int &i);
     void drawMessageScreen(const string &title, const sf::Color &title_colour, const string &message, sf::RenderWindow &window);
     //refreshes the window
     void refresh(sf::RenderWindow &window);
@@ -28,7 +26,6 @@ protected:
     sf::Sprite background; //sprite object for background
     sf::Font font;
     sf::Text score_text;
-    int stage;
     void setBackground(const sf::RenderWindow &window); //sets background on screen
     void drawIgloo(sf::RenderWindow &window); //helper that draws igloo
     void drawScore(sf::RenderWindow &window); //helper that draws score

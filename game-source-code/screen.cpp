@@ -6,7 +6,7 @@ using namespace std;
 
 Screen::Screen(sf::RenderWindow &window)
 {
-    stage = 1;
+    setBackground(window);
 }
 
 //sets texture of background based on dimensions of the window
@@ -29,40 +29,6 @@ void Screen::setBackground(const sf::RenderWindow &window) //All take in the win
     texture.draw(border);
     texture.draw(sky);
     background.setTexture(texture.getTexture()); //set texture of background
-}
-//getter for game stage
-const int Screen::getStage() const
-{
-    return stage;
-}
-void Screen::setStage(const int &i)
-{
-    stage = i;
-}
-//checks if has lives
-const bool Screen::hasLives() const
-{
-    if(score.getLives()==0)
-    {
-        return false;
-    }
-    return true;
-}
-void Screen::nextLevel(const sf::RenderWindow &window)
-{
-    stage = 2;
-    frostbite.setPosition(window.getSize().x/2,0.375*window.getSize().y);
-    score.increaseLevel();
-    temperature_timer.resetClock();
-    frostbite.reset();
-    for (int m = 0; m<ice_system.size(); m++)
-    {
-        for (int n = 0; n<ice_system[m].size(); n++)
-        {
-            ice_system[m][n].reset("resources/iceberg.png");
-        }
-    }
-    igloo.reset();
 }
 //drawing functions
 void Screen::drawMessageScreen(const string &title, const sf::Color &title_colour, const string &message, sf::RenderWindow &window)

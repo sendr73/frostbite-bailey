@@ -4,6 +4,7 @@ Game::Game(const float &width,const float &height)
 {
     GAME_WIDTH=width;
     GAME_HEIGHT=height;
+    stage = 1;
     setFrostbite();
     setIgloo();
 }
@@ -25,7 +26,7 @@ void Game::frostbiteJump(const sf::Event &event, bool &pressed)
         }
         else if(canEnter())
         {
-            //stage=4;
+            stage=4;
         }
         else
         {
@@ -114,6 +115,41 @@ void Game::landing(const int &i)
     score.increaseScore();
     igloo.incrementBlockAmount();
     frostbite.reset();
+}
+//getter for game stage
+const int Game::getStage() const
+{
+    return stage;
+}
+void Game::setStage(const int &i)
+{
+    stage = i;
+}
+//checks if has lives
+const bool Game::hasLives() const
+{
+    if(score.getLives()==0)
+    {
+        return false;
+    }
+    return true;
+}
+//enters a new level
+void Game::nextLevel()
+{
+    stage = 2;
+    frostbite.setPosition(GAME_WIDTH/2,0.375*GAME_HEIGHT);
+    score.increaseLevel();
+    temperature_timer.resetClock();
+    frostbite.reset();
+    for (int m = 0; m<ice_system.size(); m++)
+    {
+        for (int n = 0; n<ice_system[m].size(); n++)
+        {
+            ice_system[m][n].reset("resources/iceberg.png");
+        }
+    }
+    igloo.reset();
 }
 // checks in line with enterence
 const bool Game::isWithinDoorway() const
