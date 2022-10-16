@@ -13,6 +13,10 @@ public:
     Screen(){}
     //parametized constructor
     Screen(sf::RenderWindow &window);
+    void changeDisplay();
+    //getter and setter for stage
+    const int getStage() const;
+    void setStage(const int &i);
     void drawMessageScreen(const string &title, const sf::Color &title_colour, const string &message, sf::RenderWindow &window);
     //refreshes the window
     void refresh(sf::RenderWindow &window);

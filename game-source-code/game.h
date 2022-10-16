@@ -15,6 +15,7 @@ class Game
 {
     public:
         Game(const float &width=1000.f,const float &height = 800.f);
+        void play(const sf::Event &event, bool &pressed, const float &deltaTime);
         //making the frostbite object jump on window, based on events
         void frostbiteJump(const sf::Event &event, bool &pressed);
         //function to use overwritten move function
@@ -25,9 +26,6 @@ class Game
         void icebergCollision(const float &deltaTime);
         //collsion logic between frostbite and enemies
         void enemyCollision(const float &deltaTime);
-        //getter and setter for stage
-        const int getStage() const;
-        void setStage(const int &i);
         virtual ~Game();
 
     protected:
@@ -38,6 +36,7 @@ class Game
         IceSystem ice_system;
         EnemyMatrix enemy_matrix;
         int stage;
+        void initialize(const bool &resetScore);
         void respawn();
         void nextLevel();
 
@@ -46,7 +45,6 @@ class Game
         void setFrostbite(); //sets frostbite properties on screen
         void setIgloo(); //set igloo
         void landing(const int &i);
-        void initialize(const bool &resetScore);
         void checkTemperature(); //check for negative temperature
         const bool isWithinDoorway() const;
         const bool cannotEnter() const;

@@ -43,7 +43,7 @@ int main()
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)&&screen.getStage()!=2)
             {
-                if(screen.getStage()==4)
+                /*if(screen.getStage()==4)
                 {
                     screen.nextLevel(window);
                 }
@@ -55,8 +55,9 @@ int main()
                 {
                     screen.initialise(window,true);
                 }
+                */
+                screen.changeDisplay();
             }
-            screen.frostbiteJump(window, evnt, pressed);
         }
         float deltaTime = 0.f;
         switch(screen.getStage())
@@ -68,7 +69,7 @@ int main()
             //temperature_timer.resetClock();
             break;
         case 2:
-            screen.checkTemperature(); //should be combined with the action class
+            /*screen.checkTemperature(); //should be combined with the action class
             deltaTime = clock.restart().asSeconds();
             screen.moveAllSprites(window,frostbiteSpeed, deltaTime);
             screen.icebergCollision(window,deltaTime);
@@ -79,6 +80,7 @@ int main()
             {
                 screen.setStage(3);
             }
+            */
             break;
         case 3:
             screen.drawMessageScreen("You Lose",sf::Color::Red,"Press the ENTER key to restart",window);

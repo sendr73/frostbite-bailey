@@ -6,7 +6,16 @@ Game::Game(const float &width,const float &height)
     GAME_HEIGHT=height;
     stage = 1;
 }
-
+// plays the game
+void Game::play(const sf::Event &event, bool &pressed, const float &deltaTime)
+{
+    frostbiteJump(event, pressed);
+    checkTemperature(); //should be combined with the action class
+    move(deltaTime);
+    icebergCollision(deltaTime);
+    enemyCollision(deltaTime); //check for collision with crabs
+    if (!hasLives()){stage=3;}
+}
 //sets the starting position of Frostbite
 void Game::setFrostbite()
 {
@@ -125,15 +134,6 @@ void Game::landing(const int &i)
     score.increaseScore();
     igloo.incrementBlockAmount();
     frostbite.reset();
-}
-//getter for game stage
-const int Game::getStage() const
-{
-    return stage;
-}
-void Game::setStage(const int &i)
-{
-    stage = i;
 }
 //checks if has lives
 const bool Game::hasLives() const

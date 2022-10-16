@@ -28,6 +28,21 @@ void Screen::setBackground(const sf::RenderWindow &window) //All take in the win
     texture.draw(sky);
     background.setTexture(texture.getTexture()); //set texture of background
 }
+void Screen::changeDisplay()
+{
+    if(getStage()==4){nextLevel();}
+    else if(getStage()==5){initialize(false);}
+    else{initialize(true);}
+}
+//getter for game stage
+const int Screen::getStage() const
+{
+    return stage;
+}
+void Screen::setStage(const int &i)
+{
+    stage = i;
+}
 //drawing functions
 void Screen::drawMessageScreen(const string &title, const sf::Color &title_colour, const string &message, sf::RenderWindow &window)
 {
