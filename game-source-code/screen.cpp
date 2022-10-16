@@ -49,8 +49,8 @@ const bool Screen::isWithinDoorway() const
 {
     const float x = igloo.getBlockPosition(16).x;
     const float width = igloo.getBlockSize(16).x;
-    if((frostbite.getPosition().x<x+width/2)
-            &&(frostbite.getPosition().x>x-width/2))
+    if((frostbite.getPosition().x<x+width)
+            &&(frostbite.getPosition().x>x-width))
     {
         return true;
     }
@@ -69,9 +69,8 @@ void Screen::frostbiteJump(const sf::RenderWindow &window, const sf::Event &even
         {
             //do nothing
         }
-        else if(igloo.isComplete()&&frostbite.getPosition().y==0.375*window.getSize().y&&isWithinDoorway())
+        else if(igloo.isComplete()&&frostbite.getPosition().y<=0.375*window.getSize().y&&isWithinDoorway())
         {
-
             stage=4;
         }
         else
@@ -105,9 +104,57 @@ void Screen::moveSprite(Motion& spriteA, char direction, sf::RenderWindow &windo
     spriteA.move(direction, window, moveSpeed);
 }
 
-void Screen::icebergCollision(sf::RenderWindow &window,const float &icebergSpeed, const float &deltaTime)
+void Screen::icebergCollision(sf::RenderWindow &window, const float &deltaTime)
 {
-    ice_system.collision(frostbite,window,deltaTime);
+    if(frostbite.getPosition().y>0.45*window.getSize().y)
+    {
+        switch(ice_system.collision(frostbite,window,deltaTime))
+        {
+        case -1:
+            frostbite.reset();
+            frostbite.setPosition(window.getSize().x/2,0.375*window.getSize().y);
+            score.decreaseLives();
+            break;
+        case 1:
+            if(!ice_system[0][0].beenLandedOn()&&frostbite.hasJumped())
+            {
+                for(int i = 0; i <ice_system[0].size(); i++)
+                {
+                    //ice_system[0][i].landedOn("resources/iceberg_landed.png");
+                }
+            }
+            break;
+        case 2:
+            if(!ice_system[1][0].beenLandedOn()&&frostbite.hasJumped())
+            {
+                for(int i = 0; i <ice_system[1].size(); i++)
+                {
+                    //ice_system[1][i].landedOn("resources/iceberg_landed.png");
+                }
+            }
+            break;
+        case 3:
+            if(!ice_system[2][0].beenLandedOn()&&frostbite.hasJumped())
+            {
+                for(int i = 0; i <ice_system[2].size(); i++)
+                {
+                    //ice_system[2][i].landedOn("resources/iceberg_landed.png");
+                }
+            }
+            break;
+        case 4:
+            if(!ice_system[3][0].beenLandedOn()&&frostbite.hasJumped())
+            {
+                for(int i = 0; i <ice_system[3].size(); i++)
+                {
+                    //ice_system[3][i].landedOn("resources/iceberg_landed.png");
+                }
+            }
+            break;
+        default:
+            break;
+        }
+    }
 }
 
 void Screen::enemyCollision(sf::RenderWindow &window, const float &deltaTime)

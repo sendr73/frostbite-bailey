@@ -16,20 +16,25 @@ void IceSystem::move(char direction, const sf::RenderWindow &window, float moveS
     }
 }
 
-void IceSystem::collision(Frostbite &frostbite, const sf::RenderWindow &window, const float &deltaTime)
+int IceSystem::collision(Frostbite &frostbite, const sf::RenderWindow &window, const float &deltaTime)
 {
+    int index = -1;
+    int num = 0;
     sf::FloatRect frostbite_boundary_box = frostbite.getBoundaries();
     for(auto ice_row_it:icesystem_)
     {
+        num++;
         auto ice_row_boundary = ice_row_it.getRowBoundaries(); //get vector of the bourdary boxes of each enemy
         for(auto ice_boundary_it : ice_row_boundary)
         {
           if(frostbite_boundary_box.intersects(ice_boundary_it)) //if they intersect, the enemy will push frostbite along with them, generally causing him to fall off an iceberg
             {
                 frostbite.move(ice_row_it[0].getDirection(),window,ice_row_it[0].getSpeed()*deltaTime);
+                index = num;
             }
         }
     }
+    return index;
 }
 
 Icerow IceSystem::operator[](const int& index)

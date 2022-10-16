@@ -7,7 +7,7 @@ class Collisions
 {
     public:
         Collisions();
-        virtual void collision(Frostbite &frostbite, const sf::RenderWindow &window, const float &deltaTime) = 0;
+        virtual int collision(Frostbite &frostbite, const sf::RenderWindow &window, const float &deltaTime) = 0;
         virtual ~Collisions();
 
     protected:

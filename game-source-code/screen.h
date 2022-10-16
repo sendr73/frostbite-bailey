@@ -31,7 +31,7 @@ public:
     //moving the frostbite object on window
     void moveFrostbite(const sf::RenderWindow &window, const float &speed, const float &deltaTime);
     //moving the rows of ice on screen
-    void icebergCollision(sf::RenderWindow &window,const float &, const float &);
+    void icebergCollision(sf::RenderWindow &window, const float &);
     //collsion logic between frostbite and enemies
     void enemyCollision(sf::RenderWindow &window,const float &);
     //check for negative temperature
