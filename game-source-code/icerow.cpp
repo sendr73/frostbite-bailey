@@ -66,6 +66,14 @@ void Icerow::draw(sf::RenderWindow &window)
     }
 }
 
+void Icerow::landedOn()
+{
+    for(auto i =0; i<icerow_.size(); i++)
+    {
+        icerow_[i].landedOn("resources/iceberg_landed.png");
+    }
+}
+
 vector<sf::FloatRect> Icerow::getRowBoundaries() const //returns a vector containing the boundaries of each enemy in the row
 {
     vector<sf::FloatRect> rowBoundaries;

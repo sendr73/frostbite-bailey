@@ -14,6 +14,7 @@ class IceSystem: public Motion, public Collisions
         virtual int collision(Frostbite &frostbite, const sf::RenderWindow &window, const float &deltaTime) override;
         Icerow operator[](const int& index);
         int const size() const;
+        void rowLandedOn(const int &i);
         void draw(sf::RenderWindow &window);
         virtual ~IceSystem();
 

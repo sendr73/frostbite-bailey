@@ -120,7 +120,7 @@ void Screen::icebergCollision(sf::RenderWindow &window, const float &deltaTime)
             {
                 for(int i = 0; i <ice_system[0].size(); i++)
                 {
-                    //ice_system[0][i].landedOn("resources/iceberg_landed.png");
+                    ice_system.rowLandedOn(0);
                 }
                 score.increaseScore();
                 igloo.incrementBlockAmount();
@@ -132,7 +132,7 @@ void Screen::icebergCollision(sf::RenderWindow &window, const float &deltaTime)
             {
                 for(int i = 0; i <ice_system[1].size(); i++)
                 {
-                    //ice_system[1][i].landedOn("resources/iceberg_landed.png");
+                    ice_system.rowLandedOn(1);
                 }
                 score.increaseScore();
                 igloo.incrementBlockAmount();
@@ -144,7 +144,7 @@ void Screen::icebergCollision(sf::RenderWindow &window, const float &deltaTime)
             {
                 for(int i = 0; i <ice_system[2].size(); i++)
                 {
-                    //ice_system[2][i].landedOn("resources/iceberg_landed.png");
+                    ice_system.rowLandedOn(2);
                 }
                 score.increaseScore();
                 igloo.incrementBlockAmount();
@@ -156,7 +156,7 @@ void Screen::icebergCollision(sf::RenderWindow &window, const float &deltaTime)
             {
                 for(int i = 0; i <ice_system[3].size(); i++)
                 {
-                    //ice_system[3][i].landedOn("resources/iceberg_landed.png");
+                    ice_system.rowLandedOn(3);
                 }
                 score.increaseScore();
                 igloo.incrementBlockAmount();

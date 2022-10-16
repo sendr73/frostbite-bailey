@@ -47,6 +47,11 @@ const int IceSystem::size() const
     return icesystem_.size();
 }
 
+void IceSystem::rowLandedOn(const int &i)
+{
+    icesystem_[i].landedOn();
+}
+
 void IceSystem::draw(sf::RenderWindow &window) //should be separated into a different class (print class)
 {
     for(auto i =0; i<icesystem_.size(); i++)
