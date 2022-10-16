@@ -31,7 +31,6 @@ class Game
         virtual ~Game();
 
     protected:
-        float GAME_WIDTH=1000.f, GAME_HEIGHT=800.f;
         temperature temperature_timer;
         Frostbite frostbite=Frostbite("resources/frostbite.png",sf::Vector2f(1.f,1.f)); //frostbite object
         Score score;
@@ -39,12 +38,15 @@ class Game
         IceSystem ice_system;
         EnemyMatrix enemy_matrix;
         int stage;
+        void respawn();
+        void nextLevel();
+
+    private:
+        float GAME_WIDTH=1000.f, GAME_HEIGHT=800.f;
         void setFrostbite(); //sets frostbite properties on screen
         void setIgloo(); //set igloo
         void landing(const int &i);
         void initialize(const bool &resetScore);
-        void respawn();
-        void nextLevel();
         void checkTemperature(); //check for negative temperature
         const bool isWithinDoorway() const;
         const bool cannotEnter() const;

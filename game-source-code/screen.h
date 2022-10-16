@@ -10,9 +10,7 @@ using namespace std;
 class Screen: public Game
 {
 public:
-    Screen(){
-        //default
-    }
+    Screen(){}
     //parametized constructor
     Screen(sf::RenderWindow &window);
     void drawMessageScreen(const string &title, const sf::Color &title_colour, const string &message, sf::RenderWindow &window);

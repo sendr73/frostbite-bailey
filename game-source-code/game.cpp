@@ -5,8 +5,6 @@ Game::Game(const float &width,const float &height)
     GAME_WIDTH=width;
     GAME_HEIGHT=height;
     stage = 1;
-    setFrostbite();
-    setIgloo();
 }
 
 //sets the starting position of Frostbite
@@ -101,6 +99,18 @@ void Game::enemyCollision(const float &deltaTime)
     sf::RenderWindow window(sf::VideoMode(GAME_WIDTH,GAME_HEIGHT),"");
     enemy_matrix.collision(frostbite, window, deltaTime);
 }
+//initialises game to play
+void Game::initialize(const bool &resetScore)
+{
+    stage = 2;
+    if(resetScore)
+    {
+        score.reset();
+    }
+    setFrostbite();
+    setIgloo();
+    temperature_timer.resetClock();
+}
 // frostbite respawns
 void Game::respawn()
 {
@@ -150,6 +160,15 @@ void Game::nextLevel()
         }
     }
     igloo.reset();
+}
+void Game::checkTemperature()
+{
+    if(temperature_timer.getTemperature()<0) //if he has frozen
+    {
+        temperature_timer.resetClock(); //reset temperature
+        score.decreaseLives(); //decrease his lives
+        stage = 5;
+    }
 }
 // checks in line with enterence
 const bool Game::isWithinDoorway() const

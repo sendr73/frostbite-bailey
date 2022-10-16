@@ -1,14 +1,12 @@
 //Screen implementation
 #include "screen.h"
 
-
 using namespace std;
 
 Screen::Screen(sf::RenderWindow &window)
 {
     setBackground(window);
 }
-
 //sets texture of background based on dimensions of the window
 void Screen::setBackground(const sf::RenderWindow &window) //All take in the window as parameters, maybe change to height and width?
 {
@@ -60,6 +58,7 @@ void Screen::drawMessageScreen(const string &title, const sf::Color &title_colou
     window.draw(title_text);
     window.draw(message_text);
 }
+// draws score
 void Screen::drawScore(sf::RenderWindow &window)
 {
     if (!font.loadFromFile("resources/sansation.ttf"))
@@ -75,8 +74,7 @@ void Screen::drawScore(sf::RenderWindow &window)
     score_text.setPosition(sf::Vector2f(5.f,30.f));
     window.draw(score_text);
 }
-
-
+// draws igloo
 void Screen::drawIgloo(sf::RenderWindow &window)
 {
     int blockNum = igloo.getBlockAmount();
@@ -85,18 +83,7 @@ void Screen::drawIgloo(sf::RenderWindow &window)
         window.draw(igloo.getBlock(i));
     }
 }
-//initialises game to play
-void Screen::initialise(sf::RenderWindow &window,const bool &resetScore)
-{
-    stage = 2;
-    if(resetScore)
-    {
-        score.reset();
-    }
-    setFrostbite(window);
-    setIgloo(window);
-    temperature_timer.resetClock();
-}
+
 void Screen::refresh(sf::RenderWindow &window)
 {
     window.clear(sf::Color(38,79,155));
@@ -107,16 +94,6 @@ void Screen::refresh(sf::RenderWindow &window)
     ice_system.draw(window);
     temperature_timer.draw(window);
     frostbite.draw(window);
-}
-
-void Screen::checkTemperature()
-{
-    if(temperature_timer.getTemperature()<0) //if he has frozen
-    {
-        temperature_timer.resetClock(); //reset temperature
-        score.decreaseLives(); //decrease his lives
-        stage = 5;
-    }
 }
 
 Screen::~Screen()
