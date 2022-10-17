@@ -22,7 +22,6 @@ class Enemy: public Motion, public Element
         *
         * Sets texture to crab.png
         * Sets enemy speed to 70
-        * Sets direction to the right, 'r'
         */
         Enemy();
 
@@ -30,7 +29,6 @@ class Enemy: public Motion, public Element
         * \brief Enemy constructor
         *
         * Sets enemy speed to 70
-        * Sets direction to the right, 'r'
         *
         * \param imDirectory sets texture to be that image
         */
@@ -52,6 +50,7 @@ class Enemy: public Motion, public Element
         * \brief Function to get enemy's width
         *
         * Gets the enemy-element's size and returns its sixe.x
+        * \return enemy's width
         */
         const float getWidth() const;
 
@@ -60,32 +59,14 @@ class Enemy: public Motion, public Element
         *
         * Gets the enemy-element's size and returns its sixe.y
         *
-        * \return enemy's width
+        * \return enemy's height
         */
         const float getHeight() const;
 
         /**
-        * \brief Function that returns enemy's Direction
-        *
-        * Gets the enemy's private memeber varaiable direction
-        *
-        * \return enemy's height
-        */
-        const char getDirection() const;
-
-        /**
-        * \brief Void Function that will set the direction of enemy
-        *
-        * Direction determines the movement of the enemy, must be 'l' or 'r'
-        *
-        * \return enemy's speed
-        */
-        void setDirection(const char dir);
-
-        /**
         * \brief Function that returns enemy's speed
         *
-        * Gets the enemy speed, that is set as a const at construction
+        * Returns the private member variable enemy-speed, that is set as a const at construction
         *
         * \return enemy's speed
         */

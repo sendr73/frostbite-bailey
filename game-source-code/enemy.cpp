@@ -22,15 +22,6 @@ void Enemy::move(char direction, const float &x, const float &y, float deltaTime
     }
 }
 
-const char Enemy::getDirection() const
-{
-    return direction;
-}
-
-void Enemy::setDirection(const char dir)
-{
-    direction = dir;
-}
 const float Enemy::getSpeed() const
 {
     return enemySpeed;

@@ -1,9 +1,6 @@
 #include "enemyrow.h"
 #include <iostream>
 
-EnemyRow::EnemyRow()
-{
-}
 
 EnemyRow::EnemyRow(std::string imDirectory, const MovementType &movement, float xStartPosition, float yStartPosition, char direction)
 {

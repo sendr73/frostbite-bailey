@@ -37,8 +37,6 @@ void Element::moveElement(char direction, float moveSpeed)
     }
 }
 
-
-
 void Element::setTexture(std::string imDirectory)
 {
     if(!texture_.loadFromFile(imDirectory))

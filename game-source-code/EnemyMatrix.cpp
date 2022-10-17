@@ -1,14 +1,14 @@
 #include "EnemyMatrix.h"
 
-EnemyMatrix::EnemyMatrix() //populate the enemy matrix array by pushing back the two enemy rows
+EnemyMatrix::EnemyMatrix():enemy_row_crab{EnemyRow("resources/crab.png", MovementType::Glide, 40.f, 460.f, 'l')}, enemy_row_clam{EnemyRow("resources/clam.png", MovementType::Glide, 40.f, 360.f, 'r')}  //populate the enemy matrix array by pushing back the two enemy rows
 {
     enemy_matrix.push_back(enemy_row_crab);
     enemy_matrix.push_back(enemy_row_clam);
 }
-void EnemyMatrix::move(char direction, const float &x, const float &y, float moveSpeed) //move both rows
+void EnemyMatrix::move(char direction, const float &x, const float &y, float deltaTime) //move both rows
 {
-    enemy_matrix[0].move('q', x,y, moveSpeed); //q is passed in as a direction as direction is specified in the rows themselves
-    enemy_matrix[1].move('q', x,y, moveSpeed);
+    enemy_matrix[0].move('q', x,y, deltaTime); //q is passed in as a direction as direction is specified in the rows themselves
+    enemy_matrix[1].move('q', x,y, deltaTime);
 }
 int EnemyMatrix::collision(Frostbite &frostbite,const float &x, const float &y, const float &deltaTime)
 {

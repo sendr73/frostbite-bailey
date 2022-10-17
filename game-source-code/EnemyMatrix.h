@@ -23,8 +23,8 @@ class EnemyMatrix: public Motion, public Collisions
 
     private:
         //should implement smart pointers
-        EnemyRow enemy_row_crab = EnemyRow("resources/crab.png", MovementType::Glide, 40.f, 460.f, 'l'); //two enemy rows created with different textures
-        EnemyRow enemy_row_clam = EnemyRow("resources/clam.png", MovementType::Glide, 40.f, 565.f, 'r'); //they are pushed back into the enemy-matrix at construction
+        EnemyRow enemy_row_crab; // = EnemyRow("resources/crab.png", MovementType::Glide, 40.f, 460.f, 'l'); //two enemy rows created with different textures
+        EnemyRow enemy_row_clam; // = EnemyRow("resources/clam.png", MovementType::Glide, 40.f, 360.f, 'r'); //they are pushed back into the enemy-matrix at construction
         vector<EnemyRow> enemy_matrix;
 };
 
