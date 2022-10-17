@@ -14,6 +14,7 @@
 #define ENEMYMATRIX_H
 #include <vector>
 #include <string>
+#include <memory>
 #include "enemyrow.h"
 #include "motion.h"
 #include "Collisions.h"
@@ -76,9 +77,9 @@ class EnemyMatrix: public Motion, public Collisions
 
     private:
         //should implement smart pointers
-        EnemyRow enemy_row_crab; // = EnemyRow("resources/crab.png", MovementType::Glide, 40.f, 460.f, 'l'); //two enemy rows created with different textures
-        EnemyRow enemy_row_clam; // = EnemyRow("resources/clam.png", MovementType::Glide, 40.f, 360.f, 'r'); //they are pushed back into the enemy-matrix at construction
-        vector<EnemyRow> enemy_matrix;
+       // EnemyRow enemy_row_crab; // = EnemyRow("resources/crab.png", MovementType::Glide, 40.f, 460.f, 'l'); //two enemy rows created with different textures
+        //EnemyRow enemy_row_clam; // = EnemyRow("resources/clam.png", MovementType::Glide, 40.f, 360.f, 'r'); //they are pushed back into the enemy-matrix at construction
+        vector<std::shared_ptr<EnemyRow>> enemy_matrix;
 };
 
 #endif // ENEMYMATRIX_H

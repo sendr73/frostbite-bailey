@@ -17,8 +17,8 @@
 #include "print.h"
 
 using namespace std;
-//should add  enum for movement type
-enum class MovementType{Glide = 1, Stagger = 2};
+
+enum class MovementType{Glide = 1, Stagger = 2}; //should I delete??
 class EnemyRow: public Motion
 {
     public:
@@ -83,12 +83,11 @@ class EnemyRow: public Motion
         *
         */
         void draw(sf::RenderWindow &window);
+
         /**
         * \brief Default Destructor
         */
         virtual ~EnemyRow();
-
-    protected:
 
     private:
         char direction_ = 'l'; //initialized as left but is re-initialized in constructor
