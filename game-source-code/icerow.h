@@ -3,6 +3,7 @@
 
 #include "iceberg.h"
 #include <SFML\Graphics.hpp>
+#include <memory>
 #include <vector>
 
 using namespace std;
@@ -25,7 +26,7 @@ class Icerow: public Motion
 
     private:
         Iceberg iceberg_;
-        std::vector<Iceberg> icerow_;
+        std::vector<std::shared_ptr<Iceberg>> icerow_;
 };
 
 #endif // ICEROW_H
