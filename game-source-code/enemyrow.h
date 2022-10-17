@@ -6,7 +6,8 @@
 #define ENEMYROW_H
 #include <vector>
 #include <string>
-//#include <iostream>
+#include <iostream>
+#include <memory> //for smart pointers
 #include "enemy.h"
 #include "motion.h"
 #include "print.h"
@@ -29,10 +30,9 @@ class EnemyRow: public Motion
     protected:
 
     private:
-        Enemy enemy_ = Enemy("resources/crab.png"); //enemy, default is crab but can be changed with re-texturing
         char direction_ = 'l'; //initialized as left but is re-initialized in constructor
         const float EnemySpeed = 100.0f;
-        vector<Enemy> enemy_row;
+        vector<std::shared_ptr<Enemy>> enemy_row;
         Enemy overlap_enemy = Enemy("resources/frostbite.png");
         MovementType movement_type_ = MovementType::Glide; //initialized as glide - not yet implemented but important if birds are created
 };
