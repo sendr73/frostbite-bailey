@@ -3,7 +3,7 @@
 EnemyMatrix::EnemyMatrix()
 {
     enemy_matrix.push_back(make_shared<EnemyRow>("resources/crab.png", MovementType::Glide, 40.f, 460.f, 'l'));
-    enemy_matrix.push_back(make_shared<EnemyRow>("resources/clam.png", MovementType::Glide, 40.f, 360.f, 'r'));
+    enemy_matrix.push_back(make_shared<EnemyRow>("resources/clam.png", MovementType::Glide, 40.f, 570.f, 'r'));
 }
 void EnemyMatrix::move(char direction, const float &x, const float &y, float deltaTime) //move both rows
 {

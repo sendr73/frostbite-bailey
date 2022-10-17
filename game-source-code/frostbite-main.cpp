@@ -18,9 +18,7 @@ int main()
     //Game parameters
     const auto gameWidth = 1000.f;
     const auto gameHeight = 800.f;
-    const float frostbiteSpeed = 6.f;
-    const float icebergSpeed = 150.f;
-    const float enemySpeed = 100.f;
+
     //setting up the window
     sf::RenderWindow window(sf::VideoMode(gameWidth, gameHeight), "");
     window.setVerticalSyncEnabled(true);

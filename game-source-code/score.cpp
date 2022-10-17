@@ -5,7 +5,7 @@ Score::Score()
     point = 10;
     score = 0;
     level = 1;
-    lives = 3;;
+    lives = 3;
 }
 //getter for score
 const int Score::getScore() const
