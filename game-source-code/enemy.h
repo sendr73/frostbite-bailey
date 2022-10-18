@@ -1,12 +1,12 @@
 /**
  * \brief Basic Enemy Element, can take on multiple skins
  *
- *Uses implementation inheritance to inherite elements public functions (should ideally change to composition)
- *Uses interface inheritance with move function
- *Has a set speed (direction is set in the enemy_rows)
+ * Uses implementation inheritance to inherite elements public functions (should ideally change to composition)
+ * Uses interface inheritance with move function
+ * Has a set speed (direction is set in the enemy_rows)
  * @author Ruth-Ann Wright (2351852)
+ * @author Daron Sender (2332451)
  */
-
 #ifndef ENEMIES_H
 #define ENEMIES_H
 #include <iostream>

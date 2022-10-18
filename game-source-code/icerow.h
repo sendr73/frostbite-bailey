@@ -1,3 +1,11 @@
+/**
+ * \brief Iceberg Element
+ * Uses implementation inheritance to inherite Element's public functions (should ideally change to composition).
+ * Uses interface inheritance with move function from class, Motion.
+ * Has a set speed
+ * @author Ruth-Ann Wright (2351852)
+ * @author Daron Sender (2332451)
+ */
 #ifndef ICEROW_H
 #define ICEROW_H
 
@@ -11,15 +19,77 @@ using namespace std;
 class Icerow: public Motion
 {
     public:
+        /**
+        * \brief Icerow constructor
+        * Sets game width, x and height, y as 1000 and 800 by default. row is 0 by default.
+          row controls the height assigned to each Iceberg in icerow_. There are three Icebergs
+        * created per Icerow, with each position shifted. These positions are determined by the
+        * initial direction of the Icerow, dictated by the number of the row.
+        * \param game width
+        * \param game height
+        * \param row number
+        */
         Icerow(const float &x=1000.f, const float &y=800.f,const int &row=0);
+
+        /**
+        * \brief [] operator overload
+        * Uses the [] operator to access private member functions. Cannot manipulate, just access
+        * \param index in Icerow
+        * \return Iceberg at index, i, in icerow_
+        */
         Iceberg operator[](const int& index);
+
+        /**
+        * \brief Function to get Icerow's size
+        * Gets the icerow_'s size and returns it
+        * \return Size of the Icerow
+        */
         const int size() const;
+
+        /**
+        * \brief Draws each Iceberg in Icerow
+        * Gets the Iceberg-element's size and returns its size.x
+        * \param RenderWindow window
+        */
         void draw(sf::RenderWindow &window);
+
+        /**
+        * \brief move function overwridden from Motion class, deals with horizontal motion
+        * No direction is required since Iceberg has it's own direction defined.
+        * \param direction to move - is ignored
+        * \param x is the width of the screen
+        * \param y is the height of the screen
+        * \param deltaTime is time passed and is multipled with speed when implemented in Iceberg
+        */
         virtual void move(char direction, const float &x, const float &y, float deltaTime) override;
+
+        /**
+        * \brief executes landedOn function for each Iceberg in Icerow
+        */
         void landedOn();
+
+        /**
+        * \brief returns the boundaries of each Iceberg using Element's getBounding function
+        * This is used for collision logic in each row when colliding with Frostbite
+        * \return vector of FloatRect boundaries of each Iceberg in Icerow
+        */
         vector<sf::FloatRect> getRowBoundaries() const;
+
+        /**
+        * \brief reverse function changes private member direction in each Iceberg in icerow_
+        * No direction is required since Iceberg has it's own direction defined, which is flipped.
+        */
         void reverse();
+
+        /**
+        * \brief Each Iceberg in the Icerow is resetted
+        * This executes the reset function defined in Iceberg
+        */
         void reset();
+
+        /**
+        * \brief Default Icerow Destructor
+        */
         virtual ~Icerow();
 
     protected:
