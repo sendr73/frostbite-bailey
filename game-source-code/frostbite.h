@@ -1,11 +1,11 @@
 /**
  * \brief Frostbite Character
  *
- * Uses implementation inheritance to inherite elements public functions (should ideally change to composition)
- * Uses interface inheritance with move function from class motion
- * Has a set speed (direction is set in the enemy_rows)
+ * Uses implementation inheritance to inherite Element's public functions (should ideally change to composition).
+ * Uses interface inheritance with move function from class, Motion.
+ * Has a set speed
  * @author Ruth-Ann Wright (2351852)
- * @author Daron Sender
+ * @author Daron Sender (2332451)
  */
 #ifndef FROSTBITE_H
 #define FROSTBITE_H
@@ -28,66 +28,67 @@ class Frostbite: public Motion, public Element
         /**
         * \brief Frostbite constructor with image parameter
         *
-        * Sets texture to passed in image - useful for two player mode
+        * Sets texture to passed in image - useful for two player mode or animations.
         */
         Frostbite(std::string imDirectory, const sf::Vector2f &Size);
 
         /**
-        * \brief move function overwridden from motion class, deals with horizontal motion
+        * \brief move function overwridden from Motion class, deals with horizontal motion
         *
-        * checks for keyboard input and if there is, it will set the direction according to it
+        * Checks for keyboard input and if there is, it will set the direction according to it
         * if no input direction supplied function moves the frosbite in given direction.
-        * The speed is determined by deltaTime*FrostbiteSpeed
-        * Checks and adjusts for collisions at the end of the board
+        * The speed is determined by deltaTime*speed.
+        * Checks and adjusts for collisions at the boundaries of the screen
         * \param direction to move - is ignored if there is additional input from keyboard
-        * \param x is board width ????
-        * \param y is board height ????
-        * \param deltaTime is time passed as is multipled with enemey speed when moving
+        * \param x is the width of the screen
+        * \param y is the height of the screen
+        * \param deltaTime is time passed as is multipled with speed when moving
         */
         virtual void move(char direction, const float &x, const float &y, float moveSpeed) override;
 
         /**
         * \brief jump function
         *
-        * Moves the player up and down by the input vertical speed
-        * prevents any double jumping by checking the boolean jumped variable
+        * Moves the player up and down by the input vertical speed. This is set as a ratio
+        * of height to ensure Frostbite always lines up with interactable elements.
+        * Prevents any double jumping by checking the boolean jumped variable.
         * \param direction to move - is up or down
         * \param moveSpeed determines how high/low Frostbite must jump
-        * \param x is board width ????
-        * \param y is board height ????
+        * \param x is the width of the screen
+        * \param y is the height of the screen
         */
         void jump(char direction, float moveSpeed, const float gameHeight, const float gameWidth);
 
         /**
         * \brief checks if Frostbite has jumped
         *
-        * used to prevent double jumping
+        * used to prevent double jumping, and also scoring logic with icebergs
         * \return boolean private member variable jumped
         */
         const bool hasJumped() const;
 
         /**
-        * \brief Function to get frosbites's width
+        * \brief Function to get Frostbites's width
         *
-        * Gets the frostbite-element's size and returns its sixe.x
-        * \return frostbite's width
+        * Gets the Frostbite-element's size and returns its sixe.x
+        * \return Frostbite's width
         */
         const float getWidth() const ;
 
         /**
-        * \brief Function to get frosbites's height
+        * \brief Function to get Frostbites's height
         *
-        * Gets the frostbite-element's size and returns its sixe.y
-        * \return frostbite's height
+        * Gets the Frostbite-element's size and returns its sixe.y
+        * \return Frostbite's height
         */
         const float getHeight() const ;
 
         /**
-        * \brief Function that returns frostbites's speed
+        * \brief Function that returns Frostbites's speed
         *
         * Returns the private member variable speed, that is set as a const at construction
         *
-        * \return frostbite's speed
+        * \return Frostbite's speed
         */
         const float getSpeed() const;
 
@@ -97,16 +98,14 @@ class Frostbite: public Motion, public Element
         void reset();
 
         /**
-        * \brief Default Frostbie Destructor
+        * \brief Default Frostbite Destructor
         */
         virtual ~Frostbite();
 
     protected:
 
     private:
-       // sf::Texture fTexture;
-       // sf::Sprite fSprite;
-        bool jumped; //to see if the player has jumped, has implicatiins when counting icebergs for score
+        bool jumped; //to see if the player has jumped, has implications when counting icebergs for score
         const float speed = 400.f;
 };
 
