@@ -275,7 +275,38 @@ TEST_CASE("Check Score::Level at start is 1")
 {
       CHECK(1 == score_.getLevel());
 }
+TEST_CASE("Check Score::Increase Score works")
+{
+    auto initial_score = score_.getScore();
+    auto score_increment = 100.0f;
+    score_.increaseScore(score_increment);
+    CHECK(initial_score + score_increment*10 == score_.getScore()); //each point is worth ten, so score increment is multipled by 10
+}
 
+TEST_CASE("Check that Score::Increase and Decrease lives works")
+{
+    auto initial_= score_.getLives();
+    score_.increaseLives();
+    CHECK(++initial_  == score_.getLives());
+    score_.decreaseLives();
+    CHECK(--initial_  == score_.getLives());
+
+}
+
+TEST_CASE("Check that Score::Increase Level works")
+{
+    auto initial_= score_.getLevel();
+    score_.increaseLevel();
+    CHECK(++initial_  == score_.getLevel());
+}
+
+TEST_CASE("Check that Score::Reset re-initializes all varaibles")
+{
+    score_.reset();
+    CHECK(1 == score_.getLevel());
+    CHECK(3 == score_.getLives());
+    CHECK(0 == score_.getScore());
+}
 
 
 
