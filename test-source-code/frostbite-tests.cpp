@@ -8,11 +8,13 @@
 #include "../game-source-code/temperature.h"
 #include "../game-source-code/enemyrow.h"
 #include "../game-source-code/icerow.h"
+#include "../game-source-code/score.h"
 
 const auto ICEBERG_SPEED = 150.f;
 const auto GAME_HEIGHT = 800.f;
 const auto GAME_WIDTH = 1000.f;
 const auto ICEBERG_HEIGHT = GAME_HEIGHT - 200.f;
+const auto DELTATIME = 2.0f;
 
 Iceberg iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //known to exist, will create another test case later on
 Iceberg overlap("resources/iceberg.png",sf::Vector2f(1.f,1.f));
@@ -25,9 +27,9 @@ const auto FROSTBITE_JUMP= 100.f;
 Enemy enemyCrab("resources/crab.png");
 EnemyRow enemy_row("resources/crab.png", MovementType::Glide, 40.f, 460.f, 'r');
 
-const auto DELTATIME = 5.0f;
-
 temperature temperature_timer;
+
+Score score_;
 
 
 using namespace std;
@@ -67,6 +69,35 @@ TEST_CASE("Iceberg overlaps correctly") //Multiple assertions, commented below
     CHECK(overlap.getPosition().x==iceberg.getPosition().x-GAME_WIDTH);
 }
 */
+TEST_CASE("Check Iceberge Row constructor sets all the enemies in the row from the row parameter")
+{
+    //formula for height is {(1+row)(0.125)+0.39}*GameHeight
+    auto row = 1.0f;
+    auto expected_height =  ((1+row)*0.125+0.39)*GAME_HEIGHT;
+    CHECK(expected_height== ice_row[0].getPosition().y);
+    CHECK(expected_height== ice_row[2].getPosition().y);
+}
+
+
+TEST_CASE("Check Each Iceberg in the row moves by the Speed*DeltaTime")
+{
+    ice_row.move('r', GAME_WIDTH, GAME_HEIGHT, DELTATIME);
+    ice_row.move('r', GAME_WIDTH, GAME_HEIGHT, DELTATIME);
+    ice_row.move('r', GAME_WIDTH, GAME_HEIGHT, DELTATIME);
+    auto initial_position_1 = ice_row[0].getPosition().x;
+    auto initial_position_2 = ice_row[1].getPosition().x;
+    auto initial_position_3 = ice_row[2].getPosition().x;
+    auto speed = iceberg.getSpeed();
+    auto direction = ice_row[0].getDirection();
+    //cout<<direction; direction is left
+    ice_row.move('l', GAME_WIDTH, GAME_HEIGHT, DELTATIME); //note that the actual direction is non-relevent
+    CHECK(initial_position_1 -speed*DELTATIME  == ice_row[0].getPosition().x);
+    CHECK(initial_position_2 -speed*DELTATIME  == ice_row[1].getPosition().x);
+    CHECK(initial_position_3 -speed*DELTATIME  == ice_row[2].getPosition().x);
+}
+
+
+
 TEST_CASE("Frostbite Move Left, keeps vertical position and changes horizontal positon by - speed") //Testing for x and y axis
 {
     frostbite.setPosition(500,500); //set initial positon
@@ -191,23 +222,7 @@ TEST_CASE("Enemies moving off the screen uses the overlap correctly") //Multiple
 */
 
 
-TEST_CASE("Check Default reset temperature is 45")
-{
-    temperature_timer.resetClock(); //reset clock and temperature
-    CHECK(45 == temperature_timer.getTemperature());
-}
 
-/*
-TEST_CASE("Check that the temperature decreaes over time")
-{
-    sf::RenderWindow window(sf::VideoMode(GAME_WIDTH, GAME_HEIGHT), "");
-    temperature_timer.resetClock(); //reset clock and temperature
-    Sleep(1000); //sleep for some time
-    temperature_timer.draw(window); //this functions will update the temperature
-    CHECK( temperature_timer.getTemperature()<45); //check the temperatuer
-
-}
-*/
 TEST_CASE("Check Enemy Row constructor sets first enemy at given positions")
 {
     CHECK(40 == enemy_row[0].getPosition().x);
@@ -231,27 +246,39 @@ TEST_CASE("Check Each Enemy in the row moves by the enemySpeed*DeltaTime")
     CHECK(initial_position_3 +enemy_speed*DELTATIME  == enemy_row[2].getPosition().x);
 }
 
-
-TEST_CASE("Check Iceberge Row constructor sets all the enemies in the row from the row parameter")
+TEST_CASE("Check Default reset temperature is 45")
 {
-    //formula for height is {(1+row)(0.125)+0.39}*GameHeight
-    auto row = 1.0f;
-    auto expected_height =  ((1+row)*0.125+0.39)*GAME_HEIGHT;
-    CHECK(expected_height== ice_row[0].getPosition().y);
-    CHECK(expected_height== ice_row[2].getPosition().y);
+    temperature_timer.resetClock(); //reset clock and temperature
+    CHECK(45 == temperature_timer.getTemperature());
 }
 
 
-TEST_CASE("Check Each Iceberg in the row moves by the Speed*DeltaTime")
+TEST_CASE("Check that the temperature decreaes over time")
 {
-    auto initial_position_1 = ice_row[0].getPosition().x;
-    auto initial_position_2 = ice_row[1].getPosition().x;
-    auto initial_position_3 = ice_row[2].getPosition().x;
-    auto speed = iceberg.getSpeed();
-    enemy_row.move('r', GAME_WIDTH, GAME_HEIGHT, DELTATIME);
-    CHECK(initial_position_1 +speed*DELTATIME  == ice_row[0].getPosition().x);
-    CHECK(initial_position_2 +speed*DELTATIME  == ice_row[1].getPosition().x);
-    CHECK(initial_position_3 +speed*DELTATIME  == ice_row[2].getPosition().x);
+    sf::RenderWindow window(sf::VideoMode(GAME_WIDTH, GAME_HEIGHT), "");
+    temperature_timer.resetClock(); //reset clock and temperature
+    Sleep(1000); //sleep for some time - will result in screen popping up - don't know why
+    temperature_timer.update(); //this functions will update the temperature
+    CHECK( temperature_timer.getTemperature()<45); //check the temperatuer
+
 }
+
+TEST_CASE("Check Score::Lives at start is 3")
+{
+      CHECK(3 == score_.getLives());
+}
+TEST_CASE("Check Score::Score at start is 0")
+{
+      CHECK(0 == score_.getScore());
+}
+TEST_CASE("Check Score::Level at start is 1")
+{
+      CHECK(1 == score_.getLevel());
+}
+
+
+
+
+
 
 
