@@ -20,6 +20,8 @@ const auto FROSTBITE_JUMP= 100.f;
 
 Enemy enemyCrab("resources/crab.png");
 
+const auto DELTATIME = 5.0f;
+
 temperature temperature_timer;
 
 
@@ -109,14 +111,14 @@ TEST_CASE("Frostbite Screen Collision at bottom prevents Sprite's vertical posit
 {
     frostbite.setPosition(500,GAME_HEIGHT-1); //set initial positon
     frostbite.jump('d', FROSTBITE_SPEED, GAME_HEIGHT, GAME_WIDTH);
-    CHECK(GAME_HEIGHT -frostbite.getHeight() == frostbite.getPosition().y);//check y positon to be equal to game height
+    CHECK(GAME_HEIGHT == frostbite.getPosition().y);//check y positon to be equal to game height
 }
-/*
+
 TEST_CASE("Frostbite Screen Collision at right prevents Sprite from sticking over edge")
 {
     auto frostbite_half_width = frostbite.getWidth()/2;
-    frostbite.setPosition(GAME_WIDTH-frostbite_half_width -1,500); //close to edge
-    frostbite.move('r', GAME_HEIGHT, GAME_WIDTH, FROSTBITE_SPEED);
+    frostbite.setPosition((GAME_WIDTH-frostbite_half_width -1),500); //close to edge
+    frostbite.move('r',GAME_WIDTH,  GAME_HEIGHT,  FROSTBITE_SPEED);
     CHECK(GAME_WIDTH-frostbite_half_width== frostbite.getPosition().x); //check x axis that it is width minus half of Frostbite's width
 }
 
@@ -127,7 +129,7 @@ TEST_CASE("Frostbite Screen Collision at left prevents Sprite from sticking over
     frostbite.move('l', GAME_HEIGHT, GAME_WIDTH, FROSTBITE_SPEED);
     CHECK(frostbite_half_width== frostbite.getPosition().x); //check x axis that it is half of Frostbite's width
 }
-/*
+
 //enemies test cases
 TEST_CASE("Enemies Location can be Set Correctly")
 
@@ -137,34 +139,37 @@ TEST_CASE("Enemies Location can be Set Correctly")
     CHECK(enemyCrab.getPosition().y==10.0f);
 }
 
-TEST_CASE("Enemies default direction is right")
+TEST_CASE("Enemies default Speed is 70")
 {
-    CHECK('r' == enemyCrab.getDirection());
+    CHECK(70 == enemyCrab.getSpeed());
 }
 
 TEST_CASE("If enemies direction is right, enemy will move to the right at given speed")
 {
     enemyCrab.setPosition(10.0f, 10.0f);
-    enemyCrab.move(100.0f, GAME_HEIGHT, GAME_WIDTH, enemyCrab);
-    CHECK(enemyCrab.getPosition().x==110.0f);
-    CHECK(enemyCrab.getPosition().y==10.0f); //check that y-driection has not changed
+
+    enemyCrab.move('r', GAME_WIDTH,GAME_HEIGHT, DELTATIME);
+    CHECK(enemyCrab.getPosition().x == (10.0f + DELTATIME*70) );
+    CHECK(enemyCrab.getPosition().y == 10.0f); //check that y-driection has not changed
 }
 
+/*
 TEST_CASE("Enemies direction can be changed to left")
 {
     enemyCrab.setDirection('l');
     CHECK('l' == enemyCrab.getDirection());
 }
+*/
 
 TEST_CASE("If enemies direction is left, enemy will move to the left at given speed")
 {
-    enemyCrab.setDirection('l');
-    enemyCrab.setPosition(210.0f, 10.0f);
-    enemyCrab.move(100.0f, GAME_HEIGHT, GAME_WIDTH, enemyCrab);
-    CHECK(enemyCrab.getPosition().x==110.0f);
+    enemyCrab.setPosition(400.0f, 10.0f);
+    enemyCrab.move('l', GAME_WIDTH,GAME_HEIGHT, DELTATIME);
+    CHECK(enemyCrab.getPosition().x==(400.0f - 70*DELTATIME));
     CHECK(enemyCrab.getPosition().y==10.0f); //check that y-driection has not changed
 }
 
+/*
 TEST_CASE("Enemies moving off the screen uses the overlap correctly") //Multiple assertions, commented below
 {
     auto enemyHeight = enemyCrab.getHeight(); //get height of enemy crab
@@ -178,6 +183,7 @@ TEST_CASE("Enemies moving off the screen uses the overlap correctly") //Multiple
     enemyCrab.move(100,GAME_HEIGHT,GAME_WIDTH,overlapE); //Extra enemy should appear at overlap
     CHECK(overlapE.getPosition().x==enemyCrab.getPosition().x-GAME_WIDTH);
 }
+*/
 
 
 TEST_CASE("Check Default reset temperature is 45")
