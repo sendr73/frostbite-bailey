@@ -1,8 +1,7 @@
 /**
- * \brief Iceberg Element
- * Uses implementation inheritance to inherite Element's public functions (should ideally change to composition).
+ * \brief Icerow Class
  * Uses interface inheritance with move function from class, Motion.
- * Has a set speed
+ * Uses composition inheritance of Iceberg objects
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
  */
@@ -33,7 +32,7 @@ class Icerow: public Motion
 
         /**
         * \brief [] operator overload
-        * Uses the [] operator to access private member functions. Cannot manipulate, just access
+        * Uses the [] operator to access Iceberg elements. Cannot manipulate, just access
         * \param index in Icerow
         * \return Iceberg at index, i, in icerow_
         */
@@ -48,7 +47,6 @@ class Icerow: public Motion
 
         /**
         * \brief Draws each Iceberg in Icerow
-        * Gets the Iceberg-element's size and returns its size.x
         * \param RenderWindow window
         */
         void draw(sf::RenderWindow &window);
