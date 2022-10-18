@@ -1,4 +1,4 @@
-//Screen implementation
+//Iceberg implementation
 #include "iceberg.h"
 // default constructor
 Iceberg::~Iceberg()

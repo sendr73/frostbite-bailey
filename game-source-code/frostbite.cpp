@@ -1,4 +1,4 @@
-//Screen implementation
+//Frostbite implementation
 #include "Frostbite.h"
 Frostbite::Frostbite(std::string imDirectory, const sf::Vector2f &Size): Element(imDirectory, Size)
 {
