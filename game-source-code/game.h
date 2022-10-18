@@ -55,6 +55,7 @@ class Game
         * allowed to take certain actions. Parameter pressed checks if button has been released, used to debounce.
         * \param Event from user, like the up or down arrow
         * \param bool pressed, that checks if the button has been released or not
+        * \return if the button has been pressed
         */
         bool frostbiteJump(const sf::Event &event, bool &pressed);
 
@@ -107,19 +108,64 @@ class Game
         /**
         * \brief Checks the temperature
         * Checks if temperature_timer has run out of time. Then either decreases the lives or ends the game.
-        * If the life is lost this way, stage is set to 5 otherwise stage is set to 5
+        * If the life is lost this way, stage is set to 5 otherwise stage is set to 3.
         */
-        void checkTemperature(); //check for negative temperature
+        void checkTemperature();
+
+        /**
+        * \brief Increases the level
+        * Resets all members' properties and positions, besides score and lives. Increases the level of the Game.
+        */
         void nextLevel();
+
+        /**
+        * \brief Checks if the player has lives remaining
+        * Checks if player has lives. Then either decreases the lives or ends the game.
+        * If the player has no lives, stage is set to 3.
+        * \return True if the player has lives, false otherwise
+        */
         const bool hasLives() const;
 
     private:
         float GAME_WIDTH=1000.f, GAME_HEIGHT=800.f;
-        void setFrostbite(); //sets frostbite properties on screen
-        void setIgloo(); //set igloo
+
+        /**
+        * \brief Sets the Frostbite object for the Game
+        * Places Frostbite at the origin on the screen, ready to play the Game
+        */
+        void setFrostbite();
+
+        /**
+        * \brief Sets the Igloo for the Game
+        * Generates the blocks in the Igloo, sets the number of blocks gained by the player as 0.
+        */
+        void setIgloo();
+
+        /**
+        * \brief Executes certain actions when a landing has been completed
+        * Frostbite lands on an Iceberg. If the amount of blocks buit is a multiple of 4, reset the properties of IceSystem
+        * \param Index, i, of the Icerow that has been landed on in IceSystem.
+        */
         void landing(const int &i);
+
+        /**
+        * \brief Checks if Frostbite is aligned with Igloo's doorway
+        * \return True if within the doorway and on safezone, False otherwise
+        */
         const bool isWithinDoorway() const;
+
+        //Note: Both of the following need to be created as these functions are used to dictate the behaviour of frostbiteJump
+
+        /**
+        * \brief Checks if Frostbite cannot enter the Igloo and win the round
+        * \return True if Frostbite cannot win, False otherwise
+        */
         const bool cannotEnter() const;
+
+        /**
+        * \brief Checks if Frostbite can enter the Igloo and win the round
+        * \return True if Frostbite can win, False otherwise
+        */
         const bool canEnter() const;
 };
 
