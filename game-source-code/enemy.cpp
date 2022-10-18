@@ -1,10 +1,10 @@
 #include "enemy.h"
 
-Enemy::Enemy(): Element("resources/crab.png",sf::Vector2f(1.f,1.f)), enemySpeed(70.0f), direction('r')
+Enemy::Enemy(): Element("resources/crab.png",sf::Vector2f(1.f,1.f)), enemySpeed(70.0f)
 {
 }
 
-Enemy::Enemy(std::string imDirectory): Element(imDirectory,sf::Vector2f(1.f,1.f)), enemySpeed(70.0f), direction('r')
+Enemy::Enemy(std::string imDirectory): Element(imDirectory,sf::Vector2f(1.f,1.f)), enemySpeed(70.0f)
 {
 }
 

@@ -45,13 +45,13 @@ void Frostbite::jump(char direction, float moveSpeed, const float gameHeight, co
     std::cout<<direction;
     moveElement(direction, moveSpeed);
 
-   // if(direction == 'u' && !(getPosition().y-moveSpeed< 0.f + getHeight())) //if tries to exceed boundaries, don't move (avoids misalignment with icebergs)
-   // {
-   //     moveElement('d', moveSpeed);
-   // }
+   if(getPosition().y< 0.375*gameHeight) //if tries to exceed boundaries, don't move (avoids misalignment with icebergs)
+   {
+     setPosition(getPosition().x, 0.375*gameHeight);
+   }
     //screen colision on the bottom
-   // if(direction == 'd'&& getPosition().y>gameHeight) //check to base line
-   //     setPosition(getPosition().x,gameHeight);
+   if(getPosition().y>gameHeight) //check to base line
+       setPosition(getPosition().x,gameHeight);
 
 }
 //returns if frostbite has jumped
