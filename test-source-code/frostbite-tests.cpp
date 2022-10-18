@@ -197,13 +197,7 @@ TEST_CASE("Enemies direction can be changed to left")
 }
 */
 
-TEST_CASE("If enemies direction is left, enemy will move to the left at given speed")
-{
-    enemyCrab.setPosition(400.0f, 10.0f);
-    enemyCrab.move('l', GAME_WIDTH,GAME_HEIGHT, DELTATIME);
-    CHECK(enemyCrab.getPosition().x==(400.0f - 70*DELTATIME));
-    CHECK(enemyCrab.getPosition().y==10.0f); //check that y-driection has not changed
-}
+
 
 /*
 TEST_CASE("Enemies moving off the screen uses the overlap correctly") //Multiple assertions, commented below
@@ -222,17 +216,6 @@ TEST_CASE("Enemies moving off the screen uses the overlap correctly") //Multiple
 */
 
 
-
-TEST_CASE("Check Enemy Row constructor sets first enemy at given positions")
-{
-    CHECK(40 == enemy_row[0].getPosition().x);
-}
-
-TEST_CASE("Each Enemy in Enemy Row is spaced out from the other one by 2 times their width")
-{
-    auto enemyWidth = enemyCrab.getWidth();
-    CHECK(2*enemyWidth == (enemy_row[1].getPosition().x- enemy_row[0].getPosition().x));
-}
 
 
 
