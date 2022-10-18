@@ -81,7 +81,6 @@ class Enemy: public Motion, public Element
 
     private:
         const float enemySpeed; //determines the speeed of each enemy
-        char direction; //direction of each enemy
 };
 
 #endif // ENEMIES_H

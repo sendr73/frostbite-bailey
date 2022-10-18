@@ -50,8 +50,9 @@ void Frostbite::jump(char direction, float moveSpeed, const float gameHeight, co
 
     if(getPosition().y+getHeight()>gameHeight) //collision at bottom of screen
     {
-        setPosition(getPosition().x,gameHeight-getHeight());
+        setPosition(getPosition().x,gameHeight);
     }
+
 
 }
 //returns if frostbite has jumped

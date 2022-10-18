@@ -4,14 +4,11 @@
 
 EnemyRow::EnemyRow(std::string imDirectory, const MovementType &movement, float xStartPosition, float yStartPosition, char direction)
 {
-    enemy_row.push_back(make_shared<Enemy>(imDirectory)); //initializes the vector
-    enemy_row.push_back(make_shared<Enemy>(imDirectory));
-    enemy_row.push_back(make_shared<Enemy>(imDirectory));
-    cout<<"size"<<enemy_row.size();
+    enemy_row = vector<shared_ptr<Enemy>>{make_shared<Enemy>(imDirectory), make_shared<Enemy>(imDirectory), make_shared<Enemy>(imDirectory)} ;
     //set position of each enemy in the row
     for(int j = 0; j<enemy_row.size(); j++) //loops through columns
     {
-        enemy_row[j]->setPosition((xStartPosition)+3*(j)*enemy_row[j]->getWidth()
+        enemy_row[j]->setPosition((xStartPosition)+2*(j)*enemy_row[j]->getWidth()
                                  ,(yStartPosition+100)); //.y)+(frostbite.getPosition().y)+10);
     }
     movement_type_ = movement;
@@ -43,6 +40,10 @@ vector<sf::FloatRect> EnemyRow::getRowBoundaries() const //returns a vector cont
         rowBoundaries.push_back(boundary);
     }
     return rowBoundaries;
+}
+Enemy EnemyRow::operator[](const int& index)
+{
+    return *enemy_row[index];
 }
 void EnemyRow::draw(sf::RenderWindow &window) //enables drawing - should be placed in separate class
 {

@@ -39,7 +39,7 @@ class EnemyRow: public Motion
         /**
         * \brief move function overwridden from motion class
         *
-        * Itteratres through the vector and moves each enemy by passing on the input parameters to the Enemy.move function
+        * Iteratres through the vector and moves each enemy by passing on the input parameters to the Enemy.move function
         *
         * \param direction to move -
         * \param x is board width ????
@@ -77,12 +77,17 @@ class EnemyRow: public Motion
         vector<sf::FloatRect> getRowBoundaries() const;
 
         /**
-        * \brief Fucntion to ensure that the row can be drawn
+        * \brief Function to ensure that the row can be drawn
         *
-        * Itterates through the vector of enemies and calls the draw funciton of each one
+        * Iterates through the vector of enemies and calls the draw function of each one
         *
         */
         void draw(sf::RenderWindow &window);
+
+        /**
+        * \brief Overload index operator
+        */
+        Enemy operator[](const int& index);
 
         /**
         * \brief Default Destructor
@@ -91,8 +96,8 @@ class EnemyRow: public Motion
 
     private:
         char direction_ = 'l'; //initialized as left but is re-initialized in constructor
-        vector<std::shared_ptr<Enemy>> enemy_row;
-        Enemy overlap_enemy = Enemy("resources/frostbite.png");
+        std::vector<std::shared_ptr<Enemy>> enemy_row;
+       // Enemy overlap_enemy = Enemy("resources/frostbite.png");
         MovementType movement_type_ = MovementType::Glide; //initialized as glide - not yet implemented but important if birds are created
 };
 
