@@ -85,14 +85,19 @@ class EnemyRow: public Motion
         void draw(sf::RenderWindow &window);
 
         /**
+        * \brief Overload index operator
+        */
+        Enemy operator[](const int& index);
+
+        /**
         * \brief Default Destructor
         */
         virtual ~EnemyRow();
 
     private:
         char direction_ = 'l'; //initialized as left but is re-initialized in constructor
-        vector<std::shared_ptr<Enemy>> enemy_row;
-        Enemy overlap_enemy = Enemy("resources/frostbite.png");
+        std::vector<std::shared_ptr<Enemy>> enemy_row;
+       // Enemy overlap_enemy = Enemy("resources/frostbite.png");
         MovementType movement_type_ = MovementType::Glide; //initialized as glide - not yet implemented but important if birds are created
 };
 

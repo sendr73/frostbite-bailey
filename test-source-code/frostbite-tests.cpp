@@ -6,19 +6,24 @@
 #include "../game-source-code/frostbite.h"
 #include "../game-source-code/enemy.h"
 #include "../game-source-code/temperature.h"
+#include "../game-source-code/enemyrow.h"
+#include "../game-source-code/icerow.h"
+
+const auto ICEBERG_SPEED = 150.f;
+const auto GAME_HEIGHT = 800.f;
+const auto GAME_WIDTH = 1000.f;
+const auto ICEBERG_HEIGHT = GAME_HEIGHT - 200.f;
 
 Iceberg iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //known to exist, will create another test case later on
 Iceberg overlap("resources/iceberg.png",sf::Vector2f(1.f,1.f));
-const auto ICEBERG_SPEED = 150.f;
-const auto GAME_HEIGHT = 900.f;
-const auto GAME_WIDTH = 1600.f;
-const auto ICEBERG_HEIGHT = GAME_HEIGHT - 200.f;
+Icerow ice_row(GAME_WIDTH, GAME_HEIGHT, 1);
 
 Frostbite frostbite("resources/iceberg.png",sf::Vector2f(1.f,1.f));
 const auto FROSTBITE_SPEED = 6.f;
 const auto FROSTBITE_JUMP= 100.f;
 
 Enemy enemyCrab("resources/crab.png");
+EnemyRow enemy_row("resources/crab.png", MovementType::Glide, 40.f, 460.f, 'r');
 
 const auto DELTATIME = 5.0f;
 
@@ -203,5 +208,50 @@ TEST_CASE("Check that the temperature decreaes over time")
 
 }
 */
+TEST_CASE("Check Enemy Row constructor sets first enemy at given positions")
+{
+    CHECK(40 == enemy_row[0].getPosition().x);
+}
+
+TEST_CASE("Each Enemy in Enemy Row is spaced out from the other one by 2 times their width")
+{
+    auto enemyWidth = enemyCrab.getWidth();
+    CHECK(2*enemyWidth == (enemy_row[1].getPosition().x- enemy_row[0].getPosition().x));
+}
+
+TEST_CASE("Check Each Enemy in the row moves by the enemySpeed*DeltaTime")
+{
+    auto initial_position_1 = enemy_row[0].getPosition().x;
+    auto initial_position_2 = enemy_row[1].getPosition().x;
+    auto initial_position_3 = enemy_row[2].getPosition().x;
+    auto enemy_speed = enemyCrab.getSpeed();
+    enemy_row.move('r', GAME_WIDTH, GAME_HEIGHT, DELTATIME);
+    CHECK(initial_position_1 +enemy_speed*DELTATIME  == enemy_row[0].getPosition().x);
+    CHECK(initial_position_2 +enemy_speed*DELTATIME  == enemy_row[1].getPosition().x);
+    CHECK(initial_position_3 +enemy_speed*DELTATIME  == enemy_row[2].getPosition().x);
+}
+
+
+TEST_CASE("Check Iceberge Row constructor sets all the enemies in the row from the row parameter")
+{
+    //formula for height is {(1+row)(0.125)+0.39}*GameHeight
+    auto row = 1.0f;
+    auto expected_height =  ((1+row)*0.125+0.39)*GAME_HEIGHT;
+    CHECK(expected_height== ice_row[0].getPosition().y);
+    CHECK(expected_height== ice_row[2].getPosition().y);
+}
+
+
+TEST_CASE("Check Each Iceberg in the row moves by the Speed*DeltaTime")
+{
+    auto initial_position_1 = ice_row[0].getPosition().x;
+    auto initial_position_2 = ice_row[1].getPosition().x;
+    auto initial_position_3 = ice_row[2].getPosition().x;
+    auto speed = iceberg.getSpeed();
+    enemy_row.move('r', GAME_WIDTH, GAME_HEIGHT, DELTATIME);
+    CHECK(initial_position_1 +speed*DELTATIME  == ice_row[0].getPosition().x);
+    CHECK(initial_position_2 +speed*DELTATIME  == ice_row[1].getPosition().x);
+    CHECK(initial_position_3 +speed*DELTATIME  == ice_row[2].getPosition().x);
+}
 
 
