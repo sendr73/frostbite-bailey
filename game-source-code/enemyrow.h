@@ -4,6 +4,7 @@
  *Uses interface inheritance with move function
  *Has a set direction which is passed to each enemy object in the row
  * @author Ruth-Ann Wright (2351852)
+ * @author Daron Sender (2332451)
  */
 
 #ifndef ENEMYROW_H
