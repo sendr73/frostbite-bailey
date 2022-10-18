@@ -19,6 +19,12 @@ void temperature::resetClock()
 }
 void temperature::draw(sf::RenderWindow &window)
 {
+    std::string myString = std:: to_string(temperature_int);
+    temperature_.setString(myString + "°");
+    window.draw(temperature_);
+}
+void temperature::update()
+{
     auto time_ellapsed_sec = clock.getElapsedTime().asSeconds(); //get elapsed time as seconds (default is float)
     auto speed_timer = 1.0f; // large it is slower the timer will count
     if(time_ellapsed_sec >= speed_timer ) //compare to set time
@@ -26,10 +32,6 @@ void temperature::draw(sf::RenderWindow &window)
         temperature_int--; //decrement the temperature deisplayed on the screen
         clock.restart(); //reset the clock
     }
-
-    std::string myString = std:: to_string(temperature_int);
-    temperature_.setString(myString + "°");
-    window.draw(temperature_);
 }
 //getter for temperature
 const int temperature::getTemperature() const

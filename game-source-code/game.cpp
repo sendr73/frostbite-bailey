@@ -149,6 +149,7 @@ void Game::nextLevel()
 }
 void Game::checkTemperature()
 {
+    temperature_timer.update();
     if(temperature_timer.getTemperature()<=0) //if he has frozen
     {
         temperature_timer.resetClock(); //reset temperature
