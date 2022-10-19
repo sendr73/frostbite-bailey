@@ -79,6 +79,13 @@ class Element
         void draw(sf::RenderWindow &window);
 
         /**
+        * \brief Returns the Element Sprite
+        * Used only in presentation
+        * \return sprite_
+        */
+        const sf::Sprite getObject() const;
+
+        /**
         * \brief Default IceSystem Destructor
         */
         virtual ~Element();

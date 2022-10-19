@@ -36,6 +36,8 @@ const float Enemy::getHeight() const
     return getSize().y;
 }
 
+
+
 Enemy::~Enemy()
 {
     //dtor

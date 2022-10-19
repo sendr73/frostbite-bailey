@@ -89,6 +89,7 @@ protected:
     sf::Font font;
     sf::Text score_text;
     void setBackground(const sf::RenderWindow &window); //sets background on screen
+    void drawEnemySystem(sf::RenderWindow &window); //helper for enemies
     void drawIgloo(sf::RenderWindow &window); //helper that draws igloo
     void drawScore(sf::RenderWindow &window); //helper that draws score
     MessageScreen message_screen_;

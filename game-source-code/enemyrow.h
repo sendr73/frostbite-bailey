@@ -90,6 +90,11 @@ class EnemyRow: public Motion
         */
         Enemy operator[](const int& index);
 
+         /**
+        * \brief Returns size of the enemy vector
+        */
+        const int getSize();
+
         /**
         * \brief Default Destructor
         */

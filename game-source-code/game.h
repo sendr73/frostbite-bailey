@@ -15,7 +15,7 @@
 #include "score.h"
 #include "igloo.h"
 #include "temperature.h"
-#include "EnemyMatrix.h"
+#include "enemysystem.h"
 
 class Game
 {
@@ -46,7 +46,7 @@ class Game
         Score score;
         Igloo igloo;
         IceSystem ice_system;
-        EnemyMatrix enemy_matrix;
+        EnemySystem enemy_matrix;
         int stage;
         /**
         * \brief Makes Frostbite jump (separated from move in case of animating)

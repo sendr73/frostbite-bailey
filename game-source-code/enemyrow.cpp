@@ -54,6 +54,12 @@ void EnemyRow::draw(sf::RenderWindow &window) //enables drawing - should be plac
     }
 }
 
+// returns size of enemy_row
+const int EnemyRow::getSize()
+{
+    return enemy_row.size();
+}
+
 EnemyRow::~EnemyRow()
 {
     //dtor

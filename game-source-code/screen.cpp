@@ -86,6 +86,18 @@ void Screen::drawIgloo(sf::RenderWindow &window)
     }
 }
 
+
+void Screen::drawEnemySystem(sf::RenderWindow &window)
+{
+   for(auto i =0; i<enemy_matrix[0].getSize(); i++)
+   {
+       window.draw(enemy_matrix[0][i].getObject());
+       window.draw(enemy_matrix[1][i].getObject());
+   }
+
+}
+
+
 bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Event &evnt, bool &pressed)
 {
     checkTemperature();
@@ -99,7 +111,8 @@ bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Event &evnt
     window.draw(background);
     drawScore(window);
     drawIgloo(window);
-    enemy_matrix.draw(window);
+    drawEnemySystem(window);
+//    enemy_matrix.draw(window);
     ice_system.draw(window);
     temperature_timer.draw(window);
     frostbite.draw(window);

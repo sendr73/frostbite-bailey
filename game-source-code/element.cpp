@@ -76,6 +76,11 @@ void Element::draw(sf::RenderWindow &window)
    // std::cout<<"Draw";
 }
 
+const sf::Sprite Element::getObject() const
+{
+    return sprite_;
+}
+
 Element::~Element()
 {
     //dtor
