@@ -1,8 +1,9 @@
 #include "enemyrow.h"
 #include <iostream>
+#include "element.h"
 
 
-EnemyRow::EnemyRow(std::string imDirectory, const MovementType &movement, float xStartPosition, float yStartPosition, char direction)
+EnemyRow::EnemyRow(std::string imDirectory, const MovementType &movement, float xStartPosition, float yStartPosition, Direction direction)
 {
     enemy_row = vector<shared_ptr<Enemy>>{make_shared<Enemy>(imDirectory), make_shared<Enemy>(imDirectory), make_shared<Enemy>(imDirectory)} ;
     //set position of each enemy in the row
@@ -14,7 +15,7 @@ EnemyRow::EnemyRow(std::string imDirectory, const MovementType &movement, float 
     movement_type_ = movement;
     direction_ = direction;
 }
-void EnemyRow::move(char direction, const float &x, const float &y, float deltaTime)
+void EnemyRow::move(Direction direction, const float &x, const float &y, float deltaTime)
 {
     //the passed in direction is not needed, as each row has a direciton set at construction
     for(int i = 0; i<enemy_row.size(); i++) //itterate through row and moves each enemy
@@ -22,7 +23,7 @@ void EnemyRow::move(char direction, const float &x, const float &y, float deltaT
         enemy_row[i]->move(direction_,x,y, deltaTime);
     }
 }
-char EnemyRow::getDirection()
+Direction EnemyRow::getDirection()
 {
     return direction_;
 }

@@ -44,7 +44,7 @@ class Frostbite: public Motion, public Element
         * \param y is the height of the screen
         * \param deltaTime is time passed as is multipled with speed when moving
         */
-        virtual void move(char direction, const float &x, const float &y, float moveSpeed) override;
+        virtual void move(Direction direction, const float &x, const float &y, float moveSpeed) override;
 
         /**
         * \brief jump function
@@ -57,7 +57,7 @@ class Frostbite: public Motion, public Element
         * \param x is the width of the screen
         * \param y is the height of the screen
         */
-        void jump(char direction, float moveSpeed, const float gameHeight, const float gameWidth);
+        void jump(Direction direction, float moveSpeed, const float gameHeight, const float gameWidth);
 
         /**
         * \brief checks if Frostbite has jumped

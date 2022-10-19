@@ -59,7 +59,7 @@ class Icerow: public Motion
         * \param y is the height of the screen
         * \param deltaTime is time passed and is multipled with speed when implemented in Iceberg
         */
-        virtual void move(char direction, const float &x, const float &y, float deltaTime) override;
+        virtual void move(Direction direction, const float &x, const float &y, float deltaTime) override;
 
         /**
         * \brief executes landedOn function for each Iceberg in Icerow

@@ -44,7 +44,7 @@ class Enemy: public Motion, public Element
         * \param y is board height ????
         * \param deltaTime is time passed as is multipled with enemey speed when moving
         */
-        virtual void move(char direction, const float &x, const float &y, float deltaTime) override; //function of class motion to move
+        virtual void move(Direction direction, const float &x, const float &y, float deltaTime) override; //function of class motion to move
 
         /**
         * \brief Function to get enemy's width
