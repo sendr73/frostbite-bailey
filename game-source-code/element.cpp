@@ -70,12 +70,6 @@ sf::FloatRect Element::getBoundaries () const
     return sprite_.getGlobalBounds();
 }
 
-void Element::draw(sf::RenderWindow &window)
-{
-    window.draw(sprite_);
-   // std::cout<<"Draw";
-}
-
 const sf::Sprite Element::getObject() const
 {
     return sprite_;

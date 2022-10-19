@@ -73,12 +73,6 @@ class Element
         void setTexture(std::string imDirectory);
 
         /**
-        * \brief Draws the Sprite on a window
-        * \param Window on which Element is drawn
-        */
-        void draw(sf::RenderWindow &window);
-
-        /**
         * \brief Returns the Element Sprite
         * Used only in presentation
         * \return sprite_
