@@ -77,6 +77,13 @@ void Screen::drawIgloo(sf::RenderWindow &window)
     }
 }
 
+void Screen::drawTemperature(sf::RenderWindow &window)
+{
+    string s = to_string(temperature_timer.getTemperature()) + "°";
+    auto text = setTextparam(s, 30, sf::Color::White);
+    window.draw(text);
+}
+
 bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Clock &clock, sf::Event &evnt, bool &jump_pressed, bool &rev_pressed)
 {
     while(window.pollEvent(evnt))
@@ -106,7 +113,7 @@ bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Clock &cloc
         drawIgloo(window);
         drawEnemySystem(window);
         drawIcebergSystem(window);
-        temperature_timer.draw(window);
+        drawTemperature(window);
         window.draw(frostbite.getObject());
         window.display();
         break;

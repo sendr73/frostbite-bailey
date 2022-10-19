@@ -17,12 +17,7 @@ void temperature::resetClock()
     clock.restart();
     temperature_int = 45;
 }
-void temperature::draw(sf::RenderWindow &window)
-{
-    std::string myString = std:: to_string(temperature_int);
-    temperature_.setString(myString + "°");
-    window.draw(temperature_);
-}
+
 void temperature::update()
 {
     auto time_ellapsed_sec = clock.getElapsedTime().asSeconds(); //get elapsed time as seconds (default is float)

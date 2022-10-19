@@ -95,6 +95,7 @@ protected:
     void drawIcebergSystem(sf::RenderWindow &window); //helper for drawing ice system
     void drawIcebergRow(sf::RenderWindow &window, Icerow ice_row); //helper for drawing icebergs
     void drawIgloo(sf::RenderWindow &window); //helper that draws igloo
+    void drawTemperature(sf::RenderWindow &window); //helper that draws timer
     void drawScore(sf::RenderWindow &window); //helper that draws score
     MessageScreen message_screen_;
     splashScreen splash_screen;

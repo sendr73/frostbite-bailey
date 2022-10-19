@@ -22,9 +22,6 @@ class temperature
          */
         temperature();
 
-
-        void draw(sf::RenderWindow &window); //must delete
-
          /**
          * \brief Resets the clock
          *
