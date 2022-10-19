@@ -25,7 +25,7 @@ const auto FROSTBITE_SPEED = 6.f;
 const auto FROSTBITE_JUMP= 100.f;
 
 Enemy enemyCrab("resources/crab.png");
-EnemyRow enemy_row("resources/crab.png", MovementType::Glide, 40.f, 460.f, 'r');
+EnemyRow enemy_row("resources/crab.png", MovementType::Glide, 40.f, 460.f, Direction::Right);
 
 temperature temperature_timer;
 
@@ -39,7 +39,7 @@ TEST_CASE("Iceberg moves right") //Testing for x and y axis
     iceberg.setPosition(100,ICEBERG_HEIGHT);
     //direction is right by default
     const auto [initial_x,initial_y] = iceberg.getPosition();
-    iceberg.move('r',GAME_HEIGHT,GAME_WIDTH,ICEBERG_SPEED);
+    iceberg.move(Direction::Right,GAME_HEIGHT,GAME_WIDTH,ICEBERG_SPEED);
     CHECK(iceberg.getPosition().x>initial_x);
     CHECK(iceberg.getPosition().y==initial_y); //makes sure not moving upwards
 }
@@ -47,9 +47,9 @@ TEST_CASE("Iceberg moves right") //Testing for x and y axis
 TEST_CASE("Iceberg moves left") //Testing for x and y axis
 {
     iceberg.setPosition(100,ICEBERG_HEIGHT);
-    iceberg.setDirection('l'); //setting direction to be left
+    iceberg.setDirection(Direction::Left); //setting direction to be left
     const auto [initial_x,initial_y] = iceberg.getPosition();
-    iceberg.move('l',GAME_HEIGHT,GAME_WIDTH,ICEBERG_SPEED);
+    iceberg.move(Direction::Left,GAME_HEIGHT,GAME_WIDTH,ICEBERG_SPEED);
     CHECK(iceberg.getPosition().x<initial_x);
     CHECK(iceberg.getPosition().y==initial_y); //makes sure not moving upwards
 }
@@ -81,16 +81,16 @@ TEST_CASE("Check Iceberge Row constructor sets all the enemies in the row from t
 
 TEST_CASE("Check Each Iceberg in the row moves by the Speed*DeltaTime")
 {
-    ice_row.move('r', GAME_WIDTH, GAME_HEIGHT, DELTATIME);
-    ice_row.move('r', GAME_WIDTH, GAME_HEIGHT, DELTATIME);
-    ice_row.move('r', GAME_WIDTH, GAME_HEIGHT, DELTATIME);
+    ice_row.move(Direction::Right, GAME_WIDTH, GAME_HEIGHT, DELTATIME);
+    ice_row.move(Direction::Right, GAME_WIDTH, GAME_HEIGHT, DELTATIME);
+    ice_row.move(Direction::Right, GAME_WIDTH, GAME_HEIGHT, DELTATIME);
     auto initial_position_1 = ice_row[0].getPosition().x;
     auto initial_position_2 = ice_row[1].getPosition().x;
     auto initial_position_3 = ice_row[2].getPosition().x;
     auto speed = iceberg.getSpeed();
     auto direction = ice_row[0].getDirection();
     //cout<<direction; direction is left
-    ice_row.move('l', GAME_WIDTH, GAME_HEIGHT, DELTATIME); //note that the actual direction is non-relevent
+    ice_row.move(Direction::Left, GAME_WIDTH, GAME_HEIGHT, DELTATIME); //note that the actual direction is non-relevent
     CHECK(initial_position_1 -speed*DELTATIME  == ice_row[0].getPosition().x);
     CHECK(initial_position_2 -speed*DELTATIME  == ice_row[1].getPosition().x);
     CHECK(initial_position_3 -speed*DELTATIME  == ice_row[2].getPosition().x);
@@ -101,8 +101,7 @@ TEST_CASE("Check Each Iceberg in the row moves by the Speed*DeltaTime")
 TEST_CASE("Frostbite Move Left, keeps vertical position and changes horizontal positon by - speed") //Testing for x and y axis
 {
     frostbite.setPosition(500,500); //set initial positon
-    const auto left  = 'l'; //set direction
-    frostbite.move(left, GAME_WIDTH, GAME_HEIGHT, FROSTBITE_SPEED);
+    frostbite.move(Direction::Left, GAME_WIDTH, GAME_HEIGHT, FROSTBITE_SPEED);
     CHECK(500 == frostbite.getPosition().y); //check y axis that it remains the same
     CHECK((500 - FROSTBITE_SPEED) == frostbite.getPosition().x); //check x axis that it decreases by the speed
 }
@@ -110,7 +109,7 @@ TEST_CASE("Frostbite Move Left, keeps vertical position and changes horizontal p
 TEST_CASE("Frostbite Move Right, keeps vertical position and changes horizontal positon by + speed") //Testing for x and y axis
 {
     frostbite.setPosition(500,500); //set initial positon
-    const auto right  = 'r'; //set direction
+    const auto right  = Direction::Right; //set direction
     frostbite.move(right, GAME_WIDTH, GAME_HEIGHT, FROSTBITE_SPEED);
     CHECK(500 == frostbite.getPosition().y); //check y axis that it remains the same
     CHECK((500 + FROSTBITE_SPEED) == frostbite.getPosition().x); //check x axis that it increase by the speed
@@ -119,7 +118,7 @@ TEST_CASE("Frostbite Move Right, keeps vertical position and changes horizontal 
 TEST_CASE("Frostbite Jump, keeps horizontal position and changes vertical positon by Jump value") // should be by jump not speed (needs a new implementation)
 {
     frostbite.setPosition(500,500); //set initial positon
-    const auto up  = 'u'; //set direction
+    const auto up  = Direction::Up; //set direction
     frostbite.jump(up, FROSTBITE_JUMP, GAME_HEIGHT, GAME_WIDTH); //jump is independent of speed
     CHECK(500 == frostbite.getPosition().x); //check x axis that it remains the same
     CHECK((500 - FROSTBITE_JUMP) == frostbite.getPosition().y); //check y axis that it increase by the speed/jump
@@ -128,7 +127,7 @@ TEST_CASE("Frostbite Jump, keeps horizontal position and changes vertical posito
 TEST_CASE("Frostbite Move Down, keeps horizontal position and changes vertical positon by + JUMP amount") // should be by jump not speed (needs a new implementation)
 {
     frostbite.setPosition(500,500); //set initial positon
-    const auto down  = 'd'; //set direction
+    const auto down  = Direction::Down; //set direction
     frostbite.jump(down, FROSTBITE_JUMP, GAME_HEIGHT, GAME_WIDTH);
     CHECK(500 == frostbite.getPosition().x); //check x axis that it remains the same
     CHECK((500 + FROSTBITE_JUMP) == frostbite.getPosition().y); //check y axis that it increase by the speed/jump
@@ -139,14 +138,14 @@ TEST_CASE("Frostbite Screen Collision at top score section will stop Frostbite f
     auto frostbite_height = frostbite.getHeight();
     frostbite.setPosition(500,400); //set initial positon to be close to top
     const auto initial_y = 0.375*GAME_HEIGHT; //what Frosbite's position will be reset to
-    frostbite.jump('u', FROSTBITE_JUMP, GAME_HEIGHT, GAME_WIDTH);
+    frostbite.jump(Direction::Up, FROSTBITE_JUMP, GAME_HEIGHT, GAME_WIDTH);
     CHECK(initial_y == frostbite.getPosition().y); //check y position is set to frosbite_height with top collision
 }
 
 TEST_CASE("Frostbite Screen Collision at bottom prevents Sprite's vertical position from being greater than board height")
 {
     frostbite.setPosition(500,GAME_HEIGHT-1); //set initial positon
-    frostbite.jump('d', FROSTBITE_SPEED, GAME_HEIGHT, GAME_WIDTH);
+    frostbite.jump(Direction::Down, FROSTBITE_SPEED, GAME_HEIGHT, GAME_WIDTH);
     CHECK(GAME_HEIGHT == frostbite.getPosition().y);//check y positon to be equal to game height
 }
 
@@ -154,7 +153,7 @@ TEST_CASE("Frostbite Screen Collision at right prevents Sprite from sticking ove
 {
     auto frostbite_half_width = frostbite.getWidth()/2;
     frostbite.setPosition((GAME_WIDTH-frostbite_half_width -1),500); //close to edge
-    frostbite.move('r',GAME_WIDTH,  GAME_HEIGHT,  FROSTBITE_SPEED);
+    frostbite.move(Direction::Right,GAME_WIDTH,  GAME_HEIGHT,  FROSTBITE_SPEED);
     CHECK(GAME_WIDTH-frostbite_half_width== frostbite.getPosition().x); //check x axis that it is width minus half of Frostbite's width
 }
 
@@ -162,7 +161,7 @@ TEST_CASE("Frostbite Screen Collision at left prevents Sprite from sticking over
 {
     auto frostbite_half_width = frostbite.getWidth()/2;
     frostbite.setPosition(frostbite_half_width + 1,500); //close to edge
-    frostbite.move('l', GAME_HEIGHT, GAME_WIDTH, FROSTBITE_SPEED);
+    frostbite.move(Direction::Left, GAME_HEIGHT, GAME_WIDTH, FROSTBITE_SPEED);
     CHECK(frostbite_half_width== frostbite.getPosition().x); //check x axis that it is half of Frostbite's width
 }
 
@@ -259,6 +258,59 @@ TEST_CASE("Check that the temperature decreaes over time")
     Sleep(1000); //sleep for some time - will result in screen popping up - don't know why
     temperature_timer.update(); //this functions will update the temperature
     CHECK( temperature_timer.getTemperature()<45); //check the temperatuer
+}
+
+TEST_CASE("Check Score::Lives at start is 3")
+{
+      CHECK(3 == score_.getLives());
+}
+
+TEST_CASE("Check Score::Score at start is 0")
+{
+      CHECK(0 == score_.getScore());
+}
+
+TEST_CASE("Check Score::Level at start is 1")
+{
+      CHECK(1 == score_.getLevel());
+}
+
+TEST_CASE("Check Score::Increase Score works")
+{
+    auto initial_score = score_.getScore();
+    auto score_increment = 100.0f;
+    score_.increaseScore(score_increment);
+    CHECK(initial_score + score_increment*10 == score_.getScore()); //each point is worth ten, so score increment is multipled by 10
+}
+
+
+
+TEST_CASE("Check that Score::Increase and Decrease lives works")
+{
+    auto initial_= score_.getLives();
+    score_.increaseLives();
+    CHECK(++initial_  == score_.getLives());
+    score_.decreaseLives();
+    CHECK(--initial_  == score_.getLives());
+}
+
+
+
+TEST_CASE("Check that Score::Increase Level works")
+{
+    auto initial_= score_.getLevel();
+    score_.increaseLevel();
+    CHECK(++initial_  == score_.getLevel());
+}
+
+
+
+TEST_CASE("Check that Score::Reset re-initializes all varaibles")
+{
+    score_.reset();
+    CHECK(1 == score_.getLevel());
+    CHECK(3 == score_.getLives());
+    CHECK(0 == score_.getScore());
 }
 
 
