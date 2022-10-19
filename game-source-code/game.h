@@ -29,6 +29,19 @@ class Game
         */
         Game(const float &width=1000.f,const float &height = 800.f);
 
+        void play(float &deltaTime,sf::Event &evnt, bool &jump_pressed, bool &rev_pressed);
+        /**
+        * \brief Gets the stage in the Game.
+        * Since Screen inherits Game, needs this function to get the stage in frostbite-main
+        */
+        const int getStage() const;
+
+        /**
+        * \brief Sets the stage in the Game.
+        * Since Screen inherits Game, needs this function to set the stage in frostbite-main
+        */
+        void setStage(const int &i);
+
         /**
         * \brief Reverses the direction of the Iceberg
         * Executes the reversal of the Icerow on which an Iceberg is being collided with

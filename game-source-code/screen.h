@@ -36,18 +36,6 @@ public:
     void changeDisplay();
 
     /**
-    * \brief Gets the stage in the Game.
-    * Since Screen inherits Game, needs this function to get the stage in frostbite-main
-    */
-    const int getStage() const;
-
-    /**
-    * \brief Sets the stage in the Game.
-    * Since Screen inherits Game, needs this function to set the stage in frostbite-main
-    */
-    void setStage(const int &i);
-
-    /**
     * \brief Generic function that draws a Message Screen. The input of the title, title colour and message is inputted
     * into the function. The window parameter is passed in so the Message Screen members can be drawn.
     * \param title is a string that is displayed as the Title of the Message Screen
@@ -65,7 +53,7 @@ public:
     * \param evnt is an sf::Event that is passed in and operated on if required
     * \param pressed is a boolean-type that checks if a button has been pressed (specifically for debouncing jumping)
     */
-    bool refresh(sf::RenderWindow &window, float &deltaTime,sf::Event &evnt, bool &pressed);
+    bool refresh(sf::RenderWindow &window, float &deltaTime, sf::Clock clock, sf::Event &evnt, bool &jump_pressed, bool &rev_pressed);
 
     /**
     * \brief Default Iceberg Destructor

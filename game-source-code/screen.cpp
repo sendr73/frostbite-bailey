@@ -34,15 +34,6 @@ void Screen::changeDisplay()
     else if(getStage()==5){initialize(false);}
     else{initialize(true);}
 }
-//getter for game stage
-const int Screen::getStage() const
-{
-    return stage;
-}
-void Screen::setStage(const int &i)
-{
-    stage = i;
-}
 //drawing functions
 void Screen::drawMessageScreen(const string &title, const sf::Color &title_colour, const string &message, sf::RenderWindow &window)
 {
@@ -99,15 +90,38 @@ void Screen::drawIgloo(sf::RenderWindow &window)
     }
 }
 
-bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Event &evnt, bool &pressed)
+bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Clock clock, sf::Event &evnt, bool &jump_pressed, bool &rev_pressed)
 {
-    checkTemperature();
-    if(!hasLives())
-    {stage = 3;}
-    move(deltaTime);
-    pressed = frostbiteJump(evnt,pressed);
-    icebergCollision(deltaTime);
-    enemyCollision(deltaTime); //check for collision with crabs
+    switch(getStage())
+    {
+    case 1:
+        //splash_screen.draw(window);
+        window.display();
+        deltaTime = clock.restart().asSeconds(); //Whithout this there might only be 1 iceberg per row
+        break;
+    case 2:
+        deltaTime = clock.restart().asSeconds();
+        play(deltaTime,evnt,jump_pressed,rev_pressed);
+        window.display();
+        break;
+    case 3:
+        drawMessageScreen("You Lose",sf::Color::Red,"Press the ENTER key to restart",window);
+        window.display();
+        deltaTime = clock.restart().asSeconds();
+        break;
+    case 4:
+        drawMessageScreen("You Win",sf::Color::Green,"Press the ENTER key to proceed",window);
+        window.display();
+        deltaTime = clock.restart().asSeconds();
+        break;
+    case 5:
+        drawMessageScreen("You Froze",sf::Color(171,219,227,255),"Lost a life. Press the ENTER key to proceed",window);
+        window.display();
+        deltaTime = clock.restart().asSeconds();
+        break;
+    default:
+        cout<<"Invalid game stage"<<endl;
+    }
     window.clear(sf::Color(38,79,155));
     window.draw(background);
     drawScore(window);
@@ -116,7 +130,7 @@ bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Event &evnt
     ice_system.draw(window);
     temperature_timer.draw(window);
     frostbite.draw(window);
-    return pressed;
+    return jump_pressed;
 }
 
 Screen::~Screen()

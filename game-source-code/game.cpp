@@ -6,6 +6,28 @@ Game::Game(const float &width,const float &height)
     GAME_HEIGHT=height;
     stage = 1;
 }
+// plays the game
+void Game::play(float &deltaTime,sf::Event &evnt, bool &jump_pressed, bool &rev_pressed)
+{
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)&&stage==2&&!rev_pressed)
+    {
+        rev_pressed=true;
+        reverseIceberg();
+    }
+    else if((evnt.type == sf::Event::KeyReleased)&&(evnt.key.code == sf::Keyboard::Space))
+    {
+        rev_pressed=false;
+    }
+}
+//getter for game stage
+const int Game::getStage() const
+{
+    return stage;
+}
+void Game::setStage(const int &i)
+{
+    stage = i;
+}
 // sets the starting position of Frostbite
 void Game::setFrostbite()
 {
