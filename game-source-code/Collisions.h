@@ -18,11 +18,11 @@ class Collisions
         Collisions();
 
         /**
-        * \brief Virtual collision function
+        * \brief Virtual collision function.
         * Objects that will be colliding/interacting with Frostbite will override this function. They will need to take the
         * screen size and change in time as parameters because the collisions will lead to activity (like moving with an Iceberg)
         * \param frostbite Frostbite object
-        * \param x width  of the screen
+        * \param x width of the screen
         * \param y height of the screen
         * \param deltaTime change in time, that will define the dstance travelled by the Elements
         */

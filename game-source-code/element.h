@@ -1,6 +1,6 @@
 //basic element class, used later for implementation (probably should be changed to be used in compositon)
 /**
- * \brief Element Class
+ * \brief Element Class.
  * Base class with functions that all Sprites will inherit
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
@@ -31,7 +31,7 @@ class Element
 
         /**
         * \brief Gets the x and y coordinate of Element
-        * \return The position Vector2f containing the x and y coordinate
+        * \return A position Vector2f containing the x and y coordinate
         */
         const sf::Vector2f getPosition() const;
 
@@ -52,7 +52,7 @@ class Element
         const sf::Vector2<unsigned int> getSize() const;
 
         /**
-        * \brief Gets the Boundaries of Element
+        * \brief Gets the Boundaries of Element.
         * These boundaries are used to check that objects are colliding. It is not const because some
         * assymetrical textures need to be compensated for (Iceberg)
         * \return A FloatRect containing boundaries of sprite_
@@ -67,16 +67,16 @@ class Element
         void moveElement(Direction direction, float moveSpeed);
 
         /**
-        * \brief Sets the texture of the Element
+        * \brief Sets the texture of the Element.
         * It is required to be public in case the Element needs to chnage appearance
         * \param imDirectory is the directory of the texture
         */
         void setTexture(std::string imDirectory);
 
         /**
-        * \brief Returns the Element Sprite
+        * \brief Returns the Element Sprite.
         * Used only in presentation
-        * \return sprite_
+        * \return constant private member sprite_
         */
         const sf::Sprite getObject() const;
 
