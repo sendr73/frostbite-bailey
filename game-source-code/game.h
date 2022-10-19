@@ -43,12 +43,6 @@ class Game
         void setStage(const int &i);
 
         /**
-        * \brief Reverses the direction of the Iceberg
-        * Executes the reversal of the Icerow on which an Iceberg is being collided with
-        */
-        void reverseIceberg();
-
-        /**
         * \brief Default Game Destructor
         */
         virtual ~Game();
@@ -153,6 +147,12 @@ class Game
         * Generates the blocks in the Igloo, sets the number of blocks gained by the player as 0.
         */
         void setIgloo();
+
+        /**
+        * \brief Reverses the direction of the Iceberg
+        * Executes the reversal of the Icerow on which an Iceberg is being collided with
+        */
+        void reverseIceberg();
 
         /**
         * \brief Executes certain actions when a landing has been completed
