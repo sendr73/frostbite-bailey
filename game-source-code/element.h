@@ -11,6 +11,7 @@
 #include <iostream>
 #include <SFML\Graphics.hpp>
 
+enum class Direction{Up, Down, Left, Right, Null};
 class Element
 {
     public:
@@ -62,7 +63,7 @@ class Element
         * \param The direction that the Element is required to move
         * \param The speed at which the Element is moving
         */
-        void moveElement(char direction, float moveSpeed);
+        void moveElement(Direction direction, float moveSpeed);
 
         /**
         * \brief Sets the texture of the Element

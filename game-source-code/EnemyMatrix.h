@@ -45,7 +45,7 @@ class EnemyMatrix: public Motion, public Collisions
         * \param y is board height ????
         * \param deltaTime is time passed
         */
-        virtual void move(char direction, const float &x, const float &y, float moveSpeed) override;
+        virtual void move(Direction direction, const float &x, const float &y, float moveSpeed) override;
 
         /**
         * \brief collision function overwridden from collision class

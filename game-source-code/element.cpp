@@ -15,20 +15,20 @@ Element::Element(std::string imDirectory, const sf::Vector2f &Size)
     sprite_.setOrigin(texture_.getSize().x/2,texture_.getSize().y); //set orign to bottom centre
 }
 
-void Element::moveElement(char direction, float moveSpeed)
+void Element::moveElement(Direction direction, float moveSpeed)
 {
     switch (direction)
     {
-        case 'l':
+        case Direction::Left:
             sprite_.move(-moveSpeed, 0);
             break;
-        case 'r':
+        case Direction::Right:
             sprite_.move(+moveSpeed, 0);
             break;
-        case 'u':
+        case Direction::Up:
             sprite_.move(0,-moveSpeed);
             break;
-        case 'd':
+        case Direction::Down:
             sprite_.move(0,+moveSpeed);
             break;
         default:

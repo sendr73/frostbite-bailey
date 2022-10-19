@@ -2,13 +2,13 @@
 
 EnemyMatrix::EnemyMatrix()
 {
-    enemy_matrix.push_back(make_shared<EnemyRow>("resources/crab.png", MovementType::Glide, 40.f, 460.f, 'l'));
-    enemy_matrix.push_back(make_shared<EnemyRow>("resources/clam.png", MovementType::Glide, 40.f, 570.f, 'r'));
+    enemy_matrix.push_back(make_shared<EnemyRow>("resources/crab.png", MovementType::Glide, 40.f, 460.f, Direction::Left));
+    enemy_matrix.push_back(make_shared<EnemyRow>("resources/clam.png", MovementType::Glide, 40.f, 570.f, Direction::Right));
 }
-void EnemyMatrix::move(char direction, const float &x, const float &y, float deltaTime) //move both rows
+void EnemyMatrix::move(Direction direction, const float &x, const float &y, float deltaTime) //move both rows
 {
-    enemy_matrix[0]->move('q', x,y, deltaTime); //q is passed in as a direction as direction is specified in the rows themselves
-    enemy_matrix[1]->move('q', x,y, deltaTime);
+    enemy_matrix[0]->move(Direction::Null, x,y, deltaTime); //q is passed in as a direction as direction is specified in the rows themselves
+    enemy_matrix[1]->move(Direction::Null, x,y, deltaTime);
 }
 int EnemyMatrix::collision(Frostbite &frostbite,const float &x, const float &y, const float &deltaTime)
 {
