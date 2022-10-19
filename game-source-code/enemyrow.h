@@ -35,7 +35,7 @@ class EnemyRow: public Motion
         * \param yStartPosition sets the vertical position of the left most element in the array
         * \param direction sets the direction of each enemy element
         */
-        EnemyRow(std::string imDirectory, const MovementType &movement,float xStartPosition, float yStartPositionm, char direction);
+        EnemyRow(std::string imDirectory, const MovementType &movement,float xStartPosition, float yStartPositionm, Direction direction);
 
         /**
         * \brief move function overwridden from motion class
@@ -47,7 +47,7 @@ class EnemyRow: public Motion
         * \param y is board height ????
         * \param deltaTime is time passed
         */
-        virtual void move(char direction, const float &x, const float &y, float deltaTime) override;
+        virtual void move(Direction direction, const float &x, const float &y, float deltaTime) override;
 
         /**
         * \brief Function to get the direction the row is moving
@@ -56,7 +56,7 @@ class EnemyRow: public Motion
         *
         * \return enemy-row's direction
         */
-        char getDirection();
+        Direction getDirection();
 
         /**
         * \brief Function to get the speed that the row is moving
@@ -96,7 +96,7 @@ class EnemyRow: public Motion
         virtual ~EnemyRow();
 
     private:
-        char direction_ = 'l'; //initialized as left but is re-initialized in constructor
+        Direction direction_ = Direction::Left; //initialized as left but is re-initialized in constructor
         std::vector<std::shared_ptr<Enemy>> enemy_row;
        // Enemy overlap_enemy = Enemy("resources/frostbite.png");
         MovementType movement_type_ = MovementType::Glide; //initialized as glide - not yet implemented but important if birds are created

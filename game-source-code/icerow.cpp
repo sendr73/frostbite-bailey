@@ -8,7 +8,7 @@ Icerow::Icerow(const float &x, const float &y, const int &row)
     {
         for(int i = 0; i < icerow_.size(); i++)
         {
-            icerow_[i]->setDirection('l'); //make direction left
+            icerow_[i]->setDirection(Direction::Left); //make direction left
             icerow_[i]->setPosition(-(i+1)*(iceberg_.getWidth())-20,height); //sets position
         }
     }
@@ -31,14 +31,14 @@ const int Icerow::size() const
     return icerow_.size();
 }
 // moves each Iceberg in Icerow, direction not needed, passed in as 'Q'
-void Icerow::move(char direction, const float &x, const float &y, float deltaTime)
+void Icerow::move(Direction direction, const float &x, const float &y, float deltaTime)
 {
     // the passed in direction is not needed, as each row has a direciton set at construction
     const int last = icerow_.size();
     for(int i = 0; i<last-1; i++) // iterate through row and moves each enemy
     {
         icerow_[i]->move(icerow_[i]->getDirection(),x,y, deltaTime);
-        if(icerow_[i]->getDirection()=='r') // if the iceberg is travelling right
+        if(icerow_[i]->getDirection()==Direction::Right) // if the iceberg is travelling right
         {
             if(icerow_[i]->getPosition().x-icerow_[i]->getWidth()/2>=x) // if the Iceberg at i exceeds the right screen boundary
             {
@@ -86,11 +86,11 @@ vector<sf::FloatRect> Icerow::getRowBoundaries() const //returns a vector contai
 // reverse the direction of each Iceberg in Icerow
 void Icerow::reverse()
 {
-    char d;
-    if(icerow_[0]->getDirection()=='r')
-    {d = 'l';}
+    Direction d;
+    if(icerow_[0]->getDirection()==Direction::Right)
+    {d = Direction::Left;}
     else
-    {d = 'r';}
+    {d = Direction::Right;}
     for(int i = 0; i < icerow_.size();i++)
     {
         icerow_[i]->setDirection(d);

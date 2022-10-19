@@ -8,11 +8,11 @@ IceSystem::IceSystem()
     icesystem_.push_back(i4);
 }
 // moves each Icerow in the IceSystem using Icerow's move function
-void IceSystem::move(char direction, const float &x, const float &y, float moveSpeed) //move both rows
+void IceSystem::move(Direction direction, const float &x, const float &y, float moveSpeed) //move both rows
 {
     for(int i = 0; i < row; i++)
     {
-        icesystem_[i].move('q', x,y, moveSpeed); //q is passed in as a direction as direction is specified in the rows themselves
+        icesystem_[i].move(Direction::Null, x,y, moveSpeed); //q is passed in as a direction as direction is specified in the rows themselves
     }
 }
 // checks the collision for each row and returns the index of the collision. -1 if no collision

@@ -8,7 +8,7 @@ Enemy::Enemy(std::string imDirectory): Element(imDirectory,sf::Vector2f(1.f,1.f)
 {
 }
 
-void Enemy::move(char direction, const float &x, const float &y, float deltaTime)
+void Enemy::move(Direction direction, const float &x, const float &y, float deltaTime)
 {
     moveElement(direction, deltaTime*enemySpeed);
     if(getPosition().x+getWidth()/2<=0)

@@ -6,15 +6,15 @@ Frostbite::Frostbite(std::string imDirectory, const sf::Vector2f &Size): Element
     jumped = false;
 }
 // move player around horizontally
-void Frostbite::move(char direction, const float &x, const float &y, float moveSpeed)
+void Frostbite::move(Direction direction, const float &x, const float &y, float moveSpeed)
 {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) //set direction from input keyboard
     {
-        direction = 'l';
+        direction = Direction::Left;
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        direction = 'r';
+        direction = Direction::Right;
     }
     moveElement(direction,moveSpeed);
     // screen collision logic on the left
@@ -30,7 +30,7 @@ void Frostbite::move(char direction, const float &x, const float &y, float moveS
 
 }
 // make player jump vertically (was added with the intention to animate)
-void Frostbite::jump(char direction, float moveSpeed, const float gameHeight, const float gameWidth)
+void Frostbite::jump(Direction direction, float moveSpeed, const float gameHeight, const float gameWidth)
 {
     jumped = true;
     moveElement(direction, moveSpeed);

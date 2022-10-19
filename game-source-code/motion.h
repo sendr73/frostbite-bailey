@@ -7,6 +7,7 @@
 #ifndef MOTION_H
 #define MOTION_H
 #include <SFML\Graphics.hpp>
+#include "element.h" //required to get direction enum
 
 class Motion
 {
@@ -30,7 +31,7 @@ class Motion
         * \param y is the height of the screen
         * \param moveSpeed is the speed that the object travels
         */
-        virtual void move(char direction, const float &x, const float &y, float moveSpeed) = 0;
+        virtual void move(Direction direction, const float &x, const float &y, float moveSpeed) = 0;
 
     protected:
 
