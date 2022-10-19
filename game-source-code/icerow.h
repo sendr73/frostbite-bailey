@@ -20,13 +20,15 @@ class Icerow: public Motion
     public:
         /**
         * \brief Icerow constructor
+        *
         * Sets game width, x and height, y as 1000 and 800 by default. row is 0 by default.
-          row controls the height assigned to each Iceberg in icerow_. There are three Icebergs
+        * row controls the height assigned to each Iceberg in icerow_. There are three Icebergs
         * created per Icerow, with each position shifted. These positions are determined by the
         * initial direction of the Icerow, dictated by the number of the row.
-        * \param game width
-        * \param game height
-        * \param row number
+        *
+        * \param x is the game width
+        * \param x is the game height
+        * \param row is the row number - used
         */
         Icerow(const float &x=1000.f, const float &y=800.f,const int &row=0);
 
