@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Screen::Screen(sf::RenderWindow &window)
+Screen::Screen(sf::RenderWindow &window): splash_screen(window.getSize().x, window.getSize().y)
 {
     setBackground(window);
 }
@@ -27,6 +27,10 @@ void Screen::setBackground(const sf::RenderWindow &window) //All take in the win
     texture.draw(border);
     texture.draw(sky);
     background.setTexture(texture.getTexture()); //set texture of background
+}
+void Screen::drawSplashScreen(sf::RenderWindow& window)
+{
+    splash_screen.draw(window);
 }
 void Screen::changeDisplay()
 {

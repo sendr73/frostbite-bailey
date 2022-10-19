@@ -25,7 +25,7 @@ int main()
     //create screen object to run the game
     Screen screen(window);
     //setting up splash screen
-    splashScreen splash_screen(gameWidth, gameHeight);
+    //splashScreen splash_screen(gameWidth, gameHeight);
     Frostbite frosty;
     Game game;
     sf::Clock clock;
@@ -59,7 +59,7 @@ int main()
         switch(screen.getStage())
         {
         case 1:
-            splash_screen.draw(window);
+            screen.drawSplashScreen(window);
             window.display();
             deltaTime = clock.restart().asSeconds(); //Whithout this there might only be 1 iceberg per row
             //temperature_timer.resetClock();

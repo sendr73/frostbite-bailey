@@ -11,7 +11,8 @@
 #include <vector>
 #include <SFML\Graphics.hpp>
 #include "game.h"
-#include "messagescreen.h"
+#include "messagescreen.h" //two classes also dedicated to drawing specific things
+#include "splashscreen.h"
 
 using namespace std;
 
@@ -49,7 +50,9 @@ public:
     void setStage(const int &i);
 
     /**
-    * \brief Generic function that draws a Message Screen. The input of the title, title colour and message is inputted
+    * \brief Generic function that draws a Message Screen.
+    * It calls the private-member variable, message_screens own's function to assist
+    *  The input of the title, title colour and message is inputted
     * into the function. The window parameter is passed in so the Message Screen members can be drawn.
     * \param title is a string that is displayed as the Title of the Message Screen
     * \param title_colour is the sf::Color that sets the colour of the Title
@@ -58,6 +61,12 @@ public:
     */
     void drawMessageScreen(const string &title, const sf::Color &title_colour, const string &message, sf::RenderWindow &window);
 
+    /**
+    * \brief Generic function that will call display the splash screen
+    * Makes use of the pivate-member object splash_screen and its set functions
+    * \param window is window to draw on
+    */
+    void drawSplashScreen(sf::RenderWindow& window);
     /**
     * \brief Function that refreshes the Screen. This calls the private helper function defined in the Screen Class and the public
     * play function inherited from Game to update and draw the members of the Game class.
@@ -83,6 +92,7 @@ protected:
     void drawIgloo(sf::RenderWindow &window); //helper that draws igloo
     void drawScore(sf::RenderWindow &window); //helper that draws score
     MessageScreen message_screen_;
+    splashScreen splash_screen;
 };
 
 #endif
