@@ -47,7 +47,9 @@ class IceSystem: public Motion, public Collisions
 
         /**
         * \brief [] operator overload
+        *
         * Uses the [] operator to access the i-th Icerow in Icesystem. Cannot manipulate, just access
+        *
         * \param index in IceSystem
         * \return Icerow at index, i, in icesystem_
         */
@@ -55,22 +57,26 @@ class IceSystem: public Motion, public Collisions
 
         /**
         * \brief Function to get IceSystem's size
+        *
         * Gets the icesystem_'s size and returns it
+        *
         * \return Size of the Icerow
         */
         int const size() const;
 
         /**
         * \brief Executes landedOn (defined in Icerow) for the i-th icesystem_ member
+        *
         * \param index in IceSystem
         */
-        void rowLandedOn(const int &i);
+        void rowLandedOn(const int &index);
 
         /**
         * \brief Executes reverse in Icerow, that reverses the direction of each Iceberg
+        *
         * \param index in IceSystem
         */
-        void reverse(const int &i);
+        void reverse(const int &index);
 
         /**
         * \brief Executes reset in Icerow, that resets the properties of all Icebergs
