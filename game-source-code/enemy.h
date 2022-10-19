@@ -1,7 +1,7 @@
 /**
  * \brief Basic Enemy Element, can take on multiple skins
  *
- * Uses implementation inheritance to inherite elements public functions (should ideally change to composition)
+ * Uses implementation inheritance to inherite elements public functions
  * Uses interface inheritance with move function
  * Has a set speed (direction is set in the enemy_rows)
  * @author Ruth-Ann Wright (2351852)
@@ -20,7 +20,7 @@ class Enemy: public Motion, public Element
         /**
         * \brief Default Enemy constructor
         *
-        * Sets texture to crab.png
+        * Sets texture to crab.png.
         * Sets enemy speed to 70
         */
         Enemy();
@@ -28,21 +28,22 @@ class Enemy: public Motion, public Element
         /**
         * \brief Enemy constructor
         *
-        * Sets enemy speed to 70
+        * Sets enemy speed to 70.
+        * Sets texture from provided image
         *
         * \param imDirectory sets texture to be that image
         */
         Enemy(std::string imDirectory);
 
         /**
-        * \brief move function overwridden from motion class
+        * \brief move function overridden from motion class
         *
         * Moves the enemey object in given direction and at speed determined by deltaTime*enemySpeed
         * Checks and adjusts for collisions at the end of the board
-        * \param direction to move - is ignored and enemy's private member variable direction is used
-        * \param x is board width ????
-        * \param y is board height ????
-        * \param deltaTime is time passed as is multipled with enemey speed when moving
+        * \param direction to move, expected to be set to Direction::Null
+        * \param x is board width
+        * \param y is board height
+        * \param deltaTime is time passed and will be multipled with enemey speed when moving
         */
         virtual void move(Direction direction, const float &x, const float &y, float deltaTime) override; //function of class motion to move
 
@@ -66,7 +67,7 @@ class Enemy: public Motion, public Element
         /**
         * \brief Function that returns enemy's speed
         *
-        * Returns the private member variable enemy-speed, that is set as a const at construction
+        * Returns the private member variable enemySpeed, that is set as a const at construction
         *
         * \return enemy's speed
         */

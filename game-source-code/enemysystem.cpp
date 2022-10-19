@@ -2,8 +2,8 @@
 
 EnemySystem::EnemySystem()
 {
-    enemy_matrix.push_back(make_shared<EnemyRow>("resources/crab.png", MovementType::Glide, 40.f, 460.f, Direction::Left));
-    enemy_matrix.push_back(make_shared<EnemyRow>("resources/clam.png", MovementType::Glide, 40.f, 570.f, Direction::Right));
+    enemy_matrix.push_back(make_shared<EnemyRow>("resources/crab.png", 40.f, 460.f, Direction::Left));
+    enemy_matrix.push_back(make_shared<EnemyRow>("resources/clam.png", 40.f, 570.f, Direction::Right));
 }
 void EnemySystem::move(Direction direction, const float &x, const float &y, float deltaTime) //move both rows
 {
