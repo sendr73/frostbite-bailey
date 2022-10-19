@@ -46,6 +46,8 @@ void Screen::setStage(const int &i)
 //drawing functions
 void Screen::drawMessageScreen(const string &title, const sf::Color &title_colour, const string &message, sf::RenderWindow &window)
 {
+    message_screen_.drawMessageScreen(title, title_colour, message, window);
+    /*
     sf::Font font;
     if (!font.loadFromFile("resources/sansation.ttf"))
     {
@@ -72,6 +74,7 @@ void Screen::drawMessageScreen(const string &title, const sf::Color &title_colou
     message_text.setPosition(sf::Vector2f(window.getSize().x/2.0f,window.getSize().y/2.0f));
     window.draw(title_text);
     window.draw(message_text);
+   */
 }
 // draws score
 void Screen::drawScore(sf::RenderWindow &window)

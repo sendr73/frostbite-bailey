@@ -11,6 +11,7 @@
 #include <vector>
 #include <SFML\Graphics.hpp>
 #include "game.h"
+#include "messagescreen.h"
 
 using namespace std;
 
@@ -80,6 +81,7 @@ protected:
     void setBackground(const sf::RenderWindow &window); //sets background on screen
     void drawIgloo(sf::RenderWindow &window); //helper that draws igloo
     void drawScore(sf::RenderWindow &window); //helper that draws score
+    MessageScreen message_screen_;
 };
 
 #endif
