@@ -17,28 +17,24 @@ class temperature
     public:
         /**
          * \brief Temperature Constructor
-         *
-         * Initializes the clock,
+         * Initializes the clock_, and associated font and text of the timer.
          */
         temperature();
 
          /**
-         * \brief Resets the clock
-         *
+         * \brief Resets the clock_.
          * Resets the private member variable clock when required
          */
         void resetClock();
 
          /**
-         * \brief Update the Temperature
-         *
-         * Checks the time passed, if it is greater than 1 second decrement the temperature
+         * \brief Update the Temperature.
+         * Checks the time passed, if it is greater than 1 second, decrement the temperature_
          */
         void update();
 
         /**
         * \brief Function to return the temperature
-        *
         * \returns private member variable temperature_int;
         */
         const int getTemperature() const;
@@ -50,9 +46,9 @@ class temperature
     protected:
 
     private:
-        sf::Clock clock;
+        sf::Clock clock_;
         int temperature_int = 45; //initial temperature;
-        sf::Font font;
+        sf::Font font_;
         sf::Text temperature_;
 };
 

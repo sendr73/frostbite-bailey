@@ -3,7 +3,7 @@
  *
  * Uses implementation inheritance to inherite Element's public functions.
  * Uses interface inheritance with move function from Motion.
- * Has a set speed (direction is set in the enemy_rows)
+ * Has a set speed (direction is set in the enemy_rows).
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
  */

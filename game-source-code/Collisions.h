@@ -1,5 +1,5 @@
 /**
- * \brief Collisions Class
+ * \brief Collisions Class.
  * Base class with that allows for interface inheritance
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
@@ -20,7 +20,7 @@ class Collisions
         /**
         * \brief Virtual collision function.
         * Objects that will be colliding/interacting with Frostbite will override this function. They will need to take the
-        * screen size and change in time as parameters because the collisions will lead to activity (like moving with an Iceberg)
+        * screen size and change in time as parameters because the collisions will lead to activity (like moving with an Iceberg).
         * \param frostbite Frostbite object
         * \param x width of the screen
         * \param y height of the screen
