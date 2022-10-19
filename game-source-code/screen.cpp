@@ -93,6 +93,7 @@ bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Clock &cloc
     switch(getStage())
     {
     case 1:
+        drawSplashScreen(window);
         window.display();
         deltaTime = clock.restart().asSeconds(); //Whithout this there might only be 1 iceberg per row
         break;
