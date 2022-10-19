@@ -29,7 +29,7 @@ class Collisions
         virtual int collision(Frostbite &frostbite, const float &x, const float &y, const float &deltaTime) = 0;
 
         /**
-        * \brief Default IceSystem Destructor
+        * \brief Default Collisions Destructor
         */
         virtual ~Collisions();
 
