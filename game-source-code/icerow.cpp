@@ -6,7 +6,7 @@ Icerow::Icerow(const float &x, const float &y, const int &row)
     int height = (row+1)*(0.125*y)+(0.390*y); //based on the initial position of Frostbite
     if(row%2==1) //checks if row is odd
     {
-        for(int i = 0; i < icerow_.size(); i++)
+        for(auto i = 0; i < icerow_.size(); i++)
         {
             icerow_[i]->setDirection(Direction::Left); //make direction left
             icerow_[i]->setPosition(-(i+1)*(iceberg_.getWidth())-20,height); //sets position
@@ -14,7 +14,7 @@ Icerow::Icerow(const float &x, const float &y, const int &row)
     }
     else
     {
-        for(int i = 0; i < icerow_.size(); i++)
+        for(auto i = 0; i < icerow_.size(); i++)
         {
             icerow_[i]->setPosition(x+(i+1)*(iceberg_.getWidth())+20,height); //sets position
         }
@@ -54,14 +54,7 @@ void Icerow::move(Direction direction, const float &x, const float &y, float del
         }
     }
 }
-// draws the texture
-void Icerow::draw(sf::RenderWindow &window)
-{
-    for(auto i =0; i<icerow_.size(); i++)
-    {
-        icerow_[i]->draw(window);
-    }
-}
+
 // changes the properties of each Iceberg in Icerow to be landed on
 void Icerow::landedOn()
 {

@@ -46,12 +46,11 @@ Enemy EnemyRow::operator[](const int& index)
 {
     return *enemy_row[index];
 }
-void EnemyRow::draw(sf::RenderWindow &window) //enables drawing - should be placed in separate class
+
+// returns size of enemy_row
+const int EnemyRow::getSize()
 {
-    for(auto i =0; i<enemy_row.size(); i++)
-    {
-        enemy_row[i]->draw(window);
-    }
+    return enemy_row.size();
 }
 
 EnemyRow::~EnemyRow()

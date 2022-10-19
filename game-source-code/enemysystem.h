@@ -11,8 +11,8 @@
  * @author Daron Sender (2332451)
  */
 
-#ifndef ENEMYMATRIX_H
-#define ENEMYMATRIX_H
+#ifndef ENEMYSYSTEM_H
+#define ENEMYSYSTEM_H
 #include <vector>
 #include <string>
 #include <memory>
@@ -21,7 +21,7 @@
 #include "Collisions.h"
 using namespace std;
 
-class EnemyMatrix: public Motion, public Collisions
+class EnemySystem: public Motion, public Collisions
 {
     public:
         /**
@@ -33,7 +33,7 @@ class EnemyMatrix: public Motion, public Collisions
         *
         * No parameters required
         */
-        EnemyMatrix();
+        EnemySystem();
 
         /**
         * \brief move function overwridden from motion class
@@ -59,20 +59,20 @@ class EnemyMatrix: public Motion, public Collisions
         * \param deltaTime is time-passed
         */
 
-        virtual int collision(Frostbite &frostbite, const float &x, const float &y, const float &deltaTime) override;
-
         /**
-        * \brief Fucntion to ensure that the row can be drawn
-        *
-        * Itterates through the vector of enemmy-rows and calls the draw funciton of each one
-        *
+        * \brief [] operator overload
+        * Uses the [] operator to access the i-th Icerow in Icesystem. Cannot manipulate, just access
+        * \param index in EnemySystem
+        * \return Enemyrow at index, i, in Enemy System
         */
-        void draw(sf::RenderWindow &window);
+        EnemyRow operator[](const int& index);
+
+        virtual int collision(Frostbite &frostbite, const float &x, const float &y, const float &deltaTime) override;
 
         /**
         * \brief Default Destructor
         */
-        virtual ~EnemyMatrix();
+        virtual ~EnemySystem();
 
     protected:
 

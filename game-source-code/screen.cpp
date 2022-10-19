@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Screen::Screen(sf::RenderWindow &window)
+Screen::Screen(sf::RenderWindow &window): splash_screen(window.getSize().x, window.getSize().y)
 {
     setBackground(window);
 }
@@ -28,6 +28,10 @@ void Screen::setBackground(const sf::RenderWindow &window) //All take in the win
     texture.draw(sky);
     background.setTexture(texture.getTexture()); //set texture of background
 }
+void Screen::drawSplashScreen(sf::RenderWindow& window)
+{
+    splash_screen.draw(window);
+}
 void Screen::changeDisplay()
 {
     if(getStage()==4){nextLevel();}
@@ -37,49 +41,32 @@ void Screen::changeDisplay()
 //drawing functions
 void Screen::drawMessageScreen(const string &title, const sf::Color &title_colour, const string &message, sf::RenderWindow &window)
 {
-    sf::Font font;
-    if (!font.loadFromFile("resources/sansation.ttf"))
-    {
-        std::cout<<"Error Cannot load Font";
-    }
     window.clear(sf::Color::Black);
-    sf::Text title_text, message_text;
-    title_text.setFont(font); //set font, color etc
-    title_text.setString(title);
-    title_text.setCharacterSize(90);
-    title_text.setFillColor(title_colour);
-    title_text.setStyle(sf::Text::Bold|sf::Text::Underlined);
-    sf::FloatRect text_rectangle = title_text.getLocalBounds();
-    title_text.setOrigin(text_rectangle.left + text_rectangle.width/2.0f,
-                         text_rectangle.top  + text_rectangle.height/2.0f);
-    title_text.setPosition(sf::Vector2f(window.getSize().x/2.0f,window.getSize().y/4.0f));
-    message_text.setString(message);
-    message_text.setFont(font); //set font, color etc
-    message_text.setCharacterSize(30);
-    message_text.setFillColor(sf::Color::White);
-    text_rectangle = message_text.getLocalBounds();
-    message_text.setOrigin(text_rectangle.left + text_rectangle.width/2.0f,
-                           text_rectangle.top  + text_rectangle.height/2.0f);
-    message_text.setPosition(sf::Vector2f(window.getSize().x/2.0f,window.getSize().y/2.0f));
-    window.draw(title_text);
-    window.draw(message_text);
+    message_screen_.drawMessageScreen(title, title_colour, message, window);
 }
 // draws score
 void Screen::drawScore(sf::RenderWindow &window)
 {
-    if (!font.loadFromFile("resources/sansation.ttf"))
-    {
-        std::cout<<"Error Cannot load Font";
-    }
-    score_text.setFont(font); //set font, color etc
-    score_text.setCharacterSize(30);
-    score_text.setFillColor(sf::Color::White);
     string s = "Level: "+to_string(score.getLevel())+'\t'+"Score: "+to_string(score.getScore())+'\t'+"Lives: "+to_string(score.getLives());
-    score_text.setString(s);
+    score_text = setTextparam(s, 30, sf::Color::White);
     sf::FloatRect score_textbox = score_text.getLocalBounds();
     score_text.setPosition(sf::Vector2f(5.f,30.f));
     window.draw(score_text);
 }
+sf::Text Screen::setTextparam(string text, int char_size, sf::Color colour)
+{
+    sf::Text text_;
+    if (!font.loadFromFile("resources/sansation.ttf"))
+    {
+        std::cout<<"Error Cannot load Font";
+    }
+    text_.setFont(font); //set font, color etc
+    text_.setCharacterSize(char_size);
+    text_.setFillColor(colour);
+    text_.setString(text);
+    return text_;
+}
+
 // draws igloo
 void Screen::drawIgloo(sf::RenderWindow &window)
 {
@@ -90,6 +77,7 @@ void Screen::drawIgloo(sf::RenderWindow &window)
     }
 }
 
+<<<<<<< HEAD
 bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Clock &clock, sf::Event &evnt, bool &jump_pressed, bool &rev_pressed)
 {
     while(window.pollEvent(evnt))
@@ -141,6 +129,54 @@ bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Clock &cloc
         cout<<"Invalid game stage"<<endl;
     }
     return jump_pressed;
+=======
+
+void Screen::drawEnemySystem(sf::RenderWindow &window)
+{
+   for(auto i =0; i<enemy_matrix[0].getSize(); i++)
+   {
+       window.draw(enemy_matrix[0][i].getObject());
+       window.draw(enemy_matrix[1][i].getObject());
+   }
+}
+
+void Screen::drawIcebergSystem(sf::RenderWindow &window)
+{
+   for(auto i =0; i<ice_system.size(); i++)
+   {
+        drawIcebergRow(window, ice_system[i]);
+   }
+}
+
+void Screen::drawIcebergRow(sf::RenderWindow &window, Icerow ice_row)
+{
+   for(auto i =0; i<ice_row.size(); i++)
+   {
+       window.draw(ice_row[i].getObject());
+       window.draw(ice_row[i].getObject());
+   }
+}
+
+
+bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Event &evnt, bool &pressed)
+{
+    checkTemperature();
+    if(!hasLives())
+    {stage = 3;}
+    move(deltaTime);
+    pressed = frostbiteJump(evnt,pressed);
+    icebergCollision(deltaTime);
+    enemyCollision(deltaTime); //check for collision with crabs
+    window.clear(sf::Color(38,79,155));
+    window.draw(background);
+    drawScore(window);
+    drawIgloo(window);
+    drawEnemySystem(window);
+    drawIcebergSystem(window);
+    temperature_timer.draw(window);
+    window.draw(frostbite.getObject());
+    return pressed;
+>>>>>>> 53c971a1836ea4b008e9d98d72b290689cd96456
 }
 
 Screen::~Screen()

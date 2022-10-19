@@ -37,13 +37,14 @@ class Element
 
         /**
         * \brief Sets the x and y coordinate of Element
-        * \param The x coordinate
-        * \param The y coordinate
+        * \param x The x coordinate
+        * \param y The y coordinate
         */
         void setPosition(float x, float y);
 
         /**
         * \brief Gets the size of the Element
+        *
         * Since a Sprite has no size, the scale of sprite_ and size of the texture were multiplied
         * to return a unsigned int representative of the size of the Element.
         * \return A Vector2f containing the width and height of sprite_
@@ -52,7 +53,7 @@ class Element
 
         /**
         * \brief Gets the Boundaries of Element
-        * These boundaries are used to check that objects are colliding. it is not const because some
+        * These boundaries are used to check that objects are colliding. It is not const because some
         * assymetrical textures need to be compensated for (Iceberg)
         * \return A FloatRect containing boundaries of sprite_
         */
@@ -60,8 +61,8 @@ class Element
 
         /**
         * \brief Moves the Element
-        * \param The direction that the Element is required to move
-        * \param The speed at which the Element is moving
+        * \param direction The direction that the Element is required to move
+        * \param moveSpeed The speed at which the Element is moving
         */
         void moveElement(Direction direction, float moveSpeed);
 
@@ -73,10 +74,11 @@ class Element
         void setTexture(std::string imDirectory);
 
         /**
-        * \brief Draws the Sprite on a window
-        * \param Window on which Element is drawn
+        * \brief Returns the Element Sprite
+        * Used only in presentation
+        * \return sprite_
         */
-        void draw(sf::RenderWindow &window);
+        const sf::Sprite getObject() const;
 
         /**
         * \brief Default IceSystem Destructor
