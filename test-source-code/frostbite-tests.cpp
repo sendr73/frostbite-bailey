@@ -215,6 +215,52 @@ TEST_CASE("Enemies moving off the screen uses the overlap correctly") //Multiple
 }
 */
 
+TEST_CASE("If enemies direction is left, enemy will move to the left at given speed")
+{
+    enemyCrab.setPosition(400.0f, 10.0f);
+    enemyCrab.move('l', GAME_WIDTH,GAME_HEIGHT, DELTATIME);
+    CHECK(enemyCrab.getPosition().x==(400.0f - 70*DELTATIME));
+    CHECK(enemyCrab.getPosition().y==10.0f); //check that y-driection has not changed
+}
+
+TEST_CASE("Check Enemy Row constructor sets first enemy at given positions")
+{
+    CHECK(40 == enemy_row[0].getPosition().x);
+}
+
+TEST_CASE("Each Enemy in Enemy Row is spaced out from the other one by 2 times their width")
+{
+    auto enemyWidth = enemyCrab.getWidth();
+    CHECK(2*enemyWidth == (enemy_row[1].getPosition().x- enemy_row[0].getPosition().x));
+}
+
+TEST_CASE("Check Each Enemy in the row moves by the enemySpeed*DeltaTime")
+{
+    auto initial_position_1 = enemy_row[0].getPosition().x;
+    auto initial_position_2 = enemy_row[1].getPosition().x;
+    auto initial_position_3 = enemy_row[2].getPosition().x;
+    auto enemy_speed = enemyCrab.getSpeed();
+    enemy_row.move('r', GAME_WIDTH, GAME_HEIGHT, DELTATIME);
+    CHECK(initial_position_1 +enemy_speed*DELTATIME  == enemy_row[0].getPosition().x);
+    CHECK(initial_position_2 +enemy_speed*DELTATIME  == enemy_row[1].getPosition().x);
+    CHECK(initial_position_3 +enemy_speed*DELTATIME  == enemy_row[2].getPosition().x);
+}
+
+TEST_CASE("Check Default reset temperature is 45")
+{
+    temperature_timer.resetClock(); //reset clock and temperature
+    CHECK(45 == temperature_timer.getTemperature());
+}
+
+TEST_CASE("Check that the temperature decreaes over time")
+{
+    sf::RenderWindow window(sf::VideoMode(GAME_WIDTH, GAME_HEIGHT), "");
+    temperature_timer.resetClock(); //reset clock and temperature
+    Sleep(1000); //sleep for some time - will result in screen popping up - don't know why
+    temperature_timer.update(); //this functions will update the temperature
+    CHECK( temperature_timer.getTemperature()<45); //check the temperatuer
+}
+
 
 
 
