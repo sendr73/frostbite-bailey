@@ -40,12 +40,12 @@ class EnemySystem: public Motion, public Collisions
         *
         * Iteratres through the vector and moves each enemy-row by passing on the input parameters to the EnemyRow.move function
         *
-        * \param direction to move -
-        * \param x is board width ????
-        * \param y is board height ????
-        * \param deltaTime is time passed
+        * \param direction to move, expected to be Direction::Null as direction of each row is pre-determined
+        * \param x is board width
+        * \param y is board height
+        * \param deltaTime is time passed and is multipled with speed when implemented in EnemyRow
         */
-        virtual void move(Direction direction, const float &x, const float &y, float moveSpeed) override;
+        virtual void move(Direction direction, const float &x, const float &y, float deltaTime) override;
 
         /**
         * \brief collision function overwridden from collision class
@@ -54,10 +54,11 @@ class EnemySystem: public Motion, public Collisions
         * If there is an intersection, Frostbite is pushed along with the enemy row
         *
         * \param Frosbite sprite passed by reference
-        * \param x is board width ????
-        * \param y is board height ????
-        * \param deltaTime is time-passed
+        * \param x is board width
+        * \param y is board height
+        * \param deltaTime is time passed and is multipled with speed if Frostbite must be pushed
         */
+        virtual int collision(Frostbite &frostbite, const float &x, const float &y, const float &deltaTime) override;
 
         /**
         * \brief [] operator overload
@@ -67,7 +68,6 @@ class EnemySystem: public Motion, public Collisions
         */
         EnemyRow operator[](const int& index);
 
-        virtual int collision(Frostbite &frostbite, const float &x, const float &y, const float &deltaTime) override;
 
         /**
         * \brief Default Destructor

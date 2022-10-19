@@ -24,8 +24,8 @@ class Game
         * \brief Game constructor
         * Takes in width and height as parameters (see default allocations) and assigns them to local
         * private variables GAME_WIDTH and GAME_HEIGHT, stage is set to 1
-        * \param Width of screen
-        * \param Height of screen
+        * \param width of screen
+        * \param height of screen
         */
         Game(const float &width=1000.f,const float &height = 800.f);
 
@@ -50,63 +50,77 @@ class Game
         int stage;
         /**
         * \brief Makes Frostbite jump (separated from move in case of animating)
+        *
         * Checks for an event, if that event is called, jumps.
         * Uses private Game helper functions to see if certain cases are met. If they are met Frostbite is
         * allowed to take certain actions. Parameter pressed checks if button has been released, used to debounce.
-        * \param Event from user, like the up or down arrow
-        * \param bool pressed, that checks if the button has been released or not
+        * \param event is input from user, like the up or down arrow
+        * \param pressed is a boolean that checks if the button has been released or not
+        *
         * \return if the button has been pressed
         */
         bool frostbiteJump(const sf::Event &event, bool &pressed);
 
         /**
         * \brief Moves all the elements of the screen
+        *
         * Uses the helper function of the same name to move each individual Sprite per deltaTime
         * This is an example of the polymorphism OOP concept.
+        *
         * \param deltaTime is the change in time dictated by the refresh rate, passed into lower move() functions.
         */
         void move(const float& deltaTime);
 
         /**
         * \brief Helper move function
+        *
         * Moves each Sprite belonging to objects in Game. Direction is not always needed to be populated but required
         * in the function as objects use interface inheritance to override move() from Motion.
-        * \param The Sprite that is being moved
-        * \param The direction of the movement (populated with Q)
-        * \param speed that the object is moving
+        *
+        * \param spriteA is the Sprite that is being moved
+        * \param direction is the direction of the movement (populated with Q)
+        * \param moveSpeed is the speed that the object must move at
         */
         void move(Motion& spriteA, Direction direction, const float &moveSpeed) const;
 
         /**
         * \brief Iceberg collision function
+        *
         * Checks if Frostbite has collided with all Icebergs in an IceSystem, executes as defined in IceSystem
-        * \param change in time, deltaTime, defines how far the objects move
+        *
+        * \param deltaTime is the change in time which defines how far the objects move
         */
         void icebergCollision(const float &deltaTime);
 
         /**
         * \brief Enemy collision function
+        *
         * Checks if Frostbite has collided with an Enemy, executes as defined in EnemyMatrix
-        * \param change in time, deltaTime, defines how far the objects move
+        *
+        * \param deltaTime is the change in time that defines how far the objects move
         */
         void enemyCollision(const float &deltaTime);
 
         /**
         * \brief Initializes the game
+        *
         * Sets all elements of the Game to be ready to play. If you want to restart a level, boolean resetScore
-        * is set to false, but if you want to set elemets for a new game, set to true. stage is set to 2
-        * \param boolean resetScore that detrmines if you reset the Score object
+        * is set to false, but if you want to set elements for a new game, set to true. stage is set to 2
+        *
+        * \param resetScore is a boolean that detrmines if you reset the Score object
         */
         void initialize(const bool &resetScore);
 
         /**
         * \brief Respawns Frostbite
+        *
         * Sets Frostbite's position to be at the origin and decreases its lives
         */
         void respawn();
 
         /**
         * \brief Checks the temperature
+        *
         * Checks if temperature_timer has run out of time. Then either decreases the lives or ends the game.
         * If the life is lost this way, stage is set to 5 otherwise stage is set to 3.
         */
@@ -114,14 +128,17 @@ class Game
 
         /**
         * \brief Increases the level
+        *
         * Resets all members' properties and positions, besides score and lives. Increases the level of the Game.
         */
         void nextLevel();
 
         /**
         * \brief Checks if the player has lives remaining
+        *
         * Checks if player has lives. Then either decreases the lives or ends the game.
         * If the player has no lives, stage is set to 3.
+        *
         * \return True if the player has lives, false otherwise
         */
         const bool hasLives() const;
