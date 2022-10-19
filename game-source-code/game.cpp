@@ -1,31 +1,31 @@
 #include "game.h"
-
+// constructor that assigns width, height to private members and sets stage to be 1
 Game::Game(const float &width,const float &height)
 {
     GAME_WIDTH=width;
     GAME_HEIGHT=height;
     stage = 1;
 }
-//sets the starting position of Frostbite
+// sets the starting position of Frostbite
 void Game::setFrostbite()
 {
     frostbite.setPosition(GAME_WIDTH/2,0.375*GAME_HEIGHT); //maybe setting an origin is more optimal for resetting
 }
-//executes the up/down movement when as specific event is initiated
+// executes the up/down movement when as specific event is initiated
 bool Game::frostbiteJump(const sf::Event &event, bool &pressed)
 {
     if ((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Up)&&(pressed == false))
     {
         pressed = true; //while true, cannot be double clicked
-        if(cannotEnter()){}
+        if(cannotEnter()){} // do nothing
         else if(canEnter())
-        {stage=4;}
+        {stage=4;} // frostbite wins the game
         else
         {frostbite.jump('u',0.125*GAME_HEIGHT,GAME_HEIGHT,GAME_WIDTH);}
     }
     if ((event.type == sf::Event::KeyReleased)&&(event.key.code == sf::Keyboard::Up))
     {
-        pressed = false;
+        pressed = false; // key is no longer pressed
     }
     if ((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Down)&&(pressed == false))
     {
@@ -34,25 +34,23 @@ bool Game::frostbiteJump(const sf::Event &event, bool &pressed)
     }
     if ((event.type == sf::Event::KeyReleased)&&(event.key.code == sf::Keyboard::Down))
     {
-        pressed = false;
+        pressed = false; // key is no longer pressed
     }
     return pressed;
 }
-
+// moves all movable members in Game
 void Game::move(const float& deltaTime)
 {
     move(frostbite, 'Q', frostbite.getSpeed()*deltaTime);
     move(enemy_matrix, 'Q', deltaTime); //set random direction
     move(ice_system, 'Q', deltaTime);
 }
-
-//helper to move Sprites
+// helper to move Sprites
 void Game::move(Motion& spriteA, char direction, const float &moveSpeed) const
 {
     spriteA.move(direction, GAME_WIDTH,GAME_HEIGHT, moveSpeed);
 }
-
-//sets the positions of the blocks in the iceberg
+// sets the positions of the blocks in the iceberg
 void Game::setIgloo()
 {
     igloo.generateBlocks(GAME_WIDTH,GAME_HEIGHT);
@@ -65,7 +63,7 @@ void Game::icebergCollision(const float &deltaTime)
         switch(ice_system.collision(frostbite,GAME_WIDTH,GAME_HEIGHT,deltaTime))
         {
         case -1:
-            respawn();
+            respawn(); // this means that Frostbite is not on the safezone and is not on an iceberg
             break;
         case 1:
             if(!ice_system[0][0].beenLandedOn()&&frostbite.hasJumped()){landing(0);}
@@ -89,7 +87,7 @@ void Game::enemyCollision(const float &deltaTime)
 {
     enemy_matrix.collision(frostbite, GAME_WIDTH,GAME_HEIGHT, deltaTime);
 }
-//initialises game to play
+// initialises game to play
 void Game::initialize(const bool &resetScore)
 {
     stage = 2;
@@ -136,7 +134,7 @@ const bool Game::hasLives() const
     {return false;}
     return true;
 }
-//enters a new level
+// enters a new level
 void Game::nextLevel()
 {
     stage = 2;
@@ -147,6 +145,7 @@ void Game::nextLevel()
     ice_system.reset();
     igloo.reset();
 }
+// checks temperature of the timer
 void Game::checkTemperature()
 {
     temperature_timer.update();
@@ -170,7 +169,7 @@ const bool Game::isWithinDoorway() const
     {return true;}
     return false;
 }
-
+// checks if Frostbite cannot enter igloo
 const bool Game::cannotEnter() const
 {
     if((!igloo.isComplete()&&frostbite.getPosition().y<=0.375*GAME_HEIGHT)
@@ -186,7 +185,7 @@ const bool Game::canEnter() const
     {return true;}
     return false;
 }
-
+// default destructor
 Game::~Game()
 {
     //dtor
