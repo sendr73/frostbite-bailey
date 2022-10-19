@@ -15,7 +15,8 @@ class MessageScreen
     protected:
 
     private:
-        sf::Text title_text, message_text;
+        sf::Text title_text;
+        sf::Text message_text;
 };
 
 #endif // MESSAGESCREEN_H

@@ -13,6 +13,7 @@ void MessageScreen::drawMessageScreen(const string &title, const sf::Color &titl
         std::cout<<"Error Cannot load Font";
     }
     window.clear(sf::Color::Black);
+    sf::Text title_text, message_text;
     title_text.setFont(font); //set font, color etc
     title_text.setString(title);
     title_text.setCharacterSize(90);

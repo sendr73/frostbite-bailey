@@ -74,6 +74,7 @@ public:
     virtual ~Screen();
 
 protected:
+    sf::Text setTextparam( string text, int char_size, sf::Color colour);
     sf::RenderTexture texture; //texture object
     sf::Sprite background; //sprite object for background
     sf::Font font;
