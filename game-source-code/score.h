@@ -1,6 +1,8 @@
 /**
  * \brief Score Class
+ *
  * Class that deals with lives, level and and score
+ *
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
  */
@@ -13,12 +15,14 @@ class Score
     public:
         /**
         * \brief Score default constructor
+        *
         * Initializes the private member variables
         */
         Score();
 
         /**
         * \brief Gets the current score
+        *
         * \returns priavte-member variable 'score'
         */
         const int getScore() const;
@@ -30,12 +34,14 @@ class Score
 
         /**
         * \brief Increases the score by amount specified
+        *
         * \param temp amount to increment the score by
         */
         void increaseScore(const int &temp);
 
         /**
         * \brief Gets the current level
+        *
         * \returns priavte-member variable 'level'
         */
         const int getLevel() const;
@@ -48,6 +54,7 @@ class Score
 
         /**
         * \brief Gets the Lives
+        *
         * \returns priavte-member variable 'lives'
         */
         const int getLives() const;
@@ -64,6 +71,7 @@ class Score
 
         /**
         * \brief Resets all the private memeber variables
+        *
         * sets lives to 3, level to 1, score to 0
         */
         void reset();
