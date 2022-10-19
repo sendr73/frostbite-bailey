@@ -9,7 +9,6 @@
 #include <iostream>
 #include "game.h"
 #include "screen.h"
-#include "splashscreen.h"
 
 using namespace std;
 
@@ -24,9 +23,6 @@ int main()
     window.setVerticalSyncEnabled(true);
     //create screen object to run the game
     Screen screen(window);
-    //setting up splash screen
-    //splashScreen splash_screen(gameWidth, gameHeight);
-    Frostbite frosty;
     Game game;
     sf::Clock clock;
     bool jump_pressed = false; //used to stop multiple jumps
@@ -62,21 +58,8 @@ int main()
             screen.drawSplashScreen(window);
             window.display();
             deltaTime = clock.restart().asSeconds(); //Whithout this there might only be 1 iceberg per row
-            //temperature_timer.resetClock();
             break;
         case 2:
-            /*screen.checkTemperature(); //should be combined with the action class
-            deltaTime = clock.restart().asSeconds();
-            screen.moveAllSprites(window,frostbiteSpeed, deltaTime);
-            screen.icebergCollision(window,deltaTime);
-            screen.enemyCollision(window,deltaTime); //check for collision with crabs
-            screen.refresh(window);
-            window.display();
-            if (!screen.hasLives())
-            {
-                screen.setStage(3);
-            }
-            */
             deltaTime = clock.restart().asSeconds();
             jump_pressed=screen.refresh(window, deltaTime, evnt, jump_pressed);
             window.display();
