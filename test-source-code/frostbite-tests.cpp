@@ -183,7 +183,7 @@ TEST_CASE("If enemies direction is right, enemy will move to the right at given 
 {
     enemyCrab.setPosition(10.0f, 10.0f);
 
-    enemyCrab.move('r', GAME_WIDTH,GAME_HEIGHT, DELTATIME);
+    enemyCrab.move(Direction::Right, GAME_WIDTH,GAME_HEIGHT, DELTATIME);
     CHECK(enemyCrab.getPosition().x == (10.0f + DELTATIME*70) );
     CHECK(enemyCrab.getPosition().y == 10.0f); //check that y-driection has not changed
 }
@@ -217,7 +217,7 @@ TEST_CASE("Enemies moving off the screen uses the overlap correctly") //Multiple
 TEST_CASE("If enemies direction is left, enemy will move to the left at given speed")
 {
     enemyCrab.setPosition(400.0f, 10.0f);
-    enemyCrab.move('l', GAME_WIDTH,GAME_HEIGHT, DELTATIME);
+    enemyCrab.move(Direction::Left, GAME_WIDTH,GAME_HEIGHT, DELTATIME);
     CHECK(enemyCrab.getPosition().x==(400.0f - 70*DELTATIME));
     CHECK(enemyCrab.getPosition().y==10.0f); //check that y-driection has not changed
 }
@@ -239,7 +239,7 @@ TEST_CASE("Check Each Enemy in the row moves by the enemySpeed*DeltaTime")
     auto initial_position_2 = enemy_row[1].getPosition().x;
     auto initial_position_3 = enemy_row[2].getPosition().x;
     auto enemy_speed = enemyCrab.getSpeed();
-    enemy_row.move('r', GAME_WIDTH, GAME_HEIGHT, DELTATIME);
+    enemy_row.move(Direction::Right, GAME_WIDTH, GAME_HEIGHT, DELTATIME);
     CHECK(initial_position_1 +enemy_speed*DELTATIME  == enemy_row[0].getPosition().x);
     CHECK(initial_position_2 +enemy_speed*DELTATIME  == enemy_row[1].getPosition().x);
     CHECK(initial_position_3 +enemy_speed*DELTATIME  == enemy_row[2].getPosition().x);
