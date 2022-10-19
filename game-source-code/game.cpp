@@ -50,7 +50,7 @@ bool Game::frostbiteJump(const sf::Event &event, bool &pressed)
         else if(canEnter())
         {stage=4;} // frostbite wins the game
         else
-        {frostbite.jump('u',0.125*GAME_HEIGHT,GAME_HEIGHT,GAME_WIDTH);}
+        {frostbite.jump(Direction::Up,0.125*GAME_HEIGHT,GAME_HEIGHT,GAME_WIDTH);}
     }
     if ((event.type == sf::Event::KeyReleased)&&(event.key.code == sf::Keyboard::Up))
     {
@@ -59,7 +59,7 @@ bool Game::frostbiteJump(const sf::Event &event, bool &pressed)
     if ((event.type == sf::Event::KeyPressed)&&(event.key.code == sf::Keyboard::Down)&&(pressed == false))
     {
         pressed = true; //while true, cannot be double clicked
-        frostbite.jump('d',0.125*GAME_HEIGHT,GAME_HEIGHT,GAME_WIDTH);
+        frostbite.jump(Direction::Down,0.125*GAME_HEIGHT,GAME_HEIGHT,GAME_WIDTH);
     }
     if ((event.type == sf::Event::KeyReleased)&&(event.key.code == sf::Keyboard::Down))
     {
@@ -70,12 +70,12 @@ bool Game::frostbiteJump(const sf::Event &event, bool &pressed)
 // moves all movable members in Game
 void Game::move(const float& deltaTime)
 {
-    move(frostbite, 'Q', frostbite.getSpeed()*deltaTime);
-    move(enemy_matrix, 'Q', deltaTime); //set random direction
-    move(ice_system, 'Q', deltaTime);
+    move(frostbite, Direction::Null, frostbite.getSpeed()*deltaTime);
+    move(enemy_matrix, Direction::Null, deltaTime); //set random direction
+    move(ice_system, Direction::Null, deltaTime);
 }
 // helper to move Sprites
-void Game::move(Motion& spriteA, char direction, const float &moveSpeed) const
+void Game::move(Motion& spriteA, Direction direction, const float &moveSpeed) const
 {
     spriteA.move(direction, GAME_WIDTH,GAME_HEIGHT, moveSpeed);
 }

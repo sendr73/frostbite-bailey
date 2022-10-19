@@ -82,7 +82,7 @@ class Game
         * \param The direction of the movement (populated with Q)
         * \param speed that the object is moving
         */
-        void move(Motion& spriteA, char direction, const float &moveSpeed) const;
+        void move(Motion& spriteA, Direction direction, const float &moveSpeed) const;
 
         /**
         * \brief Iceberg collision function

@@ -21,7 +21,7 @@ class Iceberg: public Motion, public Element
         * \brief Default Iceberg constructor
         * Sets texture to iceberg.png, scale to 1:1, direction to right and landed to false
         */
-        Iceberg(): Element("resources/iceberg.png",sf::Vector2f(1.f,1.f)),direction{'r'},landed{false}{}
+        Iceberg(): Element("resources/iceberg.png",sf::Vector2f(1.f,1.f)),direction{Direction::Right},landed{false}{}
 
         /**
         * \brief Iceberg constructor with image parameter
@@ -40,21 +40,21 @@ class Iceberg: public Motion, public Element
         * \param y is the height of the screen
         * \param deltaTime is time passed and is multipled with speed when moving
         */
-        virtual void move(char direction, const float &x, const float &y, float deltaTime) override;
+        virtual void move(Direction direction, const float &x, const float &y, float deltaTime) override;
 
         /**
         * \brief Function to get Iceberg's direction
         * Gets the Iceberg-element's direction
         * \return Iceberg's direction
         */
-        const char getDirection() const;
+       Direction getDirection() const;
 
         /**
         * \brief Function to set Iceberg's direction
         * Sets the Iceberg-element's direction, useful for chnaging direction with SPACE
         * \param Iceberg's direction
         */
-        void setDirection(const char dir);
+        void setDirection(const Direction dir);
 
         /**
         * \brief Function to get Icebergs's width
@@ -103,7 +103,7 @@ class Iceberg: public Motion, public Element
         virtual ~Iceberg();
 
     private:
-        char direction; //will be 'r' by default, see constructor
+        Direction direction; //will be 'r' by default, see constructor
         bool landed; //will be false by default
         float speed=150.f;
 };
