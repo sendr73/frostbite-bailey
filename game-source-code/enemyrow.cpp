@@ -3,7 +3,7 @@
 #include "element.h"
 
 
-EnemyRow::EnemyRow(std::string imDirectory, const MovementType &movement, float xStartPosition, float yStartPosition, Direction direction)
+EnemyRow::EnemyRow(std::string imDirectory, float xStartPosition, float yStartPosition, Direction direction)
 {
     enemy_row = vector<shared_ptr<Enemy>>{make_shared<Enemy>(imDirectory), make_shared<Enemy>(imDirectory), make_shared<Enemy>(imDirectory)} ;
     //set position of each enemy in the row
@@ -12,7 +12,6 @@ EnemyRow::EnemyRow(std::string imDirectory, const MovementType &movement, float 
         enemy_row[j]->setPosition((xStartPosition)+2*(j)*enemy_row[j]->getWidth()
                                  ,(yStartPosition+100)); //.y)+(frostbite.getPosition().y)+10);
     }
-    movement_type_ = movement;
     direction_ = direction;
 }
 void EnemyRow::move(Direction direction, const float &x, const float &y, float deltaTime)

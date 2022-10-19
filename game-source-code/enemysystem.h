@@ -1,9 +1,9 @@
 /**
- * \brief Enemy Matrix Composing of a vector of EnemyRows
+ * \brief Enemy System Composing of a vector of EnemyRows
  *
  * Consists of the total enemy system, ultimately creating a 2D vector of enemies
- * Uses interface inheritance with move function
- * Overwrites collision function from Collision class
+ * Uses interface inheritance from the abstract Motion and Colision classes
+ * Ensures that all the enemies objects move correctly
  * Deals with collisions with frostbite
  * Class that is called and created by the game
  *
@@ -36,9 +36,9 @@ class EnemySystem: public Motion, public Collisions
         EnemySystem();
 
         /**
-        * \brief move function overwridden from motion class
+        * \brief move function overwridden from Motion class
         *
-        * Itteratres through the vector and moves each enemy-row by passing on the input parameters to the EnemyRow.move function
+        * Iteratres through the vector and moves each enemy-row by passing on the input parameters to the EnemyRow.move function
         *
         * \param direction to move -
         * \param x is board width ????
@@ -77,9 +77,6 @@ class EnemySystem: public Motion, public Collisions
     protected:
 
     private:
-        //should implement smart pointers
-       // EnemyRow enemy_row_crab; // = EnemyRow("resources/crab.png", MovementType::Glide, 40.f, 460.f, 'l'); //two enemy rows created with different textures
-        //EnemyRow enemy_row_clam; // = EnemyRow("resources/clam.png", MovementType::Glide, 40.f, 360.f, 'r'); //they are pushed back into the enemy-matrix at construction
         vector<std::shared_ptr<EnemyRow>> enemy_matrix;
 };
 
