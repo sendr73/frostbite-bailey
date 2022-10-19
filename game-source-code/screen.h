@@ -53,7 +53,7 @@ public:
     * \param evnt is an sf::Event that is passed in and operated on if required
     * \param pressed is a boolean-type that checks if a button has been pressed (specifically for debouncing jumping)
     */
-    bool refresh(sf::RenderWindow &window, float &deltaTime, sf::Clock clock, sf::Event &evnt, bool &jump_pressed, bool &rev_pressed);
+    bool refresh(sf::RenderWindow &window, float &deltaTime, sf::Clock &clock, sf::Event &evnt, bool &jump_pressed, bool &rev_pressed);
 
     /**
     * \brief Default Iceberg Destructor

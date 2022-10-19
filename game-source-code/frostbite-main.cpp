@@ -27,10 +27,10 @@ int main()
     sf::Clock clock;
     bool jump_pressed = false; //used to stop multiple jumps
     bool rev_pressed = false; //used to debounce multiple reverses
-    float deltaTime = 0.f;
     while(window.isOpen( ))
     {
         sf::Event evnt; //not using reserved word event
+        float deltaTime = 0.f;
         screen.refresh(window, deltaTime, clock, evnt, jump_pressed, rev_pressed);
     }
 
