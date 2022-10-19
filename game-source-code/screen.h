@@ -39,21 +39,6 @@ public:
     void changeDisplay();
 
     /**
-<<<<<<< HEAD
-    * \brief Generic function that draws a Message Screen. The input of the title, title colour and message is inputted
-=======
-    * \brief Gets the stage in the Game.
-    * Since Screen inherits Game, needs this function to get the stage in frostbite-main
-    */
-    const int getStage() const;
-
-    /**
-    * \brief Sets the stage in the Game.
-    * Since Screen inherits Game, needs this function to set the stage in frostbite-main
-    */
-    void setStage(const int &i);
-
-    /**
     * \brief Generic function that draws a Message Screen.
     * It calls the private-member variable, message_screens own's function to assist
     *  The input of the title, title colour and message is inputted

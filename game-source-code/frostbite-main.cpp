@@ -23,21 +23,16 @@ int main()
     window.setVerticalSyncEnabled(true);
     //create screen object to run the game
     Screen screen(window);
-<<<<<<< HEAD
-=======
-    Game game;
->>>>>>> 53c971a1836ea4b008e9d98d72b290689cd96456
     sf::Clock clock;
     bool jump_pressed = false; //used to stop multiple jumps
     bool rev_pressed = false; //used to debounce multiple reverses
     while(window.isOpen( ))
     {
         sf::Event evnt; //not using reserved word event
-<<<<<<< HEAD
         float deltaTime = 0.f;
         screen.refresh(window, deltaTime, clock, evnt, jump_pressed, rev_pressed);
-=======
-        while(window.pollEvent(evnt))
+    }
+       /* while(window.pollEvent(evnt))
         {
             //cout << screen.getStage() << endl;
             if (evnt.type == sf::Event::Closed)
@@ -90,8 +85,7 @@ int main()
             cout<<"Invalid game stage"<<endl;
         }
 
->>>>>>> 53c971a1836ea4b008e9d98d72b290689cd96456
-    }
+>>>>>>> 53c971a1836ea4b008e9d98d72b290689cd96456*/
 
     return 0;
 }

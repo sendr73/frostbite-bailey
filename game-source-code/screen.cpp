@@ -77,7 +77,6 @@ void Screen::drawIgloo(sf::RenderWindow &window)
     }
 }
 
-<<<<<<< HEAD
 bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Clock &clock, sf::Event &evnt, bool &jump_pressed, bool &rev_pressed)
 {
     while(window.pollEvent(evnt))
@@ -104,10 +103,10 @@ bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Clock &cloc
         window.draw(background);
         drawScore(window);
         drawIgloo(window);
-        enemy_matrix.draw(window);
-        ice_system.draw(window);
+        drawEnemySystem(window);
+        drawIcebergSystem(window);
         temperature_timer.draw(window);
-        frostbite.draw(window);
+        window.draw(frostbite.getObject());
         window.display();
         break;
     case 3:
@@ -129,7 +128,7 @@ bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Clock &cloc
         cout<<"Invalid game stage"<<endl;
     }
     return jump_pressed;
-=======
+}
 
 void Screen::drawEnemySystem(sf::RenderWindow &window)
 {
@@ -155,28 +154,6 @@ void Screen::drawIcebergRow(sf::RenderWindow &window, Icerow ice_row)
        window.draw(ice_row[i].getObject());
        window.draw(ice_row[i].getObject());
    }
-}
-
-
-bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Event &evnt, bool &pressed)
-{
-    checkTemperature();
-    if(!hasLives())
-    {stage = 3;}
-    move(deltaTime);
-    pressed = frostbiteJump(evnt,pressed);
-    icebergCollision(deltaTime);
-    enemyCollision(deltaTime); //check for collision with crabs
-    window.clear(sf::Color(38,79,155));
-    window.draw(background);
-    drawScore(window);
-    drawIgloo(window);
-    drawEnemySystem(window);
-    drawIcebergSystem(window);
-    temperature_timer.draw(window);
-    window.draw(frostbite.getObject());
-    return pressed;
->>>>>>> 53c971a1836ea4b008e9d98d72b290689cd96456
 }
 
 Screen::~Screen()
