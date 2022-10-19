@@ -2,6 +2,7 @@
  * \brief Screen Class.
  * This is a class that deals with the presentation layer of the project.
  * Inherits the protected objects in Game and the public function that hides the functionality
+ * Uses composition from MessageScreen and Splash Screen to help present specific text
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
  */

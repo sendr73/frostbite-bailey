@@ -32,7 +32,7 @@ int main()
         sf::Event evnt; //not using reserved word event
         while(window.pollEvent(evnt))
         {
-            cout << screen.getStage() << endl;
+            //cout << screen.getStage() << endl;
             if (evnt.type == sf::Event::Closed)
             {
                 window.close();

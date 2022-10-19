@@ -130,7 +130,7 @@ bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Event &evnt
     drawEnemySystem(window);
     drawIcebergSystem(window);
     temperature_timer.draw(window);
-    frostbite.draw(window);
+    window.draw(frostbite.getObject());
     return pressed;
 }
 
