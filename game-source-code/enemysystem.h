@@ -70,14 +70,6 @@ class EnemySystem: public Motion, public Collisions
         virtual int collision(Frostbite &frostbite, const float &x, const float &y, const float &deltaTime) override;
 
         /**
-        * \brief Fucntion to ensure that the row can be drawn
-        *
-        * Itterates through the vector of enemmy-rows and calls the draw funciton of each one
-        *
-        */
-        void draw(sf::RenderWindow &window);
-
-        /**
         * \brief Default Destructor
         */
         virtual ~EnemySystem();

@@ -78,14 +78,6 @@ class EnemyRow: public Motion
         vector<sf::FloatRect> getRowBoundaries() const;
 
         /**
-        * \brief Function to ensure that the row can be drawn
-        *
-        * Iterates through the vector of enemies and calls the draw function of each one
-        *
-        */
-        void draw(sf::RenderWindow &window);
-
-        /**
         * \brief Overload index operator
         */
         Enemy operator[](const int& index);

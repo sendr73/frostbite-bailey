@@ -90,6 +90,8 @@ protected:
     sf::Text score_text;
     void setBackground(const sf::RenderWindow &window); //sets background on screen
     void drawEnemySystem(sf::RenderWindow &window); //helper for enemies
+    void drawIcebergSystem(sf::RenderWindow &window); //helper for drawing ice system
+    void drawIcebergRow(sf::RenderWindow &window, Icerow ice_row); //helper for drawing icebergs
     void drawIgloo(sf::RenderWindow &window); //helper that draws igloo
     void drawScore(sf::RenderWindow &window); //helper that draws score
     MessageScreen message_screen_;

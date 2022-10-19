@@ -67,12 +67,6 @@ class IceSystem: public Motion, public Collisions
         void rowLandedOn(const int &i);
 
         /**
-        * \brief Executes draw in Icerow, that draws each Iceberg
-        * \param RenderWindow window
-        */
-        void draw(sf::RenderWindow &window);
-
-        /**
         * \brief Executes reverse in Icerow, that reverses the direction of each Iceberg
         * \param index in IceSystem
         */

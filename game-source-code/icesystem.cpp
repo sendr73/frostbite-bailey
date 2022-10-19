@@ -53,14 +53,7 @@ void IceSystem::rowLandedOn(const int &i)
 {
     icesystem_[i].landedOn();
 }
-// goes through all rows and executes the draw function in Icerow
-void IceSystem::draw(sf::RenderWindow &window) //should be separated into a different class (print class)
-{
-    for(auto i =0; i<icesystem_.size(); i++)
-    {
-        icesystem_[i].draw(window);
-    }
-}
+
 // executes reverse for the i-th Icerow in IceSystem
 void IceSystem::reverse(const int &i)
 {

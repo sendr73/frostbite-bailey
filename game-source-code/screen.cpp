@@ -94,7 +94,23 @@ void Screen::drawEnemySystem(sf::RenderWindow &window)
        window.draw(enemy_matrix[0][i].getObject());
        window.draw(enemy_matrix[1][i].getObject());
    }
+}
 
+void Screen::drawIcebergSystem(sf::RenderWindow &window)
+{
+   for(auto i =0; i<ice_system.size(); i++)
+   {
+        drawIcebergRow(window, ice_system[i]);
+   }
+}
+
+void Screen::drawIcebergRow(sf::RenderWindow &window, Icerow ice_row)
+{
+   for(auto i =0; i<ice_row.size(); i++)
+   {
+       window.draw(ice_row[i].getObject());
+       window.draw(ice_row[i].getObject());
+   }
 }
 
 
@@ -112,8 +128,7 @@ bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Event &evnt
     drawScore(window);
     drawIgloo(window);
     drawEnemySystem(window);
-//    enemy_matrix.draw(window);
-    ice_system.draw(window);
+    drawIcebergSystem(window);
     temperature_timer.draw(window);
     frostbite.draw(window);
     return pressed;

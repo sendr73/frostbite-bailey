@@ -36,14 +36,6 @@ EnemyRow EnemySystem::operator[](const int& index)
     return *enemy_matrix[index];
 }
 
-void EnemySystem::draw(sf::RenderWindow &window) //should be separated into a different class (print class)
-{
-    for(auto i =0; i<enemy_matrix.size(); i++)
-    {
-        enemy_matrix[i]->draw(window);
-    }
-}
-
 EnemySystem::~EnemySystem()
 {
     //dtor

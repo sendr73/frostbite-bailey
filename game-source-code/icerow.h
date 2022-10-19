@@ -46,12 +46,6 @@ class Icerow: public Motion
         const int size() const;
 
         /**
-        * \brief Draws each Iceberg in Icerow
-        * \param RenderWindow window
-        */
-        void draw(sf::RenderWindow &window);
-
-        /**
         * \brief move function overwridden from Motion class, deals with horizontal motion
         * No direction is required since Iceberg has it's own direction defined.
         * \param direction to move - is ignored
