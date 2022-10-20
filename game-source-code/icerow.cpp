@@ -2,21 +2,21 @@
 // constructor for Icerow
 Icerow::Icerow(const float &x, const float &y, const int &row)
 {
-    icerow_ = vector<std::shared_ptr<Iceberg>>{make_shared<Iceberg>(), make_shared<Iceberg>(), make_shared<Iceberg>(), make_shared<Iceberg>()};
+    icerow_ = vector<std::shared_ptr<Iceberg>>{make_shared<Iceberg>(), make_shared<Iceberg>(), make_shared<Iceberg>()};
     int height = (row+1)*(0.125*y)+(0.390*y); //based on the initial position of Frostbite
     if(row%2==1) //checks if row is odd
     {
         for(auto i = 0; i < icerow_.size(); i++)
         {
             icerow_[i]->setDirection(Direction::Left); //make direction left
-            icerow_[i]->setPosition(-(i+1)*(iceberg_.getWidth())-20,height); //sets position
+            icerow_[i]->setPosition((i+1)*(iceberg_.getWidth())-20,height); //sets position
         }
     }
     else
     {
         for(auto i = 0; i < icerow_.size(); i++)
         {
-            icerow_[i]->setPosition(x+(i+1)*(iceberg_.getWidth())+20,height); //sets position
+            icerow_[i]->setPosition(x-(i+1)*(iceberg_.getWidth())+20,height); //sets position
         }
     }
 }
@@ -35,7 +35,7 @@ void Icerow::move(Direction direction, const float &x, const float &y, float del
 {
     // the passed in direction is not needed, as each row has a direciton set at construction
     const int last = icerow_.size();
-    for(int i = 0; i<last-1; i++) // iterate through row and moves each enemy
+    for(int i = 0; i<last; i++) // iterate through row and moves each enemy
     {
         icerow_[i]->move(icerow_[i]->getDirection(),x,y, deltaTime);
         if(icerow_[i]->getDirection()==Direction::Right) // if the iceberg is travelling right
