@@ -125,7 +125,11 @@ void Game::icebergCollision(const float &deltaTime)
 // enemy collisions
 void Game::enemyCollision(const float &deltaTime)
 {
-    enemy_matrix.collision(frostbite, GAME_WIDTH,GAME_HEIGHT, deltaTime);
+   auto i = enemy_matrix.collision(frostbite, GAME_WIDTH,GAME_HEIGHT, deltaTime);
+   if(i == 1)
+   {
+       score.decreaseLives();
+   }
 }
 // initialises game to play
 void Game::initialize(const bool &resetScore)
