@@ -33,6 +33,7 @@ EnemySystem enemy_system;
 
 Enemy enemyCrab("resources/crab.png");
 EnemyRow enemy_row("resources/crab.png", 40.f, 460.f, Direction::Right);
+EnemySystem enemy_stystem();
 
 temperature temperature_timer;
 
@@ -267,20 +268,38 @@ TEST_CASE("Check Each Enemy in the row moves by the enemySpeed*DeltaTime")
     CHECK(initial_position_3 +enemy_speed*DELTATIME  == enemy_row[2].getPosition().x);
 }
 
+TEST_CASE("Check That the Enemies in the IceSystem moves by the Speed*DeltaTime and that they alternate direction")
+{
+    auto initial_position_1 = enemy_system[0][0].getPosition().x;
+    auto initial_position_2 = enemy_system[1][0].getPosition().x;
+    auto speed = enemy_system[0].getSpeed();
+    enemy_system.move(Direction::Left, GAME_WIDTH, GAME_HEIGHT, DELTATIME); //note that the actual direction is non-relevent
+    CHECK(initial_position_1 -speed*DELTATIME  == enemy_system[0][0].getPosition().x);
+    CHECK(initial_position_2 +speed*DELTATIME  == enemy_system[1][0].getPosition().x);
+}
+
+/********
+Testing Temperature
+*********/
+
 TEST_CASE("Check Default reset temperature is 45")
 {
     temperature_timer.resetClock(); //reset clock and temperature
     CHECK(45 == temperature_timer.getTemperature());
 }
 
-TEST_CASE("Check that the temperature decreaes over time")
+TEST_CASE("Check that the temperature decreases over time")
 {
     sf::RenderWindow window(sf::VideoMode(GAME_WIDTH, GAME_HEIGHT), "");
     temperature_timer.resetClock(); //reset clock and temperature
     Sleep(1000); //sleep for some time - will result in screen popping up - don't know why
     temperature_timer.update(); //this functions will update the temperature
-    CHECK( temperature_timer.getTemperature()<45); //check the temperatuer
+    CHECK( temperature_timer.getTemperature()<45); //check the temperature
 }
+
+/**************
+Testing Score
+**************/
 
 TEST_CASE("Check Score::Lives at start is 3")
 {
@@ -305,8 +324,6 @@ TEST_CASE("Check Score::Increase Score works")
     CHECK(initial_score + score_increment*10 == score_.getScore()); //each point is worth ten, so score increment is multipled by 10
 }
 
-
-
 TEST_CASE("Check that Score::Increase and Decrease lives works")
 {
     auto initial_= score_.getLives();
@@ -316,16 +333,12 @@ TEST_CASE("Check that Score::Increase and Decrease lives works")
     CHECK(--initial_  == score_.getLives());
 }
 
-
-
 TEST_CASE("Check that Score::Increase Level works")
 {
     auto initial_= score_.getLevel();
     score_.increaseLevel();
     CHECK(++initial_  == score_.getLevel());
 }
-
-
 
 TEST_CASE("Check that Score::Reset re-initializes all varaibles")
 {
