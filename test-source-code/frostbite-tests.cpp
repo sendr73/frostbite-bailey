@@ -12,6 +12,7 @@
 #include "../game-source-code/score.h"
 #include "../game-source-code/enemysystem.h"
 #include "../game-source-code/icesystem.h"
+#include "../game-source-code/igloo.h"
 
 const auto ICEBERG_SPEED = 150.f;
 const auto GAME_HEIGHT = 800.f;
@@ -25,6 +26,8 @@ Iceberg iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //known to exist
 Iceberg overlap("resources/iceberg.png",sf::Vector2f(1.f,1.f));
 Icerow ice_row(GAME_WIDTH, GAME_HEIGHT, 1);
 IceSystem ice_system;
+
+Igloo igloo_;
 
 Frostbite frostbite("resources/iceberg.png",sf::Vector2f(1.f,1.f));
 const auto FROSTBITE_SPEED = 6.f;
@@ -48,7 +51,7 @@ TEST_CASE("Element cannot be created with invalid image") {
 	CHECK_THROWS_AS(Element element("fake", sf::Vector2f(1,1)), ImageNotLoaded);
 }
 
-TEST_CASE("Element texture cannot be reset with invalid image") {
+TEST_CASE("Ele  ment texture cannot be reset with invalid image") {
 	CHECK_THROWS_AS(element.setTexture("fake"), TextureNotLoaded);
 }
 
@@ -92,7 +95,6 @@ TEST_CASE("Check Each Iceberg in the row moves by the Speed*DeltaTime")
     auto initial_position_3 = ice_row[2].getPosition().x;
     auto speed = iceberg.getSpeed();
     auto direction = ice_row[0].getDirection();
-    //cout<<direction; direction is left
     ice_row.move(Direction::Left, GAME_WIDTH, GAME_HEIGHT, DELTATIME); //note that the actual direction is non-relevent
     CHECK(initial_position_1 -speed*DELTATIME  == ice_row[0].getPosition().x);
     CHECK(initial_position_2 -speed*DELTATIME  == ice_row[1].getPosition().x);
@@ -125,6 +127,7 @@ TEST_CASE("Check Ice System Collision that Frostbite moves With the Ice row")
 /*****************
 //Frostbite Tests
 *****************/
+
 TEST_CASE("Frostbite Move Left, keeps vertical position and changes horizontal positon by - speed") //Testing for x and y axis
 {
     frostbite.setPosition(500,500); //set initial position
@@ -195,6 +198,7 @@ TEST_CASE("Frostbite Screen Collision at left prevents Sprite from sticking over
 /*****************
 //Enemies Tests
 *****************/
+
 TEST_CASE("Enemies Location can be Set Correctly")
 
 {
@@ -269,9 +273,9 @@ TEST_CASE("Check Enemy System Collision that Frostbite will re-spawn")
     CHECK( frostbite.getPosition().x == GAME_WIDTH/2); //check that the x position goes back to re-spawn position
 }
 
-/********
+/*******************
 Testing Temperature
-*********/
+*******************/
 
 TEST_CASE("Check Default reset temperature is 45")
 {
@@ -339,8 +343,38 @@ TEST_CASE("Check that Score::Reset re-initializes all varaibles")
     CHECK(0 == score_.getScore());
 }
 
+/**********
+Testing Igloo
+************/
 
+TEST_CASE("Check initial Igloo parameters")
+{
+    CHECK_FALSE(igloo_.isComplete());
+    CHECK(0 == igloo_.getBlockAmount());
+}
 
+TEST_CASE("Check Igloo Block Incrementation")
+{
+    igloo_.incrementBlockAmount(false); //passing in subtract to be false
+    CHECK(1 == igloo_.getBlockAmount());
+}
+
+TEST_CASE("Check Igloo Block Decrement - For Iceberg Reversing")
+{
+    igloo_.incrementBlockAmount(false); //passing in subtract to be false
+    CHECK(2 == igloo_.getBlockAmount());
+    igloo_.incrementBlockAmount(true); //passing in subtract to be true therefore number of blocks should decrease
+    CHECK(1 == igloo_.getBlockAmount());
+}
+
+TEST_CASE("Check that Iceberg Block amount cannot become Negative")
+{
+    igloo_.incrementBlockAmount(true); //passing in subtract to be false
+    CHECK(0 == igloo_.getBlockAmount());
+    igloo_.incrementBlockAmount(true); //passing in subtract to be true therefore number of blocks should decrease
+    CHECK_FALSE(-1 == igloo_.getBlockAmount());
+    CHECK(0 == igloo_.getBlockAmount());
+}
 
 
 

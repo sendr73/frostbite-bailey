@@ -61,7 +61,7 @@ void Igloo::incrementBlockAmount(bool subtract)
     }
     else
     {
-        if(complete > 0)
+        if(blockAmount > 0 )
         {
            blockAmount--;
         }

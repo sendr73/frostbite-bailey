@@ -30,7 +30,7 @@ class Igloo
         * \brief Toggles if Igloo is complete
         *
         * If Igloo is complete, make Igloo not complete
-        * This allows for the iglo to be rebuilt
+        * This allows for the igloo to be rebuilt
         */
         void toggleComplete();
 
