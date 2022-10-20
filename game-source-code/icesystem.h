@@ -82,6 +82,7 @@ class IceSystem: public Motion, public Collisions
 
         /**
         * \brief Executes reset in Icerow, that resets the properties of all Icebergs
+        * \param resetDirection tells the function whether or not to reset the direction
         */
         void reset(const bool &resetDirection);
 

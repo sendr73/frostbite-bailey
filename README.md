@@ -24,10 +24,19 @@ If the temperature reaches 0 degrees, a message screen will be displayed and a l
 If the player runs out of lives, the player will lose. A message screen will be displayed and prompt to restart.
 The igloo will finish building if the player lands on 16 new icebergs.
 If the player is on the safe zone, he can enter the iceberg to win (only when in line with entrance).
+The player can change the directioon of their current Iceberg row at the cost of one Igloo block.
 
 Testing:
-Movement of objects.
+Movement of Frostbite.
+Movement of Icerows.
+Movement of Enemyrows.
+Movement of IceSystem.
+Moevement of EnemySystem
 Screen Collisions and limitations.
 Overlapping of objects.
+Basic functionality of temperature.
 Temperature resetting.
-
+Score functionality.
+Igloo building.
+Collisions with Enemies
+Collisions with Icebergs

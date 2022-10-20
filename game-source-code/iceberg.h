@@ -128,7 +128,7 @@ class Iceberg: public Motion, public Element
     private:
         Direction direction; //will be Direction::Right by default, see constructor
         bool landed; //will be false by default
-        float speed=150.f;
+        float speed=90.f;
 };
 
 #endif
