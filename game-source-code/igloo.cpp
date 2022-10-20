@@ -1,11 +1,11 @@
 #include "igloo.h"
-
+// default constructor
 Igloo::Igloo()
 {
     complete = false;
     blockAmount = 0;
 }
-//generates blocks
+// generates blocks
 void Igloo::generateBlocks(const float x, const float y)
 {
     blockAmount = 0;
@@ -47,7 +47,7 @@ void Igloo::generateBlocks(const float x, const float y)
         }
     }
 }
-//increments block amount
+// increments block amount
 void Igloo::incrementBlockAmount(bool subtract)
 {
     if (blockAmount==15&&!subtract)
@@ -61,16 +61,19 @@ void Igloo::incrementBlockAmount(bool subtract)
     }
     else
     {
+        if(complete > 0)
+        {
+           blockAmount--;
+        }
         complete = false;
-        blockAmount--;
     }
 }
-//checks if Igloo is finished building
+// checks if Igloo is finished building
 const bool Igloo::isComplete() const
 {
     return complete;
 }
-//sets complete
+// sets complete
 void Igloo::toggleComplete()
 {
     if(complete)
@@ -82,7 +85,7 @@ void Igloo::toggleComplete()
         complete = true;
     }
 }
-//draws igloo up until blockAmount
+// draws igloo up until blockAmount
 const int Igloo::getBlockAmount() const
 {
     return blockAmount;
@@ -92,22 +95,23 @@ const sf::RectangleShape Igloo::getBlock(const int &i) const
 {
     return blocks[i];
 }
-//returns block position
+// returns block position
 const sf::Vector2f Igloo::getBlockPosition(const int &i) const
 {
     return blocks[i-1].getPosition();
 }
-//returns block position
+// returns block position
 const sf::Vector2f Igloo::getBlockSize(const int &i) const
 {
     return blocks[i-1].getSize();
 }
-//resets igloo
+// resets igloo
 void Igloo::reset()
 {
     toggleComplete();
     blockAmount=0;
 }
+// destructor
 Igloo::~Igloo()
 {
     //dtor
