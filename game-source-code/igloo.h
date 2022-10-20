@@ -1,8 +1,9 @@
 #ifndef IGLOO_H
 #define IGLOO_H
-
 #include <SFML/Graphics.hpp>
 #include <vector>
+
+using namespace std;
 
 /**
  * \brief Igloo Class
@@ -10,8 +11,6 @@
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
  */
-using namespace std;
-
 class Igloo
 {
     public:

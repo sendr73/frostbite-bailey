@@ -1,3 +1,14 @@
+#ifndef ENEMYSYSTEM_H
+#define ENEMYSYSTEM_H
+#include <vector>
+#include <string>
+#include <memory>
+#include "enemyrow.h"
+#include "motion.h"
+#include "Collisions.h"
+
+using namespace std;
+
 /**
  * \brief Enemy System Composing of a vector of EnemyRow.
  * Consists of the total Enemy system, ultimately creating a 2D vector of Enemy Elements.
@@ -8,17 +19,6 @@
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
  */
-
-#ifndef ENEMYSYSTEM_H
-#define ENEMYSYSTEM_H
-#include <vector>
-#include <string>
-#include <memory>
-#include "enemyrow.h"
-#include "motion.h"
-#include "Collisions.h"
-using namespace std;
-
 class EnemySystem: public Motion, public Collisions
 {
     public:
