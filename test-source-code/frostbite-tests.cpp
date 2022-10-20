@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include "doctest.h"
 
+#include "../game-source-code/element.h"
 #include "../game-source-code/iceberg.h"
 #include "../game-source-code/frostbite.h"
 #include "../game-source-code/enemy.h"
@@ -17,6 +18,8 @@ const auto GAME_HEIGHT = 800.f;
 const auto GAME_WIDTH = 1000.f;
 const auto ICEBERG_HEIGHT = GAME_HEIGHT - 200.f;
 const auto DELTATIME = 0.01f;
+
+Element element;
 
 Iceberg iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //known to exist, will create another test case later on
 Iceberg overlap("resources/iceberg.png",sf::Vector2f(1.f,1.f));
@@ -37,6 +40,14 @@ Score score_;
 
 
 using namespace std;
+
+TEST_CASE("Element cannot be created with invalid image") {
+	CHECK_THROWS_AS(Element element("fake", sf::Vector2f(1,1)), ImageNotLoaded);
+}
+
+TEST_CASE("Element texture cannot be reset with invalid image") {
+	CHECK_THROWS_AS(element.setTexture("fake"), TextureNotLoaded);
+}
 
 TEST_CASE("Iceberg moves right") //Testing for x and y axis
 {
@@ -94,7 +105,7 @@ TEST_CASE("Check That the Icebergs in the IceSystem moves by the Speed*DeltaTime
 }
 
 
-TEST_CASE("Check Ice System Collision that Frostbite moves With the Icerow")
+TEST_CASE("Check Ice System Collision that Frostbite moves With the Ice row")
 {
     auto initial_x= ice_system[0][0].getPosition().x; //get the position of an iceberg
     auto initial_y= ice_system[0][0].getPosition().y;
@@ -104,16 +115,12 @@ TEST_CASE("Check Ice System Collision that Frostbite moves With the Icerow")
     CHECK(initial_y == frostbite.getPosition().y); //check that the y position does not change
     CHECK(initial_x + iceSpeed*DELTATIME == frostbite.getPosition().x); //first iceberg row moves to the right so increase the position
 }
-
-
-
-
-
-
-
+/*****************
+//Frostbite Tests
+*****************/
 TEST_CASE("Frostbite Move Left, keeps vertical position and changes horizontal positon by - speed") //Testing for x and y axis
 {
-    frostbite.setPosition(500,500); //set initial positon
+    frostbite.setPosition(500,500); //set initial position
     frostbite.move(Direction::Left, GAME_WIDTH, GAME_HEIGHT, FROSTBITE_SPEED);
     CHECK(500 == frostbite.getPosition().y); //check y axis that it remains the same
     CHECK((500 - FROSTBITE_SPEED) == frostbite.getPosition().x); //check x axis that it decreases by the speed
@@ -178,7 +185,9 @@ TEST_CASE("Frostbite Screen Collision at left prevents Sprite from sticking over
     CHECK(frostbite_half_width== frostbite.getPosition().x); //check x axis that it is half of Frostbite's width
 }
 
-//enemies test cases
+/*****************
+//Enemies Tests
+*****************/
 TEST_CASE("Enemies Location can be Set Correctly")
 
 {
