@@ -1,3 +1,10 @@
+#ifndef MOTION_H
+#define MOTION_H
+#include <SFML\Graphics.hpp>
+#include "element.h" //required to get direction enum
+
+using namespace std;
+
 /**
  * \brief Motion Class
  *
@@ -6,12 +13,6 @@
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
  */
-
-#ifndef MOTION_H
-#define MOTION_H
-#include <SFML\Graphics.hpp>
-#include "element.h" //required to get direction enum
-
 class Motion
 {
     public:

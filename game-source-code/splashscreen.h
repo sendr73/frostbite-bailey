@@ -1,3 +1,10 @@
+#ifndef SPLASHSCREEN_H
+#define SPLASHSCREEN_H
+#include <iostream>
+#include <SFML\Graphics.hpp>
+
+using namespace std;
+
 /**
  * \brief Splash Screen Class for Initial Instructions
  *
@@ -8,12 +15,6 @@
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
  */
-
-#ifndef SPLASHSCREEN_H
-#define SPLASHSCREEN_H
-#include <iostream>
-#include <SFML\Graphics.hpp>
-
 class splashScreen
 {
     public:

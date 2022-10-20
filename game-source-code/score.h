@@ -1,3 +1,8 @@
+#ifndef SCORE_H
+#define SCORE_H
+
+using namespace std;
+
 /**
  * \brief Score Class
  *
@@ -6,10 +11,6 @@
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
  */
-#ifndef SCORE_H
-#define SCORE_H
-
-
 class Score
 {
     public:

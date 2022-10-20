@@ -1,3 +1,12 @@
+#ifndef MESSAGESCREEN_H
+#define MESSAGESCREEN_H
+
+#include <SFML\Graphics.hpp>
+#include <string>
+#include <iostream>
+
+using namespace std;
+
 /**
  * \brief Message Screen Class
  *
@@ -8,14 +17,6 @@
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
  */
-
-#ifndef MESSAGESCREEN_H
-#define MESSAGESCREEN_H
-
-#include <SFML\Graphics.hpp>
-#include <string>
-#include <iostream>
-using namespace std;
 class MessageScreen
 {
     public:
