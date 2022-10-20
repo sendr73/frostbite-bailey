@@ -9,23 +9,27 @@
 #include "../game-source-code/enemyrow.h"
 #include "../game-source-code/icerow.h"
 #include "../game-source-code/score.h"
+#include "../game-source-code/enemysystem.h"
+#include "../game-source-code/icesystem.h"
 
 const auto ICEBERG_SPEED = 150.f;
 const auto GAME_HEIGHT = 800.f;
 const auto GAME_WIDTH = 1000.f;
 const auto ICEBERG_HEIGHT = GAME_HEIGHT - 200.f;
-const auto DELTATIME = 2.0f;
+const auto DELTATIME = 0.01f;
 
 Iceberg iceberg("resources/iceberg.png",sf::Vector2f(1.f,1.f)); //known to exist, will create another test case later on
 Iceberg overlap("resources/iceberg.png",sf::Vector2f(1.f,1.f));
 Icerow ice_row(GAME_WIDTH, GAME_HEIGHT, 1);
+IceSystem ice_system;
 
 Frostbite frostbite("resources/iceberg.png",sf::Vector2f(1.f,1.f));
 const auto FROSTBITE_SPEED = 6.f;
 const auto FROSTBITE_JUMP= 100.f;
+EnemySystem enemy_system;
 
 Enemy enemyCrab("resources/crab.png");
-EnemyRow enemy_row("resources/crab.png", MovementType::Glide, 40.f, 460.f, Direction::Right);
+EnemyRow enemy_row("resources/crab.png", 40.f, 460.f, Direction::Right);
 
 temperature temperature_timer;
 
@@ -53,23 +57,8 @@ TEST_CASE("Iceberg moves left") //Testing for x and y axis
     CHECK(iceberg.getPosition().x<initial_x);
     CHECK(iceberg.getPosition().y==initial_y); //makes sure not moving upwards
 }
-/*
-TEST_CASE("Iceberg overlaps correctly") //Multiple assertions, commented below
-{
-    overlap.setPosition(-overlap.getWidth()/2,ICEBERG_HEIGHT); //Equivalent to origin position
-    const auto initial_x = overlap.getPosition().x;
-    iceberg.setDirection('r');
-    iceberg.setPosition(100,overlap.getPosition().y);
-    iceberg.move(ICEBERG_SPEED,GAME_HEIGHT,GAME_WIDTH,overlap); //Should NOT overlap, x should not change
-    CHECK(overlap.getPosition().x==initial_x);
-    iceberg.setPosition(GAME_WIDTH-80.f,ICEBERG_HEIGHT); //when moved, the right-hand side exceeds bounds by 70
-   // cout << iceberg.getPosition().x << endl;
-    iceberg.move(ICEBERG_SPEED,GAME_HEIGHT,GAME_WIDTH,overlap); //Should overlap, x should be at at iceberg.x-GAME_WIDTH
-    //cout << iceberg.getPosition().x << endl;
-    CHECK(overlap.getPosition().x==iceberg.getPosition().x-GAME_WIDTH);
-}
-*/
-TEST_CASE("Check Iceberge Row constructor sets all the enemies in the row from the row parameter")
+
+TEST_CASE("Check Iceberg Row constructor sets all the enemies in the row from the row parameter")
 {
     //formula for height is {(1+row)(0.125)+0.39}*GameHeight
     auto row = 1.0f;
@@ -77,6 +66,18 @@ TEST_CASE("Check Iceberge Row constructor sets all the enemies in the row from t
     CHECK(expected_height== ice_row[0].getPosition().y);
     CHECK(expected_height== ice_row[2].getPosition().y);
 }
+
+TEST_CASE("Check Ice System Collision that Frostbite moves With the Icerow")
+{
+    auto initial_x= ice_system[0][0].getPosition().x; //get the position of an iceberg
+    auto initial_y= ice_system[0][0].getPosition().y;
+    frostbite.setPosition(initial_x,initial_y); //set Frostbite to be on that Iceberg
+    auto iceSpeed = ice_system[0][0].getSpeed();
+    ice_system.collision(frostbite, GAME_WIDTH,GAME_HEIGHT, DELTATIME);
+    CHECK(initial_y == frostbite.getPosition().y); //check that the y position does not change
+    CHECK(initial_x + iceSpeed*DELTATIME == frostbite.getPosition().x); //first iceberg row moves to the right so increase the position
+}
+
 
 
 TEST_CASE("Check Each Iceberg in the row moves by the Speed*DeltaTime")
