@@ -4,6 +4,7 @@
 #include <SFML\Graphics.hpp>
 #include <string>
 #include <iostream>
+#include "splashscreen.h" //for throwing instance of FontNotLoaded
 
 using namespace std;
 

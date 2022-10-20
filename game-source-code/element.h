@@ -9,6 +9,9 @@ using namespace std;
 
 enum class Direction{Up, Down, Left, Right, Null};
 
+class ImageNotLoaded{};
+class TextureNotLoaded{};
+
 /**
  * \brief Element Class.
  * Base class with functions that all Sprites will inherit.

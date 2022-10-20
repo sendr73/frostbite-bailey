@@ -5,7 +5,7 @@ splashScreen::splashScreen(const float gameWidth, const float gameHeight)
 {
     if (!font.loadFromFile("resources/sansation.ttf"))
     {
-        std::cout<<"Error Cannot load Font";
+        throw FontNotLoaded{};
     }
     header.setFont(font); //set font, color etc
     header.setString("Frostbite Bailey");

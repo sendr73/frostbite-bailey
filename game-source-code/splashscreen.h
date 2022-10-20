@@ -5,6 +5,8 @@
 
 using namespace std;
 
+class FontNotLoaded{};
+
 /**
  * \brief Splash Screen Class for Initial Instructions
  *

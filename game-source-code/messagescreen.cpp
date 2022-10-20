@@ -10,7 +10,7 @@ void MessageScreen::drawMessageScreen(const string &title, const sf::Color &titl
     sf::Font font;
     if (!font.loadFromFile("resources/sansation.ttf"))
     {
-        std::cout<<"Error Cannot load Font";
+        throw FontNotLoaded{};
     }
     window.clear(sf::Color::Black);
     sf::Text title_text, message_text;

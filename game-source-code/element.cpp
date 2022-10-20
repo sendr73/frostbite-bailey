@@ -9,7 +9,7 @@ Element::Element(std::string imDirectory, const sf::Vector2f &Size)
 {
     if(!texture_.loadFromFile(imDirectory))
     {
-        std::cerr<<"Error cannot load generic image\n"; //display error if it does not load
+        throw ImageNotLoaded{}; //display error if it does not load
     }
     sprite_.setTexture(texture_);
     sprite_.setOrigin(texture_.getSize().x/2,texture_.getSize().y); //set orign to bottom centre
@@ -41,7 +41,7 @@ void Element::setTexture(std::string imDirectory)
 {
     if(!texture_.loadFromFile(imDirectory))
     {
-        std::cerr<<"Error in loading texture";
+        throw TextureNotLoaded{};
     }
     sprite_.setTexture(texture_);
 }

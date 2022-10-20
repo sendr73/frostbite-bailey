@@ -5,7 +5,18 @@ using namespace std;
 
 Screen::Screen(sf::RenderWindow &window): splash_screen(window.getSize().x, window.getSize().y)
 {
-    setBackground(window);
+    if(window.getSize().x>1600.f)
+    {
+        throw InvalidWidth{};
+    }
+    else if(window.getSize().y>800.f)
+    {
+        throw InvalidHeight{};
+    }
+    else
+    {
+        setBackground(window);
+    }
 }
 //sets texture of background based on dimensions of the window
 void Screen::setBackground(const sf::RenderWindow &window) //All take in the window as parameters, maybe change to height and width?
@@ -20,7 +31,7 @@ void Screen::setBackground(const sf::RenderWindow &window) //All take in the win
     safezone.setFillColor(sf::Color(156,156,156,255));
     if (!texture.create(window.getSize().x,0.4*window.getSize().y))
     {
-        //issue returning error from void, maybe try{catch}?
+        throw TextureNotLoaded{};
     }
     texture.clear(); //draw textures
     texture.draw(safezone);
@@ -58,7 +69,7 @@ sf::Text Screen::setTextparam(string text, int char_size, sf::Color colour)
     sf::Text text_;
     if (!font.loadFromFile("resources/sansation.ttf"))
     {
-        std::cout<<"Error Cannot load Font";
+        throw FontNotLoaded{};
     }
     text_.setFont(font); //set font, color etc
     text_.setCharacterSize(char_size);
@@ -133,7 +144,7 @@ bool Screen::refresh(sf::RenderWindow &window, float &deltaTime, sf::Clock &cloc
         deltaTime = clock.restart().asSeconds();
         break;
     default:
-        cout<<"Invalid game stage"<<endl;
+        throw InvalidStage{};
     }
     return jump_pressed;
 }

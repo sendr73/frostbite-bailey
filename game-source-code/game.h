@@ -15,6 +15,7 @@ using namespace std;
 
 class InvalidWidth{};
 class InvalidHeight{};
+class InvalidStage{};
 
 /**
  * \brief Game Class
