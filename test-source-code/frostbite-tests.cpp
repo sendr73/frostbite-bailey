@@ -67,6 +67,33 @@ TEST_CASE("Check Iceberg Row constructor sets all the enemies in the row from th
     CHECK(expected_height== ice_row[2].getPosition().y);
 }
 
+TEST_CASE("Check Each Iceberg in the row moves by the Speed*DeltaTime")
+{
+    auto initial_position_1 = ice_row[0].getPosition().x;
+    auto initial_position_2 = ice_row[1].getPosition().x;
+    auto initial_position_3 = ice_row[2].getPosition().x;
+    auto speed = iceberg.getSpeed();
+    auto direction = ice_row[0].getDirection();
+    //cout<<direction; direction is left
+    ice_row.move(Direction::Left, GAME_WIDTH, GAME_HEIGHT, DELTATIME); //note that the actual direction is non-relevent
+    CHECK(initial_position_1 -speed*DELTATIME  == ice_row[0].getPosition().x);
+    CHECK(initial_position_2 -speed*DELTATIME  == ice_row[1].getPosition().x);
+    CHECK(initial_position_3 -speed*DELTATIME  == ice_row[2].getPosition().x);
+}
+
+TEST_CASE("Check That the Icebergs in the IceSystem moves by the Speed*DeltaTime and that they alternate direction")
+{
+    auto initial_position_1 = ice_system[0][0].getPosition().x;
+    auto initial_position_2 = ice_system[1][0].getPosition().x;
+    auto initial_position_3 = ice_system[2][0].getPosition().x;
+    auto speed = ice_system[0][0].getSpeed();
+    ice_system.move(Direction::Left, GAME_WIDTH, GAME_HEIGHT, DELTATIME); //note that the actual direction is non-relevent
+    CHECK(initial_position_1 +speed*DELTATIME  == ice_system[0][0].getPosition().x);
+    CHECK(initial_position_2 -speed*DELTATIME  == ice_system[1][0].getPosition().x);
+    CHECK(initial_position_3 +speed*DELTATIME  == ice_system[2][0].getPosition().x);
+}
+
+
 TEST_CASE("Check Ice System Collision that Frostbite moves With the Icerow")
 {
     auto initial_x= ice_system[0][0].getPosition().x; //get the position of an iceberg
@@ -80,22 +107,7 @@ TEST_CASE("Check Ice System Collision that Frostbite moves With the Icerow")
 
 
 
-TEST_CASE("Check Each Iceberg in the row moves by the Speed*DeltaTime")
-{
-    ice_row.move(Direction::Right, GAME_WIDTH, GAME_HEIGHT, DELTATIME);
-    ice_row.move(Direction::Right, GAME_WIDTH, GAME_HEIGHT, DELTATIME);
-    ice_row.move(Direction::Right, GAME_WIDTH, GAME_HEIGHT, DELTATIME);
-    auto initial_position_1 = ice_row[0].getPosition().x;
-    auto initial_position_2 = ice_row[1].getPosition().x;
-    auto initial_position_3 = ice_row[2].getPosition().x;
-    auto speed = iceberg.getSpeed();
-    auto direction = ice_row[0].getDirection();
-    //cout<<direction; direction is left
-    ice_row.move(Direction::Left, GAME_WIDTH, GAME_HEIGHT, DELTATIME); //note that the actual direction is non-relevent
-    CHECK(initial_position_1 -speed*DELTATIME  == ice_row[0].getPosition().x);
-    CHECK(initial_position_2 -speed*DELTATIME  == ice_row[1].getPosition().x);
-    CHECK(initial_position_3 -speed*DELTATIME  == ice_row[2].getPosition().x);
-}
+
 
 
 
