@@ -135,7 +135,7 @@ void Game::enemyCollision(const float &deltaTime)
 void Game::initialize(const bool &resetScore)
 {
     stage = 2;
-    ice_system.reset();
+    ice_system.reset(true);
     if(resetScore){score.reset();}
     setFrostbite();
     setIgloo();
@@ -157,7 +157,7 @@ void Game::landing(const int &i)
     frostbite.reset();
     if(igloo.getBlockAmount()%4==0&!igloo.isComplete())
     {
-        ice_system.reset();
+        ice_system.reset(false);
     }
 }
 // reverses iceberg direction
@@ -168,7 +168,7 @@ void Game::reverseIceberg()
     {
         ice_system.reverse(row-1);
         igloo.incrementBlockAmount(true);
-        ice_system.reset();
+        ice_system.reset(false);
     }
 }
 // checks if has lives
@@ -186,7 +186,7 @@ void Game::nextLevel()
     score.increaseLevel();
     temperature_timer.resetClock();
     frostbite.reset();
-    ice_system.reset();
+    ice_system.reset(true);
     igloo.reset();
 }
 // checks temperature of the timer

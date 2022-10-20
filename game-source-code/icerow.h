@@ -33,22 +33,22 @@ class Icerow: public Motion
         Icerow(const float &x=1000.f, const float &y=800.f,const int &row=0);
 
         /**
-        * \brief [] operator overload
-        * Uses the [] operator to access Iceberg elements. Cannot manipulate, just access
+        * \brief [] operator overload.
+        * Uses the [] operator to access Iceberg elements. Cannot manipulate, just access.
         * \param index in Icerow
         * \return Iceberg at index, i, in icerow_
         */
         Iceberg operator[](const int& index);
 
         /**
-        * \brief Function to get Icerow's size
-        * Gets the icerow_'s size and returns it
+        * \brief Function to get Icerow's size.
+        * Gets the icerow_'s size and returns it.
         * \return Size of the Icerow
         */
         const int size() const;
 
         /**
-        * \brief move function overwridden from Motion class, deals with horizontal motion
+        * \brief move function overwridden from Motion class, deals with horizontal motion.
         * No direction is required since Iceberg has it's own direction defined.
         * \param direction to move - is ignored
         * \param x is the width of the screen
@@ -63,23 +63,24 @@ class Icerow: public Motion
         void landedOn();
 
         /**
-        * \brief returns the boundaries of each Iceberg using Element's getBounding function
-        * This is used for collision logic in each row when colliding with Frostbite
+        * \brief returns the boundaries of each Iceberg using Element's getBounding function.
+        * This is used for collision logic in each row when colliding with Frostbite.
         * \return vector of FloatRect boundaries of each Iceberg in Icerow
         */
         vector<sf::FloatRect> getRowBoundaries() const;
 
         /**
-        * \brief reverse function changes private member direction in each Iceberg in icerow_
+        * \brief reverse function changes private member direction in each Iceberg in icerow_.
         * No direction is required since Iceberg has it's own direction defined, which is flipped.
         */
         void reverse();
 
         /**
-        * \brief Each Iceberg in the Icerow is resetted
-        * This executes the reset function defined in Iceberg
+        * \brief Each Iceberg in the Icerow is resetted.
+        * This executes the reset function defined in Iceberg.
+        * \param rowNum is the number of the ice row
         */
-        void reset();
+        void reset(const int &rowNum, const bool &resetDirection);
 
         /**
         * \brief Default Icerow Destructor

@@ -83,7 +83,7 @@ class IceSystem: public Motion, public Collisions
         /**
         * \brief Executes reset in Icerow, that resets the properties of all Icebergs
         */
-        void reset();
+        void reset(const bool &resetDirection);
 
         /**
         * \brief Default IceSystem Destructor

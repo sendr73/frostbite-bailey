@@ -90,11 +90,25 @@ void Icerow::reverse()
     }
 }
 // resets the properties of each Iceberg in Icerow
-void Icerow::reset()
+void Icerow::reset(const int &rowNum, const bool &resetDirection)
 {
-    for(int i = 0; i < icerow_.size();i++)
+    if(resetDirection)
     {
-        icerow_[i]->reset("resources/iceberg.png");
+        Direction d = Direction::Right;
+        if(rowNum%2==1)
+        {d = Direction::Left;}
+        for(int i = 0; i < icerow_.size();i++)
+        {
+            icerow_[i]->reset("resources/iceberg.png");
+            icerow_[i]->setDirection(d);
+        }
+    }
+    else
+    {
+        for(int i = 0; i < icerow_.size();i++)
+        {
+            icerow_[i]->reset("resources/iceberg.png");
+        }
     }
 }
 // default destructor

@@ -60,11 +60,11 @@ void IceSystem::reverse(const int &i)
     icesystem_[i].reverse();
 }
 // resets all Icebergs in IceSystem
-void IceSystem::reset()
+void IceSystem::reset(const bool &resetDirection)
 {
     for(int i = 0; i < icesystem_.size();i++)
     {
-        icesystem_[i].reset();
+        icesystem_[i].reset(i,resetDirection);
     }
 }
 // default destuctor
