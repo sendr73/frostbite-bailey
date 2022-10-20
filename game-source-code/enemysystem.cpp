@@ -17,14 +17,14 @@ int EnemySystem::collision(Frostbite &frostbite,const float &x, const float &y, 
     sf::FloatRect frostbite_boundary_box = frostbite.getBoundaries();
     for(auto enemy_row_it: enemy_matrix)
     {
-        num++;
+        //num++;
         auto enemy_row_boundary = enemy_row_it->getRowBoundaries(); //get vector of the bourdary boxes of each enemy
         for(auto enemy_boundary_it : enemy_row_boundary)
         {
-            if(frostbite_boundary_box.intersects(enemy_boundary_it)) //if they intersect, the enemy will push frostbite along with them, generally causing him to fall off an iceberg
+            if(frostbite_boundary_box.intersects(enemy_boundary_it)) //if they intersect, frostbite will respawn
             {
-                frostbite.setPosition(x,2*y); //moves off any Iceberg
-                index = num;
+                frostbite.setPosition(x/2,0.375*y);
+                index = 1;
             }
         }
     }

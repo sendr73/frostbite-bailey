@@ -41,7 +41,9 @@ Score score_;
 
 
 using namespace std;
-
+/************
+Element Tests
+************/
 TEST_CASE("Element cannot be created with invalid image") {
 	CHECK_THROWS_AS(Element element("fake", sf::Vector2f(1,1)), ImageNotLoaded);
 }
@@ -49,6 +51,10 @@ TEST_CASE("Element cannot be created with invalid image") {
 TEST_CASE("Element texture cannot be reset with invalid image") {
 	CHECK_THROWS_AS(element.setTexture("fake"), TextureNotLoaded);
 }
+
+/************
+Iceberg Tests
+************/
 
 TEST_CASE("Iceberg moves right") //Testing for x and y axis
 {
@@ -211,32 +217,6 @@ TEST_CASE("If enemies direction is right, enemy will move to the right at given 
     CHECK(enemyCrab.getPosition().y == 10.0f); //check that y-driection has not changed
 }
 
-/*
-TEST_CASE("Enemies direction can be changed to left")
-{
-    enemyCrab.setDirection('l');
-    CHECK('l' == enemyCrab.getDirection());
-}
-*/
-
-
-
-/*
-TEST_CASE("Enemies moving off the screen uses the overlap correctly") //Multiple assertions, commented below
-{
-    auto enemyHeight = enemyCrab.getHeight(); //get height of enemy crab
-    overlapE.setPosition(-overlapE.getWidth()/2,enemyHeight);
-    const auto initial_x = overlapE.getPosition().x;
-    enemyCrab.setDirection('r'); //set to move right
-    enemyCrab.setPosition(100,overlapE.getPosition().y);
-    enemyCrab.move(100,GAME_HEIGHT,GAME_WIDTH,overlapE); //Should NOT overlap, the overlap enemy's position should not change
-    CHECK(overlapE.getPosition().x==initial_x);
-    enemyCrab.setPosition(GAME_WIDTH-80.f,ICEBERG_HEIGHT); //when moved, the right-hand side exceeds boundary
-    enemyCrab.move(100,GAME_HEIGHT,GAME_WIDTH,overlapE); //Extra enemy should appear at overlap
-    CHECK(overlapE.getPosition().x==enemyCrab.getPosition().x-GAME_WIDTH);
-}
-*/
-
 TEST_CASE("If enemies direction is left, enemy will move to the left at given speed")
 {
     enemyCrab.setPosition(400.0f, 10.0f);
@@ -276,6 +256,17 @@ TEST_CASE("Check That the Enemies in the IceSystem moves by the Speed*DeltaTime 
     enemy_system.move(Direction::Left, GAME_WIDTH, GAME_HEIGHT, DELTATIME); //note that the actual direction is non-relevent
     CHECK(initial_position_1 -speed*DELTATIME  == enemy_system[0][0].getPosition().x);
     CHECK(initial_position_2 +speed*DELTATIME  == enemy_system[1][0].getPosition().x);
+}
+
+TEST_CASE("Check Enemy System Collision that Frostbite will re-spawn")
+{
+    auto initial_x= enemy_system[0][1].getPosition().x; //get the position of an enemy
+    auto initial_y= enemy_system[0][1].getPosition().y;
+    frostbite.setPosition(initial_x,initial_y); //set Frostbite to clash with the enemy
+    cout<<initial_x;
+    auto index = enemy_system.collision(frostbite, GAME_WIDTH,GAME_HEIGHT, DELTATIME);
+    CHECK(frostbite.getPosition().y == 0.375*GAME_HEIGHT); //check that the y position goes back to re-spawn position
+    CHECK( frostbite.getPosition().x == GAME_WIDTH/2); //check that the x position goes back to re-spawn position
 }
 
 /********
