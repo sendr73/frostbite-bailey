@@ -23,7 +23,7 @@ int EnemySystem::collision(Frostbite &frostbite,const float &x, const float &y, 
         {
             if(frostbite_boundary_box.intersects(enemy_boundary_it)) //if they intersect, the enemy will push frostbite along with them, generally causing him to fall off an iceberg
             {
-                frostbite.move(enemy_row_it->getDirection(),x,y, enemy_row_it->getSpeed()*deltaTime);
+                frostbite.setPosition(x,2*y); //moves off any Iceberg
                 index = num;
             }
         }

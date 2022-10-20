@@ -33,7 +33,7 @@ void Game::play(float &deltaTime,sf::Event &evnt, bool &jump_pressed, bool &rev_
     if(!hasLives())
     {stage = 3;}
     move(deltaTime);
-    jump_pressed = frostbiteJump(evnt,jump_pressed);
+    frostbiteJump(evnt,jump_pressed);
     icebergCollision(deltaTime);
     enemyCollision(deltaTime); //check for collision with crabs
 }
