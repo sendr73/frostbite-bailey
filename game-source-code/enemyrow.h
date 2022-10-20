@@ -1,6 +1,5 @@
 /**
  * \brief Enemy Row made composing of a vector of Enemy class.
- *
  * Uses interface inheritance with move function from Motion.
  * Has a set direction which is passed to each Enemy object in the row.
  * @author Ruth-Ann Wright (2351852)
