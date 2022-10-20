@@ -2,8 +2,19 @@
 // constructor that assigns width, height to private members and sets stage to be 1
 Game::Game(const float &width,const float &height)
 {
-    GAME_WIDTH=width;
-    GAME_HEIGHT=height;
+    if(width>1600.f)
+    {
+        throw InvalidWidth{};
+    }
+    else if(height>800.f)
+    {
+        throw InvalidHeight{};
+    }
+    else
+    {
+        GAME_WIDTH=width;
+        GAME_HEIGHT=height;
+    }
     stage = 1;
 }
 // plays the game

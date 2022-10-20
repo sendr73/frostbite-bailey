@@ -13,6 +13,9 @@
 
 using namespace std;
 
+class InvalidWidth{};
+class InvalidHeight{};
+
 /**
  * \brief Game Class
  * The class in which all elements are created and game logic is implemented
@@ -153,6 +156,7 @@ class Game
         const bool hasLives() const;
 
     private:
+        //private member functions
         float GAME_WIDTH=1000.f, GAME_HEIGHT=800.f;
 
         /**
