@@ -1,12 +1,3 @@
-/**
- * \brief Frostbite Element.
- * Uses implementation inheritance to inherite Element's public functions.
- * Uses interface inheritance with move function from class, Motion.
- * Has a set speed.
- * @author Ruth-Ann Wright (2351852)
- * @author Daron Sender (2332451)
- */
-
 #ifndef FROSTBITE_H
 #define FROSTBITE_H
 
@@ -15,6 +6,16 @@
 #include "motion.h"
 #include "element.h"
 
+using namespace std;
+
+/**
+ * \brief Frostbite Element.
+ * Uses implementation inheritance to inherite Element's public functions.
+ * Uses interface inheritance with move function from class, Motion.
+ * Has a set speed.
+ * @author Ruth-Ann Wright (2351852)
+ * @author Daron Sender (2332451)
+ */
 class Frostbite: public Motion, public Element
 {
     public:
@@ -46,7 +47,7 @@ class Frostbite: public Motion, public Element
         virtual void move(Direction direction, const float &x, const float &y, float deltaTime) override;
 
         /**
-        * \brief Jump function to move Frostbite up and down
+        * \brief Jump function to move Frostbite up and down.
         * Moves the player up and down by the parameter movespeed. This is set as a ratio
         * of height to ensure Frostbite always lines up with interactable elements.
         * Prevents any double jumping by checking the boolean jumped variable.

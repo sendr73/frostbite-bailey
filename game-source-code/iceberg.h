@@ -1,3 +1,13 @@
+#ifndef ICEBERG
+#define ICEBERG
+
+#include <iostream>
+#include <SFML\Graphics.hpp>
+#include "motion.h"
+#include "element.h"
+
+using namespace std;
+
 /**
  * \brief Iceberg Element
  *
@@ -8,14 +18,6 @@
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
  */
-#ifndef ICEBERG
-#define ICEBERG
-
-#include <iostream>
-#include <SFML\Graphics.hpp>
-#include "motion.h"
-#include "element.h"
-//
 class Iceberg: public Motion, public Element
 {
     public:

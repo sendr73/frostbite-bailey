@@ -1,15 +1,15 @@
-/**
- * \brief Igloo Class
- * Class that deals with generation and manipulation of the Igloo
- * @author Ruth-Ann Wright (2351852)
- * @author Daron Sender (2332451)
- */
 #ifndef IGLOO_H
 #define IGLOO_H
 
 #include <SFML/Graphics.hpp>
 #include <vector>
 
+/**
+ * \brief Igloo Class
+ * Class that deals with generation and manipulation of the Igloo
+ * @author Ruth-Ann Wright (2351852)
+ * @author Daron Sender (2332451)
+ */
 using namespace std;
 
 class Igloo

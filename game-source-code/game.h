@@ -1,9 +1,3 @@
-/**
- * \brief Game Class
- * The class in which all elements are created and game logic is implemented
- * @author Ruth-Ann Wright (2351852)
- * @author Daron Sender (2332451)
- */
 #ifndef GAME_H
 #define GAME_H
 
@@ -17,6 +11,14 @@
 #include "temperature.h"
 #include "enemysystem.h"
 
+using namespace std;
+
+/**
+ * \brief Game Class
+ * The class in which all elements are created and game logic is implemented
+ * @author Ruth-Ann Wright (2351852)
+ * @author Daron Sender (2332451)
+ */
 class Game
 {
     public:

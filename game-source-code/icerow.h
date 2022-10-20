@@ -1,10 +1,3 @@
-/**
- * \brief Icerow Class
- * Uses interface inheritance with move function from class, Motion.
- * Uses composition inheritance of Iceberg objects
- * @author Ruth-Ann Wright (2351852)
- * @author Daron Sender (2332451)
- */
 #ifndef ICEROW_H
 #define ICEROW_H
 
@@ -15,6 +8,13 @@
 
 using namespace std;
 
+/**
+ * \brief Icerow Class
+ * Uses interface inheritance with move function from class, Motion.
+ * Uses composition inheritance of Iceberg objects
+ * @author Ruth-Ann Wright (2351852)
+ * @author Daron Sender (2332451)
+ */
 class Icerow: public Motion
 {
     public:

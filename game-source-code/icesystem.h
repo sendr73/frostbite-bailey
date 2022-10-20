@@ -1,3 +1,12 @@
+#ifndef ICESYSTEM_H
+#define ICESYSTEM_H
+#include "icerow.h"
+#include <SFML\Graphics.hpp>
+#include <vector>
+#include "Collisions.h"
+
+using namespace std;
+
 /**
  * \brief IceSystem Class
  * Uses interface inheritance with move function from class, Motion.
@@ -6,13 +15,6 @@
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
  */
-#ifndef ICESYSTEM_H
-#define ICESYSTEM_H
-#include "icerow.h"
-#include <SFML\Graphics.hpp>
-#include <vector>
-#include "Collisions.h"
-
 class IceSystem: public Motion, public Collisions
 {
     public:
