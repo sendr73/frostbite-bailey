@@ -1,11 +1,3 @@
-/**
- * \brief Enemy Row made composing of a vector of Enemy class.
- * Uses interface inheritance with move function from Motion.
- * Has a set direction which is passed to each Enemy object in the row.
- * @author Ruth-Ann Wright (2351852)
- * @author Daron Sender (2332451)
- */
-
 #ifndef ENEMYROW_H
 #define ENEMYROW_H
 #include <vector>
@@ -17,6 +9,13 @@
 
 using namespace std;
 
+/**
+ * \brief EnemyRow made composing of a vector of Enemy class.
+ * Uses interface inheritance with move function from Motion.
+ * Has a set direction which is passed to each Enemy object in the row.
+ * @author Ruth-Ann Wright (2351852)
+ * @author Daron Sender (2332451)
+ */
 class EnemyRow: public Motion
 {
     public:

@@ -1,18 +1,20 @@
 //basic element class, used later for implementation (probably should be changed to be used in compositon)
-/**
- * \brief Element Class.
- * Base class with functions that all Sprites will inherit.
- * @author Ruth-Ann Wright (2351852)
- * @author Daron Sender (2332451)
- */
-
 #ifndef ELEMENT_H
 #define ELEMENT_H
 #include <string>
 #include <iostream>
 #include <SFML\Graphics.hpp>
 
+using namespace std;
+
 enum class Direction{Up, Down, Left, Right, Null};
+
+/**
+ * \brief Element Class.
+ * Base class with functions that all Sprites will inherit.
+ * @author Ruth-Ann Wright (2351852)
+ * @author Daron Sender (2332451)
+ */
 class Element
 {
     public:

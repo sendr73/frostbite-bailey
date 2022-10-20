@@ -1,15 +1,16 @@
+#ifndef COLLISIONS_H
+#define COLLISIONS_H
+#include "Frostbite.h"
+#include <SFML\Graphics.hpp>
+
+using namespace std;
+
 /**
  * \brief Collisions Class.
  * Base class with that allows for interface inheritance
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
  */
-
-#ifndef COLLISIONS_H
-#define COLLISIONS_H
-#include "Frostbite.h"
-#include <SFML\Graphics.hpp>
-
 class Collisions
 {
     public:

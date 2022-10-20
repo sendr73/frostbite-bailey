@@ -1,3 +1,12 @@
+#ifndef ENEMIES_H
+#define ENEMIES_H
+#include <iostream>
+#include <SFML\Graphics.hpp>
+#include "motion.h"
+#include "element.h"
+
+using namespace std;
+
 /**
  * \brief Basic Enemy Element, can take on multiple skins.
  *
@@ -7,14 +16,6 @@
  * @author Ruth-Ann Wright (2351852)
  * @author Daron Sender (2332451)
  */
-
-#ifndef ENEMIES_H
-#define ENEMIES_H
-#include <iostream>
-#include <SFML\Graphics.hpp>
-#include "motion.h"
-#include "element.h"
-
 class Enemy: public Motion, public Element
 {
     public:
