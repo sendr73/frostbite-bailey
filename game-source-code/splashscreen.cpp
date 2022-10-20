@@ -24,8 +24,10 @@ splashScreen::splashScreen(const float gameWidth, const float gameHeight)
                         "Try to land on the moving icebergs to build the igloo. Beware of the\n"
                         "crabs and clams and do not fall in the water, as you will loose a \n"
                         "life. If the temperature decreases below zero you will freeze and \n"
-                        "lose a life. To win build and enter the igloo before your lives run out\n\n"
-                        "Press the ENTER key to start.");
+                        "lose a life. To win build and enter the igloo before your lives run out.\n"
+                        "If you want to reverse the direction of an iceberg, press SPACE. \n"
+                        "Beware, reversingthis will remove a block from the Igloo\n\n"
+                        "\t\t\t\t\t\t\t\tPress the ENTER key to start.");
     paragraph.setFont(font); //set font, color etc
     paragraph.setCharacterSize(30);
     paragraph.setFillColor(sf::Color::White);
@@ -33,7 +35,7 @@ splashScreen::splashScreen(const float gameWidth, const float gameHeight)
     //set positon of paragraph
     paragraph.setOrigin(text_rectangle.left + text_rectangle.width/2.0f,
                         text_rectangle.top  + text_rectangle.height/2.0f);
-    paragraph.setPosition(sf::Vector2f(gameWidth/2.0f,gameHeight/2.0f));
+    paragraph.setPosition(sf::Vector2f(gameWidth/2.0f,gameHeight/1.75f));
 }
 
 void splashScreen::draw(sf::RenderWindow &window)
